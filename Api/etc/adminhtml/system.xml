@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mirakl_api" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>API</label>
+            <tab>mirakl</tab>
+            <resource>Mirakl_Config::api</resource>
+            <group id="mirakl_api_notice" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Fieldset\Hint</frontend_model>
+            </group>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Mirakl API Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <comment><![CDATA[If disabled, all communications between Magento and Mirakl platform will be turned off.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_url" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API URL</label>
+                    <comment><![CDATA[For example https://you.mirakl.net/api]]></comment>
+                </field>
+                <field id="connect_timeout" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Connect Timeout</label>
+                    <validate>required-entry validate-greater-than-zero validate-number</validate>
+                    <comment><![CDATA[Maximum number of seconds to wait while trying to connect to Mirakl.]]></comment>
+                </field>
+                <field id="auth_method" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Authentication Method</label>
+                    <source_model>Mirakl\Api\Model\System\Config\Source\AuthMethod</source_model>
+                    <validate>required-entry</validate>
+                    <comment><![CDATA[Select one of the methods above to create access tokens. These allow you to authenticate your application and make requests to the Mirakl platform APIs.]]></comment>
+                </field>
+                <field id="test_connection" translate="button_label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label/>
+                    <button_label>Test Connection</button_label>
+                    <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\TestConnection</frontend_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+                <group id="front_key" translate="label" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>API Front Key Authentication</label>
+                    <attribute type="expanded">1</attribute>
+                    <field id="api_key" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>API Key</label>
+                        <config_path>mirakl_api/general/api_key</config_path>
+                        <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Form\Field\ApiKey</frontend_model>
+                        <comment><![CDATA[Frontend API key looks like this:<br/>ec807fe4-225c-98e5-93bf-e807062ea0f3]]></comment>
+                    </field>
+                    <depends>
+                        <field id="auth_method">api_key</field>
+                    </depends>
+                </group>
+                <group id="bearer" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Access Token Authentication</label>
+                    <attribute type="expanded">1</attribute>
+                    <comment><![CDATA[This mode provides a bearer token generated automatically with no expiration time. The rotation of this token is managed manually.]]></comment>
+                    <field id="access_token" translate="label comment" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Access Token</label>
+                        <config_path>mirakl_api/general/access_token</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                    <depends>
+                        <field id="auth_method">access_token</field>
+                    </depends>
+                </group>
+                <group id="oauth2" translate="label" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>OAuth 2.0 Client Authentication</label>
+                    <attribute type="expanded">1</attribute>
+                    <comment><![CDATA[This mode provides a client ID/client secret pair.<br>You can implement a periodic rotation of these tokens in total autonomy by following the OAuth 2.0 client credentials flow.]]></comment>
+                    <field id="client_id" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Client ID</label>
+                        <config_path>mirakl_api/oauth2/client_id</config_path>
+                        <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Form\Field\OAuth2</frontend_model>
+                    </field>
+                    <field id="client_secret" translate="label comment" type="obscure" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Client Secret</label>
+                        <config_path>mirakl_api/oauth2/client_secret</config_path>
+                        <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    </field>
+                    <field id="auth_url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Authentication URL</label>
+                        <config_path>mirakl_api/oauth2/auth_url</config_path>
+                        <comment><![CDATA[Must take one of following values according to the targeted environment:<br>- <code>https://auth-dev.mirakl.net</code> for development environment<br>- <code>https://auth-preprod.mirakl.net</code> for pre-production environment<br>- <code>https://auth.mirakl.net</code> for production environment]]></comment>
+                    </field>
+                    <depends>
+                        <field id="auth_method">oauth2</field>
+                    </depends>
+                </group>
+            </group>
+        </section>
+        <section id="mirakl_api_developer" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Developer</label>
+            <tab>mirakl</tab>
+            <resource>Mirakl_Config::api_developer</resource>
+            <group id="mirakl_api_notice" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Fieldset\Hint</frontend_model>
+            </group>
+            <group id="log" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>API Log Settings</label>
+                <field id="log_option" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Log API Calls</label>
+                    <comment><![CDATA[If enabled, all API calls between Magento and Mirakl will be logged in <code>var/log/mirakl_api.log</code> file.<br>Be aware that it is not recommended to enable this feature in a production environment.]]></comment>
+                    <source_model>Mirakl\Api\Model\System\Config\Source\ApiLogging</source_model>
+                </field>
+                <field id="log_filter" translate="label comment" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Filter by API URL</label>
+                    <comment><![CDATA[This parameter allows you to filter the requests that have to be logged with a regular expression. For example: <code>api/shipping/rates</code> will log only SH02 requests. Use the pipe | to allow multiple request patterns. For example: <code>api/shipping/rates|api/orders</code> to log requests from API SH02 and OR01.<br>Leave empty to log all requests.]]></comment>
+                </field>
+                <field id="log_buttons" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="button_label">
+                    <label>Logs</label>
+                    <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Button\Log</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

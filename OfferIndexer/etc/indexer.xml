@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="mirakl_offer" view_id="mirakl_offer" class="Mirakl\OfferIndexer\Model\Indexer\Offer\Action">
+        <title>Mirakl Offers</title>
+        <description>Index of products and Mirakl offers availability per store</description>
+    </indexer>
+    <indexer id="catalogsearch_fulltext">
+        <dependencies>
+            <indexer id="mirakl_offer"/>
+        </dependencies>
+    </indexer>
+    <indexer id="cataloginventory_stock">
+        <dependencies>
+            <indexer id="mirakl_offer"/>
+        </dependencies>
+    </indexer>
+    <indexer id="inventory">
+        <dependencies>
+            <indexer id="mirakl_offer"/>
+        </dependencies>
+    </indexer>
+</config>

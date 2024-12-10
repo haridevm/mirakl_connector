@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\Indexer\Product\Full">
+        <arguments>
+            <argument name="indexerList" xsi:type="array">
+                <item name="mirakl_offer" xsi:type="const">Mirakl\OfferIndexer\Model\Indexer\Offer\IndexProcessor::INDEXER_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\OfferIndexer\Model\Indexer\Offer\Indexer">
+        <arguments>
+            <argument name="collectionCustomizers" xsi:type="array">
+                <item name="default" xsi:type="object">Mirakl\OfferIndexer\Model\Indexer\Offer\Collection\Customizer\DefaultFilters</item>
+            </argument>
+            <argument name="indexHandlers" xsi:type="array">
+                <item name="mirakl_offer_index" xsi:type="object">Mirakl\OfferIndexer\Model\Indexer\Offer\Handler\OfferIndexHandler</item>
+                <item name="mirakl_offer_product_index" xsi:type="object">Mirakl\OfferIndexer\Model\Indexer\Offer\Handler\ProductIndexHandler</item>
+                <item name="mirakl_offer_product_stock_index" xsi:type="object">Mirakl\OfferIndexer\Model\Indexer\Offer\Handler\StockIndexHandler</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Product\Offer\Collector">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="default" xsi:type="object">Mirakl\OfferIndexer\Model\Product\Offer\Collector\Customizer\Store</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Observer\OfferImportAfterRefreshIndexObserver">
+        <arguments>
+            <argument name="indexers" xsi:type="array">
+                <item name="1" xsi:type="const">Mirakl\OfferIndexer\Model\Indexer\Offer\IndexProcessor::INDEXER_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\OfferIndexer\Observer\Product\AttributeMassUpdateBeforeObserver">
+        <arguments>
+            <argument name="attributesFilter" xsi:type="array">
+                <item name="status" xsi:type="string">status</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\InventoryIndexer\Indexer\IndexStructure">
+        <plugin name="mirakl_offer_indexer" type="Mirakl\OfferIndexer\Plugin\Indexer\Inventory\IndexStructurePlugin"/>
+    </type>
+    <preference for="Mirakl\Connector\Model\ResourceModel\Offer" type="Mirakl\OfferIndexer\Model\ResourceModel\Offer"/>
+    <preference for="Mirakl\OfferIndexer\Model\Offer\AvailabilityInterface" type="Mirakl\OfferIndexer\Model\Offer\Availability"/>
+    <preference for="Mirakl\OfferIndexer\Model\Indexer\Offer\IndexerInterface" type="Mirakl\OfferIndexer\Model\Indexer\Offer\Indexer"/>
+</config>

@@ -1,0 +1,50 @@
+<?php
+/** @var \Mirakl\FrontendDemo\Block\Product\Offer\Price $block */
+/** @var \Magento\Tax\Helper\Data $taxHelper */
+$taxHelper = $this->helper('Magento\Tax\Helper\Data');
+$offer = $block->getOffer();
+$originPrice = $offer->getOriginPrice();
+$finalPrice = $offer->getPrice();
+?>
+<div class="offer-price price-container" data-price-amount="<?= /* @escapeNotVerified */ $block->getOfferPriceAmount() ?>">
+    <?php if ($taxHelper->displayPriceIncludingTax() || $taxHelper->displayBothPrices()): ?>
+        <span class="price-wrapper price-including-tax" data-label="<?= $block->escapeHtml(__('Incl. Tax')); ?>">
+            <?= /* @escapeNotVerified */ $block->formatCurrency($block->getOfferPriceInclTax()) ?>
+            <?php if ($originPrice != $finalPrice): ?>
+                <span class="price offer-old-price">
+                    <s><?= /* @escapeNotVerified */ $block->formatCurrency($block->getOfferOriginPriceInclTax(), false) ?></s>
+                </span>
+            <?php endif; ?>
+        </span>
+    <?php endif; ?>
+    <?php if ($taxHelper->displayPriceExcludingTax() || $taxHelper->displayBothPrices()): ?>
+        <span class="price-wrapper price-excluding-tax" data-label="<?= $block->escapeHtml(__('Excl. Tax')); ?>">
+            <?= /* @escapeNotVerified */ $block->formatCurrency($block->getOfferPriceExclTax()) ?>
+            <?php if ($originPrice != $finalPrice): ?>
+                <span class="price offer-old-price">
+                    <s><?= /* @escapeNotVerified */ $block->formatCurrency($block->getOfferOriginPriceExclTax(), false) ?></s>
+                </span>
+            <?php endif; ?>
+        </span>
+    <?php endif; ?>
+</div>
+
+<?= $block->getPriceRangesHtml() ?>
+
+<?php if ($block->getDisplayShippingPrice()): ?>
+<div class="offer-shipping best-offer-shipping" data-shipping-offer-id="<?= /* @escapeNotVerified */ $offer->getId() ?>" style="display: none">
+    <?php if ($offer->getMinShippingPrice() > 0): ?>
+        <?php if ($taxHelper->displayShippingBothPrices()): ?>
+            <?= /* @escapeNotVerified */ __('+ %1 shipping (Excl. Tax: %2)', $block->formatCurrency($block->getOfferMinShippingPriceInclTax()), $block->formatCurrency($block->getOfferMinShippingPriceExclTax())) ?>
+        <?php else: ?>
+            <?= /* @escapeNotVerified */ __('+ %1 shipping', $block->formatCurrency($taxHelper->displayShippingPriceIncludingTax() ? $block->getOfferMinShippingPriceInclTax() : $block->getOfferMinShippingPriceExclTax())) ?>
+        <?php endif; ?>
+    <?php else: ?>
+        <?= /* @escapeNotVerified */ __('Free shipping') ?>
+    <?php endif; ?>
+</div>
+<?php endif; ?>
+
+<?php if ($offer->getPriceAdditionalInfo()): ?>
+    <div class="offer-price-description"><?= $block->escapeHtml($offer->getPriceAdditionalInfo()) ?></div>
+<?php endif; ?>

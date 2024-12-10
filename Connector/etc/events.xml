@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="inventory" instance="Mirakl\Connector\Observer\SubtractQuoteInventoryObserver"/>
+        <observer name="mirakl_connector" instance="Mirakl\Connector\Observer\AddQuoteFieldsToOrderObserver" shared="false"/>
+    </event>
+    <event name="sales_quote_item_save_before">
+        <observer name="mirakl_connector" instance="Mirakl\Connector\Observer\SetQuoteItemFreeShippingObserver"/>
+    </event>
+    <event name="sales_order_item_save_before">
+        <observer name="mirakl_connector" instance="Mirakl\Connector\Observer\LockOrderItemObserver"/>
+    </event>
+    <event name="mirakl_offer_import_before">
+        <observer name="mirakl_connector_import_shops" instance="Mirakl\Connector\Observer\ImportShopsBeforeOffersObserver"/>
+    </event>
+    <event name="mirakl_offer_import_after">
+        <observer name="mirakl_connector_fill_attributes" instance="Mirakl\Connector\Observer\FillAttributesObserver"/>
+        <observer name="mirakl_connector_refresh_index" instance="Mirakl\Connector\Observer\OfferImportAfterRefreshIndexObserver"/>
+        <observer name="mirakl_connector_clear_cache" instance="Mirakl\Connector\Observer\OfferImportAfterClearCacheObserver"/>
+    </event>
+    <event name="mirakl_connector_convert_order_before">
+        <observer name="mirakl_connector_convert_order_before" instance="Mirakl\Connector\Observer\ConvertOrderBeforeObserver"/>
+    </event>
+    <event name="mirakl_trigger_order_debit">
+        <observer name="mirakl_connector_trigger_order_debit" instance="Mirakl\Connector\Observer\TriggerOrderDebitObserver"/>
+    </event>
+    <event name="mirakl_trigger_order_refund">
+        <observer name="mirakl_connector_trigger_order_refund" instance="Mirakl\Connector\Observer\TriggerOrderRefundObserver"/>
+    </event>
+    <event name="mirakl_connector_convert_order_after">
+        <observer name="mirakl_add_po_number" instance="Mirakl\Connector\Observer\AddPurchaseOrderNumberObserver"/>
+    </event>
+</config>

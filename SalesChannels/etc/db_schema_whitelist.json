@@ -1,0 +1,12 @@
+{
+    "quote": {
+        "column": {
+            "mirakl_channel_code": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "mirakl_channel_code": true
+        }
+    }
+}

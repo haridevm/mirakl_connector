@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mirakl_offer_index" resource="default" engine="innodb" comment="Mirakl Offer Index">
+        <column xsi:type="int" name="offer_id" nullable="false" comment="Offer Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" default="0" comment="Store Id"/>
+        <column xsi:type="decimal" name="price" scale="6" precision="20" unsigned="false" nullable="true" comment="Price"/>
+        <column xsi:type="decimal" name="origin_price" scale="6" precision="20" unsigned="false" nullable="true" comment="Origin Price"/>
+        <column xsi:type="decimal" name="final_price" scale="6" precision="20" unsigned="false" nullable="true" comment="Final Price"/>
+        <column xsi:type="decimal" name="discount_price" scale="6" precision="20" unsigned="false" nullable="true" comment="Discount Price"/>
+        <column xsi:type="datetime" name="discount_start_date" nullable="true" comment="Discount Start Date"/>
+        <column xsi:type="datetime" name="discount_end_date" nullable="true" comment="Discount End Date"/>
+        <column xsi:type="varchar" length="255" name="price_ranges" nullable="true" comment="Price Ranges"/>
+        <column xsi:type="varchar" length="255" name="discount_ranges" nullable="true" comment="Discount Ranges"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="offer_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="MIRAKL_OFFER_INDEX_OFFER_ID" indexType="btree">
+            <column name="offer_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="MIRAKL_OFFER_INDEX_STORE_ID_STORE_STORE_ID"
+            table="mirakl_offer_index" column="store_id" referenceTable="store"
+            referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+    <table name="mirakl_offer_product_index" resource="default" engine="innodb" comment="Mirakl Offer Product Index">
+        <column xsi:type="varchar" name="sku" length="64" nullable="false" comment="SKU"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" default="0" comment="Store Id"/>
+        <column xsi:type="decimal" name="min_price" scale="6" precision="20" unsigned="false" nullable="true" comment="Min Price"/>
+        <column xsi:type="decimal" name="max_price" scale="6" precision="20" unsigned="false" nullable="true" comment="Max Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="sku"/>
+            <column name="store_id"/>
+        </constraint>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_INDEX_SKU" indexType="btree">
+            <column name="sku"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="MIRAKL_OFFER_PRODUCT_INDEX_STORE_ID_STORE_STORE_ID"
+            table="mirakl_offer_product_index" column="store_id" referenceTable="store"
+            referenceColumn="store_id" onDelete="CASCADE"/>
+    </table>
+    <table name="mirakl_offer_product_stock_index" resource="default" engine="innodb" comment="Mirakl Offer Product Stock Index">
+        <column xsi:type="int" name="offer_id" unsigned="true" nullable="false" comment="Offer Id"/>
+        <column xsi:type="int" name="product_id" unsigned="true" nullable="false" comment="Product ID"/>
+        <column xsi:type="varchar" name="sku" length="64" nullable="false" comment="SKU"/>
+        <column xsi:type="int" name="stock_id" unsigned="true" nullable="false" identity="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="offer_id"/>
+            <column name="product_id"/>
+            <column name="stock_id"/>
+        </constraint>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_STOCK_INDEX_OFFER_ID" indexType="btree">
+            <column name="offer_id"/>
+        </index>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_STOCK_INDEX_PRODUCT_ID" indexType="btree">
+            <column name="product_id"/>
+        </index>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_STOCK_INDEX_SKU" indexType="btree">
+            <column name="sku"/>
+        </index>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_STOCK_INDEX_STOCK_ID" indexType="btree">
+            <column name="stock_id"/>
+        </index>
+    </table>
+</schema>

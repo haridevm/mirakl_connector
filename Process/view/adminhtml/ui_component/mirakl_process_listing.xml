@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">mirakl_process_listing.mirakl_process_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>mirakl_process_columns</spinner>
+        <deps>
+            <dep>mirakl_process_listing.mirakl_process_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="mirakl_process_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Mirakl_Process::process</aclResource>
+        <dataProvider class="Mirakl\Process\Ui\Component\DataProvider" name="mirakl_process_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks" class="Mirakl\Process\Ui\Component\Listing\Bookmark"/>
+        <columnsControls name="columns_controls"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction" class="Mirakl\Process\Ui\Component\Listing\MassAction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="mirakl/process/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="mirakl_process_columns">
+        <settings>
+            <childDefaults>
+                <param name="fieldAction" xsi:type="array">
+                    <item name="provider" xsi:type="string">mirakl_process_listing.mirakl_process_listing.mirakl_process_columns.actions</item>
+                    <item name="target" xsi:type="string">applyAction</item>
+                    <item name="params" xsi:type="array">
+                        <item name="0" xsi:type="string">view</item>
+                        <item name="1" xsi:type="string">${ $.$data.rowIndex }</item>
+                    </item>
+                </param>
+            </childDefaults>
+        </settings>
+        <selectionsColumn name="ids">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>55</resizeDefaultWidth>
+            </settings>
+        </selectionsColumn>
+        <column name="id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">ID</label>
+                <sorting>desc</sorting>
+            </settings>
+        </column>
+        <column name="type">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+        <column name="duration" class="Mirakl\Process\Ui\Component\Listing\Column\Duration">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Duration</label>
+            </settings>
+        </column>
+        <actionsColumn name="file" class="Mirakl\Process\Ui\Component\Listing\Column\File">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">File</label>
+                <disableAction>true</disableAction>
+            </settings>
+        </actionsColumn>
+        <column name="output" class="Mirakl\Process\Ui\Component\Listing\Column\Output">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Output</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+                <fieldClass>
+                    <class name="pre">true</class>
+                </fieldClass>
+            </settings>
+        </column>
+        <column name="status" class="Mirakl\Process\Ui\Component\Listing\Column\Status">
+            <settings>
+                <options class="Mirakl\Process\Model\Source\StatusLayout"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Process Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <column name="mirakl_status" class="Mirakl\Process\Ui\Component\Listing\Column\Status">
+            <settings>
+                <options class="Mirakl\Process\Model\Source\StatusLayout"/>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <label translate="true">Mirakl Status</label>
+                <bodyTmpl>ui/grid/cells/html</bodyTmpl>
+            </settings>
+        </column>
+        <actionsColumn name="mirakl_file" class="Mirakl\Process\Ui\Component\Listing\Column\File">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Report File</label>
+            </settings>
+        </actionsColumn>
+        <actionsColumn name="actions" class="Mirakl\Process\Ui\Component\Listing\Column\ProcessActions">
+            <settings>
+                <indexField>id</indexField>
+                <resizeEnabled>false</resizeEnabled>
+                <resizeDefaultWidth>107</resizeDefaultWidth>
+            </settings>
+        </actionsColumn>
+    </columns>
+</listing>

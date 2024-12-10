@@ -1,0 +1,89 @@
+{
+    "mirakl_shipping_type": {
+        "column": {
+            "id": true,
+            "code": true,
+            "click_and_collect": true,
+            "delivery_by_operator": true,
+            "mandatory_tracking": true,
+            "label": true,
+            "description": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MIRAKL_SHIPPING_TYPE_CODE": true
+        }
+    },
+    "mirakl_shop": {
+        "column": {
+            "id": true,
+            "name": true,
+            "eav_option_id": true,
+            "state": true,
+            "date_created": true,
+            "description": true,
+            "logo": true,
+            "free_shipping": true,
+            "professional": true,
+            "premium": true,
+            "closed_from": true,
+            "closed_to": true,
+            "grade": true,
+            "evaluations_count": true,
+            "additional_info": true
+        },
+        "index": {
+            "MIRAKL_SHOP_STATE": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mirakl_shipping_zone": {
+        "column": {
+            "id": true,
+            "code": true,
+            "is_active": true,
+            "conditions_serialized": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mirakl_shipping_zone_store": {
+        "column": {
+            "zone_id": true,
+            "store_id": true
+        },
+        "index": {
+            "MIRAKL_SHIPPING_ZONE_STORE_STORE_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MIRAKL_SHIPPING_ZONE_STORE_ZONE_ID_MIRAKL_SHIPPING_ZONE_ID": true,
+            "MIRAKL_SHIPPING_ZONE_STORE_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mirakl_offer_state": {
+        "column": {
+            "id": true,
+            "name": true,
+            "eav_option_id": true,
+            "sort_order": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "mirakl_document_type": {
+        "column": {
+            "id": true,
+            "label": true,
+            "code": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,74 @@
+[
+    {
+        "data": {
+            "ean": [
+                "3570670000091"
+            ],
+            "name": "Slim Fit Polo",
+            "brand": "Lacoste",
+            "category": "3",
+            "description": "This ...",
+            "color": "BLUE",
+            "size": "M",
+            "mirakl_image_1": {
+                "source": "https://magento.mirakl.net/public/ms02-gray_main_1.jpg"
+            }
+        },
+        "product_sku": "mirakl_product_sku",
+        "creation_date": "2023-10-19T14:07:26.382Z",
+        "update_date": "2023-10-19T14:11:20.458Z",
+        "acceptance": {
+            "status": "ACCEPTED"
+        },
+        "validation": {
+            "status": "VALID",
+            "channels": [
+                {
+                    "code": "INIT",
+                    "status": "VALID"
+                },
+                {
+                    "code": "en",
+                    "status": "VALID"
+                },
+                {
+                    "code": "fr",
+                    "status": "VALID"
+                }
+            ]
+        },
+        "synchronization": {
+            "status": "SYNCHRONIZED"
+        },
+        "catalogs": [],
+        "product_urls": [],
+        "sources": [
+            {
+                "provider_code": "2001",
+                "provider_sku": "sku-01"
+            }
+        ],
+        "selling_authorization": {
+            "restricted": false,
+            "authorized_selling_shop_ids": []
+        },
+        "data_origin": {
+            "purpose": {
+                "origin": "PROVIDER",
+                "provider_code": "2024"
+            },
+            "name": {
+                "origin": "PROVIDER",
+                "provider_code": "2024"
+            },
+            "description": {
+                "origin": "PROVIDER",
+                "provider_code": "2024"
+            },
+            "category": {
+                "origin": "PROVIDER",
+                "provider_code": "2024"
+            }
+        }
+    }
+]

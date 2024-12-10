@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="invoice_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/invoice/view/items.phtml</argument>
+            </action>
+            <block class="Mirakl\Adminhtml\Block\Sales\Order\View\Items\Column\Mirakl" name="column_mirakl" template="order/items/column/mirakl.phtml" group="column"/>
+        </referenceBlock>
+        <referenceBlock name="invoice_items.default">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/invoice/view/items/renderer/default.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="tax">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/totals/tax.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="invoice_totals">
+            <block class="Mirakl\Adminhtml\Block\Sales\Invoice\Totals" name="mirakl_invoice_totals" />
+        </referenceBlock>
+    </body>
+</page>

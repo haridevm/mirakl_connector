@@ -1,0 +1,12 @@
+{
+    "catalog_product_entity": {
+        "column": {
+            "mirakl_mcm_product_id": true,
+            "mirakl_mcm_variant_group_code": true
+        },
+        "index": {
+            "CATALOG_PRODUCT_ENTITY_MIRAKL_MCM_PRODUCT_ID": true,
+            "CATALOG_PRODUCT_ENTITY_MIRAKL_MCM_VARIANT_GROUP_CODE": true
+        }
+    }
+}

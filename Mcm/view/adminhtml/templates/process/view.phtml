@@ -1,0 +1,51 @@
+<?php
+/**
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ * @var \Mirakl\Mcm\Block\Adminhtml\Process\View $block
+ */
+$process = $block->getProcess();
+?>
+
+<?php if ($process->getMiraklStatus() === 'error'): ?>
+    <?php $errors = $block->getErrors() ?>
+    <?php if (count($errors)): ?>
+        <div class="admin__page-section-title">
+            <strong class="title"><?= $block->escapeHtml(__('MCM Errors')) ?></strong>
+        </div>
+        <div class="admin__page-section-content">
+            <table class="admin__table-secondary">
+                <tbody>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Mirakl Identifier')) ?></th>
+                    <td><?= $block->escapeHtml(__('Mirakl Type Error')) ?></td>
+                    <td><?= $block->escapeHtml(__('Mirakl Error Code')) ?></td>
+                    <td><?= $block->escapeHtml(__('Mirakl Error Message')) ?></td>
+                </tr>
+                <?php if (isset($errors['products'])): ?>
+                    <?php foreach ($errors['products'] as $identifier => $errorsProduct): ?>
+                        <?php foreach ($errorsProduct as $errorProduct): ?>
+                            <tr>
+                                <td><?= $block->escapeHtml($identifier) ?></td>
+                                <td><?= $block->escapeHtml($errorProduct[0]) ?></td>
+                                <td><?= $block->escapeHtml($errorProduct[1]) ?></td>
+                                <td><?= $block->escapeHtml($errorProduct[2]) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endforeach; ?>
+                <?php endif ?>
+
+                <?php if (isset($errors['global'])): ?>
+                    <?php foreach ($errors['global'] as $errorsGlobal): ?>
+                        <tr>
+                            <td><?= $block->escapeHtml( __('Global')) ?></td>
+                            <td><?= $block->escapeHtml($errorsGlobal[0]) ?></td>
+                            <td><?= $block->escapeHtml($errorsGlobal[1]) ?></td>
+                            <td><?= $block->escapeHtml($errorsGlobal[2]) ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif ?>
+<?php endif ?>

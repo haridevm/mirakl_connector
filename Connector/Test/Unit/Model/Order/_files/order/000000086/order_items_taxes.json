@@ -1,0 +1,50 @@
+[
+    {
+        "tax_id": "57",
+        "tax_percent": "20.0000",
+        "item_id": null,
+        "taxable_item_type": "shipping",
+        "associated_item_id": null,
+        "real_amount": "0.0000",
+        "real_base_amount": "0.0000",
+        "code": "TVA20",
+        "title": "TVA20",
+        "order_id": "83"
+    },
+    {
+        "tax_id": "57",
+        "tax_percent": "20.0000",
+        "item_id": "139",
+        "taxable_item_type": "product",
+        "associated_item_id": null,
+        "real_amount": "3.1300",
+        "real_base_amount": "3.1300",
+        "code": "TVA20",
+        "title": "TVA20",
+        "order_id": "83"
+    },
+    {
+        "tax_id": "58",
+        "tax_percent": "6.6000",
+        "item_id": null,
+        "taxable_item_type": "shipping",
+        "associated_item_id": null,
+        "real_amount": "0.0000",
+        "real_base_amount": "0.0000",
+        "code": "FranceTVA5.5",
+        "title": "FranceTVA5.5",
+        "order_id": "83"
+    },
+    {
+        "tax_id": "58",
+        "tax_percent": "6.6000",
+        "item_id": "139",
+        "taxable_item_type": "product",
+        "associated_item_id": null,
+        "real_amount": "1.0300",
+        "real_base_amount": "1.0300",
+        "code": "FranceTVA5.5",
+        "title": "FranceTVA5.5",
+        "order_id": "83"
+    }
+]

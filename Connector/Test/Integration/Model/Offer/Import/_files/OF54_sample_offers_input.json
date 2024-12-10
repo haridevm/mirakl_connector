@@ -1,0 +1,1830 @@
+[
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "Convenience is next to nothing when your day is crammed with action. So whether you're heading to class, gym, or the unbeaten path, make sure you've got your Strive Shoulder Pack stuffed with all your essentials, and extras as well.\n\nZippered main compartment.\nFront zippered pocket.\nSide mesh pocket.\nCell phone pocket on strap.\nAdjustable shoulder strap and top carry handle.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-07-27T10:06:18Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2246,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 19,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 19
+                    }
+                ]
+            }
+        ],
+        "product_sku": "a55f3d46",
+        "quantity": 82768,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB04",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2238,
+        "premium": true,
+        "prices": [
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "origin_price": 6.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 6.9
+                    }
+                ]
+            },
+            {
+                "origin_price": 9.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 9.9
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT"
+                    ]
+                },
+                "origin_price": 10.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 10.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "24-MB01",
+        "quantity": 1890,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2169",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "Powerwalking to the gym or strolling to the local coffeehouse, the Savvy Shoulder Tote lets you stash your essentials in sporty style! A top-loading compartment provides quick and easy access to larger items, while zippered pockets on the front and side hold cash, credit cards and phone.\n\nWater-resistant shell.\nWater bottle pocket.\nPadded, articulating shoulder strap.\nDimensions: W 21\" x H 15\" x D 10\".",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2253,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "origin_price": 15.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 15.9
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT"
+                    ]
+                },
+                "origin_price": 18.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 18.9
+                    },
+                    {
+                        "quantity_threshold": 3,
+                        "unit_origin_price": 17.9
+                    }
+                ]
+            },
+            {
+                "discount_price": 24,
+                "discount_start_date": "2022-02-23T23:00:00Z",
+                "origin_price": 32,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 24,
+                        "unit_origin_price": 32
+                    }
+                ]
+            }
+        ],
+        "product_sku": "6a91174a",
+        "quantity": 1000,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB05",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "With more room than it appears, the Endeavor Daytrip Backpack will hold a whole day's worth of books, binders and gym clothes. The spacious main compartment includes a dedicated laptop sleeve. Two other compartments offer extra storage space.\n\nFoam-padded adjustable shoulder straps.\n900D polyester.\nOversized zippers.\nLocker loop.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2254,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 33,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 33
+                    }
+                ]
+            }
+        ],
+        "product_sku": "1545b234",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB06",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "For long weekends away, camping outings and business trips, the Overnight Duffle can't be beat. The dual handles make it a cinch to carry, while the durable waterproof exterior helps you worry less about the weather. With multiple organizational pockets inside and out, it's the perfect travel companion.\n\nDual top handles.\nW 15\" x H 15\" x D 9\".\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2255,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 45,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 45
+                    }
+                ]
+            }
+        ],
+        "product_sku": "44b2d4a9",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB07",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": true,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "The Crown Summit Backpack is equally at home in a gym locker, study cube or a pup tent, so be sure yours is packed with books, a bag lunch, water bottles, yoga block, laptop, or whatever else you want in hand. Rugged enough for day hikes and camping trips, it has two large zippered compartments and padded, adjustable shoulder straps.\n\nTop handle.\nGrommet holes.\nTwo-way zippers.\nH 20\" x W 14\" x D 12\".\nWeight: 2 lbs, 8 oz. Volume: 29 L.",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-07-13T15:04:42Z",
+        "leadtime_to_ship": 2,
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2245,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 38,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 37.9,
+                        "unit_origin_price": 38
+                    },
+                    {
+                        "quantity_threshold": 3,
+                        "unit_discount_price": 35.9,
+                        "unit_origin_price": 36.5
+                    },
+                    {
+                        "quantity_threshold": 4,
+                        "unit_discount_price": 33.9,
+                        "unit_origin_price": 34
+                    },
+                    {
+                        "quantity_threshold": 5,
+                        "unit_origin_price": 32.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "08e0031e",
+        "product_tax_code": "U0000000",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB03",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "Perfect for class, work or the gym, the Wayfarer Messenger Bag is packed with pockets. The dual-buckle flap closure reveals an organizational panel, and the roomy main compartment has spaces for your laptop and a change of clothes. An adjustable shoulder strap and easy-grip handle promise easy carrying.\n\nMultiple internal zip pockets.\nMade of durable nylon.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_additional_fields": [
+            {
+                "code": "date-test",
+                "type": "DATE",
+                "value": "2022-06-24T00:00:00Z"
+            }
+        ],
+        "offer_id": 2247,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT"
+                    ]
+                },
+                "discount_price": 43,
+                "origin_price": 46,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 43,
+                        "unit_origin_price": 46
+                    }
+                ]
+            },
+            {
+                "origin_price": 45,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 45
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "origin_price": 44,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 44
+                    }
+                ]
+            }
+        ],
+        "product_sku": "08874fd9",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB05",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "School books, camp gear and yoga clothes get along just fine in the all-purpose Driven Backpack. Crafted with tough polyester ripstop fabric, it's outfitted with rubberized end panels and padded, adjustable shoulder straps. The roomy main compartment features molded foam pockets that host everything you need.\n\nLarge main and small zip compartments.\nAdjustable, padded straps.\nInterior foam pockets.\nExterior zip compartment.\nLeft sport bottle pocket.\nSurvival gear sold separately.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2251,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 36,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 36
+                    }
+                ]
+            }
+        ],
+        "product_sku": "f1540670",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB03",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_additional_fields": [
+            {
+                "code": "multi",
+                "type": "MULTIPLE_VALUES_LIST",
+                "value": "Two"
+            }
+        ],
+        "offer_id": 2219,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 179,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 179
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7ffe1933",
+        "quantity": 2,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2152",
+        "state_code": "5"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-05-30T14:18:29Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2258,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 89,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 89
+                    }
+                ]
+            }
+        ],
+        "product_sku": "24-MB06",
+        "product_tax_code": "U0000000",
+        "quantity": 181,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2178",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-06-22T09:36:02Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2259,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 19.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 19.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "MS11-L-Blue",
+        "product_tax_code": "U0000000",
+        "quantity": 91,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2179",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-03-06T15:35:39Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2257,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 78,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 78
+                    }
+                ]
+            }
+        ],
+        "product_sku": "3df57642",
+        "product_tax_code": "U0000000",
+        "quantity": 18,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2177",
+        "state_code": "10"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-07-11T16:19:36Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2231,
+        "premium": true,
+        "prices": [
+            {
+                "discount_price": 58,
+                "discount_start_date": "2023-08-14T22:00:00Z",
+                "origin_price": 60,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 58,
+                        "unit_origin_price": 60
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "origin_price": 89,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 89
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT",
+                        "MOBILE"
+                    ]
+                },
+                "origin_price": 59,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 59
+                    }
+                ]
+            }
+        ],
+        "product_sku": "24-MB01",
+        "quantity": 888,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2164",
+        "state_code": "10"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "With the Fusion Backpack strapped on, every trek is an adventure - even a bus ride to work. That's partly because two large zippered compartments store everything you need, while a front zippered pocket and side mesh pouches are perfect for stashing those little extras, in case you change your mind and take the day off.\n\nDurable nylon construction.\n2 main zippered compartments.\n1 exterior zippered pocket.\nMesh side pouches.\nPadded, adjustable straps.\nTop carry handle.\nDimensions: 18\" x 10\" x 6\".\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2244,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 59,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 59
+                    }
+                ]
+            }
+        ],
+        "product_sku": "f8fc9be6",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB02",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "The name says so, but the Push It Messenger Bag is much more than a busy commuter's tote. It's a closet away from home when you're pedaling from class or work to gym and back or home again. It's the perfect size and shape for laptop, folded clothes, even extra shoes.\n\nAdjustable crossbody strap.\nTop handle.\nZippered interior pocket.\nSecure clip closures.\nDurable fabric construction.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2252,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 45,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 45
+                    }
+                ]
+            }
+        ],
+        "product_sku": "8c60683e",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB04",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "The Rival Field Messenger packs all your campus, studio or trail essentials inside a unique design of soft, textured leather - with loads of character to spare. Two exterior pockets keep all your smaller items handy, and the roomy interior offers even more space.\n\nLeather construction.\nAdjustable fabric carry strap.\nDimensions: 18\" x 10\" x 4\".\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2248,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 45,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 45
+                    }
+                ]
+            }
+        ],
+        "product_sku": "2aed86b5",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB06",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "The Compete Track Tote holds a host of exercise supplies with ease. Stash your towel, jacket and street shoes inside. Tuck water bottles in easy-access external spaces. Perfect for trips to gym or yoga studio, with dual top handles for convenience to and from.\n\nTwo-way zippers.\nContrast detailing.\nW 22.0\" x H 17\" x D 10\".\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2250,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 32,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 32
+                    }
+                ]
+            }
+        ],
+        "product_sku": "c73c6e2a",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB02",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "Good for beach trips, track meets, yoga retreats and more, the Impulse Duffle is the companion you'll want at your side. A large U-shaped opening makes packing a hassle-free affair, while a zippered interior pocket keeps jewelry and other small valuables safely tucked out of sight.\n\nWheeled.\nDual carry handles.\nRetractable top handle.\nW 14\" x H 26\" x D 11\".\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2249,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 74,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 74
+                    }
+                ]
+            }
+        ],
+        "product_sku": "54a403d7",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-UB02",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2023-07-13T14:48:01Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2240,
+        "premium": true,
+        "prices": [
+            {
+                "discount_price": 16.9,
+                "origin_price": 18.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 16.9,
+                        "unit_origin_price": 18.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "de3a9ae9",
+        "quantity": 122,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2174",
+        "state_code": "10"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2226,
+        "premium": true,
+        "price_additional_info": "PC040210",
+        "prices": [
+            {
+                "origin_price": 69,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 69
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7911bf22",
+        "quantity": 77,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2159",
+        "state_code": "5"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2239,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 8.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 8.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "0d62184c",
+        "quantity": 12,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2173",
+        "state_code": "5"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2241,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 17.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 17.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "0546f0ed",
+        "quantity": 99,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2175",
+        "state_code": "3"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2234,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 29,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 29
+                    }
+                ]
+            }
+        ],
+        "product_sku": "af3776f7",
+        "quantity": 28390,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2165",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "Everything you need for a trip to the gym will fit inside this surprisingly spacious Voyage Yoga Bag. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.\n\nSlip pocket on front.\nContrast piping.\nDurable nylon construction.\n",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2243,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 32,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 32
+                    }
+                ]
+            }
+        ],
+        "product_sku": "5eaee4f8",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-WB01",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 0,
+        "min_shipping_price_additional": 0,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2225,
+        "premium": true,
+        "price_additional_info": "PC040210",
+        "prices": [
+            {
+                "origin_price": 3990,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 3990
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7ffe1933",
+        "quantity": 7,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "S2158",
+        "state_code": "3"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "description": "The sporty Joust Duffle Bag can't be beat - not in the gym, not on the luggage carousel, not anywhere. Big enough to haul a basketball or soccer ball and some sneakers with plenty of room to spare, it's ideal for athletes with places to go.\n\nDual top handles.\nAdjustable shoulder strap.\nFull-length zipper.\nL 29\" x W 13\" x H 11\".",
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:13Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "max_order_quantity": 10000,
+        "min_order_quantity": 1,
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2242,
+        "package_quantity": 1,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 34,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 34
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT"
+                    ]
+                },
+                "origin_price": 39,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 39
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "origin_price": 29,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 29
+                    }
+                ]
+            }
+        ],
+        "product_sku": "5eb6d432",
+        "quantity": 100,
+        "shop_id": 2000,
+        "shop_name": "Top Travel!",
+        "shop_sku": "24-MB01",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:51Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2.9,
+        "min_shipping_price_additional": 5.12,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2222,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 7990,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 7990
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7911bf22",
+        "product_tax_code": "PC040210",
+        "quantity": 8,
+        "shop_id": 2001,
+        "shop_name": "Star Shoes",
+        "shop_sku": "S2155",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": true,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:51Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2.9,
+        "min_shipping_price_additional": 5.12,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_additional_fields": [
+            {
+                "code": "multi",
+                "type": "MULTIPLE_VALUES_LIST",
+                "value": "One,Three"
+            }
+        ],
+        "offer_id": 2218,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 199,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 199
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7ffe1933",
+        "product_tax_code": "U0000000",
+        "quantity": 993,
+        "shop_id": 2001,
+        "shop_name": "Star Shoes",
+        "shop_sku": "S2151",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:51Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2.9,
+        "min_shipping_price_additional": 5.12,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2220,
+        "premium": true,
+        "prices": [
+            {
+                "context": {
+                    "channel_codes": [
+                        "FR"
+                    ]
+                },
+                "discount_end_date": "2022-07-31T21:59:59Z",
+                "discount_start_date": "2022-07-27T22:00:00Z",
+                "origin_price": 21,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 20.79,
+                        "unit_origin_price": 21
+                    },
+                    {
+                        "quantity_threshold": 2,
+                        "unit_discount_price": 20.19,
+                        "unit_origin_price": 20.5
+                    },
+                    {
+                        "quantity_threshold": 10,
+                        "unit_discount_price": 18.9,
+                        "unit_origin_price": 19.9
+                    }
+                ]
+            },
+            {
+                "origin_price": 20.89,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 20.89
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "IT"
+                    ]
+                },
+                "discount_end_date": "2022-08-31T21:59:59Z",
+                "discount_price": 25.9,
+                "discount_start_date": "2022-08-11T22:00:00Z",
+                "origin_price": 29.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_discount_price": 25.9,
+                        "unit_origin_price": 29.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "24-MB01",
+        "product_tax_code": "U0000000",
+        "quantity": 78129,
+        "shop_id": 2001,
+        "shop_name": "Star Shoes",
+        "shop_sku": "S2153",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "FR",
+            "INIT",
+            "IT",
+            "MGT2-984"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:51Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2.9,
+        "min_shipping_price_additional": 5.12,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2223,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 590,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 590
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7d9557cc",
+        "product_tax_code": "PC040210",
+        "quantity": 3,
+        "shop_id": 2001,
+        "shop_name": "Star Shoes",
+        "shop_sku": "S2156",
+        "state_code": "10"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "INIT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:43Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2237,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 12.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 12.9
+                    }
+                ]
+            },
+            {
+                "context": {
+                    "channel_codes": [
+                        "INIT"
+                    ]
+                },
+                "origin_price": 19.9,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 19.9
+                    }
+                ]
+            }
+        ],
+        "product_sku": "24-MB01",
+        "product_tax_code": "U0000000",
+        "quantity": 999,
+        "shop_id": 2002,
+        "shop_name": "Sun Garden",
+        "shop_sku": "S2168",
+        "state_code": "11"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "INIT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:43Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 0,
+        "min_shipping_price_additional": 0,
+        "min_shipping_type": "EXPRESS",
+        "min_shipping_zone": "FR",
+        "offer_id": 2228,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 1990,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 1990
+                    }
+                ]
+            }
+        ],
+        "product_sku": "888ffed2",
+        "product_tax_code": "PC040210",
+        "quantity": 2,
+        "shop_id": 2002,
+        "shop_name": "Sun Garden",
+        "shop_sku": "S2161",
+        "state_code": "8"
+    },
+    {
+        "active": true,
+        "allow_quote_requests": false,
+        "channels": [
+            "INIT",
+            "MGT2-984",
+            "MOBILE"
+        ],
+        "currency_iso_code": "EUR",
+        "deleted": false,
+        "fulfillment": {
+            "center": {
+                "code": "DEFAULT"
+            }
+        },
+        "is_professional": true,
+        "last_updated": "2022-10-18T13:27:43Z",
+        "logistic_class": {
+            "code": "DEFAULT"
+        },
+        "min_shipping_price": 2,
+        "min_shipping_price_additional": 5,
+        "min_shipping_type": "STD",
+        "min_shipping_zone": "FR",
+        "offer_id": 2229,
+        "premium": true,
+        "prices": [
+            {
+                "origin_price": 109,
+                "volume_prices": [
+                    {
+                        "quantity_threshold": 1,
+                        "unit_origin_price": 109
+                    }
+                ]
+            }
+        ],
+        "product_sku": "7ffe1933",
+        "product_tax_code": "PC040210",
+        "quantity": 70,
+        "shop_id": 2002,
+        "shop_name": "Sun Garden",
+        "shop_sku": "S2162",
+        "state_code": "11"
+    }
+]

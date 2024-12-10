@@ -1,0 +1,36 @@
+<?php
+/**
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ * @var \Mirakl\Process\Block\Adminhtml\Process\View\ProcessOutput $block
+ */
+$process = $block->getProcess();
+?>
+<section class="admin__page-section process-output">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Process Output')) ?></span>
+    </div>
+    <div class="admin__page-section-content report-output">
+        <?php if (!$process->getOutput()): ?>
+            <?= /* @escapeNotVerified */ __('This process has not generated any output.') ?>
+        <?php else: ?>
+            <p class="report-output-actions">
+                <a href="#" onclick="jQuery('#report-output-block').scrollTop(jQuery('#report-output-block')[0].scrollHeight); return false;"><?= /* @escapeNotVerified */ __('Scroll to Bottom') ?></a>
+                | <a href="#" onclick="jQuery('#report-output-block').scrollTop(0); return false;"><?= /* @escapeNotVerified */ __('Scroll to Top') ?></a>
+            </p>
+            <div id="report-output-block" class="report-output-content">
+                <div class="output-cols">
+                    <div class="num">
+                        <?php foreach (array_keys($block->getOutput()) as $i): ?>
+                            <div><?= $i + 1 ?></div>
+                        <?php endforeach ?>
+                    </div>
+                    <div class="line">
+                        <?php foreach ($block->getOutput() as $line): ?>
+                            <div><?= /* @escapeNotVerified */ $block->format($line) ?></div>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
+</section>

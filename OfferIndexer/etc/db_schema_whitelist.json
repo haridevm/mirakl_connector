@@ -1,0 +1,55 @@
+{
+    "mirakl_offer_index": {
+        "column": {
+            "offer_id": true,
+            "store_id": true,
+            "price": true,
+            "origin_price": true,
+            "final_price": true,
+            "discount_price": true,
+            "discount_start_date": true,
+            "discount_end_date": true,
+            "price_ranges": true,
+            "discount_ranges": true
+        },
+        "index": {
+            "MIRAKL_OFFER_INDEX_OFFER_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MIRAKL_OFFER_INDEX_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mirakl_offer_product_index": {
+        "column": {
+            "sku": true,
+            "store_id": true,
+            "min_price": true,
+            "max_price": true
+        },
+        "index": {
+            "MIRAKL_OFFER_PRODUCT_INDEX_SKU": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MIRAKL_OFFER_PRODUCT_INDEX_STORE_ID_STORE_STORE_ID": true
+        }
+    },
+    "mirakl_offer_product_stock_index": {
+        "column": {
+            "offer_id": true,
+            "product_id": true,
+            "sku": true,
+            "stock_id": true
+        },
+        "index": {
+            "MIRAKL_OFFER_PRODUCT_STOCK_INDEX_OFFER_ID": true,
+            "MIRAKL_OFFER_PRODUCT_STOCK_INDEX_PRODUCT_ID": true,
+            "MIRAKL_OFFER_PRODUCT_STOCK_INDEX_SKU": true,
+            "MIRAKL_OFFER_PRODUCT_STOCK_INDEX_STOCK_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

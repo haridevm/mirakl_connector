@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mirakl_event" resource="default" engine="innodb" comment="Connector Events">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Event Id"/>
+        <column xsi:type="varchar" name="code" length="100" comment="Code"/>
+        <column xsi:type="smallint" name="action" unsigned="true" nullable="false" default="0" comment="Action"/>
+        <column xsi:type="smallint" name="type" unsigned="true" nullable="false" default="0" comment="Type"/>
+        <column xsi:type="varchar" name="status" length="50" nullable="false" default="waiting" comment="Status"/>
+        <column xsi:type="text" name="csv_data" comment="CSV Data"/>
+        <column xsi:type="int" name="process_id" unsigned="true" comment="Process Id"/>
+        <column xsi:type="int" name="line" unsigned="true" comment="Line"/>
+        <column xsi:type="varchar" name="import_id" length="36" comment="Import Id"/>
+        <column xsi:type="varchar" name="message" length="255" comment="Message"/>
+        <column xsi:type="datetime" name="created_at" comment="Created At"/>
+        <column xsi:type="datetime" name="updated_at" comment="Updated At"/>
+        <index referenceId="MIRAKL_EVENT_CODE" indexType="btree">
+            <column name="code"/>
+        </index>
+        <index referenceId="MIRAKL_EVENT_TYPE" indexType="btree">
+            <column name="type"/>
+        </index>
+        <index referenceId="MIRAKL_EVENT_STATUS" indexType="btree">
+            <column name="status"/>
+        </index>
+        <index referenceId="MIRAKL_EVENT_IMPORT_ID" indexType="btree">
+            <column name="import_id"/>
+        </index>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>

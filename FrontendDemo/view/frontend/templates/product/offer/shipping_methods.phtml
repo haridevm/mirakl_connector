@@ -1,0 +1,42 @@
+<?php
+/** @var \Mirakl\FrontendDemo\Block\Product\Offer\ShippingMethods $block */
+$shippingMethods = $block->getShippingMethods();
+$shippingAddress = $block->getShippingAddress();
+?>
+<?php if ($shippingMethods): ?>
+<table class="shipping-options">
+        <thead>
+        <tr>
+            <td><?= $block->escapeHtml(__('Delivery Method')); ?></td>
+            <td><?= $block->escapeHtml(__('Shipping Zone')); ?></td>
+            <td><?= $block->escapeHtml(__('Shipping Price')); ?></td>
+            <td><?= $block->escapeHtml(__('Delivery Date')); ?></td>
+        </tr>
+        </thead>
+    <tbody>
+        <?php foreach ($shippingMethods as $shippingMethod): ?>
+            <tr>
+            <?php
+            /** @var \Mirakl\MMP\Common\Domain\Offer\Shipping\ShippingPriceByZoneAndType $shippingMethod */ ?>
+            <td><?= /* @escapeNotVerified */ $shippingMethod->getLabel(); ?></td>
+            <td><?= /* @escapeNotVerified */ $shippingMethod->getShippingZoneLabel(); ?></td>
+            <td>
+                <?php $price = $block->getShippingPrice($shippingMethod->getShippingPriceUnit(), $shippingAddress); ?>
+                <strong><?= /* @escapeNotVerified */ $block->convertAndFormat($price); ?></strong>
+            </td>
+            <td>
+                <?php if ($shippingMethod->getDeliveryTime()): ?>
+                <?= $block->getShippingDateBlock()
+                          ->setDeliveryTime($shippingMethod->getDeliveryTime())
+                          ->toHtml(); ?>
+                <?php else: ?>
+                    <?= $block->escapeHtml(__('Not available')); ?>
+                <?php endif; ?>
+            </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<?php else : ?>
+    <strong><?= $block->escapeHtml(__('No shipping methods available for this address.')); ?></strong>
+<?php endif; ?>

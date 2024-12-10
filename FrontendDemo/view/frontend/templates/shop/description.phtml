@@ -1,0 +1,21 @@
+<?php
+/** @var Mirakl\FrontendDemo\Block\Shop\View $block */
+/** @var Mirakl\Core\Model\Shop $_shop */
+$_shop = $block->getShop();
+?>
+<div class="block-content">
+    <?php if ($_shop->getDescription()): ?>
+        <?= /* @escapeNotVerified */ nl2br($block->getShopDescription()) ?>
+    <?php else: ?>
+        <?= /* @escapeNotVerified */ __('The seller has no description') ?>
+    <?php endif; ?>
+</div>
+
+<?php if ($_shop->getClosedFrom()): ?>
+    <div class="block-content">
+        <p><strong><?= /* @escapeNotVerified */ __('Closed From:') ?></strong> <?= /* @escapeNotVerified */ $block->formatDate($_shop->getClosedFrom(), \IntlDateFormatter::MEDIUM) ?></p>
+        <?php if ($_shop->getClosedTo()): ?>
+            <p><strong><?= /* @escapeNotVerified */ __('Closed To:') ?></strong> <?= /* @escapeNotVerified */ $block->formatDate($_shop->getClosedTo(), \IntlDateFormatter::MEDIUM) ?></p>
+        <?php endif ?>
+    </div>
+<?php endif ?>

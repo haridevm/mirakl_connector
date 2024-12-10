@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mirakl_shop" resource="default" engine="innodb" comment="Mirakl Shops">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" comment="Shop ID"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" default="" comment="Shop Name"/>
+        <column xsi:type="int" name="eav_option_id" nullable="true" comment="EAV Option Id"/>
+        <column xsi:type="varchar" name="state" length="20" nullable="false" default="" comment="Shop State"/>
+        <column xsi:type="datetime" name="date_created" nullable="true" comment="Creation Date"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Shop Description"/>
+        <column xsi:type="text" name="logo" nullable="true" comment="Shop Logo"/>
+        <column xsi:type="tinyint" name="free_shipping" nullable="true" comment="Is Free Shipping"/>
+        <column xsi:type="tinyint" name="professional" nullable="true" comment="Is Professional"/>
+        <column xsi:type="tinyint" name="premium" nullable="true" comment="Is Premium"/>
+        <column xsi:type="datetime" name="closed_from" nullable="true" comment="Closed From"/>
+        <column xsi:type="datetime" name="closed_to" nullable="true" comment="Closed To"/>
+        <column xsi:type="decimal" name="grade" precision="5" scale="2" nullable="true" comment="Shop Grade"/>
+        <column xsi:type="int" name="evaluations_count" nullable="false" default="0" comment="Evaluations count"/>
+        <column xsi:type="text" name="additional_info" nullable="true" comment="Additional Information"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="MIRAKL_SHOP_STATE" indexType="btree">
+            <column name="state"/>
+        </index>
+    </table>
+    <table name="mirakl_shipping_zone" resource="default" engine="innodb" comment="Mirakl Shipping Zones">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Shipping Zone ID"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false" comment="Shipping Zone Code"/>
+        <column xsi:type="tinyint" name="is_active" unsigned="true" nullable="false" default="1" comment="Is Active"/>
+        <column xsi:type="mediumtext" name="conditions_serialized" comment="Conditions Serialized"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="true" nullable="false" default="0" comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="mirakl_shipping_zone_store" resource="default" engine="innodb" comment="Mirakl Shipping Zone Store">
+        <column xsi:type="int" name="zone_id" unsigned="true" nullable="false" default="0" comment="Shipping Zone Id"/>
+        <column xsi:type="smallint" name="store_id" unsigned="true" nullable="false" default="0" comment="Store Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="zone_id"/>
+            <column name="store_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="MIRAKL_SHIPPING_ZONE_STORE_ZONE_ID_MIRAKL_SHIPPING_ZONE_ID"
+                    table="mirakl_shipping_zone_store"
+                    column="zone_id"
+                    referenceTable="mirakl_shipping_zone"
+                    referenceColumn="id"
+                    onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="MIRAKL_SHIPPING_ZONE_STORE_STORE_ID_STORE_STORE_ID"
+                    table="mirakl_shipping_zone_store"
+                    column="store_id"
+                    referenceTable="store"
+                    referenceColumn="store_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="MIRAKL_SHIPPING_ZONE_STORE_STORE_ID" indexType="btree">
+            <column name="store_id"/>
+        </index>
+    </table>
+    <table name="mirakl_offer_state" resource="default" engine="innodb" comment="Mirakl Offer States">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="State ID"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="State Name"/>
+        <column xsi:type="int" name="eav_option_id" nullable="true" comment="EAV Option Id"/>
+        <column xsi:type="smallint" name="sort_order" unsigned="true" nullable="false" default="0" comment="Sort Order"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="mirakl_document_type" resource="default" engine="innodb" comment="Mirakl Document Types">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Document Type Id"/>
+        <column xsi:type="varchar" name="label" length="255" nullable="false" default="" comment="Document Type Label"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false" default="" comment="Document Type Code"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+    <table name="mirakl_shipping_type" resource="default" engine="innodb" comment="Mirakl Shipping Type">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Shipping Type ID"/>
+        <column xsi:type="varchar" name="code" length="50" nullable="false" comment="Shipping Type Code"/>
+        <column xsi:type="tinyint" name="click_and_collect" unsigned="true" nullable="false" default="0" comment="Is Click and Collect"/>
+        <column xsi:type="tinyint" name="delivery_by_operator" unsigned="true" nullable="false" default="0" comment="Is Delivery By Operator"/>
+        <column xsi:type="tinyint" name="mandatory_tracking" unsigned="true" nullable="false" default="0" comment="Is Tracking Mandatory"/>
+        <column xsi:type="text" name="label" nullable="false" comment="Shipping Type Label"/>
+        <column xsi:type="text" name="description" comment="Shipping Type Description"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MIRAKL_SHIPPING_TYPE_CODE">
+            <column name="code"/>
+        </constraint>
+    </table>
+</schema>

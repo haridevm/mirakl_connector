@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="adminhtml.shipping.type.grid.container">
+            <block class="Magento\Backend\Block\Widget\Grid" name="shipping.type.grid" as="grid">
+                <arguments>
+                    <argument name="id" xsi:type="string">shipping_type_grid</argument>
+                    <argument name="dataSource" xsi:type="object">Mirakl\Core\Model\ResourceModel\Shipping\Type\Collection</argument>
+                    <argument name="default_sort" xsi:type="string">id</argument>
+                    <argument name="default_dir" xsi:type="string">ASC</argument>
+                    <argument name="save_parameters_in_session" xsi:type="string">1</argument>
+                </arguments>
+                <block class="Magento\Backend\Block\Widget\Grid\ColumnSet" name="shipping.type.grid.columnSet" as="grid.columnSet">
+                    <arguments>
+                        <argument name="rowUrl" xsi:type="array">
+                            <item name="generatorClass" xsi:type="string">Magento\Backend\Model\Widget\Grid\Row\UrlGenerator</item>
+                            <item name="path" xsi:type="string">*/*/view</item>
+                            <item name="extraParamsTemplate" xsi:type="array">
+                                <item name="id" xsi:type="string">getId</item>
+                            </item>
+                        </argument>
+                    </arguments>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="id">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">ID</argument>
+                            <argument name="index" xsi:type="string">id</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="code">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Code</argument>
+                            <argument name="index" xsi:type="string">code</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="label">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Label</argument>
+                            <argument name="index" xsi:type="string">label</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\ShippingTypeLabel</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="click_and_collect">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Click And Collect</argument>
+                            <argument name="index" xsi:type="string">click_and_collect</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Yesno"/>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\Boolean</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="delivery_by_operator">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Delivery By Operator</argument>
+                            <argument name="index" xsi:type="string">delivery_by_operator</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Yesno"/>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\Boolean</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="mandatory_tracking">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Mandatory Tracking</argument>
+                            <argument name="index" xsi:type="string">mandatory_tracking</argument>
+                            <argument name="type" xsi:type="string">options</argument>
+                            <argument name="options" xsi:type="options" model="Magento\Config\Model\Config\Source\Yesno"/>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\Boolean</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="description">
+                        <arguments>
+                            <argument name="header" xsi:type="string" translate="true">Description</argument>
+                            <argument name="index" xsi:type="string">description</argument>
+                            <argument name="type" xsi:type="string">text</argument>
+                            <argument name="escape" xsi:type="string">1</argument>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\ShippingTypeDescription</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Backend\Block\Widget\Grid\Column" as="action">
+                        <arguments>
+                            <argument name="type" xsi:type="string">action</argument>
+                            <argument name="header" xsi:type="string" translate="true">Action</argument>
+                            <argument name="filter" xsi:type="string">0</argument>
+                            <argument name="sortable" xsi:type="string">0</argument>
+                            <argument name="index" xsi:type="string">id</argument>
+                            <argument name="align" xsi:type="string">center</argument>
+                            <argument name="renderer" xsi:type="string">Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer\Action</argument>
+                            <argument name="actions" xsi:type="array">
+                                <item name="view" xsi:type="array">
+                                    <item name="caption" xsi:type="string" translate="true">View</item>
+                                    <item name="url" xsi:type="array">
+                                        <item name="base" xsi:type="string">*/*/view</item>
+                                    </item>
+                                    <item name="field" xsi:type="string">id</item>
+                                </item>
+                            </argument>
+                        </arguments>
+                    </block>
+                </block>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

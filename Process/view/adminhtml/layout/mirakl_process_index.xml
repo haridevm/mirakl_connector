@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="page.main.actions">
+            <referenceBlock name="page.actions.toolbar">
+                <block class="Mirakl\Process\Block\Adminhtml\Button" name="clear_all_history">
+                    <arguments>
+                        <argument name="id" xsi:type="string">mirakl_process_clear_all_history</argument>
+                        <argument name="url" xsi:type="string">*/*/clearAllHistory</argument>
+                        <argument name="confirm" translate="true" xsi:type="string">Are you sure? This will delete all existing processes.</argument>
+                        <argument name="label" translate="true" xsi:type="string">Clear All</argument>
+                        <argument name="class" xsi:type="string">primary</argument>
+                    </arguments>
+                </block>
+            </referenceBlock>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <uiComponent name="mirakl_process_listing"/>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="order_items">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/creditmemo/create/items.phtml</argument>
+            </action>
+            <block class="Mirakl\Adminhtml\Block\Sales\Order\View\Items\Column\Mirakl" name="column_mirakl" template="order/items/column/mirakl.phtml" group="column"/>
+        </referenceBlock>
+        <referenceBlock name="order_items.default">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/creditmemo/create/items/renderer/default.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="tax">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Mirakl_Adminhtml::order/totals/tax.phtml</argument>
+            </action>
+        </referenceBlock>
+        <referenceBlock name="creditmemo_totals">
+            <block class="Mirakl\Adminhtml\Block\Sales\CreditMemo\Create\MiraklAdjustments" name="mirakl_creditmemo_create_totals" template="Mirakl_Adminhtml::order/creditmemo/create/totals/mirakl_adjustments.phtml" />
+        </referenceBlock>
+    </body>
+</page>

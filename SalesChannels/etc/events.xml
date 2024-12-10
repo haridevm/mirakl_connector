@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="mirakl_api_get_shipping_rates_before">
+        <observer name="mirakl_sales_channels" instance="Mirakl\SalesChannels\Observer\GetShippingRatesApiBeforeObserver"/>
+    </event>
+    <event name="mirakl_offer_collection_load_after">
+        <observer name="mirakl_sales_channels" instance="Mirakl\SalesChannels\Observer\OfferCollectionLoadAfterObserver"/>
+    </event>
+    <event name="sales_model_service_quote_submit_before">
+        <observer name="mirakl_sales_channels" instance="Mirakl\SalesChannels\Observer\AddQuoteFieldsToOrderObserver" shared="false"/>
+    </event>
+    <event name="mirakl_connector_convert_order_after">
+        <observer name="mirakl_sales_channels" instance="Mirakl\SalesChannels\Observer\ConvertOrderAfterObserver"/>
+    </event>
+</config>

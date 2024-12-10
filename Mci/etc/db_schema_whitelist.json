@@ -1,0 +1,27 @@
+{
+    "mirakl_product_import": {
+        "column": {
+            "shop_id": true,
+            "sku": true,
+            "hash": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "catalog_eav_attribute": {
+        "column": {
+            "mirakl_is_variant": true,
+            "mirakl_is_exportable": true,
+            "mirakl_is_localizable": true
+        }
+    },
+    "catalog_product_entity": {
+        "column": {
+            "mirakl_images_status": true
+        },
+        "index": {
+            "CATALOG_PRODUCT_ENTITY_MIRAKL_IMAGES_STATUS": true
+        }
+    }
+}

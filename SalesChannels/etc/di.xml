@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mirakl\OfferIndexer\Model\Indexer\Offer\Indexer">
+        <arguments>
+            <argument name="collectionCustomizers" xsi:type="array">
+                <item name="sales_channels" xsi:type="object">Mirakl\SalesChannels\Model\Indexer\Offer\Collection\Customizer\SalesChannels</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Quote\Updater">
+        <plugin name="mirakl_sales_channels" type="Mirakl\SalesChannels\Plugin\Model\Quote\UpdaterPlugin"/>
+    </type>
+    <type name="Mirakl\SalesChannels\Model\Offer\Channel\DataOverrider">
+        <arguments>
+            <argument name="fieldCollectors" xsi:type="array">
+                <item name="prices" xsi:type="object">Mirakl\SalesChannels\Model\Offer\Channel\FieldCollector\Prices</item>
+                <item name="prices_context" xsi:type="object">Mirakl\SalesChannels\Model\Offer\Channel\FieldCollector\PricesContext</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\SalesChannels\Model\Offer\Channel\FieldCollector\PricesContext">
+        <arguments>
+            <argument name="serializer" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Serializer\Tuples</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\OfferIndexer\Model\Offer\Availability">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="channels" xsi:type="object">Mirakl\SalesChannels\Model\Offer\Availability</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Mirakl\SalesChannels\Model\Channel\ResolverInterface" type="Mirakl\SalesChannels\Model\Channel\Resolver"/>
+    <preference for="Mirakl\SalesChannels\Model\Offer\ChannelOfferInterface" type="Mirakl\SalesChannels\Model\Offer\ChannelOffer"/>
+    <preference for="Mirakl\SalesChannels\Model\Offer\Channel\DataOverriderInterface" type="Mirakl\SalesChannels\Model\Offer\Channel\DataOverrider"/>
+</config>

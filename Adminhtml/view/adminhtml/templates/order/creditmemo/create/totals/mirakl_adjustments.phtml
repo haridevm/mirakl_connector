@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+/** @var \Mirakl\Adminhtml\Block\Sales\CreditMemo\Totals $block */
+$_source = $block->getSource();
+?>
+<?php if ($_source && $_source->getOrder()->getMiraklShippingExclTax() > 0): ?>
+    <tr>
+        <td class="label">
+            <label for="mirakl_shipping_amount"><?= $block->escapeHtml($block->getShippingLabel()) ?></label>
+        </td>
+        <td>
+            <input type="text"
+                   name="creditmemo[mirakl_shipping_amount]"
+                   value="<?= /* @noEscape */ $block->formatValue($block->getShippingAmount()) ?>"
+                   class="input-text admin__control-text not-negative-amount"
+                   id="mirakl_shipping_amount" />
+        </td>
+    </tr>
+<?php endif; ?>

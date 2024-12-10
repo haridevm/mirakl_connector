@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="product.info.form.content">
+            <block cacheable="false" class="Mirakl\FrontendDemo\Block\Product\View" name="product.info.addtocart" as="addtocart" template="Mirakl_FrontendDemo::checkout/cart/item/configure/updatecart.phtml" />
+        </referenceContainer>
+        <referenceBlock name="product.info.options.wrapper.bottom">
+            <block cacheable="false" class="Mirakl\FrontendDemo\Block\Product\View" name="product.info.addtocart.additional" as="product.info.addtocart" template="Mirakl_FrontendDemo::checkout/cart/item/configure/updatecart.phtml"/>
+        </referenceBlock>
+        <referenceContainer name="product.info.price">
+            <block cacheable="false" class="Mirakl\FrontendDemo\Pricing\CartConfigure\Render" name="product.price.final" after="product.info.sku">
+                <arguments>
+                    <argument name="price_render" xsi:type="string">product.price.render.default</argument>
+                    <argument name="price_type_code" xsi:type="string">final_price</argument>
+                    <argument name="zone" xsi:type="string">item_view</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="root">
+            <block class="Magento\Framework\Pricing\Render" name="product.price.render.default">
+                <arguments>
+                    <argument name="price_render_handle" xsi:type="string">catalog_product_prices</argument>
+                    <argument name="use_link_for_as_low_as" xsi:type="boolean">true</argument>
+                    <argument name="cache_lifetime" xsi:type="boolean">false</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+        <referenceBlock name="product.info.choicebox" remove="true"/>
+    </body>
+</page>

@@ -1,0 +1,417 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mcm_product_import" xsi:type="object">Mirakl\Mcm\Console\Command\Product\Import\ImportCommand</item>
+                <item name="mcm_product_async_import" xsi:type="object">Mirakl\Mcm\Console\Command\Product\Import\AsyncImportCommand</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Handler\Csv">
+        <arguments>
+            <argument name="successReport" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Report\Data</argument>
+            <argument name="errorReport" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Report\Data</argument>
+            <argument name="adapter" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Adapter\Mcm</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Adapter\Bulk">
+        <arguments>
+            <argument name="importer" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Importer</argument>
+            <argument name="dataSourceManager" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Manager</argument>
+            <argument name="fieldCollector" xsi:type="object">Mirakl\Core\Model\File\FieldCollector\Csv</argument>
+            <argument name="parentProducts" xsi:type="object">Mirakl\Core\Model\Stack\Data</argument>
+            <argument name="simpleBuilder" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder\Csv</argument>
+            <argument name="configurableBuilder" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Builder\Configurable\Builder</argument>
+            <argument name="miraklProductIdField" xsi:type="const">Mirakl\Mcm\Helper\Data::CSV_MIRAKL_PRODUCT_ID</argument>
+            <argument name="miraklProductSkuField" xsi:type="const">Mirakl\Mcm\Helper\Data::CSV_MIRAKL_PRODUCT_SKU</argument>
+            <argument name="miraklVariantGroupCodeField" xsi:type="const">Mirakl\Mcm\Helper\Data::CSV_MIRAKL_VARIANT_GROUP_CODE</argument>
+        </arguments>
+    </type>
+
+    <!-- Formatters for MCM bulk import -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\Json" type="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter">
+        <arguments>
+            <argument name="formatters" xsi:type="array">
+                <item name="attribute_set" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\AttributeSet</item>
+                <item name="scope" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\Scope</item>
+                <item name="variations" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\Variations</item>
+                <item name="unique_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\UniqueAttributes</item>
+                <item name="variant_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\VariantAttributes</item>
+                <item name="i18n" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\I18n</item>
+                <item name="multi_value_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\MultiValueAttributes</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\I18n">
+        <arguments>
+            <argument name="urlGenerator" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Generator\Url</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Manager">
+        <arguments>
+            <argument name="dataSource" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Json</argument>
+            <argument name="dataFormatter" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter\Json</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\AllowedAttributes">
+        <arguments>
+            <argument name="extraColumns" xsi:type="array">
+                <item name="localized_attributes" xsi:type="const">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\LocalizedAttributes::I18N_FIELD</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- Cleaners for MCM bulk simple product import in JSON format -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Bulk\Simple\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner">
+        <arguments>
+            <argument name="cleaners" xsi:type="array">
+                <item name="data" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\Data\Cleaner\Data</item>
+                <item name="identifier" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier\Json</item>
+                <item name="category" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Category</item>
+                <item name="localized_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\LocalizedAttributes</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode\Json</item>
+                <item name="allowed_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\AllowedAttributes</item>
+                <item name="multi_value_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\MultiValueAttributes</item>
+                <item name="images" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\Data\Cleaner\Images</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Mirakl\Mcm\Helper\Data::JSON_MIRAKL_PRODUCT_ID</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Mirakl\Mcm\Helper\Data::JSON_MIRAKL_VARIANT_GROUP_CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Processors for MCM bulk simple product import in JSON format -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Simple\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Processor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="mirakl_fields" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\MiraklFields</item>
+                <item name="sku" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Sku</item>
+                <item name="type" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Type</item>
+                <item name="status" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Status\Json</item>
+                <item name="visibility" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility\Json</item>
+                <item name="price" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Price</item>
+                <item name="tax_class" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass\Json</item>
+                <item name="url" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Url</item>
+                <item name="attribute_set" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\AttributeSet</item>
+                <item name="categories" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Categories</item>
+                <item name="images" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Images</item>
+                <item name="scope" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Scope</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\VariantGroupCode</item>
+                <item name="variations" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Variations</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Status\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\Status">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_ASYNC_MCM_AUTO_ENABLE_PRODUCT</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_ASYNC_MCM_DEFAULT_VISIBILITY</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_ASYNC_MCM_DEFAULT_TAX_CLASS</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder\Json" type="Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder">
+        <arguments>
+            <argument name="dataCleaner" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Bulk\Simple\Json</argument>
+            <argument name="dataProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Simple\Json</argument>
+            <argument name="productRepository" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Repository\Product\Simple</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Cleaners for MCM bulk simple product import in CSV format -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Bulk\Simple" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner">
+        <arguments>
+            <argument name="cleaners" xsi:type="array">
+                <item name="identifier" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier\Csv</item>
+                <item name="category" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Category</item>
+                <item name="localized_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\LocalizedAttributes</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode\Csv</item>
+                <item name="allowed_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\AllowedAttributes</item>
+                <item name="multi_value_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\MultiValueAttributes</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Identifier">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Mirakl\Mcm\Helper\Data::CSV_MIRAKL_PRODUCT_ID</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\VariantGroupCode">
+        <arguments>
+            <argument name="fieldName" xsi:type="const">Mirakl\Mcm\Helper\Data::CSV_MIRAKL_VARIANT_GROUP_CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Cleaner\MultiValueAttributes">
+        <arguments>
+            <argument name="multiValueParser" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Parser\MultiValue</argument>
+        </arguments>
+    </type>
+
+    <!-- Processors for MCM bulk simple product import in CSV format -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Simple" type="Mirakl\Mcm\Model\Product\Import\Data\Processor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="mirakl_fields" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\MiraklFields</item>
+                <item name="sku" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Sku</item>
+                <item name="type" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Type</item>
+                <item name="status" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Status\Csv</item>
+                <item name="visibility" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility\Csv</item>
+                <item name="price" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Price</item>
+                <item name="tax_class" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass\Csv</item>
+                <item name="url" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Url</item>
+                <item name="attribute_set" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\AttributeSet</item>
+                <item name="categories" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Categories</item>
+                <item name="images" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Images</item>
+                <item name="scope" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Scope</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\VariantGroupCode</item>
+                <item name="variations" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Variations</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Status\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\Status">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_MCM_AUTO_ENABLE_PRODUCT</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_MCM_DEFAULT_VISIBILITY</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Processor\TaxClass">
+        <arguments>
+            <argument name="configPath" xsi:type="const">Mirakl\Mcm\Helper\Config::XML_PATH_MCM_DEFAULT_TAX_CLASS</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder\Csv" type="Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder">
+        <arguments>
+            <argument name="dataCleaner" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Cleaner\Bulk\Simple</argument>
+            <argument name="dataProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Simple</argument>
+            <argument name="productRepository" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Repository\Product\Simple</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Processors for MCM bulk parent product import -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Configurable" type="Mirakl\Mcm\Model\Product\Import\Data\Processor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="sku" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Sku</item>
+                <item name="visibility" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Visibility\Csv</item>
+                <item name="url" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Url</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Builder\Configurable\Builder" shared="false">
+        <arguments>
+            <argument name="dataProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Processor\Bulk\Configurable</argument>
+            <argument name="productRepository" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Repository\Product\Configurable</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Variations">
+        <arguments>
+            <argument name="variantCollector" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Collector\Variant</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Sku">
+        <arguments>
+            <argument name="skuGenerator" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Generator\Sku</argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Data\Processor\Url">
+        <arguments>
+            <argument name="urlGenerator" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Generator\Url</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type\Simple" type="Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type">
+        <arguments>
+            <argument name="type" xsi:type="const">Magento\Catalog\Model\Product\Type::TYPE_SIMPLE</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type\Configurable" type="Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type">
+        <arguments>
+            <argument name="type" xsi:type="const">Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Customizers and decorators for simple products loader -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Loader\Product\Simple" type="Mirakl\Mcm\Model\Product\Import\Loader\Product">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="default_columns" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\DefaultColumns</item>
+                <item name="mirakl_images" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\MiraklImages</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\VariantGroupCode</item>
+                <item name="type_simple" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type\Simple</item>
+            </argument>
+            <argument name="decorators" xsi:type="array">
+                <item name="categories" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Decorator\Categories</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Repository\Product\Simple" type="Mirakl\Mcm\Model\Product\Import\Repository\Product">
+        <arguments>
+            <argument name="productLoader" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Product\Simple</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Customizers and decorators for configurable products loader -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Loader\Product\Configurable" type="Mirakl\Mcm\Model\Product\Import\Loader\Product">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="default_columns" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\DefaultColumns</item>
+                <item name="type_configurable" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Customizer\Type\Configurable</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Repository\Product\Configurable" type="Mirakl\Mcm\Model\Product\Import\Repository\Product">
+        <arguments>
+            <argument name="productLoader" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Loader\Product\Configurable</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Bulk\LinkProcessor" type="Magento\CatalogImportExport\Model\Import\Product\LinkProcessor">
+        <arguments>
+            <argument name="skuProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\SkuProcessor</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Bulk\Validator\SuperProductsSku" type="Magento\CatalogImportExport\Model\Import\Product\Validator\SuperProductsSku">
+        <arguments>
+            <argument name="skuProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\SkuProcessor</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Bulk\Validator">
+        <arguments>
+            <argument name="skuProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\SkuProcessor</argument>
+            <argument name="validators" xsi:type="array">
+                <item name="superProductsSku" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\Validator\SuperProductsSku</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\Mcm">
+        <arguments>
+            <argument name="importConfig" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\Config</argument>
+            <argument name="validator" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\Validator</argument>
+            <argument name="skuProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\SkuProcessor</argument>
+            <argument name="linkProcessor" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\LinkProcessor</argument>
+            <argument name="data" xsi:type="array">
+                <item name="option_entity" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Bulk\Option</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <!-- MCM asynchronous products import dependencies -->
+    <virtualType name="Mirakl\Mcm\Model\Product\Import\Adapter\Bulk\Async" type="Mirakl\Mcm\Model\Product\Import\Adapter\Bulk">
+        <arguments>
+            <argument name="fieldCollector" xsi:type="object">Mirakl\Core\Model\File\FieldCollector\Json</argument>
+            <argument name="importer" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Importer</argument>
+            <argument name="dataSourceManager" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Manager</argument>
+            <argument name="parentProducts" xsi:type="object">Mirakl\Core\Model\Stack\Data</argument>
+            <argument name="simpleBuilder" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple\Builder\Json</argument>
+            <argument name="configurableBuilder" xsi:type="object">Mirakl\Mcm\Model\Product\Import\Data\Builder\Configurable\Builder</argument>
+            <argument name="miraklProductIdField" xsi:type="const">Mirakl\Mcm\Helper\Data::JSON_MIRAKL_PRODUCT_ID</argument>
+            <argument name="miraklProductSkuField" xsi:type="const">Mirakl\Mcm\Helper\Data::JSON_MIRAKL_PRODUCT_SKU</argument>
+            <argument name="miraklVariantGroupCodeField" xsi:type="string">data.variant_group_code</argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Mcm\Model\Product\AsyncImport\Handler\Json">
+        <arguments>
+            <argument name="successReport" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Report\Data</argument>
+            <argument name="errorReport" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Report\Data</argument>
+            <argument name="adapter" xsi:type="object" shared="false">Mirakl\Mcm\Model\Product\Import\Adapter\Bulk\Async</argument>
+        </arguments>
+    </type>
+
+    <!-- Mcm asynchronous products import actions list -->
+    <virtualType name="Mirakl\Mcm\Model\Product\AsyncImport\Import\ActionList" type="Mirakl\Process\Model\Action\ActionList">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="10" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\CreateProductsExport</item>
+                <item name="20" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\PollProductsExportStatus</item>
+                <item name="30" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\UrlsProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Mcm\Model\Product\AsyncImport\Import">
+        <arguments>
+            <argument name="actionList" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\Import\ActionList</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Mcm\Model\Product\AsyncImport\PollProductsExportStatus">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="default_delay" xsi:type="number">5</item>
+                <item name="max_attempts" xsi:type="number">6</item>
+                <item name="max_retry" xsi:type="number">2</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Mcm\Model\Product\AsyncImport\UrlsProcessor">
+        <arguments>
+            <argument name="actionList" xsi:type="object">Mirakl\Mcm\Model\Product\AsyncImport\UrlsProcessor\ActionList</argument>
+        </arguments>
+    </type>
+
+    <!-- MCM products export formatters -->
+    <type name="Mirakl\Mcm\Model\Product\Export\Formatter">
+        <arguments>
+            <argument name="formatters" xsi:type="array">
+                <item name="category" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\Category</item>
+                <item name="variant_group_code" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\VariantGroupCode</item>
+                <item name="images" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\Images</item>
+                <item name="description" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\Description</item>
+                <item name="data_cleaner" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\DataCleaner</item>
+                <item name="multi_values" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\MultiValues</item>
+                <item name="identifier_attributes" xsi:type="object">Mirakl\Mcm\Model\Product\Export\Formatter\IdentifierAttributes</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\CatalogImportExport\Model\ResourceModel\ProductDataLoader">
+        <plugin name="mirakl_mcm" type="Mirakl\Mcm\Plugin\Model\ResourceModel\CatalogImportExport\ProductDataLoaderPlugin"/>
+    </type>
+
+    <preference for="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\EntityAdapterInterface" type="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\Mcm" />
+    <preference for="Mirakl\Mcm\Model\Product\Import\Repository\FilterInterface" type="Mirakl\Mcm\Model\Product\Import\Repository\Filter" />
+</config>

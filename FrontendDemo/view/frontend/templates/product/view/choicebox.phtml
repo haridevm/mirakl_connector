@@ -1,0 +1,125 @@
+<?php
+/** @var \Mirakl\FrontendDemo\Block\Product\View\ChoiceBox $block */
+if (!$block->isEnabled()) {
+    return;
+}
+$isConfigure = $block->isConfigure();
+$product = $block->getProduct();
+$mainOffer = $product->getData('main_offer');
+$mainOfferId = null;
+if ($mainOffer) {
+    $mainOfferId = $mainOffer->getId();
+}
+$offers = $block->getAllOffers($mainOfferId);
+
+// check if price in BuyBox lower than best offer price
+if (isset($offers['min_price'])) {
+    $buyBoxPrice = $mainOffer ? $mainOffer->getPrice() : $product->getFinalPrice(1);
+    if ($buyBoxPrice < $offers['min_price']) {
+        $offers['min_price'] = $buyBoxPrice;
+    }
+}
+
+$storeName = $block->getStoreName();
+if (!count($offers['offers'])) return;
+?>
+
+<?php if ($product->isSaleable() || $offers): ?>
+<div class="block" id="product-offers-choicebox" <?php if ($block->isConfigurableProduct()): ?> style="display: none;"<?php endif ?>>
+    <div class="block-content">
+        <h3><?= /* @escapeNotVerified */ $storeName ? __('Others Sellers on %1', $storeName) : __('Other Sellers'); ?></h3>
+        <div class="table-wrapper product-offers">
+            <table data-max-offers="<?= /* @escapeNotVerified */ $offers['max_count']; ?>" class="data table table-offers" id="choicebox-product-offers-list">
+                <caption class="table-caption"><?= /* @escapeNotVerified */ __('All Offers') ?></caption>
+                <tbody>
+                    <?php $i = 0;?>
+                    <?php foreach ($offers['offers'] as $offer): ?>
+                        <?php
+                            /** @var \Mirakl\Connector\Model\Offer $offer */
+                            $shop = $block->getOfferHelper()->getOfferShop($offer);
+                        ?>
+                        <tr class="offer offer-<?= /* @escapeNotVerified */ $offer->getId() ?> sku-<?= /* @escapeNotVerified */ $offer->getProductSku() ?>" <?php if (++$i > $offers['max_count']):?>style="display: none;"<?php endif;?>>
+                            <td data-th="<?= $block->escapeHtml(__('Price')) ?>" class="cell price">
+                                <?= $block->getOfferPriceBlock($offer)
+                                          ->setDisplayShippingPrice(false)
+                                          ->toHtml() ?>
+                                <div class="offer-state"><?= /* @escapeNotVerified */ __($offer->getConditionName()) ?></div>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml(__('Shipping Methods')) ?>" class="cell label shipping" style="display: none">
+                                <div class="offer-shipping best-offer-shipping" data-shipping-offer-id="<?= /* @escapeNotVerified */ $offer->getId()?>" style="display: none"></div>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml(__('Qty')) ?>" class="cell">
+                                <div class="field qty">
+                                    <div class="control">
+                                        <label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>
+                                        <input class="input-text qty offer-number-qty marketplace-offer"
+                                               type="number"
+                                               name="qty"
+                                               id="qty-choicebox-<?= /* @escapeNotVerified */ $offer->getId() ?>"
+                                               maxlength="12"
+                                               value="<?= /* @escapeNotVerified */ $block->getOfferDefaultQty($offer) * 1 ?>"
+                                               title="<?= /* @escapeNotVerified */ __('Qty') ?>"
+                                               data-validate='<?= $block->escapeHtml(json_encode($block->getOfferQuantityValidators($offer))) ?>' />
+                                    </div>
+                                </div>
+                                <?php if ($shop): ?>
+                                    <div class="offer-seller-name">
+                                        <?= /* @escapeNotVerified */ __('sold by') ?> <a href="<?= $block->escapeUrl($shop->getUrl()) ?>" title="<?= $block->escapeHtml($shop->getName()) ?>"><?= $block->escapeHtml($shop->getName()) ?></a>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($offer->getPackageQuantity()): ?>
+                                    <div class="product pricing increment">
+                                        <?= /* @escapeNotVerified */ __('Available to buy in increments of %1', $offer->getPackageQuantity()) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                            <td data-th="<?= $block->escapeHtml(__('Action')) ?>" class="cell actions">
+                                <?php $cartAction = !$isConfigure ? __('Add to Cart') : __('Update Cart') ?>
+                                <button type="submit" title="<?= $block->escapeHtml($cartAction) ?>" class="action primary tocart add-offer-to-cart choicebox" id="product-addtocart-button" data-offer="<?= /* @escapeNotVerified */ $offer->getId() ?>">
+                                    <span><?= /* @escapeNotVerified */ $cartAction ?></span>
+                                </button>
+
+                                <?php if ($shop): ?>
+                                    <?php $evaluation = $shop->getFormattedGrade() ?>
+                                    <div class="rating-summary">
+                                        <?php if ($shop->getEvaluationsCount() > 0): ?>
+                                            <div class="rating-result" title="<?= /* @escapeNotVerified */ $evaluation ?>%">
+                                                <span style="width:<?= /* @escapeNotVerified */ $evaluation ?>%"><span><span itemprop="ratingValue"><?= /* @escapeNotVerified */ $evaluation ?></span>% <?= /* @escapeNotVerified */ __('of') ?> <span itemprop="bestRating">100</span></span></span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div id="product-offers-summary">
+                <a class="data switch" tabindex="-1" href="#marketplace_offers" id="tab-label-marketplace_offers-title">
+                    <?= /* @escapeNotVerified */ __('%1 offer(s) from %2', '<span class="product-offers-summary-number">' . $offers['total_count'] . '</span>', $block->formatCurrency($offers['min_price'])) ?>
+                </a>
+            </div>
+            <script>
+                require([
+                    'jquery'
+                ], function ($) {
+                    'use strict';
+
+                    $('#product-offers-summary a').click(function (event) {
+                        event.preventDefault();
+                        var anchor = $(this).attr('href').replace(/^.*?(#|$)/, '');
+                        $(".product.data.items [data-role='content']").each(function(index){
+                            if (this.id == anchor) {
+                                $('.product.data.items').tabs('activate', index);
+                                $('html, body').animate({
+                                    scrollTop: $('#' + anchor).offset().top - 50
+                                }, 300);
+                            }
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

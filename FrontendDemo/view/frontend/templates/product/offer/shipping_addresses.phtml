@@ -1,0 +1,23 @@
+<?php
+/** @var \Mirakl\FrontendDemo\Block\Product\Offer\ShippingAddresses $block */
+$shippingAddresses = $block->getCustomerAddresses();
+$sku = $block->getProductSku();
+$offerId = $block->getOfferId();
+?>
+<?php if ($shippingAddresses): ?>
+<?= /* @escapeNotVerified */ __('Get shipping methods for which address?') ?>
+<div class="shipping-addresses" data-offer-id = <?= /* @escapeNotVerified */ $offerId ?>>
+    <?php foreach ($shippingAddresses as $shippingZone => $address): ?>
+            <input type="radio"
+                   name="address<?= /* @escapeNotVerified */ $offerId ?>"
+                   value="<?= /* @escapeNotVerified */ $address->getId()?>" <?= /* @escapeNotVerified */ $block->isDefaultShippingAddress($address) ? 'checked' : ''?>
+                   id="address-<?= /* @escapeNotVerified */ $offerId?>-<?= /* @escapeNotVerified */ $address->getId()?>"
+                   data-offer-id="<?= /* @escapeNotVerified */ $offerId ?>"
+                   data-product-sku="<?= /* @escapeNotVerified */ $sku ?>"
+                   data-address-id="<?= /* @escapeNotVerified */ $address->getId()?>" />
+            <label for="address-<?= /* @escapeNotVerified */ $offerId?>-<?= /* @escapeNotVerified */ $address->getId()?>">
+                <?= /* @escapeNotVerified */ $block->formatAddress($address)?>
+            </label><br>
+    <?php endforeach; ?>
+</div><br>
+<?php endif; ?>

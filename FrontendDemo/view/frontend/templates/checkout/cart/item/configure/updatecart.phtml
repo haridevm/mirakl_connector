@@ -1,0 +1,75 @@
+<?php
+/** @var Magento\Framework\View\TemplateEngine\Php $this */
+/** @var \Mirakl\FrontendDemo\Block\Product\View $block */
+/** @var \Mirakl\FrontendDemo\Helper\Quote $quoteHelper */
+/** @var \Mirakl\Connector\Model\Offer $offer */
+$_product = $block->getProduct();
+$quoteHelper = $this->helper(\Mirakl\FrontendDemo\Helper\Quote::class);
+$quoteItemId = $block->getRequest()->getParam('id');
+$quoteItem = $quoteHelper->getQuote()->getItemById($quoteItemId);
+$offer = $quoteItem ? $quoteItem->getData('offer') : null;
+$buttonTitle = __('Update Cart');
+?>
+
+<?php if ($_product->isSaleable() || $offer): ?>
+    <div class="box-tocart update">
+        <fieldset class="fieldset">
+            <?php if ($block->shouldRenderQuantity()): ?>
+            <div class="field qty">
+                <label class="label" for="qty"><span><?= $block->escapeHtml(__('Qty')) ?></span></label>
+                <div class="control">
+                    <input type="number"
+                           name="qty"
+                           id="qty"
+                           min="0"
+                           value=""
+                           title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
+                           class="input-text qty <?= $offer ? 'marketplace-offer' : 'operator-offer' ?>"
+                           data-validate="<?= $block->escapeHtml(json_encode($block->getMixedQuantityValidators())) ?>"
+                        />
+                </div>
+            </div>
+            <?php endif; ?>
+            <div class="actions">
+                <button type="submit"
+                        title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
+                        class="action primary tocart add-offer-to-cart"
+                        id="product-updatecart-button"
+                        <?php if ($offer): ?>
+                            data-offer="<?= /* @escapeNotVerified */ $offer->getId() ?>"
+                        <?php endif; ?>
+                    >
+                    <span><?= $block->escapeHtml($buttonTitle) ?></span>
+                </button>
+                <?= $block->getChildHtml('', true) ?>
+            </div>
+
+            <?php $shop = $offer ? $offer->getShop() : null; ?>
+            <div class="offer-data"<?php if (!$offer): ?> style="display: none;"<?php endif; ?>>
+                <?php $evaluation = $shop ? $shop->getFormattedGrade(): '' ?>
+                <div class="rating-summary">
+                    <span class="offer-seller-name">
+                        <?= /* @escapeNotVerified */ __('sold by') ?> <a href="<?= $shop ? $block->escapeUrl($shop->getUrl()) : '' ?>"><span class="offer-shop-name"><?= $shop ? $this->escapeHtml($shop->getName()) : '' ?></span></a>
+                    </span>
+                    <div class="rating-result" title="<?= /* @escapeNotVerified */ $evaluation ?>%"<?php if (!$shop || !$shop->getEvaluationsCount()): ?> style="display: none;"<?php endif; ?>>
+                        <span style="width:<?= /* @escapeNotVerified */ $evaluation ?>%"><span><span itemprop="ratingValue"><?= /* @escapeNotVerified */ $evaluation ?></span>% <?= /* @escapeNotVerified */ __('of') ?> <span itemprop="bestRating">100</span></span></span>
+                    </div>
+                </div>
+                <div class="offer-seller-rating"<?php if (!$shop || !$shop->getEvaluationsCount()): ?> style="display: none;"<?php endif; ?>>
+                    <span class="number"><?= /* @escapeNotVerified */ $evaluation ?></span>% <?= /* @escapeNotVerified */ __('positive evaluations') ?>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "#product_addtocart_form": {
+                "validation": {},
+                "addToCart": {
+                    "cartButtonId": "#product-updatecart-button",
+                    "cartForm": "#product_addtocart_form"
+                }
+            }
+        }
+    </script>
+<?php endif; ?>

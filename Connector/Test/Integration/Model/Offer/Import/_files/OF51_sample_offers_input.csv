@@ -1,0 +1,116 @@
+offer-id;product-sku;min-shipping-price;min-shipping-price-additional;min-shipping-zone;min-shipping-type;price;total-price;price-additional-info;quantity;description;state-code;shop-id;shop-name;professional;premium;logistic-class;active;favorite-rank;channels;deleted;origin-price;discount-start-date;discount-end-date;available-start-date;available-end-date;discount-price;currency-iso-code;discount-ranges;leadtime-to-ship;allow-quote-requests;price-ranges;fulfillment-center-code;shop-sku;min-order-quantity;max-order-quantity;package-quantity;product-tax-code;multi;date-test;measurement-units
+"2218";"7ffe1933";"2.90";"5.12";"FR";"STD";"199.00";"201.90";"";"993";"";"11";"2001";"Star Shoes";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984";"false";"199.00";"";"";"";"";"";"EUR";"";"";"true";"1|199.00";"DEFAULT";"S2151";"";"";"";"U0000000";"One,Three";"";""
+"2219";"7ffe1933";"2.00";"5.00";"FR";"STD";"179.00";"181.00";"";"2";"";"5";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"179.00";"";"";"";"";"";"EUR";"";"";"false";"1|179.00";"DEFAULT";"S2152";"";"";"";"";"Two";"";""
+"2220";"24-MB01";"2.90";"5.12";"FR";"STD";"20.89";"23.79";"";"78129";"";"11";"2001";"Star Shoes";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984";"false";"20.89";"";"";"";"";"";"EUR";"";"";"false";"1|20.89";"DEFAULT";"S2153";"";"";"";"U0000000";"";"";""
+"2222";"7911bf22";"2.90";"5.12";"FR";"STD";"7990.00";"7992.90";"";"8";"";"11";"2001";"Star Shoes";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984";"false";"7990.00";"";"";"";"";"";"EUR";"";"";"false";"1|7990.00";"DEFAULT";"S2155";"";"";"";"PC040210";"";"";""
+"2223";"7d9557cc";"2.90";"5.12";"FR";"STD";"590.00";"592.90";"";"3";"";"10";"2001";"Star Shoes";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984";"false";"590.00";"";"";"";"";"";"EUR";"";"";"false";"1|590.00";"DEFAULT";"S2156";"";"";"";"PC040210";"";"";""
+"2225";"7ffe1933";"0.00";"0.00";"FR";"STD";"3990.00";"3990.00";"PC040210";"7";"";"3";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"3990.00";"";"";"";"";"";"EUR";"";"";"false";"1|3990.00";"DEFAULT";"S2158";"";"";"";"";"";"";""
+"2226";"7911bf22";"2.00";"5.00";"FR";"STD";"69.00";"71.00";"PC040210";"77";"";"5";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"69.00";"";"";"";"";"";"EUR";"";"";"false";"1|69.00";"DEFAULT";"S2159";"";"";"";"";"";"";""
+"2228";"888ffed2";"0.00";"0.00";"FR";"EXPRESS";"1990.00";"1990.00";"";"2";"";"8";"2002";"Sun Garden";"true";"true";"DEFAULT";"true";"";"INIT|MGT2-984|MOBILE";"false";"1990.00";"";"";"";"";"";"EUR";"";"";"false";"1|1990.00";"DEFAULT";"S2161";"";"";"";"PC040210";"";"";""
+"2229";"7ffe1933";"2.00";"5.00";"FR";"STD";"109.00";"111.00";"";"70";"";"11";"2002";"Sun Garden";"true";"true";"DEFAULT";"true";"";"INIT|MGT2-984|MOBILE";"false";"109.00";"";"";"";"";"";"EUR";"";"";"false";"1|109.00";"DEFAULT";"S2162";"";"";"";"PC040210";"";"";""
+"2231";"24-MB01";"2.00";"5.00";"FR";"STD";"58.00";"60.00";"";"888";"";"10";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"60.00";"2023-08-14T22:00:00Z";"";"";"";"58.00";"EUR";"1|58.00";"";"false";"1|60.00";"DEFAULT";"S2164";"";"";"";"";"";"";""
+"2234";"af3776f7";"2.00";"5.00";"FR";"STD";"29.00";"31.00";"";"28390";"";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"29.00";"";"";"";"";"";"EUR";"";"";"false";"1|29.00";"DEFAULT";"S2165";"";"";"";"";"";"";""
+"2237";"24-MB01";"2.00";"5.00";"FR";"STD";"12.90";"14.90";"";"999";"";"11";"2002";"Sun Garden";"true";"true";"DEFAULT";"true";"";"INIT|MGT2-984|MOBILE";"false";"12.90";"";"";"";"";"";"EUR";"";"";"false";"1|12.90";"DEFAULT";"S2168";"";"";"";"U0000000";"";"";""
+"2238";"24-MB01";"2.00";"5.00";"FR";"STD";"9.90";"11.90";"";"1890";"";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"9.90";"";"";"";"";"";"EUR";"";"";"false";"1|9.90";"DEFAULT";"S2169";"";"";"";"";"";"";""
+"2239";"0d62184c";"2.00";"5.00";"FR";"STD";"8.90";"10.90";"";"12";"";"5";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"8.90";"";"";"";"";"";"EUR";"";"";"false";"1|8.90";"DEFAULT";"S2173";"";"";"";"";"";"";""
+"2240";"de3a9ae9";"2.00";"5.00";"FR";"STD";"16.90";"18.90";"";"122";"";"10";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"18.90";"";"";"";"";"16.90";"EUR";"1|16.90";"";"false";"1|18.90";"DEFAULT";"S2174";"";"";"";"";"";"";""
+"2241";"0546f0ed";"2.00";"5.00";"FR";"STD";"17.90";"19.90";"";"99";"";"3";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"17.90";"";"";"";"";"";"EUR";"";"";"false";"1|17.90";"DEFAULT";"S2175";"";"";"";"";"";"";""
+"2242";"5eb6d432";"2.00";"5.00";"FR";"STD";"34.00";"36.00";"";"100";"The sporty Joust Duffle Bag can't be beat - not in the gym, not on the luggage carousel, not anywhere. Big enough to haul a basketball or soccer ball and some sneakers with plenty of room to spare, it's ideal for athletes with places to go.
+
+Dual top handles.
+Adjustable shoulder strap.
+Full-length zipper.
+L 29"" x W 13"" x H 11"".";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"34.00";"";"";"";"";"";"EUR";"";"";"false";"1|34.00";"DEFAULT";"24-MB01";"1";"10000";"1";"";"";"";""
+"2243";"5eaee4f8";"2.00";"5.00";"FR";"STD";"32.00";"34.00";"";"100";"Everything you need for a trip to the gym will fit inside this surprisingly spacious Voyage Yoga Bag. Stock it with a water bottle, change of clothes, pair of shoes, and even a few beauty products. Fits inside a locker and zips shut for security.
+
+Slip pocket on front.
+Contrast piping.
+Durable nylon construction.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"32.00";"";"";"";"";"";"EUR";"";"";"false";"1|32.00";"DEFAULT";"24-WB01";"1";"10000";"1";"";"";"";""
+"2244";"f8fc9be6";"2.00";"5.00";"FR";"STD";"59.00";"61.00";"";"100";"With the Fusion Backpack strapped on, every trek is an adventure - even a bus ride to work. That's partly because two large zippered compartments store everything you need, while a front zippered pocket and side mesh pouches are perfect for stashing those little extras, in case you change your mind and take the day off.
+
+Durable nylon construction.
+2 main zippered compartments.
+1 exterior zippered pocket.
+Mesh side pouches.
+Padded, adjustable straps.
+Top carry handle.
+Dimensions: 18"" x 10"" x 6"".
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"59.00";"";"";"";"";"";"EUR";"";"";"false";"1|59.00";"DEFAULT";"24-MB02";"1";"10000";"1";"";"";"";""
+"2245";"08e0031e";"2.00";"5.00";"FR";"STD";"37.90";"39.90";"";"100";"The Crown Summit Backpack is equally at home in a gym locker, study cube or a pup tent, so be sure yours is packed with books, a bag lunch, water bottles, yoga block, laptop, or whatever else you want in hand. Rugged enough for day hikes and camping trips, it has two large zippered compartments and padded, adjustable shoulder straps.
+
+Top handle.
+Grommet holes.
+Two-way zippers.
+H 20"" x W 14"" x D 12"".
+Weight: 2 lbs, 8 oz. Volume: 29 L.";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"38.00";"";"";"";"";"";"EUR";"1|37.90,3|35.90,4|33.90";"2";"true";"1|38.00,3|36.50,4|34.00,5|32.90";"DEFAULT";"24-MB03";"1";"10000";"1";"U0000000";"";"";""
+"2246";"a55f3d46";"2.00";"5.00";"FR";"STD";"19.00";"21.00";"";"82768";"Convenience is next to nothing when your day is crammed with action. So whether you're heading to class, gym, or the unbeaten path, make sure you've got your Strive Shoulder Pack stuffed with all your essentials, and extras as well.
+
+Zippered main compartment.
+Front zippered pocket.
+Side mesh pocket.
+Cell phone pocket on strap.
+Adjustable shoulder strap and top carry handle.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"19.00";"";"";"";"";"";"EUR";"";"";"false";"1|19.00";"DEFAULT";"24-MB04";"1";"10000";"1";"";"";"";""
+"2247";"08874fd9";"2.00";"5.00";"FR";"STD";"45.00";"47.00";"";"100";"Perfect for class, work or the gym, the Wayfarer Messenger Bag is packed with pockets. The dual-buckle flap closure reveals an organizational panel, and the roomy main compartment has spaces for your laptop and a change of clothes. An adjustable shoulder strap and easy-grip handle promise easy carrying.
+
+Multiple internal zip pockets.
+Made of durable nylon.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"45.00";"";"";"";"";"";"EUR";"";"";"false";"1|45.00";"DEFAULT";"24-MB05";"1";"10000";"1";"";"";"2022-06-24T00:00:00Z";""
+"2248";"2aed86b5";"2.00";"5.00";"FR";"STD";"45.00";"47.00";"";"100";"The Rival Field Messenger packs all your campus, studio or trail essentials inside a unique design of soft, textured leather - with loads of character to spare. Two exterior pockets keep all your smaller items handy, and the roomy interior offers even more space.
+
+Leather construction.
+Adjustable fabric carry strap.
+Dimensions: 18"" x 10"" x 4"".
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"45.00";"";"";"";"";"";"EUR";"";"";"false";"1|45.00";"DEFAULT";"24-MB06";"1";"10000";"1";"";"";"";""
+"2249";"54a403d7";"2.00";"5.00";"FR";"STD";"74.00";"76.00";"";"100";"Good for beach trips, track meets, yoga retreats and more, the Impulse Duffle is the companion you'll want at your side. A large U-shaped opening makes packing a hassle-free affair, while a zippered interior pocket keeps jewelry and other small valuables safely tucked out of sight.
+
+Wheeled.
+Dual carry handles.
+Retractable top handle.
+W 14"" x H 26"" x D 11"".
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"74.00";"";"";"";"";"";"EUR";"";"";"false";"1|74.00";"DEFAULT";"24-UB02";"1";"10000";"1";"";"";"";""
+"2250";"c73c6e2a";"2.00";"5.00";"FR";"STD";"32.00";"34.00";"";"100";"The Compete Track Tote holds a host of exercise supplies with ease. Stash your towel, jacket and street shoes inside. Tuck water bottles in easy-access external spaces. Perfect for trips to gym or yoga studio, with dual top handles for convenience to and from.
+
+Two-way zippers.
+Contrast detailing.
+W 22.0"" x H 17"" x D 10"".
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"32.00";"";"";"";"";"";"EUR";"";"";"false";"1|32.00";"DEFAULT";"24-WB02";"1";"10000";"1";"";"";"";""
+"2251";"f1540670";"2.00";"5.00";"FR";"STD";"36.00";"38.00";"";"100";"School books, camp gear and yoga clothes get along just fine in the all-purpose Driven Backpack. Crafted with tough polyester ripstop fabric, it's outfitted with rubberized end panels and padded, adjustable shoulder straps. The roomy main compartment features molded foam pockets that host everything you need.
+
+Large main and small zip compartments.
+Adjustable, padded straps.
+Interior foam pockets.
+Exterior zip compartment.
+Left sport bottle pocket.
+Survival gear sold separately.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"36.00";"";"";"";"";"";"EUR";"";"";"false";"1|36.00";"DEFAULT";"24-WB03";"1";"10000";"1";"";"";"";""
+"2252";"8c60683e";"2.00";"5.00";"FR";"STD";"45.00";"47.00";"";"100";"The name says so, but the Push It Messenger Bag is much more than a busy commuter's tote. It's a closet away from home when you're pedaling from class or work to gym and back or home again. It's the perfect size and shape for laptop, folded clothes, even extra shoes.
+
+Adjustable crossbody strap.
+Top handle.
+Zippered interior pocket.
+Secure clip closures.
+Durable fabric construction.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"45.00";"";"";"";"";"";"EUR";"";"";"false";"1|45.00";"DEFAULT";"24-WB04";"1";"10000";"1";"";"";"";""
+"2253";"6a91174a";"2.00";"5.00";"FR";"STD";"24.00";"26.00";"";"1000";"Powerwalking to the gym or strolling to the local coffeehouse, the Savvy Shoulder Tote lets you stash your essentials in sporty style! A top-loading compartment provides quick and easy access to larger items, while zippered pockets on the front and side hold cash, credit cards and phone.
+
+Water-resistant shell.
+Water bottle pocket.
+Padded, articulating shoulder strap.
+Dimensions: W 21"" x H 15"" x D 10"".";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"32.00";"2022-02-23T23:00:00Z";"";"";"";"24.00";"EUR";"1|24.00";"";"false";"1|32.00";"DEFAULT";"24-WB05";"1";"10000";"1";"";"";"";""
+"2254";"1545b234";"2.00";"5.00";"FR";"STD";"33.00";"35.00";"";"100";"With more room than it appears, the Endeavor Daytrip Backpack will hold a whole day's worth of books, binders and gym clothes. The spacious main compartment includes a dedicated laptop sleeve. Two other compartments offer extra storage space.
+
+Foam-padded adjustable shoulder straps.
+900D polyester.
+Oversized zippers.
+Locker loop.
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"33.00";"";"";"";"";"";"EUR";"";"";"false";"1|33.00";"DEFAULT";"24-WB06";"1";"10000";"1";"";"";"";""
+"2255";"44b2d4a9";"2.00";"5.00";"FR";"STD";"45.00";"47.00";"";"100";"For long weekends away, camping outings and business trips, the Overnight Duffle can't be beat. The dual handles make it a cinch to carry, while the durable waterproof exterior helps you worry less about the weather. With multiple organizational pockets inside and out, it's the perfect travel companion.
+
+Dual top handles.
+W 15"" x H 15"" x D 9"".
+";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"45.00";"";"";"";"";"";"EUR";"";"";"false";"1|45.00";"DEFAULT";"24-WB07";"1";"10000";"1";"";"";"";""
+"2257";"3df57642";"2.00";"5.00";"FR";"STD";"78.00";"80.00";"";"18";"";"10";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"78.00";"";"";"";"";"";"EUR";"";"";"false";"1|78.00";"DEFAULT";"S2177";"";"";"";"U0000000";"";"";""
+"2258";"24-MB06";"2.00";"5.00";"FR";"STD";"89.00";"91.00";"";"181";"";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"89.00";"";"";"";"";"";"EUR";"";"";"false";"1|89.00";"DEFAULT";"S2178";"";"";"";"U0000000";"";"";""
+"2259";"MS11-L-Blue";"2.00";"5.00";"FR";"STD";"19.90";"21.90";"";"91";"";"11";"2000";"Top Travel!";"true";"true";"DEFAULT";"true";"";"FR|INIT|IT|MGT2-984|MOBILE";"false";"19.90";"";"";"";"";"";"EUR";"";"";"false";"1|19.90";"DEFAULT";"S2179";"";"";"";"U0000000";"";"";""

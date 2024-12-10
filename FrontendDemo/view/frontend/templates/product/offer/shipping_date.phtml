@@ -1,0 +1,26 @@
+<?php
+/** @var Mirakl\FrontendDemo\Block\Product\Offer\ShippingDate $block */
+/** @var Mirakl\MMP\Common\Domain\Offer\Shipping\DeliveryTime|Mirakl\MMP\Common\Domain\Shipping\DeliveryTime $deliveryTime */
+$deliveryTime = $block->getDeliveryTime();
+?>
+<?php if ($deliveryTime): ?>
+    <?php $minDate = $deliveryTime->getEarliestDeliveryDate(); ?>
+    <?php $maxDate = $deliveryTime->getLatestDeliveryDate(); ?>
+    <?php $minDays = $deliveryTime->getEarliestDays(); ?>
+    <?php $maxDays = $deliveryTime->getLatestDays(); ?>
+    <?php if (!$minDays): ?>
+        <?php if ($minDays === 0): ?>
+            <?= /* @escapeNotVerified */ __('<strong>before %1</strong>', $block->format($minDate)); ?>
+        <?php else: ?>
+            <?= /* @escapeNotVerified */ __('before <strong>%1</strong>', $block->format($maxDate)); ?>
+        <?php endif; ?>
+    <?php elseif (!$maxDays): ?>
+        <?= /* @escapeNotVerified */ __('after <strong>%1</strong>', $block->format($minDate)); ?>
+    <?php elseif ($minDays === $maxDays && $minDays > 1): ?>
+        <?= /* @escapeNotVerified */ __('<strong>%deliveryDate</strong>', ['deliveryDate' => $block->format($minDate)]); ?>
+    <?php elseif ($minDays === $maxDays && $minDays == 1): ?>
+        <strong><?= /* @escapeNotVerified */ __('in one day'); ?></strong>
+    <?php else: ?>
+        <?= /* @escapeNotVerified */ __('between <strong>%1</strong> and <strong>%2</strong>', $block->format($minDate), $block->format($maxDate)); ?>
+    <?php endif; ?>
+<?php endif; ?>

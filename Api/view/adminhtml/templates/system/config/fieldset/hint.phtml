@@ -1,0 +1,23 @@
+<?php
+/**
+ * @var \Mirakl\Api\Block\Adminhtml\System\Config\Fieldset\Hint $block
+ */
+$miraklVersion = $block->getMiraklVersion(); // may encounter error if bad configuration
+?>
+<?php if ($miraklVersion): ?>
+    <div class="message message-success success">
+        <div><?= /* @escapeNotVerified */ __('Your Mirakl connection is up and running.') ?></div>
+    </div>
+<?php elseif ($error = $block->getError()): ?>
+    <div class="message message-error error">
+        <div><?= /* @escapeNotVerified */ __('An error occurred with your Mirakl configuration.') ?></div>
+        <div><strong><?= $block->escapeHtml($error) ?></strong></div>
+    </div>
+<?php endif ?>
+
+<div class="message message-notice notice">
+    <div><?= /* @escapeNotVerified */ __('Magento Connector Version: <strong>v%1</strong>', $block->getConnectorVersion()) ?></div>
+    <?php if ($_versionSDK = $block->getVersionSDK()): ?>
+        <div><?= /* @escapeNotVerified */ __('PHP SDK Version: <strong>v%1</strong>', $_versionSDK) ?></div>
+    <?php endif ?>
+</div>

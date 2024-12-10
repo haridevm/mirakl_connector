@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="mirakl_shipping">
+            <title translate="true">Marketplace Shipping</title>
+            <source_field>mirakl_shipping_excl_tax</source_field>
+            <model>Mirakl\Connector\Model\Sales\Pdf\MiraklShipping</model>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>410</sort_order>
+        </total>
+    </totals>
+</config>

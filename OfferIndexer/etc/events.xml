@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_after">
+        <observer name="mirakl_offer_indexer" instance="Mirakl\OfferIndexer\Observer\Product\SaveAfterObserver"/>
+    </event>
+    <event name="catalog_product_delete_after">
+        <observer name="mirakl_offer_indexer" instance="Mirakl\OfferIndexer\Observer\Product\DeleteAfterObserver"/>
+    </event>
+    <event name="catalog_product_attribute_update_before">
+        <observer name="mirakl_offer_indexer" instance="Mirakl\OfferIndexer\Observer\Product\AttributeMassUpdateBeforeObserver"/>
+    </event>
+</config>

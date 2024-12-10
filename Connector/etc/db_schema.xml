@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="mirakl_offer" resource="default" engine="innodb" comment="Mirakl Offer">
+        <column xsi:type="int" name="offer_id" nullable="false" comment="Offer Id"/>
+        <column xsi:type="varchar" length="64" name="product_sku" nullable="false" comment="Product SKU"/>
+        <column xsi:type="decimal" name="min_shipping_price" scale="2" precision="19" nullable="false" default="0" comment="Min Shipping Price"/>
+        <column xsi:type="decimal" name="min_shipping_price_additional" scale="2" precision="19" nullable="true" comment="Min Shipping Price Additional"/>
+        <column xsi:type="varchar" length="255" name="min_shipping_zone" nullable="true" comment="Min Shipping Zone"/>
+        <column xsi:type="varchar" length="255" name="min_shipping_type" nullable="true" comment="Min Shipping Type"/>
+        <column xsi:type="decimal" name="price" scale="2" precision="19" nullable="false" default="0" comment="Price"/>
+        <column xsi:type="decimal" name="total_price" scale="2" precision="19" nullable="false" default="0" comment="Total Price"/>
+        <column xsi:type="varchar" length="255" name="price_additional_info" nullable="false" comment="Price Additional Info"/>
+        <column xsi:type="int" name="quantity" nullable="false" default="0" comment="Quantity"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="int" name="state_code" nullable="false" unsigned="true" comment="State Code"/>
+        <column xsi:type="int" name="shop_id" nullable="false" unsigned="true" comment="Shop Id"/>
+        <column xsi:type="varchar" length="255" name="shop_name" nullable="false" comment="Shop Name"/>
+        <column xsi:type="varchar" length="5" name="professional" nullable="true" comment="Professional"/>
+        <column xsi:type="varchar" length="5" name="premium" nullable="true" comment="Premium"/>
+        <column xsi:type="varchar" length="255" name="logistic_class" nullable="false" comment="Logistic Class"/>
+        <column xsi:type="varchar" length="5" name="active" nullable="true" comment="Is Active"/>
+        <column xsi:type="int" name="favorite_rank" nullable="true" comment="Favorite Rank"/>
+        <column xsi:type="varchar" length="255" name="channels" nullable="false" comment="Channels"/>
+        <column xsi:type="varchar" length="5" name="deleted" nullable="true" comment="Is Deleted"/>
+        <column xsi:type="decimal" name="origin_price" scale="2" precision="19" nullable="false" default="0" comment="Origin Price"/>
+        <column xsi:type="datetime" name="discount_start_date" nullable="true" comment="Discount Start Date"/>
+        <column xsi:type="datetime" name="discount_end_date" nullable="true" comment="Discount End Date"/>
+        <column xsi:type="datetime" name="available_start_date" nullable="true" comment="Available Start Date"/>
+        <column xsi:type="datetime" name="available_end_date" nullable="true" comment="Available End Date"/>
+        <column xsi:type="decimal" name="discount_price" scale="2" precision="19" nullable="true" comment="Discount Price"/>
+        <column xsi:type="varchar" length="3" name="currency_iso_code" nullable="true" comment="Currency ISO Code"/>
+        <column xsi:type="varchar" length="255" name="discount_ranges" nullable="true" comment="Discount Ranges"/>
+        <column xsi:type="varchar" length="3" name="leadtime_to_ship" nullable="true" comment="Lead Time To Ship"/>
+        <column xsi:type="varchar" length="5" name="allow_quote_requests" nullable="true" comment="Allow Quote Requests"/>
+        <column xsi:type="varchar" length="255" name="price_ranges" nullable="true" comment="Price Ranges"/>
+        <column xsi:type="int" name="min_order_quantity" unsigned="true" nullable="true" comment="Min Order Quantity"/>
+        <column xsi:type="int" name="max_order_quantity" unsigned="true" nullable="true" comment="Max Order Quantity"/>
+        <column xsi:type="int" name="package_quantity" unsigned="true" nullable="true" comment="Package Quantity"/>
+        <column xsi:type="varchar" length="255" name="product_tax_code" nullable="true" comment="Product Tax Code"/>
+        <column xsi:type="longtext" name="additional_info" nullable="true" comment="Additional Info"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="offer_id"/>
+        </constraint>
+        <index referenceId="MIRAKL_OFFER_PRODUCT_SKU" indexType="btree">
+            <column name="product_sku"/>
+        </index>
+        <index referenceId="MIRAKL_OFFER_ACTIVE" indexType="btree">
+            <column name="active"/>
+        </index>
+        <index referenceId="MIRAKL_OFFER_DELETED" indexType="btree">
+            <column name="deleted"/>
+        </index>
+    </table>
+</schema>

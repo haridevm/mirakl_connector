@@ -1,0 +1,75 @@
+<?php
+/** @var Mirakl\FrontendDemo\Block\Shop\Evaluations $block */
+$_evaluations = $block->getEvaluations();
+?>
+<div class="seller-shop">
+    <?php if (!$_evaluations->count()): ?>
+        <?= /* @escapeNotVerified */ __('The seller has no review') ?>
+    <?php else: ?>
+        <div class="box-reviews">
+            <div class="block-content">
+                <div class="toolbar">
+                    <?= /* @escapeNotVerified */ $block->getChildHtml('toolbar') ?>
+                </div>
+                <div class="items review-items">
+                    <ol class="items review-items">
+                        <?php /** @var \Mirakl\MMP\Common\Domain\Evaluation $_evaluation */ ?>
+                        <?php foreach ($_evaluations as $_evaluation): ?>
+                            <li class="item review-item">
+                                <div class="review-title rating-summary">
+                                    <?= /* @escapeNotVerified */ __('Review by %1 — on %2', $block->getEvaluationAuthor($_evaluation), $block->getEvaluationDate($_evaluation)) ?>
+                                    <div class="rating-result" title="<?= /* @escapeNotVerified */ $block->getEvaluationPercent($_evaluation) ?>%">
+                                        <span style="width:<?= /* @escapeNotVerified */ $block->getEvaluationPercent($_evaluation) ?>%">
+                                            <span><?= /* @escapeNotVerified */ $block->getEvaluationPercent($_evaluation) ?></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <?php if ($_evaluation->getAssessments()->count()): ?>
+                                    <div class="review-ratings">
+                                        <?php foreach ($_evaluation->getAssessments() as $_assessment): ?>
+                                            <div class="rating-summary item">
+                                                <span class="label rating-label"><span><?= $block->escapeHtml($_assessment->getLabel()) ?></span></span>
+                                                <?php if ($_assessment->getResponse() === 'true'): ?>
+                                                    <div class="evaluation-value"><?= /* @escapeNotVerified */ __('Yes') ?></div>
+                                                <?php elseif ($_assessment->getResponse() === 'false'): ?>
+                                                    <div class="evaluation-value"><?= /* @escapeNotVerified */ __('No') ?></div>
+                                                <?php else: ?>
+                                                    <div class="rating-result" title="<?= /* @escapeNotVerified */ $block->getAssessmentPercent($_assessment) ?>%">
+                                                        <span style="width:<?= /* @escapeNotVerified */ $block->getAssessmentPercent($_assessment) ?>%">
+                                                            <span><?= /* @escapeNotVerified */ $block->getAssessmentPercent($_assessment) ?>%</span>
+                                                        </span>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php endif; ?>
+                                <?php if ($_evaluation->getComment()): ?>
+                                    <div class="review-content">
+                                        <?= /* @escapeNotVerified */ nl2br($block->escapeHtml($_evaluation->getComment())) ?>
+                                    </div>
+                                <?php endif; ?>
+                            </li>
+                        <?php endforeach; ?>
+                    </ol>
+                </div>
+                <div class="toolbar">
+                    <?= $block->getChildHtml('toolbar') ?>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
+</div>
+<script type="text/javascript">
+    /* hack to set tab ref for pagination */
+    require(['jquery'], function ($) {
+        $(document).ready(function () {
+            $('.toolbar a').each(function (elem) {
+                $(this).prop('href', $(this).prop('href') + '#reviews');
+            });
+            $('.toolbar select option').each(function (elem) {
+                $(this).prop('value', $(this).prop('value') + '#reviews');
+            });
+        });
+    })
+</script>

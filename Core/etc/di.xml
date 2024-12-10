@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Mirakl\Core\Model\ResourceModel\Shipping\Zone\Collection" shared="false" />
+    <type name="Mirakl\Core\Model\ResourceModel\Shop\Collection" shared="false" />
+    <type name="Mirakl\Core\Model\ResourceModel\Shipping\Zone">
+        <arguments>
+            <argument name="eventManager" xsi:type="object">Magento\Framework\Event\Manager\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Core\Model\ResourceModel\Shop">
+        <arguments>
+            <argument name="eventManager" xsi:type="object">Magento\Framework\Event\Manager\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item">
+        <plugin name="mirakl" type="Mirakl\Core\Plugin\Model\Quote\ItemPlugin"/>
+    </type>
+    <type name="Magento\Framework\Authorization\Policy\Acl">
+        <plugin name="mirakl_cli_authorization_plugin" type="Mirakl\Core\Plugin\Authorization\Policy\Acl\CliAuthorizationPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Cart\CartTotalRepository">
+        <plugin name="mirakl_cart_total_repository" type="Mirakl\Core\Plugin\Model\Quote\Cart\CartTotalRepositoryPlugin" />
+    </type>
+    <type name="Magento\Sales\Model\Order\Creditmemo\RefundOperation">
+        <plugin name="mirakl_order_refund_operation" type="Mirakl\Core\Plugin\Model\Order\CreditMemo\RefundOperationPlugin" />
+    </type>
+    <preference for="Mirakl\Core\Model\ResourceModel\Metadata\MetadataProviderInterface"
+                type="Mirakl\Core\Model\ResourceModel\Metadata\MetadataProvider"/>
+    <preference for="Mirakl\Core\Model\File\FileHandlerInterface"
+                type="Mirakl\Core\Model\File\FileHandler"/>
+</config>

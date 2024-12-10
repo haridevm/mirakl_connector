@@ -1,0 +1,21 @@
+<?php
+/**
+ * @var \Mirakl\Process\Block\Adminhtml\Process\View\Title $block
+ */
+$titleIdHtml = ($block->getTitleId()) ? ' id="' . $block->escapeHtmlAttr($block->getTitleId()) . '"' : '';
+$titleClass = ($block->getTitleClass()) ? ' ' . $block->getTitleClass() : '';
+$title = $block->getPageTitle();
+?>
+
+<div class="page-title-wrapper<?= $block->escapeHtmlAttr($titleClass) ?>">
+    <h1 class="page-title"<?= /* @noEscape */ $titleIdHtml ?>>
+        <?php if ($block->getParentId()): ?>
+            <a href="<?= $block->escapeUrl($block->getUrl('*/*/*', ['id' => $block->getParentId()])) ?>">
+                <?= /* @escapeNotVerified */ $block->getProcessLabel($block->getParentId()) ?>
+            </a>
+            &gt;
+        <?php endif; ?>
+        <?= $block->escapeHtml($title) ?>
+    </h1>
+    <?= $block->getChildHtml() ?>
+</div>

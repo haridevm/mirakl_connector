@@ -1,0 +1,70 @@
+<?php
+/** @var \Mirakl\FrontendDemo\Block\Product\Offer\BestShippingMethod $block */
+/** @var Mirakl\MMP\Common\Domain\Offer\Shipping\ShippingPriceByZoneAndType $shippingMethodByPrice */
+$shippingMethodByPrice = $block->getBestShippingMethodByPrice();
+/** @var Mirakl\MMP\Common\Domain\Offer\Shipping\ShippingPriceByZoneAndType $shippingMethodByDate */
+$shippingMethodByDate = $block->getBestShippingMethodByDate();
+$shippingAddress = $block->getShippingAddress();
+?>
+<?php if (!$shippingMethodByPrice && !$shippingMethodByDate): ?>
+    <?= $block->escapeHtml(__('No shipping available for current address')); ?>
+<?php else: ?>
+    <?php $price = $shippingMethodByPrice->getShippingPriceUnit(); ?>
+    <?php if ($price == 0): ?>
+        <?php if ($shippingMethodByPrice->getDeliveryTime()): ?>
+            <strong><?= $block->escapeHtml(__('Free shipping: delivery')); ?></strong>
+        <?php else: ?>
+            <strong><?= $block->escapeHtml(__('Free shipping')); ?></strong>
+        <?php endif; ?>
+    <?php else: ?>
+        <?php if ($shippingMethodByPrice->getDeliveryTime()): ?>
+            <?= /* @escapeNotVerified */ __('Shipping from <strong>%1</strong>: delivery', $block->convertAndFormat($price)); ?>
+            <?php else: ?>
+            <?= /* @escapeNotVerified */ __('Shipping from <strong>%1</strong>', $block->convertAndFormat($price)); ?>
+        <?php endif; ?>
+    <?php endif; ?>
+
+    <?= $block->getShippingDateBlock()
+                ->setDeliveryTime($shippingMethodByPrice->getDeliveryTime())
+                ->toHtml(); ?>
+
+    <?php if ($shippingMethodByDate && $shippingMethodByDate->getCode() !== $shippingMethodByPrice->getCode()): ?>
+        <div class="offer-shipping fastest-shipping">
+            <?= $block->escapeHtml(__('Or fastest delivery')); ?>
+            <?= $block->getShippingDateBlock()
+                      ->setDeliveryTime($shippingMethodByDate->getDeliveryTime())
+                      ->toHtml(); ?>
+
+            <?php $price = $block->getShippingPrice($shippingMethodByDate->getShippingPriceUnit(), $shippingAddress); ?>
+            <?php $cutOffTime = $block->getShippingDateBlock()
+                                      ->getCutOffTime($shippingMethodByDate->getCutOffTime(), $shippingMethodByDate->getCutOffNextDate()); ?>
+
+            <?php if ($price == 0): ?>
+                <?php if ($cutOffTime): ?>
+                 (<?= /* @escapeNotVerified */ __('Free shipping, order within <span class="cut-off-time">%1</span>', $cutOffTime); ?>)
+                <?php else: ?>
+                    (<?= /* @escapeNotVerified */ __(
+                            'from <strong>%1</strong>, order within <span class="cut-off-time">%2</span>',
+                            $block->convertAndFormat($price),
+                            $cutOffTime
+                          );?>)
+                <?php endif; ?>
+            <?php else: ?>
+                <?php if ($cutOffTime): ?>
+                    (<?= /* @escapeNotVerified */ __(
+                            'from <strong>%1</strong>, order within <span class="cut-off-time">%2</span>',
+                            $block->convertAndFormat($price),
+                            $cutOffTime
+                         );?>)
+                <?php else: ?>
+                    (<?= /* @escapeNotVerified */ __('from <strong>%1</strong>', $block->convertAndFormat($price)); ?>)
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+
+<div class="offer-shipping shipping-destination">
+    <span class="delivery-pin"></span>
+    <span><?= $block->escapeHtml(__('Delivered to %1', $shippingMethodByPrice->getShippingZoneLabel())); ?></span>
+</div>
+<?php endif; ?>

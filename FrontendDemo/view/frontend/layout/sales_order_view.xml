@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <update handle="sales_order_item_renderers"/>
+    <update handle="sales_order_item_price"/>
+    <update handle="sales_order_info_links"/>
+    <head>
+        <css src="Mirakl_FrontendDemo::css/marketplace.css"/>
+    </head>
+    <body>
+        <referenceBlock name="sales.order.view">
+            <referenceBlock name="order_items">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Mirakl_FrontendDemo::order/items.phtml</argument>
+                </action>
+            </referenceBlock>
+            <referenceBlock name="tax">
+                <action method="setTemplate">
+                    <argument name="template" xsi:type="string">Mirakl_FrontendDemo::order/tax.phtml</argument>
+                </action>
+            </referenceBlock>
+        </referenceBlock>
+        <referenceBlock name="order_totals">
+            <block class="Mirakl\FrontendDemo\Block\Order\Totals" name="mirakl_order_totals">
+                <action method="setBeforeCondition">
+                    <argument name="condition" xsi:type="string">tax</argument>
+                </action>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

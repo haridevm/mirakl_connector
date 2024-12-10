@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="process" xsi:type="object">Mirakl\Process\Console\Command\ProcessCommand</item>
+                <item name="process:api" xsi:type="object">Mirakl\Process\Console\Command\ApiReturnProcessCommand</item>
+                <item name="process:clear-history" xsi:type="object">Mirakl\Process\Console\Command\ClearHistoryCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Api\Helper\ClientHelper\MMP">
+        <plugin name="mirakl_process_api" type="Mirakl\Process\Plugin\Api\ClientHelperPlugin" sortOrder="100"/>
+    </type>
+    <type name="Mirakl\Api\Helper\ClientHelper\MCI">
+        <plugin name="mirakl_process_api" type="Mirakl\Process\Plugin\Api\ClientHelperPlugin" sortOrder="100"/>
+    </type>
+    <type name="Mirakl\Api\Helper\ClientHelper\MCM">
+        <plugin name="mirakl_process_api" type="Mirakl\Process\Plugin\Api\ClientHelperPlugin" sortOrder="100"/>
+    </type>
+    <type name="Mirakl\Process\Helper\Api">
+        <arguments>
+            <argument name="synchroIdKeys" xsi:type="array">
+                <item name="synchro_id" xsi:type="string">synchro_id</item>
+                <item name="import_id" xsi:type="string">import_id</item>
+                <item name="tracking_id" xsi:type="string">tracking_id</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Backend\Model\Auth\Session">
+        <plugin name="mirakl_ajax_sessions_prolong" type="Mirakl\Process\Plugin\Model\Auth\SessionPlugin" sortOrder="99" />
+    </type>
+    <virtualType name="Mirakl\Process\Model\ResourceModel\Process\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mirakl_process</argument>
+            <argument name="resourceModel" xsi:type="string">Mirakl\Process\Model\ResourceModel\Process</argument>
+            <argument name="identifierName" xsi:type="string">id</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="mirakl_process_listing_data_source" xsi:type="string">Mirakl\Process\Model\ResourceModel\Process\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Process\Model\Execution\Validator\ConcurrencyValidator">
+        <arguments>
+            <argument name="ignoreProcessCodes" xsi:type="array">
+                <item name="images_import" xsi:type="const">Mirakl\Mci\Helper\Product\Image\Process::CODE</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Process\Model\Execution\Validator\Start" type="Mirakl\Process\Model\Execution\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="already_started" xsi:type="object">Mirakl\Process\Model\Execution\Validator\AlreadyStartedValidator</item>
+                <item name="concurrency" xsi:type="object">Mirakl\Process\Model\Execution\Validator\ConcurrencyValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Mirakl\Process\Model\Execution\Validator\Run" type="Mirakl\Process\Model\Execution\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="can_run" xsi:type="object">Mirakl\Process\Model\Execution\Validator\CanRunValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Process\Model\Execution">
+        <arguments>
+            <argument name="startProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Start</argument>
+            <argument name="runProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Run</argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Process\Model\Execution\Validator\Execute" type="Mirakl\Process\Model\Execution\Validator">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="already_running" xsi:type="object">Mirakl\Process\Model\Execution\Validator\AlreadyRunningValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Process\Model\Execution\Executor">
+        <arguments>
+            <argument name="executeProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Execute</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Process\Model\TimeoutManager">
+        <arguments>
+            <argument name="longProcessCodes" xsi:type="array">
+                <item name="CM21" xsi:type="string">CM21</item>
+                <item name="CM51" xsi:type="string">CM51</item>
+                <item name="CM52" xsi:type="string">CM52</item>
+                <item name="P21" xsi:type="string">P21</item>
+                <item name="PM01" xsi:type="string">PM01</item>
+                <item name="IMAGE_IMPORT" xsi:type="string">IMAGE_IMPORT</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Mirakl\Process\Model\Action\ActionListInterface" type="Mirakl\Process\Model\Action\ActionList"/>
+    <preference for="Mirakl\Process\Model\Action\Execution\ChildProviderInterface" type="Mirakl\Process\Model\Action\Execution\ChildProvider"/>
+    <preference for="Mirakl\Process\Model\ChildProcessFactoryInterface" type="Mirakl\Process\Model\ChildProcessFactory"/>
+    <preference for="Mirakl\Process\Model\Exception\RetryLaterHandlerInterface" type="Mirakl\Process\Model\Exception\RetryLaterHandler"/>
+    <preference for="Mirakl\Process\Model\File\StorageInterface" type="Mirakl\Process\Model\File\Storage"/>
+</config>

@@ -1,0 +1,267 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Catalog\Model\ResourceModel\Product\Indexer\LinkedProductSelectBuilderByIndexPrice">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\ResourceModel\Product\LinkedProductSelectBuilderByIndexPricePlugin" sortOrder="100"/>
+    </type>
+    <type name="Magento\Catalog\Model\ResourceModel\Product\LinkedProductSelectBuilderByBasePrice">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\ResourceModel\Product\LinkedProductSelectBuilderByBasePricePlugin" sortOrder="100"/>
+    </type>
+    <type name="Magento\CatalogInventory\Observer\CancelOrderItemObserver">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Observer\CatalogInventory\CancelOrderItemObserverPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\QuoteItemQtyList">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\CatalogInventory\Quote\Item\QuoteItemQtyListPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="mirakl_connector_send_order" type="Mirakl\Connector\Plugin\Model\Order\OrderSavePlugin"/>
+    </type>
+    <type name="Magento\Sales\Model\Spi\OrderResourceInterface">
+        <plugin name="mirakl_connector_send_order" type="Mirakl\Connector\Plugin\Model\Order\OrderUpdatePlugin"/>
+    </type>
+    <type name="Magento\InventorySales\Plugin\Sales\OrderManagement\AppendReservationsAfterOrderPlacementPlugin">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\InventorySales\OrderManagement\AppendReservationsAfterOrderPlacementPlugin"/>
+    </type>
+    <type name="Magento\InventorySales\Model\IsProductSalableCondition\IsAnySourceItemInStockCondition">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\InventorySales\IsProductSalableCondition\IsAnySourceItemInStockConditionPlugin"/>
+    </type>
+    <type name="Magento\InventoryShipping\Model\GetItemsToDeductFromShipment">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\InventoryShipping\GetItemsToDeductFromShipmentPlugin"/>
+    </type>
+    <type name="Magento\Tax\Model\Sales\Total\Quote\CommonTaxCollector">
+        <plugin name="mirakl_connector" type="Mirakl\Connector\Plugin\Model\Quote\Total\CommonTaxCollectorPlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="mirakl_collect_debits" xsi:type="object">Mirakl\Connector\Console\Command\Order\CollectDebitsCommand</item>
+                <item name="mirakl_collect_refunds" xsi:type="object">Mirakl\Connector\Console\Command\Order\CollectRefundsCommand</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsProductSalableForRequestedQtyConditionChain">
+        <arguments>
+            <argument name="conditions" xsi:type="array">
+                <item name="is_salable_with_offers" xsi:type="array">
+                    <item name="sort_order" xsi:type="number">25</item>
+                    <item name="object" xsi:type="object">Mirakl\Connector\Model\InventorySales\IsProductSalableForRequestedQtyCondition\IsSalableWithOfferCondition</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Type\AbstractType">
+        <plugin name="mirakl_frontend" type="Mirakl\Connector\Plugin\Model\Catalog\Product\Type\AbstractTypePlugin" sortOrder="50"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="mirakl_frontend" type="Mirakl\Connector\Plugin\Model\Catalog\ProductPlugin" sortOrder="50"/>
+    </type>
+    <type name="Magento\Checkout\Model\ShippingInformationManagement">
+        <plugin name="mirakl_frontend" type="Mirakl\Connector\Plugin\Model\Checkout\ShippingInformationManagementPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address">
+        <plugin name="mirakl_frontend" type="Mirakl\Connector\Plugin\Model\Quote\AddressPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\OfflineShipping\Model\Carrier\Freeshipping">
+        <plugin name="mirakl_frontend_freeshipping" type="Mirakl\Connector\Plugin\Model\Carrier\FreeshippingPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\Shipping\Model\CarrierFactory">
+        <plugin name="mirakl_frontend_freeshipping" type="Mirakl\Connector\Plugin\Model\Carrier\CarrierFactoryPlugin" sortOrder="10"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator">
+        <plugin name="mirakl_frontend" type="Mirakl\Connector\Plugin\Model\CatalogInventory\Quote\Item\QuantityValidatorPlugin" sortOrder="50"/>
+    </type>
+    <type name="Magento\Shipping\Model\Shipping">
+        <plugin name="mirakl_frontend_collect_carrier_rates" type="Mirakl\Connector\Plugin\Model\Shipping\ShippingPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\SalesRule\Model\RulesApplier">
+        <plugin name="mirakl_rules_applier_plugin" type="Mirakl\Connector\Plugin\SalesRule\Model\RulesApplierPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Validator">
+        <plugin name="mirakl_validator_can_apply_discount_plugin" type="Mirakl\Connector\Plugin\SalesRule\Model\Validator\CanApplyDiscountPlugin"/>
+        <plugin name="mirakl_validator_process_shipping_amount_plugin" type="Mirakl\Connector\Plugin\SalesRule\Model\Validator\ProcessShippingAmountPlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product">
+        <plugin name="mirakl_product_validation_plugin" type="Mirakl\Connector\Plugin\SalesRule\Model\Condition\Product\ValidatePlugin"/>
+    </type>
+    <type name="Magento\SalesRule\Model\Rule\Condition\Address">
+        <plugin name="mirakl_address_validation_plugin" type="Mirakl\Connector\Plugin\SalesRule\Model\Condition\Address\ValidatePlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Item\Compare">
+        <plugin name="mirakl_quote_item_compare" type="Mirakl\Connector\Plugin\Model\Quote\Item\ComparePlugin"/>
+    </type>
+    <type name="Mirakl\Connector\Model\Product\Offer\Collector">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="default" xsi:type="object">Mirakl\Connector\Model\Product\Offer\Collector\Customizer\DefaultFilters</item>
+                <item name="product_ids" xsi:type="object">Mirakl\Connector\Model\Product\Offer\Collector\Customizer\ProductIds</item>
+                <item name="skus" xsi:type="object">Mirakl\Connector\Model\Product\Offer\Collector\Customizer\Skus</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Product\Offer\BuyRequest\Processor">
+        <arguments>
+            <argument name="validators" xsi:type="array">
+                <item name="association" xsi:type="object">Mirakl\Connector\Model\Product\Offer\BuyRequest\Validator\Association</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Store\Model\StoreSwitcher">
+        <arguments>
+            <argument name="storeSwitchers" xsi:type="array">
+                <item name="mirakl_quote_synchronizer" xsi:type="object">Mirakl\Connector\Model\StoreSwitcher\MiraklQuoteSynchronizer</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Observer\OfferImportAfterRefreshIndexObserver">
+        <arguments>
+            <argument name="indexers" xsi:type="array">
+                <item name="10" xsi:type="const">Magento\CatalogInventory\Model\Indexer\Stock\Processor::INDEXER_ID</item>
+                <item name="20" xsi:type="const">Magento\Catalog\Model\Indexer\Product\Price\Processor::INDEXER_ID</item>
+                <item name="30" xsi:type="const">Magento\Catalog\Model\Indexer\Product\Eav\Processor::INDEXER_ID</item>
+                <item name="40" xsi:type="const">Magento\CatalogSearch\Model\Indexer\Fulltext::INDEXER_ID</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Connector\Model\Offer\AsyncImport\Import\ActionList" type="Mirakl\Process\Model\Action\ActionList">
+        <arguments>
+            <argument name="actions" xsi:type="array">
+                <item name="10" xsi:type="object">Mirakl\Connector\Model\Shop\Import\Handler</item>
+                <item name="20" xsi:type="object">Mirakl\Connector\Model\Offer\AsyncImport\CreateOffersExport</item>
+                <item name="30" xsi:type="object">Mirakl\Connector\Model\Offer\AsyncImport\PollOffersExportStatus</item>
+                <item name="40" xsi:type="object">Mirakl\Connector\Model\Offer\AsyncImport\UrlsProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Connector\Model\Offer\AsyncImport\Import">
+        <arguments>
+            <argument name="actionList" xsi:type="object">Mirakl\Connector\Model\Offer\AsyncImport\Import\ActionList</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\AsyncImport\PollOffersExportStatus">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="default_delay" xsi:type="number">5</item>
+                <item name="max_attempts" xsi:type="number">6</item>
+                <item name="max_retry" xsi:type="number">2</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\AsyncImport\UrlsProcessor">
+        <arguments>
+            <argument name="actionList" xsi:type="object">Mirakl\Connector\Model\Offer\AsyncImport\UrlsProcessor\ActionList</argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Connector\Model\Offer\Import\DataBuilder\Legacy" type="Mirakl\Connector\Model\Offer\Import\DataBuilder">
+        <arguments>
+            <argument name="formatters" xsi:type="array">
+                <item name="10" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\TableColumns</item>
+                <item name="20" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\AdditionalInfo</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Connector\Model\Offer\ImportFileBuilder">
+        <arguments>
+            <argument name="dataBuilder" xsi:type="object">Mirakl\Connector\Model\Offer\Import\DataBuilder\Legacy</argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Connector\Model\Offer\Import\DataBuilder\Async" type="Mirakl\Connector\Model\Offer\Import\DataBuilder">
+        <arguments>
+            <argument name="customizers" xsi:type="array">
+                <item name="10" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Customizer\Prices</item>
+            </argument>
+            <argument name="formatters" xsi:type="array">
+                <item name="10" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\Channels</item>
+                <item name="20" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\Prices</item>
+                <item name="30" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\Boolean</item>
+                <item name="40" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\LogisticClass</item>
+                <item name="50" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\TableColumns</item>
+                <item name="60" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\AdditionalInfo</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Connector\Model\Offer\Import\Formatter\Prices">
+        <arguments>
+            <argument name="serializer" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Serializer\Tuples</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\Import\Formatter\AdditionalInfo">
+        <arguments>
+            <argument name="pricesFormatter" xsi:type="object">Mirakl\Connector\Model\Offer\Import\Formatter\Prices</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\AsyncImport\GetOffersExportFile">
+        <arguments>
+            <argument name="dataBuilder" xsi:type="object">Mirakl\Connector\Model\Offer\Import\DataBuilder\Async</argument>
+            <argument name="data" xsi:type="array">
+                <item name="max_retry" xsi:type="number">2</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\Import\Formatter\Boolean">
+        <arguments>
+            <argument name="fields" xsi:type="array">
+                <item name="active" xsi:type="string">active</item>
+                <item name="deleted" xsi:type="string">deleted</item>
+                <item name="is_professional" xsi:type="string">professional</item>
+                <item name="premium" xsi:type="string">premium</item>
+                <item name="allow_quote_requests" xsi:type="string">allow_quote_requests</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mirakl\Connector\Model\ResourceModel\Metadata\MetadataProvider\Offer" type="Mirakl\Core\Model\ResourceModel\Metadata\MetadataProvider">
+        <arguments>
+            <argument name="tableName" xsi:type="string">mirakl_offer</argument>
+            <argument name="defaults" xsi:type="array">
+                <item name="favorite_rank" xsi:type="number">0</item>
+                <item name="min_order_quantity" xsi:type="number">0</item>
+                <item name="max_order_quantity" xsi:type="number">0</item>
+                <item name="package_quantity" xsi:type="number">0</item>
+                <item name="min_shipping_price" xsi:type="number">0</item>
+                <item name="min_shipping_price_additional" xsi:type="number">0</item>
+                <item name="discount_price" xsi:type="number">0</item>
+                <item name="discount_start_date" xsi:type="string">0000-00-00</item>
+                <item name="discount_end_date" xsi:type="string">0000-00-00</item>
+                <item name="available_start_date" xsi:type="string">0000-00-00</item>
+                <item name="available_end_date" xsi:type="string">0000-00-00</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mirakl\Connector\Model\Offer\Import\ChannelFields">
+        <arguments>
+            <argument name="fields" xsi:type="array">
+                <item name="price" xsi:type="string">price</item>
+                <item name="origin_price" xsi:type="string">origin_price</item>
+                <item name="price_ranges" xsi:type="string">price_ranges</item>
+                <item name="discount_price" xsi:type="string">discount_price</item>
+                <item name="discount_start_date" xsi:type="string">discount_start_date</item>
+                <item name="discount_end_date" xsi:type="string">discount_end_date</item>
+                <item name="discount_ranges" xsi:type="string">discount_ranges</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\ResourceModel\Offer">
+        <arguments>
+            <argument name="metadataProvider" xsi:type="object">Mirakl\Connector\Model\ResourceModel\Metadata\MetadataProvider\Offer</argument>
+        </arguments>
+    </type>
+    <type name="Mirakl\Connector\Model\Offer\Import\Formatter\TableColumns">
+        <arguments>
+            <argument name="metadataProvider" xsi:type="object">Mirakl\Connector\Model\ResourceModel\Metadata\MetadataProvider\Offer</argument>
+        </arguments>
+    </type>
+    <preference for="Magento\Sales\Model\Order\CreditmemoFactory" type="Mirakl\Connector\Model\Order\CreditMemoFactory"/>
+    <preference for="Mirakl\Connector\Model\Offer\FinalPriceInterface" type="Mirakl\Connector\Model\Offer\FinalPrice"/>
+    <preference for="Mirakl\Connector\Model\Product\Offer\CollectorInterface" type="Mirakl\Connector\Model\Product\Offer\Collector"/>
+    <preference for="Mirakl\Connector\Model\Inventory\Store\StockIndexResolverInterface" type="Mirakl\Connector\Model\Inventory\Store\StockIndexResolver"/>
+    <preference for="Mirakl\Connector\Model\Inventory\Store\StockIndexInterface" type="Mirakl\Connector\Model\Inventory\Store\StockIndex"/>
+    <preference for="Mirakl\Connector\Model\Product\Offer\BuyRequest\ProcessorInterface" type="Mirakl\Connector\Model\Product\Offer\BuyRequest\Processor"/>
+    <preference for="Mirakl\Connector\Model\Product\Offer\CustomOption\CreatorInterface" type="Mirakl\Connector\Model\Product\Offer\CustomOption\Creator"/>
+    <preference for="Mirakl\Connector\Model\Product\Inventory\GetOperatorStockInterface" type="Mirakl\Connector\Model\Product\Inventory\GetOperatorStock"/>
+    <preference for="Mirakl\Connector\Model\Product\Inventory\GetOperatorInStock\DefaultStockInterface" type="Mirakl\Connector\Model\Product\Inventory\GetOperatorInStock\DefaultStock"/>
+    <preference for="Mirakl\Connector\Model\Product\Inventory\GetOperatorInStock\MultiSourceStockInterface" type="Mirakl\Connector\Model\Product\Inventory\GetOperatorInStock\MultiSourceStock"/>
+    <preference for="Mirakl\Connector\Model\Offer\Import\DataBuilderInterface" type="Mirakl\Connector\Model\Offer\Import\DataBuilder"/>
+    <preference for="Mirakl\Connector\Model\Offer\Import\Price\DiscountPriceProviderInterface" type="Mirakl\Connector\Model\Offer\Import\Price\DiscountPriceProvider"/>
+    <preference for="Mirakl\Connector\Model\Offer\Import\Price\PriceBuilderInterface" type="Mirakl\Connector\Model\Offer\Import\Price\PriceBuilder"/>
+    <preference for="Mirakl\Connector\Model\Offer\Import\Price\PriceRangesProviderInterface" type="Mirakl\Connector\Model\Offer\Import\Price\PriceRangesProvider"/>
+    <preference for="Mirakl\Connector\Model\Offer\Import\Price\PriceValidatorInterface" type="Mirakl\Connector\Model\Offer\Import\Price\PriceValidator"/>
+    <preference for="Mirakl\Connector\Model\Connector\IsFreshInstallInterface" type="Mirakl\Connector\Model\Connector\IsFreshInstall"/>
+</config>

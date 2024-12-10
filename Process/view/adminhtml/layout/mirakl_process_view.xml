@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.title" class="Mirakl\Process\Block\Adminhtml\Process\View\Title" template="process/view/title.phtml"/>
+        <referenceContainer name="content">
+            <block class="Mirakl\Process\Block\Adminhtml\Process\View\ProcessInfo" name="adminhtml.process.view.process-info" template="process/view/process-info.phtml"/>
+            <block class="Mirakl\Process\Block\Adminhtml\Process\View\ChildList" name="adminhtml.process.view.child-list" template="process/view/child-list.phtml">
+                <uiComponent name="mirakl_process_listing"/>
+            </block>
+            <block class="Mirakl\Process\Block\Adminhtml\Process\View\ProcessOutput" name="adminhtml.process.view.process-output" template="process/view/process-output.phtml"/>
+            <block class="Mirakl\Process\Block\Adminhtml\Process\View\MiraklInfo" name="adminhtml.process.view.mirakl-info" template="process/view/mirakl-info.phtml"/>
+        </referenceContainer>
+    </body>
+</page>

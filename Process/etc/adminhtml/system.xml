@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mirakl_process" translate="label" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Processes</label>
+            <tab>mirakl</tab>
+            <resource>Mirakl_Config::process</resource>
+            <group id="mirakl_api_notice" translate="label" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Fieldset\Hint</frontend_model>
+            </group>
+            <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Mirakl Processes Configuration</label>
+                <field id="auto_async_execution" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Automatic Execution in Background</label>
+                    <comment><![CDATA[If enabled, pending processes will be automatically executed in background during Magento backend navigation through an AJAX request.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="timeout_delay" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Long Process Timeout Delay</label>
+                    <comment><![CDATA[Delay in minutes after which a running process that hasn't been updated is automatically cancelled. <br>Concerns: Product Import (MCI or CM51), Image Import, Product Export (CM21), Attributes Export (PM01)<br>This parameter is useful if a crash occurs during a process runtime and blocks other processes execution.<br>Leave blank to ignore.]]></comment>
+                    <validate>validate-greater-than-zero validate-number</validate>
+                </field>
+                <field id="short_timeout_delay" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Short Process Timeout Delay</label>
+                    <comment><![CDATA[Delay in minutes after which a running process that hasn't been updated is automatically cancelled. Concerns: All jobs not mentioned in long process timeout delay config.<br>Leave blank to ignore.]]></comment>
+                    <validate>validate-greater-than-zero validate-number</validate>
+                </field>
+                <field id="show_file_max_size" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA["Open in Browser" Max File Size]]></label>
+                    <comment><![CDATA[Allow files not exceeding this size (in MB) to be opened directly in browser.]]></comment>
+                    <validate>required-entry validate-greater-than-zero validate-number</validate>
+                </field>
+            </group>
+            <group id="history" translate="label" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Mirakl Processes History</label>
+                <field id="clear_keep_days" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label><![CDATA[Clear History of Processes Created Before (days)]]></label>
+                    <validate>required-entry validate-greater-than-zero validate-number</validate>
+                </field>
+                <field id="clear" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="button_label">
+                    <frontend_model>Mirakl\Process\Block\Adminhtml\System\Config\Button\ClearHistory</frontend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

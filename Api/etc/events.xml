@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="admin_system_config_changed_section_mirakl_api">
+        <observer name="mirakl_api_config_changed" instance="Mirakl\Api\Observer\Adminhtml\Config\ConfigChangedObserver"/>
+    </event>
+    <event name="mirakl_api_send_request_before">
+        <observer name="mirakl_api" instance="Mirakl\Api\Observer\Client\SendRequestBeforeObserver"/>
+    </event>
+</config>

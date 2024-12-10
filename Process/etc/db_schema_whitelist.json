@@ -1,0 +1,35 @@
+{
+    "mirakl_process": {
+        "column": {
+            "id": true,
+            "type": true,
+            "name": true,
+            "status": true,
+            "mirakl_status": true,
+            "synchro_id": true,
+            "output": true,
+            "duration": true,
+            "file": true,
+            "mirakl_file": true,
+            "helper": true,
+            "method": true,
+            "params": true,
+            "parent_id": true,
+            "hash": true,
+            "timeout": true,
+            "created_at": true,
+            "updated_at": true,
+            "code": true
+        },
+        "index": {
+            "MIRAKL_PROCESS_TYPE": true,
+            "MIRAKL_PROCESS_STATUS": true,
+            "MIRAKL_PROCESS_MIRAKL_STATUS": true,
+            "MIRAKL_PROCESS_HASH": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "MIRAKL_PROCESS_PARENT_ID_MIRAKL_PROCESS_ID": true
+        }
+    }
+}

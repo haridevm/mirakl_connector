@@ -1,0 +1,58 @@
+<?php
+/**
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ * @var \Mirakl\Process\Block\Adminhtml\Process\View\ProcessInfo $block
+ * @var \Mirakl\Core\Helper\Data $helper
+ */
+$process = $block->getProcess();
+$helper = $this->helper('Mirakl\Core\Helper\Data');
+?>
+<section class="admin__page-section process-information">
+    <div class="admin__page-section-title">
+        <span class="title"><?= $block->escapeHtml(__('Process Information')) ?></span>
+    </div>
+    <table class="admin__table-secondary">
+        <tbody>
+        <?= $block->getChildHtml() ?>
+        <tr>
+            <th><?= $block->escapeHtml(__('Type')) ?></th>
+            <td><?= $block->escapeHtml($process->getType()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Name')) ?></th>
+            <td><?= $block->escapeHtml($process->getName()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Date')) ?></th>
+            <td><?= /* @escapeNotVerified */ $block->formatDate($process->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Duration')) ?></th>
+            <td><?= $block->escapeHtml($helper->formatDuration($process->getDuration())) ?></td>
+        </tr>
+        <?php if ($url = $process->getDownloadFileUrl()): ?>
+            <tr>
+                <td><?= $block->escapeHtml(__('File')) ?></td>
+                <td>
+                    <a href="<?= /* @escapeNotVerified */ $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;')): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                    <?php if ($process->canShowFile()): ?>
+                        <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->escapeUrl($block->getUrl('*/*/showFile', ['id' => $process->getId()])) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
+                    <?php endif ?>
+                </td>
+            </tr>
+        <?php endif ?>
+        <?php if ($url = $process->getDownloadOutputUrl()): ?>
+            <tr>
+                <td><?= $block->escapeHtml(__('Output')) ?></td>
+                <td>
+                    <a href="<?= /* @escapeNotVerified */ $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getOutputSizeFormatted('&nbsp;')): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                </td>
+            </tr>
+        <?php endif ?>
+        <tr>
+            <td><?= $block->escapeHtml(__('Status')) ?></td>
+            <td><p class="report-status"><span class="<?= $block->escapeHtml($process->getStatusClass()) ?>"><span><?= $block->escapeHtml(__($process->getStatus())) ?></span></span></p></td>
+        </tr>
+        </tbody>
+    </table>
+</section>

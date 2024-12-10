@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="marketplace_shipping" instance="Mirakl\Connector\Model\Quote\Address\Total\Shipping" sort_order="455"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="marketplace_shipping" instance="Mirakl\Connector\Model\Total\Invoice\Shipping" sort_order="300"/>
+            <item name="marketplace_totals" instance="Mirakl\Connector\Model\Total\Invoice\Totals" sort_order="310"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="marketplace_shipping" instance="Mirakl\Connector\Model\Total\CreditMemo\Shipping" sort_order="300"/>
+        </group>
+    </section>
+</config>

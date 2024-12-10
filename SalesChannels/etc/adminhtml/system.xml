@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mirakl_connector">
+            <group id="sales_channels" translate="label" sortOrder="60" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Sales Channels</label>
+                <field id="enable_channel_pricing" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Sales Channels</label>
+                    <comment>If enabled, visibility per channel and channel prices will be applied to marketplace products.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mirakl_channels" translate="label comment" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Channels Mapping</label>
+                    <comment>Magento stores and Mirakl enabled channels mapping.</comment>
+                    <frontend_model>Mirakl\SalesChannels\Block\Adminhtml\System\Config\Form\Field\ChannelMapping</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <depends>
+                        <field id="mirakl_connector/sales_channels/enable_channel_pricing">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

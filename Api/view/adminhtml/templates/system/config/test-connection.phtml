@@ -1,0 +1,23 @@
+<?php
+/** @var \Mirakl\Api\Block\Adminhtml\System\Config\TestConnection $block */
+/** @var \Magento\Framework\Escaper $escaper */
+?>
+<div data-bind="scope: 'mirakl-api-test-connection'" class="scalable">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "mirakl-api-test-connection": {
+                        "component": "Mirakl_Api/js/test-connection",
+                        "success": true,
+                        "url": "<?= $escaper->escapeJs($escaper->escapeUrl($block->getAjaxUrl())) ?>",
+                        "buttonLabel": "<?= $escaper->escapeHtml($block->getButtonLabel()) ?>"
+                    }
+                }
+            }
+        }
+    }
+</script>

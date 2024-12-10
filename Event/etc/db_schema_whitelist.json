@@ -1,0 +1,27 @@
+{
+    "mirakl_event": {
+        "column": {
+            "id": true,
+            "code": true,
+            "action": true,
+            "type": true,
+            "status": true,
+            "csv_data": true,
+            "process_id": true,
+            "line": true,
+            "import_id": true,
+            "message": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "index": {
+            "MIRAKL_EVENT_CODE": true,
+            "MIRAKL_EVENT_TYPE": true,
+            "MIRAKL_EVENT_STATUS": true,
+            "MIRAKL_EVENT_IMPORT_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

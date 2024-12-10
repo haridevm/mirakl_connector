@@ -1,0 +1,10 @@
+<div class="pp-buttons-container">
+    <button onclick="<?php if ($block->getConfirmLabel()): ?>confirmSetLocation(
+            '<?= $block->escapeJsQuote($block->getConfirmLabel()); ?>',
+            '<?= $block->escapeUrl($block->getButtonUrl()); ?>');
+        <?php else: ?>setLocation(
+            '<?= $block->escapeUrl($block->getButtonUrl()); ?>');
+        <?php endif; ?>" class="<?= $block->getButtonClass() ?: 'scalable' ?>" type="button" id="<?= $block->escapeHtml($block->getHtmlId()); ?>">
+        <span><?= $block->escapeHtml($block->getButtonLabel()); ?></span>
+    </button>
+</div>

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @var \Magento\Framework\View\TemplateEngine\Php $block
+ * @var \Mirakl\Core\Block\Adminhtml\Shipping\Type\View $block
+ */
+$shippingType = $block->getShippingType();
+?>
+<section class="admin__page-section">
+    <div class="admin__page-section-title">
+        <strong class="title"><?= /* @escapeNotVerified */ __('Shipping Type Information') ?></strong>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary mirakl-shipping-types-table">
+            <tbody>
+                <?php foreach ($shippingType->getData() as $key => $value): ?>
+                <?php $needsFormatting = ($key === 'label' || $key === 'description') ?>
+                <tr>
+                    <th class="mirakl-shipping-type-column"><?= /* @escapeNotVerified */  __(ucwords(str_replace('_', ' ', $key))) ?></th>
+                    <?php if ($needsFormatting) : ?>
+                        <td class="mirakl-shipping-type-value"><?= /* @escapeNotVerified */ $block->formatShippingTypeField($key, $shippingType) ?></td>
+                    <?php else : ?>
+                        <td><?= /* @escapeNotVerified */ $block->escapeHtml($value) ?></td>
+                    <?php endif; ?>
+                </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</section>

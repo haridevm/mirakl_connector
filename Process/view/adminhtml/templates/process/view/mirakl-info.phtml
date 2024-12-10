@@ -1,0 +1,39 @@
+<?php
+/**
+ * @var \Magento\Framework\View\TemplateEngine\Php $this
+ * @var \Mirakl\Process\Block\Adminhtml\Process\View\MiraklInfo $block
+ */
+$process = $block->getProcess();
+?>
+<?php if ($process->getMiraklStatus()): ?>
+    <section class="admin__page-section mirakl-information">
+        <div class="admin__page-section-title">
+            <strong class="title"><?= $block->escapeHtml(__('Mirakl Information')) ?></strong>
+        </div>
+        <div class="admin__page-section-content">
+            <table class="admin__table-secondary">
+                <tbody>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Mirakl API Status')) ?></th>
+                    <td><p class="report-status"><span class="<?= $block->escapeHtml($process->getStatusClass(true)) ?>"><span><?= /* @escapeNotVerified */ __($process->getMiraklStatus()) ?></span></span></p></td>
+                </tr>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Synchro Id')) ?></th>
+                    <td><?= $block->escapeHtml(__($process->getSynchroId())) ?></td>
+                </tr>
+                <?php if ($url = $process->getDownloadFileUrl(true)): ?>
+                    <tr>
+                        <th><?= $block->escapeHtml(__('Report File')) ?></th>
+                        <td>
+                            <a href="<?= $block->escapeUrl($url) ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;', true)): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                            <?php if ($process->canShowFile(true)): ?>
+                                <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->escapeUrl($block->getUrl('*/*/showFile', ['id' => $process->getId(), 'mirakl' => true])) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
+                            <?php endif ?>
+                        </td>
+                    </tr>
+                <?php endif ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+<?php endif ?>

@@ -1,0 +1,51 @@
+{
+    "mirakl_offer": {
+        "column": {
+            "offer_id": true,
+            "product_sku": true,
+            "min_shipping_price": true,
+            "min_shipping_price_additional": true,
+            "min_shipping_zone": true,
+            "min_shipping_type": true,
+            "price": true,
+            "total_price": true,
+            "price_additional_info": true,
+            "quantity": true,
+            "description": true,
+            "state_code": true,
+            "shop_id": true,
+            "shop_name": true,
+            "professional": true,
+            "premium": true,
+            "logistic_class": true,
+            "active": true,
+            "favorite_rank": true,
+            "channels": true,
+            "deleted": true,
+            "origin_price": true,
+            "discount_start_date": true,
+            "discount_end_date": true,
+            "available_start_date": true,
+            "available_end_date": true,
+            "discount_price": true,
+            "currency_iso_code": true,
+            "discount_ranges": true,
+            "leadtime_to_ship": true,
+            "allow_quote_requests": true,
+            "price_ranges": true,
+            "min_order_quantity": true,
+            "max_order_quantity": true,
+            "package_quantity": true,
+            "product_tax_code": true,
+            "additional_info": true
+        },
+        "index": {
+            "MIRAKL_OFFER_PRODUCT_SKU": true,
+            "MIRAKL_OFFER_ACTIVE": true,
+            "MIRAKL_OFFER_DELETED": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
