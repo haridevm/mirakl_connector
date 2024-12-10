@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\System\Config\Source;
 
 use Mirakl\Core\Model\System\Config\Source\Attribute\Category as CategorySource;
@@ -14,7 +11,7 @@ class Category
     protected $categorySource;
 
     /**
-     * @param CategorySource $categorySource
+     * @param   CategorySource  $categorySource
      */
     public function __construct(CategorySource $categorySource)
     {
@@ -22,7 +19,7 @@ class Category
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

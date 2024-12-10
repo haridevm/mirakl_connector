@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Block\Product;
 
 use Magento\Catalog\Block\Product\ListProduct;

@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Mirakl\Mcm\Test\Unit\Model\Product\Import\Repository;
 
@@ -13,10 +12,10 @@ use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
 {
-    private const PRODUCT_1 = ['sku' => 'sku_1', 'mirakl_mcm_product_id' => 'mcm_product_id_1', 'attr_1' => 'value_1'];
-    private const PRODUCT_2 = ['sku' => 'sku_2', 'mirakl_mcm_product_id' => 'mcm_product_id_2', 'attr_1' => 'value_2'];
-    private const PRODUCT_3 = ['sku' => 'sku_3', 'mirakl_mcm_product_id' => null,               'attr_1' => 'value_3'];
-    private const PRODUCT_4 = ['sku' => 'sku_4', 'mirakl_mcm_product_id' => null,               'attr_1' => 'value_4'];
+    const PRODUCT_1 = ['sku' => 'sku_1', 'mirakl_mcm_product_id' => 'mcm_product_id_1', 'attr_1' => 'value_1'];
+    const PRODUCT_2 = ['sku' => 'sku_2', 'mirakl_mcm_product_id' => 'mcm_product_id_2', 'attr_1' => 'value_2'];
+    const PRODUCT_3 = ['sku' => 'sku_3', 'mirakl_mcm_product_id' => null,               'attr_1' => 'value_3'];
+    const PRODUCT_4 = ['sku' => 'sku_4', 'mirakl_mcm_product_id' => null,               'attr_1' => 'value_4'];
 
     /**
      * @var LoaderInterface|MockObject
@@ -59,7 +58,7 @@ class ProductTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->productRepository = new ProductRepository(
+        $this->productRepository = new ProductRepository (
             $this->collectionFactory,
             $this->loader,
             500
@@ -149,10 +148,7 @@ class ProductTest extends TestCase
             );
 
         $this->expectsMethodAddAttributeToFilterWillBeCalled(
-            [
-                'mirakl_mcm_product_id',
-                ['mcm_product_id_1', 'mcm_product_id_2', 'mcm_product_id_3', 'mcm_product_id_4', 'mcm_product_id_5']
-            ],
+            ['mirakl_mcm_product_id', ['mcm_product_id_1', 'mcm_product_id_2', 'mcm_product_id_3', 'mcm_product_id_4', 'mcm_product_id_5']],
             ['sku', ['sku_3', 'sku_5']],
             ['attr_1', ['value_4', 'value_5']]
         );
@@ -182,13 +178,11 @@ class ProductTest extends TestCase
         $matcher = $this->exactly(count($expectedConsecutiveParams));
         $this->productCollection->expects($matcher)
             ->method('addAttributeToFilter')
-            ->willReturnCallback(
-                function (string $attribute, array $condition) use ($matcher, $expectedConsecutiveParams) {
-                    $expectedParams = $expectedConsecutiveParams[$matcher->getInvocationCount() - 1];
-                    $this->assertEquals($expectedParams[0], $attribute);
-                    $this->assertArrayHasKey('in', $condition);
-                    $this->assertSame($expectedParams[1], array_values($condition['in']));
-                }
-            );
+            ->willReturnCallback(function (string $attribute, array $condition) use ($matcher, $expectedConsecutiveParams) {
+                $expectedParams = $expectedConsecutiveParams[$matcher->getInvocationCount() - 1];
+                $this->assertEquals($expectedParams[0], $attribute);
+                $this->assertArrayHasKey('in', $condition);
+                $this->assertSame($expectedParams[1], array_values($condition['in']));
+            });
     }
 }

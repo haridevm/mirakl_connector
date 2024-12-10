@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MCI\Front\Request\Hierarchy\HierarchyImportRequest;
@@ -13,8 +10,8 @@ class Hierarchy extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (H01) Import operator hierarchies
      *
-     * @param array $data
-     * @return int|false
+     * @param   array   $data
+     * @return  int|false
      */
     public function export(array $data)
     {
@@ -35,8 +32,8 @@ class Hierarchy extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (H03) Send hierarchy import report request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \SplFileObject
+     * @param   int $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {
@@ -50,8 +47,8 @@ class Hierarchy extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (H02) Send hierarchy import status request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
+     * @param   int $synchroId
+     * @return  \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
      */
     public function getSynchroResult($synchroId)
     {

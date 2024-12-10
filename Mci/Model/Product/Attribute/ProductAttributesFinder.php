@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Attribute;
 
 use Magento\Catalog\Model\ProductFactory;
@@ -46,10 +43,10 @@ class ProductAttributesFinder
     protected $attributesBySetId = [];
 
     /**
-     * @param AttributeSource          $attributeSource
-     * @param ProductFactory           $productFactory
-     * @param ProductResourceFactory   $productResourceFactory
-     * @param AttrSetCollectionFactory $attrSetCollectionFactory
+     * @param   AttributeSource             $attributeSource
+     * @param   ProductFactory              $productFactory
+     * @param   ProductResourceFactory      $productResourceFactory
+     * @param   AttrSetCollectionFactory    $attrSetCollectionFactory
      */
     public function __construct(
         AttributeSource $attributeSource,
@@ -64,8 +61,8 @@ class ProductAttributesFinder
     }
 
     /**
-     * @param string $attrCode
-     * @return Attribute|null
+     * @param   string  $attrCode
+     * @return  Attribute|null
      */
     public function findByCode($attrCode)
     {
@@ -75,8 +72,8 @@ class ProductAttributesFinder
     }
 
     /**
-     * @param int $setId
-     * @return Attribute[]
+     * @param   int $setId
+     * @return  Attribute[]
      */
     public function findBySetId($setId)
     {
@@ -86,7 +83,7 @@ class ProductAttributesFinder
     }
 
     /**
-     * @return Attribute[]
+     * @return  Attribute[]
      */
     public function getAttributesByCode()
     {
@@ -94,7 +91,7 @@ class ProductAttributesFinder
     }
 
     /**
-     * @return Attribute[][]
+     * @return  Attribute[][]
      */
     public function getAttributesBySetId()
     {
@@ -114,7 +111,7 @@ class ProductAttributesFinder
     }
 
     /**
-     * @return Attribute[]
+     * @return  Attribute[]
      */
     public function getExportableAttributesLocalizable()
     {
@@ -124,7 +121,7 @@ class ProductAttributesFinder
     }
 
     /**
-     * @return Attribute[]
+     * @return  Attribute[]
      */
     public function getExportableAttributes()
     {
@@ -135,7 +132,7 @@ class ProductAttributesFinder
     }
 
     /**
-     * @return ProductResource
+     * @return  ProductResource
      */
     protected function getProductResource()
     {

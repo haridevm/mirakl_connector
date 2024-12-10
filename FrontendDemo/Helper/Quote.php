@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -22,9 +19,6 @@ use Mirakl\MMP\Front\Domain\Shipping\OrderShippingFee;
 use Mirakl\MMP\Front\Domain\Shipping\ShippingFeeType;
 use Mirakl\MMP\Front\Domain\Shipping\ShippingRateOffer;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Quote extends AbstractHelper
 {
     /**
@@ -58,13 +52,13 @@ class Quote extends AbstractHelper
     protected $offerCollector;
 
     /**
-     * @param Context           $context
-     * @param Config            $config
-     * @param QuoteLoader       $quoteLoader
-     * @param QuoteSynchronizer $quoteSynchronizer
-     * @param QuoteUpdater      $quoteUpdater
-     * @param QuoteHelper       $quoteHelper
-     * @param OfferCollector    $offerCollector
+     * @param   Context             $context
+     * @param   Config              $config
+     * @param   QuoteLoader         $quoteLoader
+     * @param   QuoteSynchronizer   $quoteSynchronizer
+     * @param   QuoteUpdater        $quoteUpdater
+     * @param   QuoteHelper         $quoteHelper
+     * @param   OfferCollector      $offerCollector
      */
     public function __construct(
         Context $context,
@@ -86,8 +80,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject|null $quote
-     * @return bool
+     * @param   QuoteObject|null    $quote
+     * @return  bool
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::canComputeTaxes()
      */
@@ -101,8 +95,8 @@ class Quote extends AbstractHelper
     /**
      * Returns current quote items grouped by order (SH02)
      *
-     * @param QuoteObject $quote
-     * @return QuoteItem[]
+     * @param   QuoteObject $quote
+     * @return  QuoteItem[]
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::getGroupedItems()
      */
@@ -114,8 +108,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject $quote
-     * @return array
+     * @param   QuoteObject $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::getGroupedOfferIds()
      */
@@ -129,8 +123,8 @@ class Quote extends AbstractHelper
     /**
      * Returns selected shipping fee type
      *
-     * @param QuoteItem $item
-     * @return ShippingFeeType
+     * @param   QuoteItem   $item
+     * @return  ShippingFeeType
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::getItemSelectedShippingType()
      */
@@ -142,8 +136,8 @@ class Quote extends AbstractHelper
     /**
      * Returns shipping fee offer of given item (item that is a Mirakl offer)
      *
-     * @param QuoteItem $item
-     * @return ShippingRateOffer
+     * @param   QuoteItem   $item
+     * @return  ShippingRateOffer
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::getItemShippingRateOffer()
      */
@@ -155,9 +149,9 @@ class Quote extends AbstractHelper
     /**
      * Returns shipping fee type by code
      *
-     * @param QuoteItem $item
-     * @param string    $shippingTypeCode
-     * @return ShippingFeeType
+     * @param   QuoteItem   $item
+     * @param   string      $shippingTypeCode
+     * @return  ShippingFeeType
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::getItemShippingTypeByCode()
      */
@@ -169,8 +163,8 @@ class Quote extends AbstractHelper
     /**
      * Returns available shipping methods for given quote item
      *
-     * @param QuoteItem $item
-     * @return ShippingFeeTypeCollection
+     * @param   QuoteItem   $item
+     * @return  ShippingFeeTypeCollection
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::getItemShippingTypes()
      */
@@ -182,8 +176,8 @@ class Quote extends AbstractHelper
     /**
      * Returns current offers in quote
      *
-     * @param QuoteObject $quote
-     * @return array
+     * @param   QuoteObject $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\OfferCollector::getItemsWithOffer()
      */
@@ -197,8 +191,8 @@ class Quote extends AbstractHelper
     /**
      * Returns operator quote items
      *
-     * @param QuoteObject $quote
-     * @return array
+     * @param   QuoteObject $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\OfferCollector::getItemsWithoutOffer()
      */
@@ -212,8 +206,8 @@ class Quote extends AbstractHelper
     /**
      * Returns order shipping fee of given quote item (that is linked to a Mirakl offer)
      *
-     * @param QuoteItem $item
-     * @return OrderShippingFee
+     * @param   QuoteItem   $item
+     * @return  OrderShippingFee
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::getItemOrderShippingFee()
      */
@@ -225,8 +219,8 @@ class Quote extends AbstractHelper
     /**
      * Returns offers in cart with quantity
      *
-     * @param QuoteObject $quote
-     * @return array
+     * @param   QuoteObject $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\OfferCollector::getOffersWithQty()
      */
@@ -240,7 +234,7 @@ class Quote extends AbstractHelper
     /**
      * Returns current quote
      *
-     * @return QuoteObject
+     * @return  QuoteObject
      */
     public function getQuote()
     {
@@ -248,8 +242,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject $quote
-     * @return array
+     * @param   QuoteObject $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\OfferCollector::getQuoteItems()
      */
@@ -261,8 +255,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject $quote
-     * @return int
+     * @param   QuoteObject $quote
+     * @return  int
      */
     public function getQuoteItemsCount(QuoteObject $quote = null)
     {
@@ -279,8 +273,8 @@ class Quote extends AbstractHelper
     /**
      * Returns shipping zone code of current or specified quote object
      *
-     * @param QuoteObject $quote
-     * @return string
+     * @param   QuoteObject $quote
+     * @return  string
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::getQuoteShippingZone()
      */
@@ -292,8 +286,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject|null $quote
-     * @return array
+     * @param   QuoteObject|null    $quote
+     * @return  array
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::getShippingAddressData()
      */
@@ -307,25 +301,23 @@ class Quote extends AbstractHelper
     /**
      * Returns current quote shipping fees
      *
-     * @param QuoteObject $quote
-     * @return OrderShippingFeeCollection
+     * @param   QuoteObject $quote
+     * @return  OrderShippingFeeCollection
      */
     public function getShippingFees(QuoteObject $quote = null)
     {
         $quote = $quote ?: $this->getQuote();
 
         return $this->quoteSynchronizer->getShippingFees(
-            $quote,
-            $this->config->isShippingFeesCacheEnabled(),
-            $this->config->getShippingFeesCacheLifetime()
+            $quote, $this->config->isShippingFeesCacheEnabled(), $this->config->getShippingFeesCacheLifetime()
         );
     }
 
     /**
      * Returns true if given quote contains ONLY Mirakl products
      *
-     * @param QuoteObject $quote
-     * @return bool
+     * @param   QuoteObject $quote
+     * @return  bool
      */
     public function isFullMiraklQuote(QuoteObject $quote = null)
     {
@@ -337,8 +329,8 @@ class Quote extends AbstractHelper
     /**
      * Returns true if given quote contains SOME Mirakl products
      *
-     * @param QuoteObject $quote
-     * @return bool
+     * @param   QuoteObject $quote
+     * @return  bool
      */
     public function isMiraklQuote(QuoteObject $quote = null)
     {
@@ -351,8 +343,8 @@ class Quote extends AbstractHelper
      * Returns true if shipping address data of specified quote is empty
      * (check only attributes used for Mirakl shipping zones conditions)
      *
-     * @param QuoteObject|null $quote
-     * @return bool
+     * @param   QuoteObject|null    $quote
+     * @return  bool
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::isQuoteShippingAddressDataEmpty()
      */
@@ -364,8 +356,8 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param QuoteObject|null $quote
-     * @return false
+     * @param   QuoteObject|null    $quote
+     * @return  false
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Synchronizer::isShippingAddressComplete()
      */
@@ -379,8 +371,8 @@ class Quote extends AbstractHelper
     /**
      * Reset quote item shipping method
      *
-     * @param QuoteItem $item
-     * @return $this
+     * @param   QuoteItem   $item
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::resetItemShippingType()
      */
@@ -394,8 +386,8 @@ class Quote extends AbstractHelper
     /**
      * Reset all quote shipping methods
      *
-     * @param QuoteObject $quote
-     * @return $this
+     * @param   QuoteObject $quote
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::resetQuoteShippingTypes()
      */
@@ -411,9 +403,9 @@ class Quote extends AbstractHelper
     /**
      * Update quote item shipping fee information
      *
-     * @param QuoteItem    $item
-     * @param ShippingType $shippingType
-     * @return $this
+     * @param   QuoteItem       $item
+     * @param   ShippingType    $shippingType
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::setItemShippingType()
      */
@@ -427,9 +419,9 @@ class Quote extends AbstractHelper
     /**
      * Update quote item shipping method information
      *
-     * @param QuoteItem $item
-     * @param string    $shippingTypeCode
-     * @return $this
+     * @param   QuoteItem   $item
+     * @param   string      $shippingTypeCode
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::setItemShippingTypeByCode()
      */
@@ -443,9 +435,9 @@ class Quote extends AbstractHelper
     /**
      * Update quote item shipping fee amount
      *
-     * @param QuoteItem         $item
-     * @param ShippingRateOffer $shippingRateOffer
-     * @return $this
+     * @param   QuoteItem           $item
+     * @param   ShippingRateOffer   $shippingRateOffer
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::setItemShippingFee()
      */
@@ -459,15 +451,15 @@ class Quote extends AbstractHelper
     /**
      * Synchronizes shipping fees with current checkout session (calls the Mirakl platform)
      *
-     * @param QuoteObject $quote
-     * @param bool        $useCache
-     * @return $this
+     * @param   QuoteObject $quote
+     * @param   bool        $useCache
+     * @return  $this
      */
     public function syncQuoteShippingInfo(QuoteObject $quote = null, $useCache = false)
     {
         try {
-            $this->quoteSynchronizer
-                ->syncQuoteShippingInfo($quote, $useCache, $this->config->getShippingFeesCacheLifetime());
+            $this->quoteSynchronizer->syncQuoteShippingInfo($quote, $useCache, $this->config->getShippingFeesCacheLifetime());
+
         } catch (\GuzzleHttp\Exception\ServerException $e) { // (5xx codes)
             $response = \Mirakl\parse_json_response($e->getResponse());
             $quote->setHasError(true);
@@ -476,8 +468,7 @@ class Quote extends AbstractHelper
         } catch (\GuzzleHttp\Exception\ClientException $e) { // (4xx codes)
             $response = \Mirakl\parse_json_response($e->getResponse());
             if (isset($response['code']) && ShippingRatesError::isProviderError($response['code'])) {
-                $quote->addMessage(__('Shipping charges calculation has encountered an error. '
-                    . 'Please modify the shipping address.'));
+                $quote->addMessage(__('Shipping charges calculation has encountered an error. Please modify the shipping address.'));
             } else {
                 $quote->addMessage(__('Shipping charges calculation has encountered an error: %1', $e->getCode()));
             }
@@ -496,20 +487,16 @@ class Quote extends AbstractHelper
     }
 
     /**
-     * @param array            $offersShippingTypes
-     * @param QuoteObject|null $quote
-     * @param bool             $resetAll
-     * @param bool             $saveItem
-     * @return $this
+     * @param   array       $offersShippingTypes
+     * @param   QuoteObject $quote
+     * @param   bool        $resetAll
+     * @param   bool        $saveItem
+     * @return  $this
      * @deprecated
      * @see \Mirakl\Connector\Model\Quote\Updater::updateOffersShippingTypes()
      */
-    public function updateOffersShippingTypes(
-        array $offersShippingTypes,
-        QuoteObject $quote = null,
-        $resetAll = true,
-        $saveItem = false
-    ) {
+    public function updateOffersShippingTypes(array $offersShippingTypes, QuoteObject $quote = null, $resetAll = true, $saveItem = false)
+    {
         $quote = $quote ?: $this->getQuote();
 
         $this->quoteUpdater->updateOffersShippingTypes($offersShippingTypes, $quote, $resetAll, $saveItem);

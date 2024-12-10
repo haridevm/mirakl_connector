@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Order;
 
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -24,9 +21,6 @@ use Mirakl\MMP\Front\Domain\Order\Create\CreateOrderPaymentInfo;
 use Mirakl\MMP\FrontOperator\Domain\Order\CustomerShippingAddress;
 use Mirakl\MMP\FrontOperator\Domain\Order\OrderCustomer;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Converter
 {
     /**
@@ -91,8 +85,8 @@ class Converter
     /**
      * Transforms Magento order data into Mirakl format
      *
-     * @param Order $order
-     * @return CreateOrder
+     * @param   Order   $order
+     * @return  CreateOrder
      */
     public function convert(Order $order)
     {
@@ -150,8 +144,8 @@ class Converter
     }
 
     /**
-     * @param Order $order
-     * @return CustomerBillingAddress
+     * @param   Order   $order
+     * @return  CustomerBillingAddress
      */
     protected function createCustomerBillingAddress(Order $order)
     {
@@ -163,10 +157,8 @@ class Converter
 
         $country = $this->getCountryByCode($billingAddress->getCountryId());
 
-        // Main street address
-        $street1 = $billingAddress->getStreetLine(1);
-        // Address can have up to 2 complement street lines natively in Magento
-        $street2 = [$billingAddress->getStreetLine(2)];
+        $street1 = $billingAddress->getStreetLine(1); // main address street
+        $street2 = [$billingAddress->getStreetLine(2)]; // address can have up to 2 complement street lines natively in Magento
         if ($complement = $billingAddress->getStreetLine(3)) {
             $street2[] = $complement;
         }
@@ -195,8 +187,8 @@ class Converter
     }
 
     /**
-     * @param Order $order
-     * @return CustomerShippingAddress
+     * @param   Order   $order
+     * @return  CustomerShippingAddress
      */
     protected function createCustomerShippingAddress(Order $order)
     {
@@ -240,8 +232,8 @@ class Converter
     /**
      * Create offers associated to specified order
      *
-     * @param Order $order
-     * @return CreateOrderOfferCollection
+     * @param   Order   $order
+     * @return  CreateOrderOfferCollection
      */
     protected function createOffers(Order $order)
     {
@@ -261,15 +253,13 @@ class Converter
     }
 
     /**
-     * @param Order\Item $orderItem
-     * @return CreateOrderOffer
+     * @param   Order\Item  $orderItem
+     * @return  CreateOrderOffer
      */
     protected function createOffer(Order\Item $orderItem)
     {
         if (!$orderItem->getMiraklOfferId()) {
-            throw new \InvalidArgumentException(
-                'Trying to create an offer for API OR01 with a non-marketplace order item.'
-            );
+            throw new \InvalidArgumentException(__('Trying to create an offer for API OR01 with a non-marketplace order item.'));
         }
 
         $order = $orderItem->getOrder();
@@ -302,10 +292,7 @@ class Converter
 
         if (!$taxes->count() && !$shippingTaxes->count()) {
             $taxes = $this->getOrderItemTaxDetails($orderItem);
-            $shippingTaxes = $this->getOrderItemShippingTaxDetails(
-                $orderItem,
-                (bool) $order->getMiraklIsShippingInclTax()
-            );
+            $shippingTaxes = $this->getOrderItemShippingTaxDetails($orderItem, (bool) $order->getMiraklIsShippingInclTax());
         }
 
         $offer->setTaxes($taxes);
@@ -315,8 +302,8 @@ class Converter
     }
 
     /**
-     * @param Order $order
-     * @return OrderCustomer
+     * @param   Order   $order
+     * @return  OrderCustomer
      */
     protected function createOrderCustomer(Order $order)
     {
@@ -334,7 +321,7 @@ class Converter
 
         try {
             $customer = $this->customerRepository->getById((int) $order->getCustomerId());
-        } catch (NoSuchEntityException $e) {
+        } catch(NoSuchEntityException $e) {
             $customer = null;
         }
 
@@ -345,8 +332,8 @@ class Converter
     }
 
     /**
-     * @param string $code
-     * @return Country
+     * @param   string  $code
+     * @return  Country
      */
     protected function getCountryByCode($code)
     {
@@ -356,8 +343,8 @@ class Converter
     /**
      * Returns order items taxes information
      *
-     * @param Order $order
-     * @return array
+     * @param   Order   $order
+     * @return  array
      */
     protected function getOrderItemsTaxes(Order $order)
     {
@@ -370,9 +357,9 @@ class Converter
     }
 
     /**
-     * @param Order\Item $orderItem
-     * @param string     $taxType
-     * @return OrderTaxAmountCollection
+     * @param   Order\Item  $orderItem
+     * @param   string      $taxType
+     * @return  OrderTaxAmountCollection
      */
     protected function getOrderItemCustomTaxDetails(Order\Item $orderItem, $taxType)
     {
@@ -382,7 +369,7 @@ class Converter
             return $taxes;
         }
 
-        $customTaxApplied = unserialize($orderItem->getMiraklCustomTaxApplied()); // phpcs:ignore
+        $customTaxApplied = unserialize($orderItem->getMiraklCustomTaxApplied());
 
         if (!is_array($customTaxApplied) || empty($customTaxApplied[$taxType])) {
             return $taxes;
@@ -406,8 +393,8 @@ class Converter
     }
 
     /**
-     * @param Order\Item $orderItem
-     * @return OrderTaxAmountCollection
+     * @param   Order\Item  $orderItem
+     * @return  OrderTaxAmountCollection
      */
     protected function getOrderItemTaxDetails(Order\Item $orderItem)
     {
@@ -426,9 +413,9 @@ class Converter
     }
 
     /**
-     * @param Order\Item $orderItem
-     * @param bool       $priceInclTax
-     * @return OrderTaxAmountCollection
+     * @param   Order\Item  $orderItem
+     * @param   bool        $priceInclTax
+     * @return  OrderTaxAmountCollection
      */
     protected function getOrderItemShippingTaxDetails(Order\Item $orderItem, $priceInclTax = false)
     {
@@ -438,7 +425,7 @@ class Converter
             return $shippingTaxes;
         }
 
-        $shippingTaxApplied = unserialize($orderItem->getMiraklShippingTaxApplied()); // phpcs:ignore
+        $shippingTaxApplied = unserialize($orderItem->getMiraklShippingTaxApplied());
 
         if (!is_array($shippingTaxApplied) || !$orderItem->getMiraklBaseShippingTaxAmount()) {
             return $shippingTaxes;
@@ -476,8 +463,8 @@ class Converter
     }
 
     /**
-     * @param Order $order
-     * @return string
+     * @param   Order   $order
+     * @return  string
      */
     protected function getOrderTaxMode(Order $order)
     {
@@ -489,9 +476,9 @@ class Converter
     }
 
     /**
-     * @param float $price
-     * @param int   $precision
-     * @return float
+     * @param   float   $price
+     * @param   int     $precision
+     * @return  float
      */
     protected function round($price, $precision = 2)
     {

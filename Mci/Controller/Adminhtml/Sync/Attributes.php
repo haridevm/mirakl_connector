@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Controller\Adminhtml\Sync;
 
 use Mirakl\Connector\Controller\Adminhtml\AbstractSync;
@@ -31,6 +28,7 @@ class Attributes extends AbstractSync
             $this->connectorConfig->setSyncDate('attributes');
             $this->messageManager->addSuccessMessage(__('Attributes will be exported in background.'));
             $this->addRawSuccessMessage(__('Click <a href="%1">here</a> to view process output.', $process->getUrl()));
+
         } catch (\Exception $e) {
             $this->logger->critical($e->getMessage());
             $this->messageManager->addErrorMessage(

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Console\Command\Product\Import;
 
 use Magento\Framework\App\Area;
@@ -22,8 +19,8 @@ class ImportCommand extends Command
 {
     use CommandTrait;
 
-    public const UPDATED_SINCE_OPTION = 'since';
-    public const UPDATED_UNTIL_OPTION = 'until';
+    const UPDATED_SINCE_OPTION = 'since';
+    const UPDATED_UNTIL_OPTION = 'until';
 
     /**
      * @var ObjectManagerInterface
@@ -56,13 +53,13 @@ class ImportCommand extends Command
     private $importProcess;
 
     /**
-     * @param ObjectManagerInterface $objectManager
-     * @param ConfigInterface        $configManager
-     * @param State                  $state
-     * @param ConnectorConfig        $connectorConfig
-     * @param Config                 $config
-     * @param ImportProcess          $importProcess
-     * @param string|null            $name
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   ConfigInterface         $configManager
+     * @param   State                   $state
+     * @param   ConnectorConfig         $connectorConfig
+     * @param   Config                  $config
+     * @param   ImportProcess           $importProcess
+     * @param   string|null             $name
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -83,7 +80,7 @@ class ImportCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -99,8 +96,7 @@ class ImportCommand extends Command
                 self::UPDATED_UNTIL_OPTION,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'MCM: Export end date. Given date must respect ISO-8601 format and must be URL encoded '
-                    . '(Last Synchronization Date will not be change with this parameter)',
+                'MCM: Export end date. Given date must respect ISO-8601 format and must be URL encoded (Last Synchronization Date will not be change with this parameter)',
                 null
             ),
         ];
@@ -111,7 +107,7 @@ class ImportCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

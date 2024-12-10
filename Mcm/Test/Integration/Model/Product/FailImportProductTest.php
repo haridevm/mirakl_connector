@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
 
 use Mirakl\Mcm\Test\Integration\Model\Product\AbstractImportMcmProductTestCase as MiraklBaseTestCase;
@@ -17,8 +14,8 @@ class FailImportProductTest extends MiraklBaseTestCase
      *
      * @magentoConfigFixture current_store mirakl_mcm/import_product/enable_mcm 0
      *
-     * @param string $csv
-     * @param array  $errors
+     * @param   string  $csv
+     * @param   array   $errors
      */
     public function testDataDisabledMcm($csv, $errors)
     {
@@ -30,20 +27,20 @@ class FailImportProductTest extends MiraklBaseTestCase
      *
      * @magentoConfigFixture current_store mirakl_mcm/import_product/enable_mcm 1
      *
-     * @param string $csv
-     * @param array  $errors
+     * @param   string  $csv
+     * @param   array   $errors
      */
     public function testDataErrorMcmImport($csv, $errors)
     {
-        $process = $this->runImport($csv);
+        $this->runImport($csv);
 
         foreach ($errors as $error) {
-            $this->assertStringContainsString($error, $process->getOutput());
+            $this->assertStringContainsString($error, $this->processModel->getOutput());
         }
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMcmErrorDataProvider()
     {
@@ -58,15 +55,12 @@ class FailImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMcmDataFailProvider()
     {
         return [
-            [
-                'CM51_single_product_category_not_found.csv',
-                ['Module MCM is disabled. See your Mirakl MCM configuration']
-            ],
+            ['CM51_single_product_category_not_found.csv', ['Module MCM is disabled. See your Mirakl MCM configuration']],
         ];
     }
 }

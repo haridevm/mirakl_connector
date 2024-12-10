@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -23,15 +20,13 @@ use Mirakl\Connector\Common\ExportTrait;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Process\Model\Process;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Category extends AbstractHelper implements ExportInterface
 {
     use ExportTrait;
 
-    public const CODE = 'CA01';
-    public const EXPORT_SOURCE = 'CA01';
+    const CODE = 'CA01';
+
+    const EXPORT_SOURCE = 'CA01';
 
     /**
      * @var StoreManagerInterface
@@ -79,15 +74,15 @@ class Category extends AbstractHelper implements ExportInterface
     protected $treeCache = [];
 
     /**
-     * @param Context                   $context
-     * @param StoreManagerInterface     $storeManager
-     * @param Api                       $api
-     * @param Config                    $config
-     * @param CategoryTreeFactory       $categoryTreeFactory
-     * @param CategoryFactory           $categoryFactory
-     * @param CategoryResourceFactory   $categoryResourceFactory
-     * @param CategoryCollectionFactory $categoryCollectionFactory
-     * @param EntityManager             $entityManager
+     * @param   Context                     $context
+     * @param   StoreManagerInterface       $storeManager
+     * @param   Api                         $api
+     * @param   Config                      $config
+     * @param   CategoryTreeFactory         $categoryTreeFactory
+     * @param   CategoryFactory             $categoryFactory
+     * @param   CategoryResourceFactory     $categoryResourceFactory
+     * @param   CategoryCollectionFactory   $categoryCollectionFactory
+     * @param   EntityManager               $entityManager
      */
     public function __construct(
         Context $context,
@@ -112,7 +107,7 @@ class Category extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return StoreInterface
+     * @return  StoreInterface
      */
     protected function getDefaultStore()
     {
@@ -120,7 +115,7 @@ class Category extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function export(array $data)
     {
@@ -134,8 +129,8 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Exports all Magento category tree that have mirakl_sync flag set to 1
      *
-     * @param Process|null $process
-     * @return int|false
+     * @param   Process $process
+     * @return  int|false
      */
     public function exportAll(Process $process = null)
     {
@@ -170,9 +165,9 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Exports custom category collection to Mirakl platform
      *
-     * @param CategoryCollection $collection
-     * @param string|null        $action
-     * @return int
+     * @param   CategoryCollection  $collection
+     * @param   string|null         $action
+     * @return  int
      */
     public function exportCollection(CategoryCollection $collection, $action = null)
     {
@@ -196,9 +191,9 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Exports custom category tree to Mirakl platform
      *
-     * @param CategoryTree $tree
-     * @param string|null  $action
-     * @return int|false
+     * @param   CategoryTree    $tree
+     * @param   string|null     $action
+     * @return  int|false
      */
     public function exportTree(CategoryTree $tree, $action = null)
     {
@@ -222,11 +217,10 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Prepares category data for export
      *
-     * @param DataObject  $category
-     * @param string|null $action
-     * @return array
-     * @throws \Exception
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   DataObject  $category
+     * @param   null|string $action
+     * @return  array
+     * @throws  \Exception
      */
     public function prepare(DataObject $category, $action = null)
     {
@@ -237,18 +231,14 @@ class Category extends AbstractHelper implements ExportInterface
 
         $catalogIntegrationStore = $this->config->getCatalogIntegrationStore();
         if ($category->getStoreId() != $catalogIntegrationStore->getId()) {
-            // If category store is not the one defined in config "Translation Store",
-            // reload category with configured store
+            // If category store is not the one defined in config "Translation Store", reload category with configured store
             if ($category instanceof CategoryObject && $category->getLevel() <= 1) {
                 $category = $this->getTree($category, $catalogIntegrationStore)->getNodeById($category->getId());
             } else {
                 $category = $this->getTree()->getNodeById($category->getId());
             }
-
             if (!$category) {
-                throw new \Exception(
-                    __('Could not find category on configured store')->render()
-                );
+                throw new \Exception(__('Could not find category on configured store'));
             }
         }
 
@@ -279,8 +269,7 @@ class Category extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return CategoryCollection
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  CategoryCollection
      */
     protected function _getDefaultCollection()
     {
@@ -304,8 +293,8 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Returns store locale
      *
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getLocale($store = null)
     {
@@ -317,9 +306,9 @@ class Category extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @param CategoryObject $category
-     * @param mixed          $store
-     * @return CategoryTree
+     * @param   CategoryObject  $category
+     * @param   mixed           $store
+     * @return  CategoryTree
      */
     public function getTree(CategoryObject $category = null, $store = null)
     {
@@ -355,8 +344,8 @@ class Category extends AbstractHelper implements ExportInterface
     /**
      * Prepares translated data for specified category
      *
-     * @param CategoryObject $category
-     * @return array
+     * @param   CategoryObject  $category
+     * @return  array
      */
     protected function translateCategory($category)
     {

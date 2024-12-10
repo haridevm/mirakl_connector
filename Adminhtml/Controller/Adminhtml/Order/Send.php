@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Controller\Adminhtml\Order;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Send extends \Magento\Sales\Controller\Adminhtml\Order implements HttpGetActionInterface
+class Send extends \Magento\Sales\Controller\Adminhtml\Order
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -23,9 +18,7 @@ class Send extends \Magento\Sales\Controller\Adminhtml\Order implements HttpGetA
                 $offersNotShippable = $createdOrders->getOffersNotShippable();
                 if ($offersNotShippable && $offersNotShippable->count()) {
                     $reason = $offersNotShippable->first()->getReason();
-                    throw new \Exception(
-                        __('Something went wrong while sending the order to Mirakl: %1.', $reason)->render()
-                    );
+                    throw new \Exception(__('Something went wrong while sending the order to Mirakl: %1.', $reason));
                 }
 
                 $this->messageManager->addSuccessMessage(__('The order has been sent to Mirakl.'));

@@ -44,46 +44,10 @@
             </argument>
         </arguments>
     </type>
-    <type name="Mirakl\Process\Model\Execution\Validator\ConcurrencyValidator">
-        <arguments>
-            <argument name="ignoreProcessCodes" xsi:type="array">
-                <item name="images_import" xsi:type="const">Mirakl\Mci\Helper\Product\Image\Process::CODE</item>
-            </argument>
-        </arguments>
-    </type>
-    <virtualType name="Mirakl\Process\Model\Execution\Validator\Start" type="Mirakl\Process\Model\Execution\Validator">
-        <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="already_started" xsi:type="object">Mirakl\Process\Model\Execution\Validator\AlreadyStartedValidator</item>
-                <item name="concurrency" xsi:type="object">Mirakl\Process\Model\Execution\Validator\ConcurrencyValidator</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <virtualType name="Mirakl\Process\Model\Execution\Validator\Run" type="Mirakl\Process\Model\Execution\Validator">
-        <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="can_run" xsi:type="object">Mirakl\Process\Model\Execution\Validator\CanRunValidator</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <type name="Mirakl\Process\Model\Execution">
-        <arguments>
-            <argument name="startProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Start</argument>
-            <argument name="runProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Run</argument>
-        </arguments>
-    </type>
-    <virtualType name="Mirakl\Process\Model\Execution\Validator\Execute" type="Mirakl\Process\Model\Execution\Validator">
-        <arguments>
-            <argument name="validators" xsi:type="array">
-                <item name="already_running" xsi:type="object">Mirakl\Process\Model\Execution\Validator\AlreadyRunningValidator</item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <type name="Mirakl\Process\Model\Execution\Executor">
-        <arguments>
-            <argument name="executeProcessValidator" xsi:type="object">Mirakl\Process\Model\Execution\Validator\Execute</argument>
-        </arguments>
-    </type>
+    <preference for="Mirakl\Process\Model\Action\ActionListInterface" type="Mirakl\Process\Model\Action\ActionList"/>
+    <preference for="Mirakl\Process\Model\Action\Execution\ChildProviderInterface" type="Mirakl\Process\Model\Action\Execution\ChildProvider"/>
+    <preference for="Mirakl\Process\Model\ChildProcessFactoryInterface" type="Mirakl\Process\Model\ChildProcessFactory"/>
+    <preference for="Mirakl\Process\Model\Exception\RetryLaterHandlerInterface" type="Mirakl\Process\Model\Exception\RetryLaterHandler"/>
     <type name="Mirakl\Process\Model\TimeoutManager">
         <arguments>
             <argument name="longProcessCodes" xsi:type="array">
@@ -96,9 +60,4 @@
             </argument>
         </arguments>
     </type>
-    <preference for="Mirakl\Process\Model\Action\ActionListInterface" type="Mirakl\Process\Model\Action\ActionList"/>
-    <preference for="Mirakl\Process\Model\Action\Execution\ChildProviderInterface" type="Mirakl\Process\Model\Action\Execution\ChildProvider"/>
-    <preference for="Mirakl\Process\Model\ChildProcessFactoryInterface" type="Mirakl\Process\Model\ChildProcessFactory"/>
-    <preference for="Mirakl\Process\Model\Exception\RetryLaterHandlerInterface" type="Mirakl\Process\Model\Exception\RetryLaterHandler"/>
-    <preference for="Mirakl\Process\Model\File\StorageInterface" type="Mirakl\Process\Model\File\Storage"/>
 </config>

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Attribute;
 
 use Magento\Catalog\Model\Category;
@@ -9,7 +6,7 @@ use Magento\Store\Api\Data\StoreInterface;
 use Mirakl\Mci\Helper\Config as MciConfig;
 use Mirakl\Mci\Helper\Data as MciHelper;
 
-class CategoryAttributesBuilder extends \ArrayObject // phpcs:ignore
+class CategoryAttributesBuilder extends \ArrayObject
 {
     /**
      * @var MciConfig

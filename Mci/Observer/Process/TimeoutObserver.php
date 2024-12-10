@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Process;
 
 use Magento\Framework\Event\Observer;
@@ -26,7 +23,7 @@ class TimeoutObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

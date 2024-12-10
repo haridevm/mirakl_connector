@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product\Attribute;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -11,7 +8,7 @@ use Magento\Framework\Event\ObserverInterface;
 class DeleteBeforeObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

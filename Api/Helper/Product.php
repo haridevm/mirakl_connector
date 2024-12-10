@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\FrontOperator\Request\Catalog\Product\ProductSynchroRequest;
@@ -13,8 +10,8 @@ class Product extends ClientHelper\MMP implements SynchroResultInterface, Export
     /**
      * (P21) Builds and sends product synchro request to Mirakl platform
      *
-     * @param array $data
-     * @return int|false
+     * @param   array   $data
+     * @return  int|false
      */
     public function export(array $data)
     {
@@ -51,8 +48,8 @@ class Product extends ClientHelper\MMP implements SynchroResultInterface, Export
     /**
      * (P23) Send product synchronization report request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \SplFileObject
+     * @param   int $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {
@@ -66,8 +63,8 @@ class Product extends ClientHelper\MMP implements SynchroResultInterface, Export
     /**
      * (P22) Send product synchronization status request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \Mirakl\MMP\FrontOperator\Domain\Synchro\AbstractSynchroResult
+     * @param   int $synchroId
+     * @return  \Mirakl\MMP\FrontOperator\Domain\Synchro\AbstractSynchroResult
      */
     public function getSynchroResult($synchroId)
     {

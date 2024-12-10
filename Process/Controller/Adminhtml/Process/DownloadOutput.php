@@ -1,18 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
-
-use Magento\Framework\App\Action\HttpGetActionInterface;
 
 /**
  * @method \Magento\Framework\App\Response\Http getResponse()
  */
-class DownloadOutput extends AbstractProcessAction implements HttpGetActionInterface
+class DownloadOutput extends AbstractProcessAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -26,8 +21,8 @@ class DownloadOutput extends AbstractProcessAction implements HttpGetActionInter
 
         $this->getResponse()->setHttpResponseCode(200)
             ->setHeader('Pragma', 'public', true)
-            ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
-            ->setHeader('Content-Type', 'application/octet-stream', true)
+            ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0',true)
+            ->setHeader('Content-type', 'application/octet-stream', true)
             ->setHeader('Content-Length', $process->getOutputSize())
             ->setHeader('Content-Disposition', 'attachment; filename=' . $fileName);
 
@@ -35,9 +30,6 @@ class DownloadOutput extends AbstractProcessAction implements HttpGetActionInter
         $this->getResponse()->sendHeaders();
 
         $this->_session->writeClose();
-        echo $process->getOutput(); // phpcs:ignore
-
-        // Nothing more to do
-        exit;  // phpcs:ignore
+        echo $process->getOutput();
     }
 }

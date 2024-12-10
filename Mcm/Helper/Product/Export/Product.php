@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper\Product\Export;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -25,9 +22,9 @@ class Product extends AbstractHelper
     protected $productAttributesFinder;
 
     /**
-     * @param Context                  $context
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ProductAttributesFinder  $productAttributesFinder
+     * @param   Context                     $context
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ProductAttributesFinder     $productAttributesFinder
      */
     public function __construct(
         Context $context,
@@ -40,7 +37,7 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @return string[]
+     * @return  string[]
      */
     public function getAttributeCodesToExport()
     {
@@ -50,7 +47,7 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @return EavAttribute[]
+     * @return  EavAttribute[]
      */
     public function getAttributesToExport()
     {
@@ -58,8 +55,8 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @param array $productIds
-     * @return array
+     * @param   array   $productIds
+     * @return  array
      */
     public function getProductsData(array $productIds)
     {
@@ -93,8 +90,8 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @param array $productIds
-     * @return ProductCollection
+     * @param   array   $productIds
+     * @return  ProductCollection
      */
     public function getProductCollection(array $productIds)
     {
@@ -119,9 +116,9 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @param array $productIds
-     * @param int   $attrChunkSize
-     * @return ProductCollection[]
+     * @param   array   $productIds
+     * @param   int     $attrChunkSize
+     * @return  ProductCollection[]
      */
     public function getProductsDataCollections(array $productIds, $attrChunkSize = 15)
     {
@@ -144,8 +141,8 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @param int $productId
-     * @return array
+     * @param   int $productId
+     * @return  array
      */
     public function getSingleProductData($productId)
     {
@@ -155,8 +152,8 @@ class Product extends AbstractHelper
     }
 
     /**
-     * @param string $attrCode
-     * @return bool
+     * @param   string  $attrCode
+     * @return  bool
      */
     public function isAttributeMultiSelect($attrCode)
     {

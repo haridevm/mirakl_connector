@@ -1,21 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Shipping\Zone;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
      * All Store Views value
      */
-    public const ALL_STORE_VIEWS = '0';
+    const ALL_STORE_VIEWS = '0';
 
     /**
-     * @inheritdoc
+     * Set resource model
+     *
+     * @return void
      */
     protected function _construct()
     {
@@ -23,7 +19,9 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * @inheritdoc
+     * Add store ids to rules data
+     *
+     * @return $this
      */
     protected function _afterLoad()
     {
@@ -39,7 +37,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function addActiveFilter()
     {
@@ -49,8 +47,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * Limit shipping zone collection by specific store
      *
-     * @param mixed $storeId
-     * @return $this
+     * @param   mixed   $storeId
+     * @return  $this
      */
     public function addStoreFilter($storeId)
     {
@@ -61,8 +59,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
             }
             $this->getSelect()->distinct()->joinInner(
                 ['store' => $this->getTable('mirakl_shipping_zone_store')],
-                sprintf(
-                    'main_table.id = store.zone_id  AND (%s OR %s)',
+                sprintf('main_table.id = store.zone_id  AND (%s OR %s)',
                     $this->getConnection()->quoteInto('store.store_id  = ?', self::ALL_STORE_VIEWS),
                     $this->getConnection()->quoteInto('store.store_id  = ?', $storeId)
                 ),
@@ -76,16 +73,16 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * Provide support for store id filter
      *
-     * @param string $field
-     * @param mixed  $condition
-     * @return $this
+     * @param   string  $field
+     * @param   mixed   $condition
+     * @return  $this
      */
     public function addFieldToFilter($field, $condition = null)
     {
         if ($field == 'store_ids') {
             return $this->addStoreFilter($condition);
         }
-
+    
         parent::addFieldToFilter($field, $condition);
 
         return $this;
@@ -94,8 +91,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * Filter collection to only active or inactive shipping zone
      *
-     * @param int $isActive
-     * @return $this
+     * @param   int $isActive
+     * @return  $this
      */
     public function addIsActiveFilter($isActive = 1)
     {
@@ -110,8 +107,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     /**
      * Init flag for adding shipping zone store ids to collection result
      *
-     * @param bool|null $flag
-     * @return $this
+     * @param   bool|null   $flag
+     * @return  $this
      */
     public function addStoresToResult($flag = null)
     {
@@ -122,8 +119,10 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
     }
 
     /**
-     * @param string $direction
-     * @return $this
+     * Sets sort order
+     *
+     * @param   string  $direction
+     * @return  $this
      */
     public function setSortOrder($direction = self::SORT_ORDER_ASC)
     {

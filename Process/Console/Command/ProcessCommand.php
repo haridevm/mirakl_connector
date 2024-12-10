@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Console\Command;
 
 use Magento\Framework\Console\Cli;
@@ -16,14 +13,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProcessCommand extends Command
 {
-    public const PENDING_OPTION         = 'pending'; // Run pending processes
-    public const RUN_PROCESS_OPTION     = 'run';     // Run a specific process id
-    public const FORCE_EXECUTION_OPTION = 'force';   // Force process execution
+    const PENDING_OPTION         = 'pending'; // Run pending processes
+    const RUN_PROCESS_OPTION     = 'run';     // Run a specific process id
+    const FORCE_EXECUTION_OPTION = 'force';   // Force process execution
 
     /**
      * Run command without applying timeout
      */
-    public const NO_TIMEOUT_OPTION = 'no-timeout';
+    const NO_TIMEOUT_OPTION = 'no-timeout';
 
     /**
      * @var ProcessFactory
@@ -67,7 +64,7 @@ class ProcessCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -104,7 +101,7 @@ class ProcessCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -113,11 +110,7 @@ class ProcessCommand extends Command
             $timeoutProcessCollection = $this->timeoutManager->applyTimeout();
             $ids = $timeoutProcessCollection->getColumnValues('id');
             if ($ids) {
-                $output->writeln(sprintf(
-                    '<comment>%s process(es) in timeout (id: %s)</comment>',
-                    count($ids),
-                    implode(',', $ids)
-                ));
+                $output->writeln(sprintf('<comment>%s process(es) in timeout (id: %s)</comment>', count($ids), implode(',', $ids)));
             } else {
                 $output->writeln('<info>No processes in timeout</info>');
             }

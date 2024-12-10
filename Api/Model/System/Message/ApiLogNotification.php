@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\System\Message;
 
 use Magento\Framework\Notification\MessageInterface;
@@ -21,8 +18,8 @@ class ApiLogNotification implements MessageInterface
     private $config;
 
     /**
-     * @param Config       $config
-     * @param UrlInterface $urlBuilder
+     * @param   Config          $config
+     * @param   UrlInterface    $urlBuilder
      */
     public function __construct(Config $config, UrlInterface $urlBuilder)
     {
@@ -31,7 +28,7 @@ class ApiLogNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getIdentity()
     {
@@ -39,7 +36,7 @@ class ApiLogNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isDisplayed()
     {
@@ -47,19 +44,18 @@ class ApiLogNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getText()
     {
         $url = $this->urlBuilder->getUrl('adminhtml/system_config/edit/section/mirakl_api_developer');
 
-        return __('<strong>Mirakl API logging is enabled. '
-            . 'It is not recommended to enable it in a production environment.</strong><br>'
-            . 'Go to <a href="%1">developer configuration</a> to disable it.', $url);
+        return __('<strong>Mirakl API logging is enabled. It is not recommended to enable it in a production environment.</strong><br>'.
+            'Go to <a href="%1">developer configuration</a> to disable it.', $url);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSeverity()
     {

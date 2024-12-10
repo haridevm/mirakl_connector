@@ -30,19 +30,19 @@ $process = $block->getProcess();
                                 <td><?= $block->escapeHtml($errorProduct[1]) ?></td>
                                 <td><?= $block->escapeHtml($errorProduct[2]) ?></td>
                             </tr>
-                        <?php endforeach; ?>
-                    <?php endforeach; ?>
+                        <?php endforeach;?>
+                    <?php endforeach;?>
                 <?php endif ?>
 
                 <?php if (isset($errors['global'])): ?>
                     <?php foreach ($errors['global'] as $errorsGlobal): ?>
                         <tr>
-                            <td><?= $block->escapeHtml( __('Global')) ?></td>
+                            <td><?= $block->escapeHtml( __('Global'))?></td>
                             <td><?= $block->escapeHtml($errorsGlobal[0]) ?></td>
                             <td><?= $block->escapeHtml($errorsGlobal[1]) ?></td>
                             <td><?= $block->escapeHtml($errorsGlobal[2]) ?></td>
                         </tr>
-                    <?php endforeach; ?>
+                    <?php endforeach;?>
                 <?php endif ?>
                 </tbody>
             </table>

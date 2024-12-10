@@ -1,19 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
-class Receive extends AbstractOrder implements HttpGetActionInterface
+class Receive extends AbstractOrder
 {
     /**
      *  Mark a Mirakl order as RECEIVED
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {

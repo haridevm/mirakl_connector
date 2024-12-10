@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\Log;
 
 use Mirakl\Api\Helper\Config;
@@ -26,9 +23,9 @@ class LoggerManager
     protected $logFile;
 
     /**
-     * @param Config $config
-     * @param Logger $logger
-     * @param string $logFile
+     * @param   Config  $config
+     * @param   Logger  $logger
+     * @param   string  $logFile
      */
     public function __construct(
         Config $config,
@@ -45,7 +42,7 @@ class LoggerManager
     /**
      * Clears log file contents
      *
-     * @return void
+     * @return  void
      */
     public function clear()
     {
@@ -55,7 +52,7 @@ class LoggerManager
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getLogFile()
     {
@@ -63,7 +60,7 @@ class LoggerManager
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getLogFileContents()
     {
@@ -75,15 +72,15 @@ class LoggerManager
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getLogFilePath()
     {
-        return BP . $this->logFile; // @phpstan-ignore-line
+        return BP . $this->logFile;
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getLogFileSize()
     {
@@ -95,7 +92,7 @@ class LoggerManager
     }
 
     /**
-     * @return Logger
+     * @return  Logger
      */
     public function getLogger()
     {
@@ -103,7 +100,7 @@ class LoggerManager
     }
 
     /**
-     * @return \GuzzleHttp\MessageFormatter
+     * @return  \GuzzleHttp\MessageFormatter
      */
     public function getMessageFormatter()
     {
@@ -121,7 +118,7 @@ class LoggerManager
     }
 
     /**
-     * @return void
+     * @return  void
      */
     private function initLogger()
     {

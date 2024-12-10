@@ -1,17 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Shop;
 
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Registry;
 use Mirakl\Core\Model\ShopFactory;
 use Mirakl\Core\Model\ResourceModel\ShopFactory as ShopResourceFactory;
 
-class View extends \Magento\Framework\App\Action\Action implements HttpGetActionInterface
+class View extends \Magento\Framework\App\Action\Action
 {
     /**
      * @var Registry
@@ -29,10 +25,10 @@ class View extends \Magento\Framework\App\Action\Action implements HttpGetAction
     protected $shopResourceFactory;
 
     /**
-     * @param Context             $context
-     * @param Registry            $registry
-     * @param ShopFactory         $shopFactory
-     * @param ShopResourceFactory $shopResourceFactory
+     * @param   Context             $context
+     * @param   Registry            $registry
+     * @param   ShopFactory         $shopFactory
+     * @param   ShopResourceFactory $shopResourceFactory
      */
     public function __construct(
         Context $context,
@@ -47,7 +43,7 @@ class View extends \Magento\Framework\App\Action\Action implements HttpGetAction
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

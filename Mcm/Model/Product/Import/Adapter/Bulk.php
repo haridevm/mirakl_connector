@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Adapter;
@@ -76,7 +75,6 @@ class Bulk extends AbstractAdapter
      * @param string                       $miraklProductIdField
      * @param string                       $miraklProductSkuField
      * @param string                       $miraklVariantGroupCodeField
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         DataSource\ImporterInterface $importer,
@@ -136,7 +134,6 @@ class Bulk extends AbstractAdapter
             array_column($products, 'sku'),
             array_column($parents, 'sku')
         );
-
         $this->skuProcessor->setSkusFilter($skus);
     }
 
@@ -152,7 +149,7 @@ class Bulk extends AbstractAdapter
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function import(array $data)
     {
@@ -175,11 +172,8 @@ class Bulk extends AbstractAdapter
      */
     public function after()
     {
-        if ($this->getProcess()->isProcessing()) {
-            // Ensure process has not failed before saving products
-            $this->prepareParentProducts();
-            $this->saveProducts();
-        }
+        $this->prepareParentProducts();
+        $this->saveProducts();
     }
 
     /**
@@ -211,8 +205,7 @@ class Bulk extends AbstractAdapter
         if ($errors = $this->importer->getErrors()) {
             /** @var ProcessingError $error */
             foreach ($errors as $error) {
-                $process->output(__(
-                    'ERROR in row %1 (%2): %3',
+                $process->output(__('ERROR in row %1 (%2): %3',
                     $error->getRowNumber() + 1,
                     $error->getErrorLevel(),
                     $error->getErrorMessage()

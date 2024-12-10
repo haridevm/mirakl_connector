@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Sync;
 
 use Mirakl\Connector\Controller\Adminhtml\AbstractSync;
@@ -11,7 +8,7 @@ class State extends AbstractSync
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Config::sync';
+    const ADMIN_RESOURCE = 'Mirakl_Config::sync';
 
     /**
      * Synchronize Mirakl offer states into Magento

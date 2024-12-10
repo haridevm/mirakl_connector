@@ -1,0 +1,13 @@
+# Misc
+/.buildpath
+/.project
+/nbproject
+/catalog.xml
+/sitemap.xml
+/.settings
+/.idea
+/.secrets
+.DS_Store
+.~*
+*.sublime-*
+atlassian-ide-plugin.xml

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Sales\Pdf;
 
 use Magento\Sales\Model\Order\Pdf\Total\DefaultTotal;
@@ -18,11 +15,11 @@ class MiraklShipping extends DefaultTotal
     protected $taxConfig;
 
     /**
-     * @param TaxHelper                 $taxHelper
-     * @param TaxCalculation            $taxCalculation
-     * @param OrderTaxCollectionFactory $ordersFactory
-     * @param TaxConfig                 $taxConfig
-     * @param array                     $data
+     * @param   TaxHelper                   $taxHelper
+     * @param   TaxCalculation              $taxCalculation
+     * @param   OrderTaxCollectionFactory   $ordersFactory
+     * @param   TaxConfig                   $taxConfig
+     * @param   array                       $data
      */
     public function __construct(
         TaxHelper $taxHelper,
@@ -36,7 +33,7 @@ class MiraklShipping extends DefaultTotal
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTotalsForDisplay()
     {

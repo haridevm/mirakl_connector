@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Shipping\Zone;
 
 use Magento\Backend\Block\Widget\Context;
@@ -11,15 +8,16 @@ use Magento\Framework\Registry;
 class Edit extends Container
 {
     /**
+     * Core registry
+     *
      * @var Registry
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $registry
-     * @param array    $data
+     * @param   Context     $context
+     * @param   Registry    $registry
+     * @param   array       $data
      */
     public function __construct(
         Context $context,
@@ -36,8 +34,7 @@ class Edit extends Container
      * Add "Save and Apply" button
      * Add "Save and Continue" button
      *
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  void
      */
     protected function _construct()
     {
@@ -57,6 +54,6 @@ class Edit extends Container
                 ]
             ],
             10
-        );
+       );
     }
 }

@@ -1,0 +1,158 @@
+name: CI - Build & Test
+
+on: push
+
+jobs:
+  run-tests:
+    runs-on: mirakl-hosted
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ['Adobe Commerce', 'Magento']
+        version:
+          - { magento: '2.4.7', php: '8.2' }
+          - { magento: '2.4.6-p5', php: '8.2' }
+          - { magento: '2.4.5-p7', php: '8.1' }
+          - { magento: '2.4.4-p8', php: '8.1' }
+    name: >-
+      ${{ matrix.platform }} ${{ matrix.version.magento }} - PHP ${{ matrix.version.php }}
+    env:
+      MAGENTO_DB_PREFIX: mkl_
+      MAGENTO_ADMIN_USER: mirakl
+      MAGENTO_ADMIN_PASSWORD: mirakl123
+      MAGENTO_ADMIN_EMAIL: php@mirakl.com
+      MAGENTO_ADMIN_FIRSTNAME: Admin
+      MAGENTO_ADMIN_LASTNAME: Mirakl
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: magento
+      MYSQL_DATABASE_TESTS: magento_tests
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ${{ env.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ env.MYSQL_DATABASE }}
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+      elasticsearch:
+        image: elasticsearch:7.17.0
+        ports:
+          - 9200:9200
+        options: >-
+          -e discovery.type=single-node
+          -e xpack.security.enabled=false
+          --health-cmd="curl http://127.0.0.1:9200/_cluster/health"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+    steps:
+      - name: Install some tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y procps mysql-client
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        env:
+          runner: self-hosted
+        with:
+          php-version: ${{ matrix.version.php }}
+          extensions: bcmath, gd, soap
+          coverage: none
+
+      - name: Init MySQL database
+        run: mysql -h127.0.0.1 -uroot -p${{ env.MYSQL_ROOT_PASSWORD }} -e "CREATE DATABASE ${{ env.MYSQL_DATABASE_TESTS }};"
+
+      - name: Init Composer dependencies
+        run: |
+          PACKAGE_NAME="${{ matrix.platform == 'Magento' && 'community' || 'enterprise' }}"
+          composer config --global http-basic.repo.magento.com ${{ secrets.COMPOSER_AUTH_MAGENTO_USERNAME }} ${{ secrets.COMPOSER_AUTH_MAGENTO_PASSWORD }}
+          composer create-project --no-install --repository=https://repo.magento.com/ magento/project-${PACKAGE_NAME}-edition . ${{ matrix.version.magento }}
+          composer config repositories.mirakl_sdk '{ "type": "composer", "url": "https://sdk-front-satis.mirakl.net", "options": { "http": { "header": ["Authorization: Basic ${{ secrets.MIRAKL_PHP_SDK_BASIC_AUTH }}"] } } }'
+          composer require mirakl/sdk-php-front --no-update
+          composer update --no-install
+
+      - name: Fix for Magento 2.4.4
+        if: startsWith(matrix.version.magento, '2.4.4')
+        run: composer require psr/log ^1.0 --no-update
+
+      - name: Authenticate to Google Cloud
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/467739647176/locations/global/workloadIdentityPools/github-oidc-pool/providers/github-oidc-provider'
+          service_account: 'gha-cache@labs-live-1790.iam.gserviceaccount.com'
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: mirakl/gha-cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer update
+
+      - name: Install Magento 2
+        run: |
+          php bin/magento setup:install --base-url="http://127.0.0.1/" \
+            --db-host=127.0.0.1 --db-name=${{ env.MYSQL_DATABASE }} --backend-frontname=admin --db-user=root --db-password="${{ env.MYSQL_ROOT_PASSWORD }}" \
+            --admin-firstname=${{ env.MAGENTO_ADMIN_FIRSTNAME }} --admin-lastname=${{ env.MAGENTO_ADMIN_LASTNAME }} \
+            --admin-email=${{ env.MAGENTO_ADMIN_EMAIL }} --admin-user=${{ env.MAGENTO_ADMIN_USER }} \
+            --admin-password=${{ env.MAGENTO_ADMIN_PASSWORD }} --db-prefix=${{ env.MAGENTO_DB_PREFIX }} --use-rewrites=1 \
+            --language=en_US --currency=EUR --timezone=Europe/Paris --use-secure-admin=0 --session-save=files \
+            --elasticsearch-host=127.0.0.1 --elasticsearch-port=9200 --elasticsearch-index-prefix=${{ env.MYSQL_DATABASE }}
+
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          path: app/code/Mirakl/
+
+      - name: Setup integration tests
+        run: |
+          sed -i "s/'localhost'/'127.0.0.1'/g" dev/tests/integration/etc/install-config-mysql.php.dist
+          sed -i "s/'123123q'/'${{ env.MYSQL_ROOT_PASSWORD }}'/g" dev/tests/integration/etc/install-config-mysql.php.dist
+          sed -i "s/'magento_integration_tests'/'${{ env.MYSQL_DATABASE_TESTS }}'/g" dev/tests/integration/etc/install-config-mysql.php.dist
+          sed -i "s/'opensearch'/'elasticsearch7'/g" dev/tests/integration/etc/install-config-mysql.php.dist
+          sed -i "s/opensearch/elasticsearch/g" dev/tests/integration/etc/install-config-mysql.php.dist
+          sed -i '/amqp-/d' dev/tests/integration/etc/install-config-mysql.php.dist
+
+      - name: Enable Mirakl connector modules
+        run: php bin/magento module:enable --all
+
+      - name: Check setup:di:compile command
+        run: php bin/magento setup:di:compile
+
+      - name: Check setup:upgrade command
+        run: |
+          php bin/magento setup:upgrade
+          php bin/magento indexer:set-mode schedule
+          php bin/magento setup:upgrade
+
+      - name: Deploy sample data
+        run: |
+          cp ~/.composer/auth.json .
+          php bin/magento sampledata:deploy
+          php bin/magento setup:upgrade
+          php bin/magento indexer:reindex
+
+      - name: Execute unit tests
+        run: |
+          cd dev/tests/unit/
+          php ../../../vendor/bin/phpunit -c phpunit.xml.dist ../../../app/code/Mirakl/ --filter '/^Mirakl\\.*\\Test\\Unit\\/'
+
+      - name: Execute integration tests
+        run: |
+          cd dev/tests/integration/
+          php ../../../vendor/bin/phpunit -c phpunit.xml.dist ../../../app/code/Mirakl/ --filter '/^Mirakl\\.*\\Test\\Integration\\/'

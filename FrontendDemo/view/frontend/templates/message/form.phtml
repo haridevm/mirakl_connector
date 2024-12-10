@@ -4,94 +4,92 @@ $_thread = $block->getThread();
 ?>
 <?php if ($block->getAsModal()): ?>
     <div class="<?= $block->escapeHtmlAttr($block->getJsId()) ?>-button">
-        <button type="button" class="<?= $block->escapeHtmlAttr($block->getButtonClass()) ?>"
-                title="<?= $block->escapeHtmlAttr($block->getFormTitle()) ?>"
-                data-trigger="trigger-<?= /* @escapeNotVerified */ $block->getJsId() ?>">
-            <span><?= $block->escapeJsQuote($block->getFormTitle()) ?></span>
+        <button type="button" class="<?= $block->escapeHtmlAttr($block->getButtonClass()) ?>" data-trigger="trigger-<?= $block->getJsId() ?>">
+            <span data-bind="i18n: '<?= $block->escapeJsQuote($block->getFormTitle()) ?>'"><?= $block->escapeJsQuote($block->getFormTitle()) ?></span>
         </button>
     </div>
     <div data-bind="mageInit: {
         'Magento_Ui/js/modal/modal':{
             'type': 'popup',
-            'trigger': '[data-trigger=trigger-<?= /* @escapeNotVerified */ $block->getJsId() ?>]',
+            'trigger': '[data-trigger=trigger-<?= $block->getJsId() ?>]',
             'responsive': true,
             'buttons': []
         }}" style="display: none;">
 <?php endif; ?>
 
-<div class="marketplace-messages">
-    <a name="form"></a>
-    <form action="<?= /* @escapeNotVerified */ $block->getFormAction() ?>" class="message-form" method="post" id="<?= /* @escapeNotVerified */ $block->getJsId() ?>" data-role="order-message-form" data-bind="scope: 'messsage-form'" enctype="multipart/form-data">
-        <?= $block->getBlockHtml('formkey'); ?>
-        <?= $block->getChildHtml('form_fields_before') ?>
-        <fieldset class="fieldset message-fieldset _collapsible"
-                  data-bind="mageInit: {'collapsible':{'openedState': '_active'}}"
-                  data-hasrequired="<?php __('* Required Fields'); ?>" >
-            <?php if ($title = trim($block->getFormTitle())): ?>
-                <legend class="legend message-legend action field choice" data-role="title">
-                    <span class="action-toggle"><?= /* @escapeNotVerified */ $title ?></span>
-                </legend>
-            <?php endif; ?>
-            <div class="field message-field-summary required">
-                <label for="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_recipients" class="label"><span><?= /* @escapeNotVerified */ __('Recipients') ?></span></label>
-                <div class="control">
-                    <select name="<?= /* @escapeNotVerified */ $block->getFormField('recipients') ?>" id="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_recipients" title="<?= /* @escapeNotVerified */ $block->escapeHtmlAttr($block->getReasonsLabel()) ?>" data-validate="{'validate-select':true}">
-                        <option value=""><?= /* @escapeNotVerified */ __('-- Please Select --') ?></option>
-                        <?php foreach ($block->getRecipients() as $_type => $_name): ?>
-                            <option <?php if ($block->getPostMessage($block->getFormField('recipients')) == $_type): ?>selected="selected" <?php endif; ?>value="<?= /* @escapeNotVerified */ $_type ?>"><?= /* @escapeNotVerified */ $_name ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </div>
-            </div>
-            <?php if (!empty($block->getReasons())): ?>
+    <div class="marketplace-messages">
+        <a name="form"></a>
+        <form action="<?php /* @escapeNotVerified */ echo $block->getFormAction() ?>" class="message-form" method="post" id="<?= $block->getJsId() ?>" data-role="order-message-form" data-bind="scope: 'messsage-form'" enctype="multipart/form-data">
+            <?= $block->getBlockHtml('formkey'); ?>
+            <?= $block->getChildHtml('form_fields_before')?>
+            <fieldset class="fieldset message-fieldset _collapsible"
+                      data-bind="mageInit: {'collapsible':{'openedState': '_active'}}"
+                      data-hasrequired="<?php __('* Required Fields'); ?>" >
+                <?php if ($title = trim($block->getFormTitle())): ?>
+                    <legend class="legend message-legend action field choice" data-role="title">
+                        <span class="action-toggle"><?= $title ?></span>
+                    </legend>
+                <?php endif; ?>
                 <div class="field message-field-summary required">
-                    <label for="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_subject" class="label"><span><?= /* @escapeNotVerified */ $block->getReasonsLabel() ?></span></label>
+                    <label for="<?= $block->getJsId() ?>-message_recipients" class="label"><span><?php /* @escapeNotVerified */ echo __('Recipients') ?></span></label>
                     <div class="control">
-                        <select name="<?= /* @escapeNotVerified */ $block->getFormField('subject') ?>" id="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_subject" title="<?= /* @escapeNotVerified */ $block->escapeHtmlAttr($block->getReasonsLabel()) ?>" data-validate="{'validate-select':true}">
-                            <option value=""><?= /* @escapeNotVerified */ __('-- Please Select --') ?></option>
-                            <?php foreach ($block->getReasons() as $reason): ?>
-                                <?php /** @var \Mirakl\MMP\FrontOperator\Domain\Reason $reason */ ?>
-                                <?php $_label = $this->escapeHtml(__($reason->getLabel())); ?>
-                                <option <?php if ($block->isReasonSelected($reason)): ?>selected="selected" <?php endif; ?>value="<?= $block->escapeHtmlAttr($block->getReasonValue($reason)) ?>"><?= /* @escapeNotVerified */ $_label ?></option>
+                        <select name="<?= $block->getFormField('recipients') ?>" id="<?= $block->getJsId() ?>-message_recipients" title="<?php /* @escapeNotVerified */ echo $block->escapeHtmlAttr($block->getReasonsLabel()) ?>" data-validate="{'validate-select':true}">
+                            <option value=""><?= __('-- Please Select --') ?></option>
+                            <?php foreach ($block->getRecipients() as $_type => $_name): ?>
+                                <option <?php if ($block->getPostMessage($block->getFormField('recipients')) == $_type): ?>selected="selected" <?php endif;?>value="<?= $_type ?>"><?= $_name ?></option>
                             <?php endforeach; ?>
                         </select>
-                        <?php foreach ($block->getReasons() as $reason): ?>
-                            <input type="hidden" name="reasons[<?= /* @escapeNotVerified */ $reason->getCode() ?>]" value="<?= $block->escapeHtmlAttr($reason->getLabel()) ?>" />
-                        <?php endforeach; ?>
                     </div>
                 </div>
-            <?php endif; ?>
-            <div class="field message-field-text required">
-                <label for="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_body" class="label"><span><?= /* @escapeNotVerified */ __('Message') ?></span></label>
-                <div class="control">
-                    <textarea name="<?= /* @escapeNotVerified */ $block->getFormField('body') ?>" id="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_body" cols="5" rows="3" data-validate="{required:true,minlength:3}"><?= /* @escapeNotVerified */ $block->getPostMessage($block->getFormField('body')) ?></textarea>
-                </div>
-            </div>
-            <?php if ($block->withFile()): ?>
-                <div class="field message-field-text">
-                    <label for="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_file" class="label"><span><?= /* @escapeNotVerified */ __('File') ?></span></label>
+                <?php if (!empty($block->getReasons())): ?>
+                    <div class="field message-field-summary required">
+                        <label for="<?= $block->getJsId() ?>-message_subject" class="label"><span><?php /* @escapeNotVerified */ echo $block->getReasonsLabel() ?></span></label>
+                        <div class="control">
+                            <select name="<?= $block->getFormField('subject') ?>" id="<?= $block->getJsId() ?>-message_subject" title="<?php /* @escapeNotVerified */ echo $block->escapeHtmlAttr($block->getReasonsLabel()) ?>" data-validate="{'validate-select':true}">
+                                <option value=""><?= __('-- Please Select --') ?></option>
+                                <?php foreach ($block->getReasons() as $reason): ?>
+                                    <?php /** @var \Mirakl\MMP\FrontOperator\Domain\Reason $reason */ ?>
+                                    <?php $_label = $this->escapeHtml(__($reason->getLabel())); ?>
+                                    <option <?php if ($block->isReasonSelected($reason)): ?>selected="selected" <?php endif; ?>value="<?= $block->escapeHtmlAttr($block->getReasonValue($reason)) ?>"><?= $_label ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <?php foreach ($block->getReasons() as $reason): ?>
+                                <input type="hidden" name="reasons[<?= $reason->getCode() ?>]" value="<?= $block->escapeHtmlAttr($reason->getLabel()) ?>" />
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="field message-field-text required">
+                    <label for="<?= $block->getJsId() ?>-message_body" class="label"><span><?php /* @escapeNotVerified */ echo __('Message') ?></span></label>
                     <div class="control">
-                        <input type="file" name="file" id="<?= /* @escapeNotVerified */ $block->getJsId() ?>-message_file" />
+                        <textarea name="<?= $block->getFormField('body') ?>" id="<?= $block->getJsId() ?>-message_body" cols="5" rows="3" data-validate="{required:true,minlength:3}"><?= $block->getPostMessage($block->getFormField('body')) ?></textarea>
                     </div>
                 </div>
-            <?php endif; ?>
-        </fieldset>
-        <div class="actions-toolbar message-form-actions">
-            <div class="primary actions-primary">
-                <button type="submit" class="action submit primary">
-                    <span><?= /* @escapeNotVerified */ __('Send Message') ?></span>
-                </button>
+                <?php if ($block->withFile()): ?>
+                    <div class="field message-field-text">
+                        <label for="<?= $block->getJsId() ?>-message_file" class="label"><span><?php /* @escapeNotVerified */ echo __('File') ?></span></label>
+                        <div class="control">
+                            <input type="file" name="file" id="<?= $block->getJsId() ?>-message_file" />
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </fieldset>
+            <div class="actions-toolbar message-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" class="action submit primary">
+                        <span><?php /* @escapeNotVerified */ echo __('Send Message') ?></span>
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
-    <script type="text/x-magento-init">
-        {
-            "#<?= /* @escapeNotVerified */ $block->getJsId() ?>": {
-               "validation": {}
+        </form>
+        <script type="text/x-magento-init">
+            {
+                "#<?= $block->getJsId() ?>": {
+                   "validation": {}
+                }
             }
-        }
-    </script>
-</div>
+        </script>
+    </div>
 
 <?php if ($block->getAsModal()): ?>
     </div>

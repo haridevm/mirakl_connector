@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product\View\Tab;
 
 use Magento\Catalog\Block\Product\Context;
@@ -24,9 +21,6 @@ use Mirakl\FrontendDemo\Block\Product\Offer\Price;
 use Mirakl\FrontendDemo\Helper\Config;
 use Mirakl\FrontendDemo\Helper\Offer as OfferHelper;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Offers extends AbstractView implements IdentityInterface
 {
     use OfferQuantityTrait;
@@ -82,18 +76,17 @@ class Offers extends AbstractView implements IdentityInterface
     protected $usedProducts;
 
     /**
-     * @param Context                $context
-     * @param ArrayUtils             $arrayUtils
-     * @param OfferHelper            $offerHelper
-     * @param Config                 $configHelper
-     * @param JsonEncoderInterface   $jsonEncoder
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param StockStateInterface    $stockState
-     * @param StockRegistryInterface $stockRegistry
-     * @param StockQtyHelper         $stockQtyHelper
-     * @param Json                   $json
-     * @param array                  $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                 $context
+     * @param   ArrayUtils              $arrayUtils
+     * @param   OfferHelper             $offerHelper
+     * @param   Config                  $configHelper
+     * @param   JsonEncoderInterface    $jsonEncoder
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   StockStateInterface     $stockState
+     * @param   StockRegistryInterface  $stockRegistry
+     * @param   StockQtyHelper          $stockQtyHelper
+     * @param   Json                    $json
+     * @param   array                   $data
      */
     public function __construct(
         Context $context,
@@ -106,7 +99,7 @@ class Offers extends AbstractView implements IdentityInterface
         StockRegistryInterface $stockRegistry,
         StockQtyHelper $stockQtyHelper,
         Json $json,
-        array $data = []
+        $data = []
     ) {
         parent::__construct($context, $arrayUtils, $data);
 
@@ -125,7 +118,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Get offer helper
      *
-     * @return OfferHelper
+     * @return  OfferHelper
      */
     public function getOfferHelper()
     {
@@ -135,7 +128,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Get current product
      *
-     * @return Product|null
+     * @return  null|Product
      */
     public function getProduct()
     {
@@ -145,7 +138,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Set tab title
      *
-     * @return void
+     * @return  void
      */
     public function setTabTitle()
     {
@@ -155,10 +148,10 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Format price value
      *
-     * @param float $amount
-     * @param bool  $includeContainer
-     * @param int   $precision
-     * @return float
+     * @param   float   $amount
+     * @param   bool    $includeContainer
+     * @param   int     $precision
+     * @return  float
      */
     public function formatCurrency(
         $amount,
@@ -171,7 +164,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Return HTML code
      *
-     * @return string
+     * @return  string
      */
     public function toHtml()
     {
@@ -185,7 +178,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Retrieve configurable attributes of current product
      *
-     * @return Attribute[]
+     * @return  Attribute[]
      */
     public function getConfigurableAttributes()
     {
@@ -202,7 +195,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Return unique ID(s) for each object in system
      *
-     * @return array
+     * @return  array
      */
     public function getIdentities()
     {
@@ -210,47 +203,23 @@ class Offers extends AbstractView implements IdentityInterface
     }
 
     /**
-     * @param Offer $offer
-     * @return string
+     * @param   Offer   $offer
+     * @return  string
      */
     public function getOfferPriceHtml(Offer $offer)
-    {
-        return $this->getOfferPriceBlock($offer)->toHtml();
-    }
-
-    /**
-     * @param Offer $offer
-     * @return Price
-     */
-    public function getOfferPriceBlock(Offer $offer)
     {
         /** @var Price $block */
         $block = $this->getLayout()->createBlock(Price::class);
 
         return $block->setProduct($this->getProduct())
-                     ->setOffer($offer);
+            ->setOffer($offer)
+            ->toHtml();
     }
 
     /**
-     * @return string
-     */
-    public function getOfferShippingAjaxUrl()
-    {
-        return $this->getUrl('marketplace/ajax/offershipping');
-    }
-
-    /**
-     * @return string
-     */
-    public function getAddressShippingMethodsAjaxUrl()
-    {
-        return $this->getUrl('marketplace/ajax/addressshippingmethods');
-    }
-
-    /**
-     * @param int       $productId
-     * @param Attribute $attribute
-     * @return string
+     * @param   int         $productId
+     * @param   Attribute   $attribute
+     * @return  string
      */
     public function getProductAttributeValue($productId, Attribute $attribute)
     {
@@ -266,7 +235,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Get all operator offers with associated stock
      *
-     * @return array
+     * @return  array
      */
     public function getOperatorOffers()
     {
@@ -295,7 +264,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Get store name
      *
-     * @return string
+     * @return  string
      */
     public function getStoreName()
     {
@@ -305,8 +274,8 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Get all offers
      *
-     * @param int|array $excludeOfferIds
-     * @return array
+     * @param   int|array   $excludeOfferIds
+     * @return  array
      */
     public function getAllOffers($excludeOfferIds = null)
     {
@@ -331,35 +300,18 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * @return string
      */
-    public function getProductSkusJson()
+    public function getAllOfferIdsJson()
     {
-        $skus = $this->getUsedSkus();
+        $offerIds = $this->getAllOfferIds();
 
-        return $this->json->serialize($skus);
-    }
-
-    /**
-     * @return array
-     */
-    public function getUsedSkus()
-    {
-        if (!$this->isConfigurableProduct()) {
-            return [$this->getProduct()->getSku()];
-        }
-
-        $skus = [];
-        foreach ($this->getUsedProducts() as $product) {
-            $skus[] = $product->getSku();
-        }
-
-        return $skus;
+        return $this->json->serialize($offerIds);
     }
 
     /**
      * Retrieve product qty increments
      *
-     * @param Product $product
-     * @return float|false
+     * @param   Product $product
+     * @return  float|false
      */
     public function getProductQtyIncrements(Product $product)
     {
@@ -376,7 +328,7 @@ class Offers extends AbstractView implements IdentityInterface
     }
 
     /**
-     * @return Product[]
+     * @return  Product[]
      */
     protected function getUsedProducts()
     {
@@ -405,7 +357,7 @@ class Offers extends AbstractView implements IdentityInterface
     /**
      * Is a product configurable
      *
-     * @return bool
+     * @return  bool
      */
     public function isConfigurableProduct()
     {

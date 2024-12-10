@@ -157,4 +157,4 @@
 "Decimal Attributes Precision","Précision des attributs décimaux"
 "This configuration will set the &quot;Decimal places&quot; parameter for decimal attributes in the Mirakl platform.","Cette configuration définira le paramètre &quot;Nombre de décimales&quot; pour les attributs décimaux dans la plateforme Mirakl."
 "Enable Incremental Synchronization","Activer la synchronisation incrémentale"
-"If enabled, incremental synchronization (after creation, deletion or modification) will be activated (synchronously or via connector events).","Si activé, la synchronisation incrémentale (suite à une création, suppression ou modification) sera activée (de manière synchrone ou via les événements du connecteur)."
+"If enabled, incremental synchronization (after creation, deletion or modification) will be activated (synchronously or via Mirakl events).","Si activé, la synchronisation incrémentale (suite à une création, suppression ou modification) sera activée (de manière synchrone ou via les événements Mirakl)."

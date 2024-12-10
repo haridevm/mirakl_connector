@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\StoreSwitcher;
@@ -44,7 +43,7 @@ class MiraklQuoteSynchronizer implements StoreSwitcherInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function switch(StoreInterface $fromStore, StoreInterface $targetStore, string $redirectUrl): string
     {

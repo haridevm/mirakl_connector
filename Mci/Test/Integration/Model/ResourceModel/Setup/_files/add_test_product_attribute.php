@@ -1,10 +1,8 @@
 <?php
-
 /**
  * Data fixture to set up a test attribute and confirm you can set its
  * Mirakl settings to the inverse of the default
  */
-
 declare(strict_types=1);
 
 use Magento\Catalog\Model\Product;

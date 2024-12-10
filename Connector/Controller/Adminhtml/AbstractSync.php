@@ -1,12 +1,8 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Api\Helper\Config as ApiConfig;
 use Mirakl\Connector\Helper\Config as ConnectorConfig;
 use Mirakl\Core\Controller\Adminhtml\RawMessagesTrait;
@@ -15,7 +11,7 @@ use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 use Psr\Log\LoggerInterface;
 
-abstract class AbstractSync extends Action implements HttpGetActionInterface
+abstract class AbstractSync extends Action
 {
     use RedirectRefererTrait;
     use RawMessagesTrait;
@@ -23,7 +19,7 @@ abstract class AbstractSync extends Action implements HttpGetActionInterface
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Config::sync';
+    const ADMIN_RESOURCE = 'Mirakl_Config::sync';
 
     /**
      * @var ApiConfig
@@ -51,12 +47,12 @@ abstract class AbstractSync extends Action implements HttpGetActionInterface
     protected $logger;
 
     /**
-     * @param Context                $context
-     * @param ApiConfig              $apiConfig
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param LoggerInterface        $logger
-     * @param ConnectorConfig        $connectorConfig
+     * @param   Context                 $context
+     * @param   ApiConfig               $apiConfig
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   LoggerInterface         $logger
+     * @param   ConnectorConfig         $connectorConfig
      */
     public function __construct(
         Context $context,
@@ -77,7 +73,7 @@ abstract class AbstractSync extends Action implements HttpGetActionInterface
     /**
      * Will redirect with an error if Mirakl Connector is disabled in config
      *
-     * @return bool
+     * @return  bool
      */
     protected function checkConnectorEnabled()
     {

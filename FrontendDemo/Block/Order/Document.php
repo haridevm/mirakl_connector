@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\Data\Form\FormKey;
@@ -40,22 +37,20 @@ class Document extends Info
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/document.phtml';
 
     /**
-     * @param TemplateContext               $context
-     * @param Registry                      $registry
-     * @param PaymentHelper                 $paymentHelper
-     * @param AddressRenderer               $addressRenderer
-     * @param FormKey                       $formKey
-     * @param OrderApi                      $orderApi
-     * @param TypeFactory                   $documentTypeFactory
-     * @param DocumentTypeCollectionFactory $documentTypeCollectionFactory
-     * @param OrderHelper                   $orderHelper
-     * @param array                         $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   TemplateContext                 $context
+     * @param   Registry                        $registry
+     * @param   PaymentHelper                   $paymentHelper
+     * @param   AddressRenderer                 $addressRenderer
+     * @param   FormKey                         $formKey
+     * @param   OrderApi                        $orderApi
+     * @param   TypeFactory                     $documentTypeFactory
+     * @param   DocumentTypeCollectionFactory   $documentTypeCollectionFactory
+     * @param   OrderHelper                     $orderHelper
+     * @param   array                           $data
      */
     public function __construct(
         TemplateContext $context,
@@ -86,7 +81,7 @@ class Document extends Info
     /**
      * Retrieves document list of current Mirakl order
      *
-     * @return OrderDocumentCollection
+     * @return  OrderDocumentCollection
      */
     public function getDocuments()
     {
@@ -94,8 +89,8 @@ class Document extends Info
     }
 
     /**
-     * @param OrderDocument $doc
-     * @return string
+     * @param   OrderDocument   $doc
+     * @return  string
      */
     public function getDownloadUrl(OrderDocument $doc)
     {
@@ -110,8 +105,8 @@ class Document extends Info
     /**
      * Get the label for a document type code
      *
-     * @param string $code
-     * @return string
+     * @param   string  $code
+     * @return  string
      */
     public function getDocumentTypeLabel($code)
     {

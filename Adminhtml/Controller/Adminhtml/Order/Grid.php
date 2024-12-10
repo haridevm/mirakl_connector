@@ -1,17 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Controller\Adminhtml\Order;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
-
-class Grid extends \Magento\Sales\Controller\Adminhtml\Order implements HttpPostActionInterface
+class Grid extends \Magento\Sales\Controller\Adminhtml\Order
 {
     /**
      * Mirakl orders grid
      *
-     * @inheritdoc
+     * @return  \Magento\Framework\View\Result\Layout
      */
     public function execute()
     {

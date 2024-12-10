@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Cli;
 
 class AclAuthorizationManager
@@ -26,7 +23,6 @@ class AclAuthorizationManager
 
     /**
      * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIsCliMode()
     {
@@ -43,10 +39,10 @@ class AclAuthorizationManager
 
     /**
      * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIsCliAuthorized()
     {
         return $this->isAuthorized;
     }
 }
+

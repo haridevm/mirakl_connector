@@ -1,29 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Test\Integration;
 
-use Magento\TestFramework\ObjectManager;
+use Magento\Framework\ObjectManager\ObjectManager;
 use Magento\TestFramework\Helper\Bootstrap;
-use Mirakl\Process\Model\Action\AbstractParentAction;
-use Mirakl\Process\Model\Action\ActionListInterface;
-use Mirakl\Process\Model\Action\Execution\ChildProviderInterface;
-use Mirakl\Process\Model\Exception\RetryLaterHandlerInterface;
-use Mirakl\Process\Model\Execution\Executor;
-use Mirakl\Process\Model\Output\Cli;
 use Mirakl\Process\Model\Output\Factory as OutputFactory;
 use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ProcessFactory as ProcessModelFactory;
 use Mirakl\Process\Model\ResourceModel\Process\Collection as ProcessCollection;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory as ProcessCollectionFactory;
-use Mirakl\Process\Test\Integration\Model\Action\ActionStub;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.NumberOfChildren)
- */
 abstract class TestCase extends \Mirakl\Core\Test\TestCase
 {
     /**
@@ -56,9 +44,6 @@ abstract class TestCase extends \Mirakl\Core\Test\TestCase
      */
     protected $outputFactoryMock;
 
-    /**
-     * @inheritdoc
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -74,37 +59,22 @@ abstract class TestCase extends \Mirakl\Core\Test\TestCase
     }
 
     /**
-     * @param int|null $parentId
-     * @param string   $status
-     * @param mixed    $actionStub
-     * @return Process
+     * @param   int|null    $parentId
+     * @param   string|null $code
+     * @return  Process
      */
-    protected function createSampleProcess(
-        $parentId = null,
-        $status = Process::STATUS_PENDING,
-        $actionStub = null
-    ): Process {
-        $objectManagerMock = $this->createMock(ObjectManager::class);
-
+    protected function createSampleProcess($parentId = null, $code = null): Process
+    {
         $process = $this->processModelFactory->create([
-            'objectManager' => $objectManagerMock,
+            'objectManager' => $this->objectManagerMock,
             'outputFactory' => $this->outputFactoryMock,
         ]);
-
-        if (null === $actionStub) {
-            $actionStub = new ActionStub();
-        }
-
-        $objectManagerMock->expects($this->any())
-            ->method('create')
-            ->willReturn($actionStub);
-
         $process->setType('TESTS')
-            ->setCode('TESTS')
-            ->setName($actionStub->getName())
-            ->setStatus($status)
-            ->setHelper(get_class($actionStub))
-            ->setMethod('execute')
+            ->setCode($code)
+            ->setStatus(Process::STATUS_PENDING)
+            ->setName('Sample process for integration tests')
+            ->setHelper('Mirakl\Process\Helper\Data')
+            ->setMethod('run')
             ->setParams(['foo', ['bar']])
             ->setParentId($parentId);
 
@@ -114,8 +84,8 @@ abstract class TestCase extends \Mirakl\Core\Test\TestCase
     }
 
     /**
-     * @param int $processId
-     * @return Process
+     * @param   int $processId
+     * @return  Process
      */
     protected function getProcessById($processId): Process
     {
@@ -126,9 +96,9 @@ abstract class TestCase extends \Mirakl\Core\Test\TestCase
     }
 
     /**
-     * @param string $field
-     * @param mixed  $value
-     * @return ProcessCollection
+     * @param   string  $field
+     * @param   mixed   $value
+     * @return  ProcessCollection
      */
     protected function findProcess($field, $value): ProcessCollection
     {
@@ -139,32 +109,22 @@ abstract class TestCase extends \Mirakl\Core\Test\TestCase
     }
 
     /**
-     * @return void
+     * @return  void
      */
     protected function mockCliOutput(): void
     {
-        $cliOutputMock = $this->createMock(Cli::class);
+        $outputFactory = $this->objectManager->create(OutputFactory::class);
 
-        $this->objectManager->configure([
-            'preferences' => [Cli::class => get_class($cliOutputMock)],
-        ]);
-    }
+        $callback = function ($type, $process) use ($outputFactory) {
+            if ($type == 'cli') {
+                $type = 'nullOutput';
+            }
 
-    /**
-     * @param array $actionList
-     * @return AbstractParentAction
-     */
-    protected function createParentActionMock(array $actionList = []): AbstractParentAction
-    {
-        return $this->getMockBuilder(AbstractParentAction::class)
-            ->setConstructorArgs([
-                'childProvider'     => $this->objectManager->create(ChildProviderInterface::class),
-                'retryLaterHandler' => $this->objectManager->create(RetryLaterHandlerInterface::class),
-                'executor'          => $this->objectManager->create(Executor::class),
-                'actionList'        => $this->objectManager->create(ActionListInterface::class, [
-                    'actions' => $actionList,
-                ]),
-            ])
-            ->getMockForAbstractClass();
+            return $outputFactory->create($type, $process);
+        };
+
+        $this->outputFactoryMock
+            ->method('create')
+            ->willReturnCallback($callback);
     }
 }

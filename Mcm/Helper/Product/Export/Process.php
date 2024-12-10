@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper\Product\Export;
 
 use Magento\Catalog\Model\ResourceModel\CategoryFactory as CategoryResourceFactory;
@@ -19,12 +16,9 @@ use Mirakl\Mcm\Helper\Product\Export\Product as ProductHelper;
 use Mirakl\Mcm\Model\Product\Export\Formatter;
 use Mirakl\Process\Model\Process as ProcessModel;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Process extends AbstractHelper
 {
-    public const CODE = 'CM21';
+    const CODE = 'CM21';
 
     /**
      * @var StoreManagerInterface
@@ -100,8 +94,8 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param ProcessModel $process
-     * @return bool
+     * @param   ProcessModel    $process
+     * @return  bool
      */
     public function exportAll(ProcessModel $process)
     {
@@ -131,11 +125,11 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param ProcessModel      $process
-     * @param ProductCollection $collection
-     * @param int               $limit
-     * @param int               $offset
-     * @return int
+     * @param   ProcessModel      $process
+     * @param   ProductCollection $collection
+     * @param   int               $limit
+     * @param   int               $offset
+     * @return  int
      */
     public function exportChunk(ProcessModel $process, ProductCollection $collection, $limit, $offset)
     {
@@ -155,9 +149,9 @@ class Process extends AbstractHelper
     /**
      * Exports an unique product to Mirakl platform
      *
-     * @param int    $productId
-     * @param string $acceptance
-     * @return int|false
+     * @param   int     $productId
+     * @param   string  $acceptance
+     * @return  int|false
      */
     public function exportProduct($productId, $acceptance = ProductAcceptance::STATUS_ACCEPTED)
     {
@@ -167,12 +161,12 @@ class Process extends AbstractHelper
     /**
      * Exports specified product ids to Mirakl platform
      *
-     * @param array             $productIds
-     * @param string            $acceptance
-     * @param bool              $forceOperatorMaster
-     * @param ProcessModel|null $process
-     * @param array             $overrideData
-     * @return int|false
+     * @param   array               $productIds
+     * @param   string              $acceptance
+     * @param   bool                $forceOperatorMaster
+     * @param   ProcessModel|null   $process
+     * @param   array               $overrideData
+     * @return  int|false
      */
     public function exportProducts(
         array $productIds,
@@ -215,10 +209,10 @@ class Process extends AbstractHelper
     /**
      * Exports custom product collection to Mirakl platform
      *
-     * @param ProductCollection $collection
-     * @param string            $acceptance
-     * @param bool              $forceOperatorMaster
-     * @return int|false
+     * @param   ProductCollection   $collection
+     * @param   string              $acceptance
+     * @param   bool                $forceOperatorMaster
+     * @return  int|false
      */
     public function exportCollection(
         ProductCollection $collection,
@@ -233,7 +227,7 @@ class Process extends AbstractHelper
     /**
      * Retrieves Magento MCM products available for being exported to Mirakl platform
      *
-     * @return ProductCollection
+     * @return  ProductCollection
      */
     public function getProductsToExport()
     {
@@ -280,8 +274,8 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param array $product
-     * @return bool
+     * @param   array   $product
+     * @return  bool
      */
     protected function isSyncProduct(array $product)
     {
@@ -290,13 +284,12 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param array $product
-     * @return bool
+     * @param   array   $product
+     * @return  bool
      */
     protected function isOperatorMasterProduct(array $product)
     {
-        // Consider that mirakl_mcm_is_operator_master is enabled
-        // if provided data do not contain the mirakl_mcm_is_operator_master key
+        // Consider that mirakl_mcm_is_operator_master is enabled if provided data do not contain the mirakl_mcm_is_operator_master key
         return !isset($product[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER])
             || $product[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER];
     }
@@ -304,10 +297,10 @@ class Process extends AbstractHelper
     /**
      * Prepares product data for export
      *
-     * @param array  $product
-     * @param string $acceptance
-     * @param bool   $forceOperatorMaster
-     * @return array
+     * @param   array   $product
+     * @param   string  $acceptance
+     * @param   bool    $forceOperatorMaster
+     * @return  array
      */
     public function prepare(
         array $product,
@@ -325,8 +318,7 @@ class Process extends AbstractHelper
         // Do not send internal Magento data to Mirakl
         unset($product[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER], $product['mirakl_sync']);
 
-        if (
-            $forceOperatorMaster ||
+        if ($forceOperatorMaster ||
             ($isSyncProduct && $isOperatorMaster && $acceptance == ProductAcceptance::STATUS_ACCEPTED)
         ) {
             // Add product's data
@@ -349,8 +341,8 @@ class Process extends AbstractHelper
     /**
      * Returns formatted product's data
      *
-     * @param array $data
-     * @return array
+     * @param   array   $data
+     * @return  array
      */
     protected function prepareProductData(array $data)
     {
@@ -362,9 +354,9 @@ class Process extends AbstractHelper
     /**
      * Prepares product data for export
      *
-     * @param int    $productId
-     * @param string $acceptance
-     * @return array
+     * @param   int     $productId
+     * @param   string  $acceptance
+     * @return  array
      */
     public function prepareProductFromId($productId, $acceptance = ProductAcceptance::STATUS_ACCEPTED)
     {
@@ -374,8 +366,8 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param int $productId
-     * @return int|false
+     * @param   int $productId
+     * @return  int|false
      */
     public function rejectProduct($productId)
     {
@@ -383,8 +375,8 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param array $productIds
-     * @return int|false
+     * @param   array   $productIds
+     * @return  int|false
      */
     public function rejectProducts(array $productIds)
     {

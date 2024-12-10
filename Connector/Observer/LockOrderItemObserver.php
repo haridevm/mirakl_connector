@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -24,7 +21,7 @@ class LockOrderItemObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

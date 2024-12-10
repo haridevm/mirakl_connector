@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data\Cleaner;
@@ -25,7 +24,7 @@ class AllowedAttributes implements CleanerInterface
 
     /**
      * @param ProductAttributesFinder $attributesFinder
-     * @param array                   $extraColumns
+     * @param array $extraColumns
      */
     public function __construct(ProductAttributesFinder $attributesFinder, array $extraColumns = [])
     {

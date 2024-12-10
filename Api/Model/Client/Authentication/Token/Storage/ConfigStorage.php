@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication\Token\Storage;
@@ -54,13 +53,11 @@ class ConfigStorage implements StorageInterface
     {
         $value = (string) $this->config->getRawValue($this->path);
 
-        if ('' === $value) {
+        if (!$value) {
             return null;
         }
 
-        return $this->encrypted
-            ? $this->encryptor->decrypt($value)
-            : $value;
+        return $this->encrypted ? $this->encryptor->decrypt($value) : $value;
     }
 
     /**

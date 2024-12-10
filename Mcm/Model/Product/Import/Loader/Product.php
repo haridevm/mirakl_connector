@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Loader;
@@ -22,7 +21,7 @@ class Product implements LoaderInterface
 
     /**
      * @param CustomizerInterface[] $customizers
-     * @param DecoratorInterface[]  $decorators
+     * @param DecoratorInterface[] $decorators
      */
     public function __construct(
         array $customizers = [],

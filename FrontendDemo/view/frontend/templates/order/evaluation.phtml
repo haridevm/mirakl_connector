@@ -4,7 +4,7 @@
     <div class="block-content">
         <?php if (!$_miraklOrder->getCanEvaluate()): ?>
             <div class="order-title">
-                <strong><?= /* @escapeNotVerified */ __('Order Evaluation') ?></strong>
+                <strong><?php /* @escapeNotVerified */ echo __('Order Evaluation') ?></strong>
             </div>
             <div class="block-content" id="order-evaluation">
                 <?php $_evaluation = $block->getEvaluation() ?>
@@ -12,27 +12,27 @@
                     <ol class="items evaluation-items">
                         <li class="item evaluation-item view-rating">
                             <div class="evaluation-label">
-                                <?= $block->escapeHtml(__('Overall evaluation of your order')) ?>
+                                <?php echo $block->escapeHtml(__('Overall evaluation of your order')) ?>
                             </div>
                             <div class="evaluation-value rating-summary">
                                 <div class="rating-result">
-                                    <span style="width:<?= /* @escapeNotVerified */ $block->getEvaluationPercent($_evaluation) ?>%"><span><?= /* @escapeNotVerified */ $block->getEvaluationPercent($_evaluation) ?>%</span></span>
+                                    <span style="width:<?php echo $block->getEvaluationPercent($_evaluation) ?>%"><span><?php echo $block->getEvaluationPercent($_evaluation) ?>%</span></span>
                                 </div>
                             </div>
                         </li>
                         <?php foreach ($_evaluation->getAssessments() as $_assessment): ?>
                             <li class="item evaluation-item view-rating">
                                 <div class="evaluation-label">
-                                    <?= $block->escapeHtml($_assessment->getLabel()) ?>
+                                    <?php echo $block->escapeHtml($_assessment->getLabel()) ?>
                                 </div>
                                 <?php if ($_assessment->getResponse() == 'true'): ?>
-                                    <div class="evaluation-value"><?= /* @escapeNotVerified */ __('Yes') ?></div>
+                                    <div class="evaluation-value"><?php echo __('Yes') ?></div>
                                 <?php elseif ($_assessment->getResponse() == 'false'): ?>
-                                    <div class="evaluation-value"><?= /* @escapeNotVerified */ __('No') ?></div>
+                                    <div class="evaluation-value"><?php echo __('No') ?></div>
                                 <?php else: ?>
                                     <div class="evaluation-value rating-summary">
                                         <div class="rating-result">
-                                            <span style="width:<?= /* @escapeNotVerified */ $block->getAssessmentPercent($_assessment) ?>%"><span><?= /* @escapeNotVerified */ $block->getAssessmentPercent($_assessment) ?>%</span></span>
+                                            <span style="width:<?php echo $block->getAssessmentPercent($_assessment) ?>%"><span><?php echo $block->getAssessmentPercent($_assessment) ?>%</span></span>
                                         </div>
                                     </div>
                                 <?php endif ?>
@@ -41,41 +41,43 @@
                     </ol>
                     <?php if ($_evaluation->getComment()): ?>
                         <div>
-                            <h4><?= /* @escapeNotVerified */ __('Comment') ?></h4>
-                            <p><?= /* @escapeNotVerified */ nl2br($block->escapeHtml($_evaluation->getComment())) ?></p>
+                            <h4><?php echo __('Comment') ?></h4>
+                            <p><?php echo nl2br($block->escapeHtml($_evaluation->getComment())) ?></p>
                         </div>
                     <?php endif ?>
                 <?php endif ?>
             </div>
         <?php else: ?>
-            <?php $postData = $block->getPostEvaluation('evaluation') ?>
+            <?php $postData = $block->getPostEvaluation('evaluation')?>
             <div class="order-title">
-                <strong><?= /* @escapeNotVerified */ __('How would you evaluate your order?') ?></strong>
+                <strong><?php /* @escapeNotVerified */ echo __('How would you evaluate your order?') ?></strong>
             </div>
             <div class="block-content">
-                <form action="<?= /* @escapeNotVerified */ $block->getFormAction() ?>" id="order-evaluation" class="order-evaluation-form" method="post">
-                    <?= $block->getBlockHtml('formkey'); ?>
+                <form action="<?php /* @escapeNotVerified */ echo $block->getFormAction() ?>" id="order-evaluation" class="order-evaluation-form" method="post">
+                    <?php echo $block->getBlockHtml('formkey'); ?>
                     <ol class="items evaluation-items">
                         <li class="item evaluation-item review-field-rating">
                             <div class="evaluation-label">
-                                <?= $block->escapeHtml(__('Overall evaluation of your order')) ?>
+                                <?php echo $block->escapeHtml(__('Overall evaluation of your order')) ?>
                             </div>
                             <div class="evaluation-value">
                                 <div class="radio-box control review-control-vote">
                                     <?php for ($_i = 0; $_i <= 5; $_i++): ?>
-                                        <input type="radio"
+                                        <input
+                                            type="radio"
                                             name="evaluation[grade]"
-                                            id="evaluation_grade_<?= /* @escapeNotVerified */ $_i ?>"
-                                            value="<?= /* @escapeNotVerified */ $_i ?>"
+                                            id="evaluation_grade_<?php echo $_i ?>"
+                                            value="<?php echo $_i ?>"
                                             class="radio"
-                                            <?php if (isset($postData['grade']) && $postData['grade'] == $_i || $_i === 5 && empty($postData)): ?>checked="checked"<?php endif; ?>
-                                            data-validate="{required:true, messages:{required:'<?= $block->escapeHtml(__('Please answer the question.')) ?>'}}"
+                                            <?php if (isset($postData['grade']) && $postData['grade'] == $_i || $_i === 5 && empty($postData)):?>checked="checked"<?php endif; ?>
+                                            data-validate="{required:true, messages:{required:'<?php echo __('Please answer the question.') ?>'}}"
                                         />
-                                        <label class="rating-<?= /* @escapeNotVerified */ $_i ?>"
-                                            for="evaluation_grade_<?= /* @escapeNotVerified */ $_i ?>"
-                                            title="<?= /* @escapeNotVerified */ __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?>"
-                                            id="evaluation_grade_<?= /* @escapeNotVerified */ $_i ?>_label">
-                                            <span><?= /* @escapeNotVerified */ __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?></span>
+                                        <label
+                                            class="rating-<?php echo $_i ?>"
+                                            for="evaluation_grade_<?php echo $_i ?>"
+                                            title="<?php echo __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?>"
+                                            id="evaluation_grade_<?php echo $_i ?>_label">
+                                            <span><?php echo __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?></span>
                                         </label>
                                     <?php endfor; ?>
                                 </div>
@@ -84,41 +86,47 @@
                         <?php foreach ($block->getAssessments() as $_assessment): ?>
                             <li class="item evaluation-item review-field-rating">
                                 <div class="evaluation-label">
-                                    <?= $block->escapeHtml($_assessment->getLabel()) ?>
+                                    <?php echo $block->escapeHtml($_assessment->getLabel()) ?>
                                 </div>
                                 <?php if ($block->isBooleanAssessment($_assessment)): ?>
                                     <div class="evaluation-value field choice">
                                         <div class="radio-box">
                                             <input
-                                                id="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_true"
+                                                id="evaluation_assessments_<?php echo $_assessment->getCode() ?>_true"
                                                 type="radio"
-                                                name="evaluation[assessments][<?= /* @escapeNotVerified */ $_assessment->getCode() ?>]"
+                                                name="evaluation[assessments][<?php echo $_assessment->getCode() ?>]"
                                                 value="true"
                                                 class="radio"
                                                 checked="checked"
                                                 <?php if (isset($postData['assessments'][$_assessment->getCode()]) &&
-                                                    $postData['assessments'][$_assessment->getCode()] == 'true'): ?>
+                                                    $postData['assessments'][$_assessment->getCode()] == 'true'):?>
                                                     checked="checked"
                                                 <?php endif; ?>
-                                                data-validate="{required:true, messages:{required:'<?= $block->escapeHtml(__('Please answer the question.')) ?>'}}"
+                                                data-validate="{required:true, messages:{required:'<?php echo __('Please answer the question.') ?>'}}"
                                             />
-                                            <label class="label" for="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_true">
-                                                <span><?= $block->escapeHtml(__('Yes')) ?></span>
+                                            <label 
+                                                class="label" 
+                                                for="evaluation_assessments_<?php echo $_assessment->getCode() ?>_true"
+                                            >
+                                                <span><?php echo $block->escapeHtml(__('Yes')) ?></span>
                                             </label>
                                             <input
-                                                id="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_false"
+                                                id="evaluation_assessments_<?php echo $_assessment->getCode() ?>_false"
                                                 type="radio"
-                                                name="evaluation[assessments][<?= /* @escapeNotVerified */ $_assessment->getCode() ?>]"
+                                                name="evaluation[assessments][<?php echo $_assessment->getCode() ?>]"
                                                 value="false"
                                                 class="radio"
                                                 <?php if (isset($postData['assessments'][$_assessment->getCode()]) &&
-                                                    $postData['assessments'][$_assessment->getCode()] == 'false'): ?>
+                                                    $postData['assessments'][$_assessment->getCode()] == 'false'):?>
                                                     checked="checked"
                                                 <?php endif; ?>
-                                                data-validate="{required:true, messages:{required:'<?= $block->escapeHtml(__('Please answer the question.')) ?>'}}"
+                                                data-validate="{required:true, messages:{required:'<?php echo __('Please answer the question.') ?>'}}"
                                             />
-                                            <label class="label" for="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_false">
-                                                <span><?= $block->escapeHtml(__('No')) ?></span>
+                                            <label
+                                                class="label" 
+                                                for="evaluation_assessments_<?php echo $_assessment->getCode() ?>_false"
+                                            >
+                                                <span><?php echo $block->escapeHtml(__('No')) ?></span>
                                             </label>
                                         </div>
                                     </div>
@@ -128,19 +136,19 @@
                                             <?php for ($_i = 0; $_i <= 5; $_i++): ?>
                                                 <input
                                                     type="radio"
-                                                    name="evaluation[assessments][<?= /* @escapeNotVerified */ $_assessment->getCode() ?>]"
-                                                    id="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_<?= /* @escapeNotVerified */ $_i ?>"
-                                                    value="<?= /* @escapeNotVerified */ $_i ?>"
+                                                    name="evaluation[assessments][<?php echo $_assessment->getCode() ?>]"
+                                                    id="evaluation_assessments_<?php echo $_assessment->getCode() ?>_<?php echo $_i ?>"
+                                                    value="<?php echo $_i ?>"
                                                     class="radio"
-                                                    <?php if (isset($postData['assessments'][$_assessment->getCode()]) && $postData['assessments'][$_assessment->getCode()] == $_i || $_i === 5 && empty($postData)): ?>checked="checked"<?php endif; ?>
-                                                    data-validate="{required:true, messages:{required:'<?= $block->escapeHtml(__('Please answer the question.')) ?>'}}"
+                                                    <?php if (isset($postData['assessments'][$_assessment->getCode()]) && $postData['assessments'][$_assessment->getCode()] == $_i || $_i === 5 && empty($postData)):?>checked="checked"<?php endif; ?>
+                                                    data-validate="{required:true, messages:{required:'<?php echo __('Please answer the question.') ?>'}}"
                                                 />
                                                 <label
-                                                    class="rating-<?= /* @escapeNotVerified */ $_i ?>"
-                                                    for="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_<?= /* @escapeNotVerified */ $_i ?>"
-                                                    title="<?= $block->escapeHtml(__('%1 %2', $_i, $_i > 1 ? 'stars' : 'star')) ?>"
-                                                    id="evaluation_assessments_<?= /* @escapeNotVerified */ $_assessment->getCode() ?>_<?= /* @escapeNotVerified */ $_i ?>_label">
-                                                    <span><?= /* @escapeNotVerified */ __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?></span>
+                                                    class="rating-<?php echo $_i ?>"
+                                                    for="evaluation_assessments_<?php echo $_assessment->getCode() ?>_<?php echo $_i ?>"
+                                                    title="<?php echo __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?>"
+                                                    id="evaluation_assessments_<?php echo $_assessment->getCode() ?>_<?php echo $_i ?>_label">
+                                                    <span><?php echo __('%1 %2', $_i, $_i > 1 ? 'stars' : 'star') ?></span>
                                                 </label>
                                             <?php endfor; ?>
                                         </div>
@@ -150,16 +158,16 @@
                         <?php endforeach ?>
                         <li class="evaluation-comment-item">
                             <div class="evaluation-label">
-                                <label for="evaluation-comment"><?= /* @escapeNotVerified */ __('Comment') ?></label>
+                                <label for="evaluation-comment"><?php echo __('Comment') ?></label>
                             </div>
                             <div class="evaluation-value input-box">
-                                <textarea name="evaluation[comment]" id="evaluation_comment" cols="5" rows="3"><?php if (isset($postData['comment'])): ?><?= /* @escapeNotVerified */ $postData['comment']; ?><?php endif; ?></textarea>
+                                <textarea name="evaluation[comment]" id="evaluation_comment" cols="5" rows="3"><?php if (isset($postData['comment'])):?><?php echo $postData['comment']; ?><?php endif; ?></textarea>
                             </div>
                         </li>
                     </ol>
                     <div class="primary actions-primary">
                         <button type="submit" class="action submit primary">
-                            <span><?= /* @escapeNotVerified */ __('Submit Evaluation') ?></span>
+                            <span><?php echo __('Submit Evaluation') ?></span>
                         </button>
                     </div>
                 </form>

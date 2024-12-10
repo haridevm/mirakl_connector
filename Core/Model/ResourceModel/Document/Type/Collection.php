@@ -1,14 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Document\Type;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Set resource model
+     *
+     * @return  void
      */
     protected function _construct()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shop;
 
 use Magento\Backend\App\Action;
@@ -10,16 +7,12 @@ use Magento\Framework\Registry;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Core\Helper\Data as CoreHelper;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 abstract class Shop extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Core::shops';
+    const ADMIN_RESOURCE = 'Mirakl_Core::shops';
 
     /**
      * @var Registry
@@ -37,10 +30,10 @@ abstract class Shop extends Action
     protected $coreHelper;
 
     /**
-     * @param Context    $context
-     * @param Registry   $coreRegistry
-     * @param Config     $connectorConfig
-     * @param CoreHelper $coreHelper
+     * @param   Context     $context
+     * @param   Registry    $coreRegistry
+     * @param   Config      $connectorConfig
+     * @param   CoreHelper  $coreHelper
      */
     public function __construct(
         Context $context,
@@ -55,6 +48,8 @@ abstract class Shop extends Action
     }
 
     /**
+     * Init action
+     *
      * @return $this
      */
     protected function _initAction()
@@ -71,12 +66,13 @@ abstract class Shop extends Action
     /**
      * Adds a notice that displays last synchronization date of specified entity
      *
-     * @param string $entity
+     * @param   string  $entity
      */
     protected function showLastUpdateDate($entity)
     {
-        if ($lastUpdateDate = $this->connectorConfig->getSyncDate($entity)) {
-            $this->messageManager->addSuccessMessage(
+        $lastUpdateDate = $this->connectorConfig->getSyncDate($entity);
+        if ($lastUpdateDate) {
+            $this->messageManager->addNoticeMessage(
                 __('Last synchronization: %1', $this->coreHelper->formatDateTime($lastUpdateDate))
             );
         }

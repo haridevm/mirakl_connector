@@ -1,8 +1,7 @@
 <?php
-
 declare(strict_types=1);
 
-namespace Mirakl\Process\Test\Integration\Ui\Component;
+namespace Mirakl\Process\Test\Integration\Ui;
 
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\View\Element\UiComponent\DataProvider\DataProviderInterface;
@@ -12,20 +11,19 @@ use Mirakl\Process\Test\Integration\TestCase;
 use Mirakl\Process\Ui\Component\DataProvider;
 
 /**
- * @group process
- * @group ui_component
- * @magentoDbIsolation enabled
  * @magentoAppArea adminhtml
+ * @magentoDbIsolation enabled
+ * @group process
  */
 class DataProviderTest extends TestCase
 {
     /**
-     * @var UiComponentFactory
+     * @var UiComponentFactory|null
      */
     private $componentFactory;
 
     /**
-     * @var RequestInterface
+     * @var RequestInterface|null
      */
     private $request;
 
@@ -42,6 +40,7 @@ class DataProviderTest extends TestCase
 
     /**
      * @magentoDataFixture Mirakl_Process::Test/Integration/_files/processes.php
+     *
      * @return void
      */
     public function testParentProcessListing(): void
@@ -66,6 +65,7 @@ class DataProviderTest extends TestCase
 
     /**
      * @magentoDataFixture Mirakl_Process::Test/Integration/_files/processes.php
+     *
      * @return void
      */
     public function testChildProcessListing(): void
@@ -108,7 +108,7 @@ class DataProviderTest extends TestCase
     }
 
     /**
-     * @param string $namespace
+     * @param  string $namespace
      * @return DataProviderInterface
      */
     private function getComponentProvider(string $namespace): DataProviderInterface

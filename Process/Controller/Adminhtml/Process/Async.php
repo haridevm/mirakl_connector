@@ -1,23 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
-use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Mirakl\Process\Helper\Data;
 use Mirakl\Process\Helper\Config;
 use Mirakl\Process\Model\TimeoutManager;
 
-class Async extends Action implements HttpPostActionInterface
+class Async extends AbstractProcessAction
 {
-    /**
-     * @see _isAllowed()
-     */
-    public const ADMIN_RESOURCE = 'Mirakl_Process::process';
-
     /**
      * @var TimeoutManager
      */
@@ -52,7 +42,7 @@ class Async extends Action implements HttpPostActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -88,7 +78,6 @@ class Async extends Action implements HttpPostActionInterface
             $process->run();
         }
 
-        // Nothing more to do
-        exit;  // phpcs:ignore
+        exit; // Nothing more to do
     }
 }

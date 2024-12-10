@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote;
 
 use Magento\Checkout\Model\Session;
@@ -11,9 +8,6 @@ use Magento\Quote\Model\QuoteFactory;
 use Magento\Quote\Model\ResourceModel\QuoteFactory as QuoteResourceFactory;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
- */
 class Loader
 {
     /**
@@ -42,11 +36,11 @@ class Loader
     protected $storeManager;
 
     /**
-     * @param Session                 $session
-     * @param CartRepositoryInterface $quoteRepository
-     * @param QuoteFactory            $quoteFactory
-     * @param QuoteResourceFactory    $quoteResourceFactory
-     * @param StoreManagerInterface   $storeManager
+     * @param   Session                 $session
+     * @param   CartRepositoryInterface $quoteRepository
+     * @param   QuoteFactory            $quoteFactory
+     * @param   QuoteResourceFactory    $quoteResourceFactory
+     * @param   StoreManagerInterface   $storeManager
      */
     public function __construct(
         CartRepositoryInterface $quoteRepository,
@@ -63,7 +57,7 @@ class Loader
     }
 
     /**
-     * @return int
+     * @return  int
      */
     protected function getCurrentWebsiteId()
     {
@@ -71,7 +65,7 @@ class Loader
     }
 
     /**
-     * @return Quote
+     * @return  Quote
      */
     public function getQuote()
     {
@@ -95,7 +89,7 @@ class Loader
     }
 
     /**
-     * @return Quote
+     * @return  Quote
      */
     protected function loadQuote()
     {

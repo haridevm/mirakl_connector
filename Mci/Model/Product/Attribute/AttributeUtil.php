@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Attribute;
 
 use Mirakl\Mci\Helper\Data as MciHelper;
@@ -11,9 +8,9 @@ class AttributeUtil
     /**
      * Checks the difference between two arrays of attributes grouped by hierarchy code
      *
-     * @param array $array1 First array to compare
-     * @param array $array2 Second array to compare
-     * @return array
+     * @param   array   $array1 First array to compare
+     * @param   array   $array2 Second array to compare
+     * @return  array
      */
     public static function diff($array1, $array2)
     {
@@ -35,8 +32,8 @@ class AttributeUtil
     /**
      * Returns true if given attribute code is "system" (for internal usage)
      *
-     * @param string $attrCode
-     * @return bool
+     * @param   string  $attrCode
+     * @return  bool
      */
     public static function isSystem($attrCode)
     {
@@ -46,7 +43,7 @@ class AttributeUtil
     /**
      * Get all system attribute codes
      *
-     * @return string[]
+     * @return  string[]
      */
     public static function getSystemAttributes()
     {
@@ -60,8 +57,8 @@ class AttributeUtil
     /**
      * Parses given attribute code to identify the original Magento code and a potential locale code
      *
-     * @param string $attrCode
-     * @return AttributeInfo
+     * @param   string  $attrCode
+     * @return  AttributeInfo
      */
     public static function parse($attrCode)
     {

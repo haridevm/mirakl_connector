@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Offer\Collection;
@@ -10,7 +9,7 @@ class AddStoreFilterToCollection
 {
     /**
      * @param Collection $collection
-     * @param int        $storeId
+     * @param int $storeId
      * @return void
      */
     public function execute(Collection $collection, int $storeId): void

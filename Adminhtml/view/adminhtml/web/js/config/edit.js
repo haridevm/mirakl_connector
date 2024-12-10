@@ -43,7 +43,8 @@ require([
 
             $.each(configElements, function (index, element) {
                     $(element).hide();
-            });
+                }
+            );
         }
     });
 
@@ -64,7 +65,8 @@ require([
 
             $.each(configElements, function (index, element) {
                     $(element).hide();
-            });
+                }
+            );
         }
     });
 });

@@ -5,19 +5,19 @@
 
 <div class="block block-order-details-view">
     <div class="block-title">
-        <strong><?= /* @escapeNotVerified */ __('Order Documents') ?></strong>
+        <strong><?php /* @escapeNotVerified */ echo __('Order Documents') ?></strong>
     </div>
     <div class="block-content">
         <?php if (!$_docs || !$_docs->count()): ?>
-            <p><?= /* @escapeNotVerified */ __('There is no document attached to this order.') ?></p>
+            <p><?php echo __('There is no document attached to this order.') ?></p>
         <?php else: ?>
             <ul>
                 <?php foreach ($_docs as $_doc): ?>
                     <li>
                         <?php if ($_type = $block->getDocumentTypeLabel($_doc->getTypeCode())): ?>
-                            <strong><?= /* @escapeNotVerified */ __('%1: ', $_type) ?></strong>
+                            <strong><?php echo __('%1: ', $_type) ?></strong>
                         <?php endif ?>
-                        <a href="<?= /* @escapeNotVerified */ $block->getDownloadUrl($_doc) ?>"><?= /* @escapeNotVerified */ $_doc->getFileName() ?></a> (<?= /* @escapeNotVerified */ $_coreHelper->formatDateTime($_doc->getDateUploaded()) ?>)
+                        <a href="<?php echo $block->getDownloadUrl($_doc) ?>"><?php echo $_doc->getFileName() ?></a> (<?php echo $_coreHelper->formatDateTime($_doc->getDateUploaded()) ?>)
                     </li>
                 <?php endforeach ?>
             </ul>

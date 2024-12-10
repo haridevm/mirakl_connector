@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product\AttributeSet;
 
 use Magento\Framework\Event\Observer;
@@ -34,10 +31,10 @@ abstract class AbstractObserver implements ObserverInterface
     protected $messageManager;
 
     /**
-     * @param ApiConfig        $apiConfigHelper
-     * @param MciConfigHelper  $mciConfigHelper
-     * @param AttributeHelper  $attributeHelper
-     * @param ManagerInterface $messageManager
+     * @param   ApiConfig           $apiConfigHelper
+     * @param   MciConfigHelper     $mciConfigHelper
+     * @param   AttributeHelper     $attributeHelper
+     * @param   ManagerInterface    $messageManager
      */
     public function __construct(
         ApiConfig $apiConfigHelper,
@@ -52,12 +49,11 @@ abstract class AbstractObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
-        if (
-            $this->apiConfigHelper->isEnabled()
+        if ($this->apiConfigHelper->isEnabled()
             && $this->mciConfigHelper->isSyncAttributes()
             && $this->mciConfigHelper->isIncrementalAttributesSyncEnabled()
         ) {

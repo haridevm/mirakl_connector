@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Console\Command;
 
 use Mirakl\Core\Model\Cli\AclAuthorizationManager;
@@ -21,7 +18,6 @@ trait CommandTrait
     protected function initAuthorization()
     {
         /** @var AclAuthorizationManager $cliAuthorizationManager */
-        // @phpstan-ignore-next-line
         $cliAuthorizationManager = $this->objectManager->get(AclAuthorizationManager::class);
         $cliAuthorizationManager->setIsCliMode(true);
         $cliAuthorizationManager->setIsCliAuthorized(true);

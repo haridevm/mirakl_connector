@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Indexer\Offer;
@@ -33,7 +32,7 @@ class Action implements Indexer\ActionInterface, Mview\ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute($ids)
     {
@@ -41,7 +40,7 @@ class Action implements Indexer\ActionInterface, Mview\ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function executeFull()
     {
@@ -49,7 +48,7 @@ class Action implements Indexer\ActionInterface, Mview\ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function executeList(array $ids)
     {
@@ -60,7 +59,7 @@ class Action implements Indexer\ActionInterface, Mview\ActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function executeRow($id)
     {

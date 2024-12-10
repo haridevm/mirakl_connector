@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter;
@@ -47,8 +46,7 @@ class MultiValueAttributes implements FormatterInterface
             }
             // Identifier attributes are always sent as multi value by Mirakl in JSON format
             // JSON format is used only for async MCM import
-            if (
-                $this->isMultiValueField($attribute)
+            if ($this->isMultiValueField($attribute)
                 || $this->isTextField($attribute)
                 || in_array($key, $this->mcmConfig->getMcmIdentifiersAttributes())
             ) {

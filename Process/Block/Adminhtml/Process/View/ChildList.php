@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Block\Adminhtml\Process\View;
 
 use Magento\Backend\Block\Widget\Context;
@@ -40,8 +37,7 @@ class ChildList extends AbstractView
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheirtdoc}
      */
     protected function _toHtml(): string
     {

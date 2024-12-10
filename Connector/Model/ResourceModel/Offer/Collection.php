@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\ResourceModel\Offer;
 
 use Magento\Catalog\Model\Product\Attribute\Source\Status as ProductStatus;
@@ -12,10 +9,6 @@ use Magento\Store\Api\Data\StoreInterface;
 use Mirakl\Connector\Model\Offer;
 use Mirakl\Core\Model\Shop;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Collection extends AbstractCollection
 {
     /**
@@ -49,7 +42,7 @@ class Collection extends AbstractCollection
     protected $_isEnterprise;
 
     /**
-     * @inheritdoc
+     * Set resource model
      */
     protected function _construct()
     {
@@ -67,8 +60,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param int $storeId
-     * @return $this
+     * @param   int     $storeId
+     * @return  $this
      */
     public function setStoreId($storeId)
     {
@@ -78,7 +71,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function addActiveFilter()
     {
@@ -86,7 +79,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function addAvailableFilter()
     {
@@ -99,8 +92,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param string $currencyCode
-     * @return $this
+     * @param   string  $currencyCode
+     * @return  $this
      */
     public function addCurrencyCodeFilter($currencyCode)
     {
@@ -108,8 +101,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param StoreInterface $store
-     * @return $this
+     * @param   StoreInterface  $store
+     * @return  $this
      */
     public function addStoreFilter(StoreInterface $store)
     {
@@ -121,7 +114,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function addProductNames()
     {
@@ -140,8 +133,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param int|null $storeId
-     * @return $this
+     * @param   int|null    $storeId
+     * @return  $this
      */
     public function addProductsEnabledFilter($storeId = null)
     {
@@ -173,16 +166,14 @@ class Collection extends AbstractCollection
         );
 
         $enabled = $this->_conn->quote(ProductStatus::STATUS_ENABLED);
-        $this->getSelect()->where(
-            "status.value = $enabled OR (status.value IS NULL AND status_default.value = $enabled)"
-        );
+        $this->getSelect()->where("status.value = $enabled OR (status.value IS NULL AND status_default.value = $enabled)");
 
         return $this;
     }
 
     /**
-     * @param string|array $sku
-     * @return $this
+     * @param   string|array    $sku
+     * @return  $this
      */
     public function addProductSkuFilter($sku)
     {
@@ -208,8 +199,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param string|array $offerIds
-     * @return $this
+     * @param   string|array    $offerIds
+     * @return  $this
      */
     public function excludeOfferIdsFilter($offerIds)
     {
@@ -217,9 +208,9 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param bool $leftJoin
-     * @param bool $withNames @deprecated Use addProductNames() instead
-     * @return $this
+     * @param   bool    $leftJoin
+     * @param   bool    $withNames  @deprecated Use addProductNames() instead
+     * @return  $this
      */
     public function joinProductIds($leftJoin = false, $withNames = false)
     {
@@ -244,8 +235,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param string|array $cols
-     * @return $this
+     * @param   string|array    $cols
+     * @return  $this
      */
     public function joinShops($cols = '*')
     {
@@ -259,7 +250,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function addItem(DataObject $item)
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Indexer\Offer\Collection\Customizer;
@@ -30,8 +29,8 @@ class SalesChannels implements CustomizerInterface
     private $channelResolver;
 
     /**
-     * @param ConfigInterface           $objectManagerConfig
-     * @param Config                    $config
+     * @param ConfigInterface $objectManagerConfig
+     * @param Config $config
      * @param Channel\ResolverInterface $channelResolver
      */
     public function __construct(
@@ -45,7 +44,7 @@ class SalesChannels implements CustomizerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function customize(OfferCollection $collection, StoreInterface $store): void
     {

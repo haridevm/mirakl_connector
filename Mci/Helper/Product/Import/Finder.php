@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Product as ProductModel;
@@ -22,8 +19,8 @@ class Finder
     protected $mciHelper;
 
     /**
-     * @param Config    $config
-     * @param MciHelper $mciHelper
+     * @param   Config      $config
+     * @param   MciHelper   $mciHelper
      */
     public function __construct(
         Config $config,
@@ -34,9 +31,9 @@ class Finder
     }
 
     /**
-     * @param string $shopId
-     * @param array  $data
-     * @return ProductModel|null
+     * @param   string  $shopId
+     * @param   array   $data
+     * @return  ProductModel|null
      */
     public function findParentProductByVariantId($shopId, array $data)
     {
@@ -45,9 +42,7 @@ class Finder
         $attrCode = MciHelper::ATTRIBUTE_VARIANT_GROUP_CODE;
         if ($attrCode && isset($data[$attrCode]) && strlen($data[$attrCode])) {
             $parentProduct = $this->mciHelper->findProductByVariantId(
-                $shopId,
-                $data[$attrCode],
-                Configurable::TYPE_CODE
+                $shopId, $data[$attrCode], Configurable::TYPE_CODE
             );
         }
 
@@ -55,9 +50,9 @@ class Finder
     }
 
     /**
-     * @param array       $data
-     * @param string|null $type
-     * @return ProductModel|null
+     * @param   array       $data
+     * @param   string|null $type
+     * @return  ProductModel|null
      */
     public function findProductByDeduplication(array $data, $type = null)
     {

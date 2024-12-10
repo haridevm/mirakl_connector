@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Event\ObserverInterface;
@@ -27,9 +24,9 @@ abstract class AbstractObserver implements ObserverInterface
     protected $quoteUpdater;
 
     /**
-     * @param ApiConfig    $apiConfig
-     * @param QuoteHelper  $quoteHelper
-     * @param QuoteUpdater $quoteUpdater
+     * @param   ApiConfig       $apiConfig
+     * @param   QuoteHelper     $quoteHelper
+     * @param   QuoteUpdater    $quoteUpdater
      */
     public function __construct(
         ApiConfig $apiConfig,

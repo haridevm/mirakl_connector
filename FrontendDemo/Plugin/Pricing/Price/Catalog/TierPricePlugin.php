@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Pricing\Price\Catalog;
 
 use Magento\Catalog\Pricing\Price\TierPrice;
@@ -15,7 +12,7 @@ class TierPricePlugin
     protected $offerHelper;
 
     /**
-     * @param OfferHelper $offerHelper
+     * @param   OfferHelper $offerHelper
      */
     public function __construct(OfferHelper $offerHelper)
     {
@@ -23,9 +20,9 @@ class TierPricePlugin
     }
 
     /**
-     * @param TierPrice $subject
-     * @param \Closure  $proceed
-     * @return array
+     * @param   TierPrice   $subject
+     * @param   \Closure    $proceed
+     * @return  array
      */
     public function aroundGetTierPriceList(TierPrice $subject, \Closure $proceed)
     {

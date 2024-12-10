@@ -122,7 +122,7 @@ $commentText = $block->getCreditmemo()->getCommentText();
                         <span><?= $block->escapeHtml(__('Append Comments')) ?></span>
                     </label>
                 </div>
-                <?php if ($block->canSendCreditmemoEmail()): ?>
+                <?php if ($block->canSendCreditmemoEmail()):?>
                 <div class="field choice admin__field admin__field-option field-email-copy">
                     <input id="send_email"
                            class="admin__control-checkbox"

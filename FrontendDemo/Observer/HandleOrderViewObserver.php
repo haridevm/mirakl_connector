@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Controller\Result\RedirectFactory;
@@ -35,10 +32,10 @@ class HandleOrderViewObserver implements ObserverInterface
     private $url;
 
     /**
-     * @param OrderLoaderInterface $orderLoader
-     * @param Registry             $coreRegistry
-     * @param OrderHelper          $orderHelper
-     * @param UrlInterface         $url
+     * @param   OrderLoaderInterface    $orderLoader
+     * @param   Registry                $coreRegistry
+     * @param   OrderHelper             $orderHelper
+     * @param   UrlInterface            $url
      */
     public function __construct(
         OrderLoaderInterface $orderLoader,
@@ -55,7 +52,7 @@ class HandleOrderViewObserver implements ObserverInterface
     /**
      * Handles sales/order/view page which has to be redirected to history if order contains some Mirakl products
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

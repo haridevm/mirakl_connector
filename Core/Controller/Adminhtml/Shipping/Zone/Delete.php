@@ -1,18 +1,14 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-class Delete extends Zone implements HttpPostActionInterface
+class Delete extends Zone
 {
     /**
      * Delete shipping zone action
      *
-     * @return void
+     * @return  void
      */
     public function execute()
     {

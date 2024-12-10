@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Block\Adminhtml\Event;
 
 use Magento\Backend\Block\Widget\Context;
@@ -17,9 +14,9 @@ class View extends Container
     protected $coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $registry
-     * @param array    $data
+     * @param   Context     $context
+     * @param   Registry    $registry
+     * @param   array       $data
      */
     public function __construct(
         Context $context,
@@ -31,8 +28,7 @@ class View extends Container
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct()
     {
@@ -55,7 +51,7 @@ class View extends Container
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getDeleteUrl()
     {
@@ -63,7 +59,7 @@ class View extends Container
     }
 
     /**
-     * @return Event
+     * @return  Event
      */
     public function getEvent()
     {

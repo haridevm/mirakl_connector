@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Indexer;
 
 use Magento\Catalog\Helper\Product as ProductHelper;
@@ -19,9 +16,6 @@ use Magento\Framework\Registry;
 use Magento\Indexer\Model\Indexer\CollectionFactory;
 use Mirakl\Mci\Helper\Config as MciConfigHelper;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Indexer
 {
     /**
@@ -31,7 +25,6 @@ class Indexer
 
     /**
      * @var ProductHelper
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_catalogProduct;
 
@@ -52,7 +45,6 @@ class Indexer
 
     /**
      * @var EventManagerInterface
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_eventManager;
 
@@ -75,12 +67,12 @@ class Indexer
     public $productIdsForIndexers = [];
 
     /**
-     * @param MciConfigHelper       $mciConfigHelper
-     * @param ProductHelper         $catalogProduct
-     * @param IndexerRegistry       $indexerRegistry
-     * @param Registry              $registry
-     * @param CollectionFactory     $indexerCollectionFactory
-     * @param EventManagerInterface $eventManager
+     * @param   MciConfigHelper         $mciConfigHelper
+     * @param   ProductHelper           $catalogProduct
+     * @param   IndexerRegistry         $indexerRegistry
+     * @param   Registry                $registry
+     * @param   CollectionFactory       $indexerCollectionFactory
+     * @param   EventManagerInterface   $eventManager
      */
     public function __construct(
         MciConfigHelper $mciConfigHelper,
@@ -120,7 +112,7 @@ class Indexer
     }
 
     /**
-     * @param string $indexerId
+     * @param   string  $indexerId
      */
     public function addIndexer($indexerId)
     {
@@ -143,8 +135,8 @@ class Indexer
     }
 
     /**
-     * @param string $indexerId
-     * @return bool
+     * @param   string  $indexerId
+     * @return  bool
      */
     public function isEnabled($indexerId)
     {
@@ -152,9 +144,7 @@ class Indexer
     }
 
     /**
-     * @param Product $product
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   Product $product
      */
     public function setIdsToIndex(Product $product)
     {
@@ -162,22 +152,19 @@ class Indexer
             return;
         }
 
-        if (
-            $this->isEnabled(PriceIndexer::INDEXER_ID)
+        if ($this->isEnabled(PriceIndexer::INDEXER_ID)
             && ($product->isObjectNew() || $this->_catalogProduct->isDataForPriceIndexerWasChanged($product))
         ) {
             $this->productIdsForIndexers[PriceIndexer::INDEXER_ID][] = $product->getId();
         }
 
-        if (
-            $this->isEnabled(EavIndexer::INDEXER_ID)
+        if ($this->isEnabled(EavIndexer::INDEXER_ID)
             && ($product->isObjectNew() || $product->isDataChanged())
         ) {
             $this->productIdsForIndexers[EavIndexer::INDEXER_ID][] = $product->getId();
         }
 
-        if (
-            $this->isEnabled(CategoryIndexer::INDEXER_ID)
+        if ($this->isEnabled(CategoryIndexer::INDEXER_ID)
             && ($this->_catalogProduct->isDataForProductCategoryIndexerWasChanged($product) || $product->isDeleted())
         ) {
             $this->productIdsForIndexers[CategoryIndexer::INDEXER_ID][] = $product->getId();
@@ -186,6 +173,10 @@ class Indexer
         if ($this->isEnabled(ProductFlatIndexer::INDEXER_ID)) {
             $this->productIdsForIndexers[ProductFlatIndexer::INDEXER_ID][] = $product->getId();
         }
+
+        //if ($this->isEnabled(StockIndexer::INDEXER_ID)) {
+            // Marketplace stock do not change when importing product
+        //}
 
         if ($this->isEnabled(ProductRuleIndexer::INDEXER_ID)) {
             $this->productIdsForIndexers[ProductRuleIndexer::INDEXER_ID][] = $product->getId();
@@ -203,7 +194,7 @@ class Indexer
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getIdsToIndex()
     {
@@ -211,7 +202,7 @@ class Indexer
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function shouldIndex()
     {
@@ -223,7 +214,7 @@ class Indexer
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function shouldReindex()
     {
@@ -232,7 +223,7 @@ class Indexer
     }
 
     /**
-     * @throws \Exception
+     * @throws  \Exception
      */
     public function reindex()
     {

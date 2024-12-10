@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Total\Invoice;
 
 use Magento\Sales\Model\Order\Invoice;
@@ -16,8 +13,8 @@ class Shipping extends AbstractTotal
     protected $invoiceManagement;
 
     /**
-     * @param InvoiceManagement $invoiceManagement
-     * @param array             $data
+     * @param   InvoiceManagement   $invoiceManagement
+     * @param   array               $data
      */
     public function __construct(InvoiceManagement $invoiceManagement, array $data = [])
     {
@@ -26,8 +23,8 @@ class Shipping extends AbstractTotal
     }
 
     /**
-     * @param Invoice $invoice
-     * @return $this
+     * @param   Invoice $invoice
+     * @return  $this
      */
     public function collect(Invoice $invoice)
     {
@@ -46,19 +43,16 @@ class Shipping extends AbstractTotal
         foreach ($invoice->getItems() as $item) {
             $orderItem = $item->getOrderItem();
 
-            if (
-                $item->getQty() <= 0
-                || $orderItem->isDummy()
-                || !$orderItem->getMiraklOfferId()
-                || !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId())
-            ) {
+            if ($item->getQty() <= 0 ||
+                $orderItem->isDummy() ||
+                !$orderItem->getMiraklOfferId() ||
+                !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId()))
+            {
                 continue;
             }
 
-            $itemShippingTaxAmount = $orderItem->getMiraklShippingTaxAmount()
-                + $orderItem->getMiraklCustomShippingTaxAmount();
-            $itemBaseShippingTaxAmount = $orderItem->getMiraklBaseShippingTaxAmount()
-                + $orderItem->getMiraklBaseCustomShippingTaxAmount();
+            $itemShippingTaxAmount = $orderItem->getMiraklShippingTaxAmount() + $orderItem->getMiraklCustomShippingTaxAmount();
+            $itemBaseShippingTaxAmount = $orderItem->getMiraklBaseShippingTaxAmount() + $orderItem->getMiraklBaseCustomShippingTaxAmount();
 
             $miraklShippingExclTax       += $orderItem->getMiraklShippingExclTax();
             $miraklBaseShippingExclTax   += $orderItem->getMiraklBaseShippingExclTax();

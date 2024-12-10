@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -17,32 +14,28 @@ use Magento\Framework\DataObject;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 use Magento\Framework\Exception\LocalizedException;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Data extends AbstractHelper
 {
     // Fake attributes to send in PM01 to ease sellers products import
-    public const ATTRIBUTE_SKU                 = 'shop_sku';
-    public const ATTRIBUTE_CATEGORY            = 'category';
-    public const ATTRIBUTE_VARIANT_GROUP_CODE  = 'variant_group_code';
+    const ATTRIBUTE_SKU                 = 'shop_sku';
+    const ATTRIBUTE_CATEGORY            = 'category';
+    const ATTRIBUTE_VARIANT_GROUP_CODE  = 'variant_group_code';
 
     // Real Magento attributes created for Mirakl
-    public const ATTRIBUTE_ATTR_SET            = 'mirakl_attr_set_id';
-    public const ATTRIBUTE_SHOPS_SKUS          = 'mirakl_shops_skus';
-    public const ATTRIBUTE_VARIANT_GROUP_CODES = 'mirakl_variant_group_codes';
-    public const ATTRIBUTE_IMAGE_PREFIX        = 'mirakl_image_';
-    public const ATTRIBUTE_IMAGES_STATUS       = 'mirakl_images_status';
+    const ATTRIBUTE_ATTR_SET            = 'mirakl_attr_set_id';
+    const ATTRIBUTE_SHOPS_SKUS          = 'mirakl_shops_skus';
+    const ATTRIBUTE_VARIANT_GROUP_CODES = 'mirakl_variant_group_codes';
+    const ATTRIBUTE_IMAGE_PREFIX        = 'mirakl_image_';
+    const ATTRIBUTE_IMAGES_STATUS       = 'mirakl_images_status';
 
     // Separators used for multiple values attributes
-    public const MULTIVALUES_VALUE_SEPARATOR   = '|';
-    public const MULTIVALUES_PAIR_SEPARATOR    = ',';
+    const MULTIVALUES_VALUE_SEPARATOR   = '|';
+    const MULTIVALUES_PAIR_SEPARATOR    = ',';
 
     /**
      * List of forbidden chars for multiple values attributes
      *
      * @var array
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_forbiddenChars = [
         self::MULTIVALUES_VALUE_SEPARATOR,
@@ -100,13 +93,13 @@ class Data extends AbstractHelper
     protected $uniqueAttributes;
 
     /**
-     * @param Context                  $context
-     * @param ResourceConnection       $resource
-     * @param EavConfig                $eavConfig
-     * @param ProductFactory           $productFactory
-     * @param ProductResourceFactory   $productResourceFactory
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param Config                   $config
+     * @param   Context                     $context
+     * @param   ResourceConnection          $resource
+     * @param   EavConfig                   $eavConfig
+     * @param   ProductFactory              $productFactory
+     * @param   ProductResourceFactory      $productResourceFactory
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   Config                      $config
      */
     public function __construct(
         Context $context,
@@ -130,10 +123,10 @@ class Data extends AbstractHelper
     /**
      * Adds shop sku to specified product (format is shop_id1|shop_sku1,shop_id2|shop_sku2)
      *
-     * @param DataObject $product
-     * @param string     $shopId
-     * @param string     $sku
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $shopId
+     * @param   string      $sku
+     * @return  DataObject
      */
     public function addProductShopSku(DataObject $product, $shopId, $sku)
     {
@@ -148,10 +141,10 @@ class Data extends AbstractHelper
     /**
      * Adds shop variant group code to specified product (format is shop_id1|variant_id1,shop_id2|variant_id2)
      *
-     * @param DataObject $product
-     * @param string     $shopId
-     * @param string     $variantId
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $shopId
+     * @param   string      $variantId
+     * @return  DataObject
      */
     public function addProductShopVariantId(DataObject $product, $shopId, $variantId)
     {
@@ -164,11 +157,11 @@ class Data extends AbstractHelper
     /**
      * Assembles product shop multi values
      *
-     * @param DataObject $product
-     * @param string     $shopId
-     * @param string     $attrCode
-     * @param string     $value
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $shopId
+     * @param   string      $attrCode
+     * @param   string      $value
+     * @return  DataObject
      */
     private function addProductShopAttributeMultiValues(DataObject $product, $shopId, $attrCode, $value)
     {
@@ -186,8 +179,8 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @param string $variantId
-     * @return string
+     * @param   string  $variantId
+     * @return  string
      */
     public function cleanVariantId($variantId)
     {
@@ -202,10 +195,10 @@ class Data extends AbstractHelper
     /**
      * Tries to find a product by specified attribute with exact value matching
      *
-     * @param string      $attrCode
-     * @param mixed       $value
-     * @param string|null $type
-     * @return Product|null
+     * @param   string      $attrCode
+     * @param   mixed       $value
+     * @param   string|null $type
+     * @return  Product|null
      */
     public function findProductByAttribute($attrCode, $value, $type = null)
     {
@@ -229,11 +222,11 @@ class Data extends AbstractHelper
     /**
      * Tries to find a product by specified attribute with multi values
      *
-     * @param string      $attrCode
-     * @param string      $value
-     * @param string      $separator
-     * @param string|null $type
-     * @return Product|null
+     * @param   string      $attrCode
+     * @param   string      $value
+     * @param   string      $separator
+     * @param   string|null $type
+     * @return  Product|null
      */
     public function findProductByMultiValues($attrCode, $value, $separator, $type = null)
     {
@@ -256,9 +249,9 @@ class Data extends AbstractHelper
     /**
      * Tries to find a product by shop sku
      *
-     * @param string $shopId
-     * @param string $sku
-     * @return Product|null
+     * @param   string  $shopId
+     * @param   string  $sku
+     * @return  Product|null
      */
     public function findProductByShopSku($shopId, $sku)
     {
@@ -293,10 +286,10 @@ class Data extends AbstractHelper
     /**
      * Tries to find a product by shop variant id
      *
-     * @param string      $shopId
-     * @param string      $variantId
-     * @param string|null $type
-     * @return Product|null
+     * @param   string      $shopId
+     * @param   string      $variantId
+     * @param   string|null $type
+     * @return  Product|null
      */
     public function findProductByVariantId($shopId, $variantId, $type = null)
     {
@@ -334,7 +327,7 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @return \Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection
+     * @return  \Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection
      */
     private function getAttributeCollection()
     {
@@ -344,7 +337,7 @@ class Data extends AbstractHelper
     /**
      * Returns Mirakl images special attributes, starting by mirakl_image_*
      *
-     * @return EavAttribute[]
+     * @return  EavAttribute[]
      */
     public function getImagesAttributes()
     {
@@ -358,7 +351,7 @@ class Data extends AbstractHelper
             }
         }
 
-        uksort($this->imagesAttributes, function ($a, $b) {
+        uksort($this->imagesAttributes, function($a, $b) {
             if ($a == $b) {
                 return 0;
             }
@@ -376,7 +369,7 @@ class Data extends AbstractHelper
     /**
      * Returns product attributes flagged as unique
      *
-     * @return EavAttribute[]
+     * @return  EavAttribute[]
      */
     public function getUniqueAttributes()
     {
@@ -384,11 +377,7 @@ class Data extends AbstractHelper
             $this->uniqueAttributes = [];
             foreach ($this->getAttributeCollection()->getItems() as $attribute) {
                 /** @var EavAttribute $attribute */
-                if (
-                    $attribute->getIsUnique()
-                    && $attribute->isScopeGlobal()
-                    && $attribute->getAttributeCode() != 'sku'
-                ) {
+                if ($attribute->getIsUnique() && $attribute->isScopeGlobal() && $attribute->getAttributeCode() != 'sku') {
                     $this->uniqueAttributes[$attribute->getAttributeCode()] = $attribute;
                 }
             }
@@ -400,8 +389,8 @@ class Data extends AbstractHelper
     /**
      * Returns product's URL key and set it to product's SKU if Magento fails giving a nice one
      *
-     * @param Product $product
-     * @return string
+     * @param   Product $product
+     * @return  string
      */
     public function getProductUrlKey(Product $product)
     {
@@ -416,8 +405,8 @@ class Data extends AbstractHelper
     /**
      * Returns true if specified attribute is for image import, false otherwise
      *
-     * @param DataObject $attribute
-     * @return bool
+     * @param   DataObject  $attribute
+     * @return  bool
      */
     public static function isAttributeImage(DataObject $attribute)
     {
@@ -428,7 +417,7 @@ class Data extends AbstractHelper
     /**
      * Returns product attributes flagged as variant (mirakl_is_variant attribute)
      *
-     * @return EavAttribute[]
+     * @return  EavAttribute[]
      */
     public function getVariantAttributes()
     {
@@ -448,11 +437,11 @@ class Data extends AbstractHelper
     /**
      * Removes product shop multi values
      *
-     * @param DataObject $product
-     * @param string     $shopId
-     * @param string     $attrCode
-     * @param string     $value
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $shopId
+     * @param   string      $attrCode
+     * @param   string      $value
+     * @return  DataObject
      */
     private function removeProductShopAttributeMultiValues(DataObject $product, $shopId, $attrCode, $value)
     {
@@ -473,10 +462,10 @@ class Data extends AbstractHelper
     /**
      * Removes shop sku from specified product (format is shop_id1|shop_sku1,shop_id2|shop_sku2)
      *
-     * @param DataObject $product
-     * @param string     $shopId
-     * @param string     $sku
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $shopId
+     * @param   string      $sku
+     * @return  DataObject
      */
     public function removeProductShopSku(DataObject $product, $shopId, $sku)
     {
@@ -488,9 +477,9 @@ class Data extends AbstractHelper
     /**
      * Verify that provided shop's SKU does not contain a forbidden char
      *
-     * @param string $shopSku
-     * @return $this
-     * @throws LocalizedException
+     * @param   string  $shopSku
+     * @return  $this
+     * @throws  LocalizedException
      */
     public function validateShopSku($shopSku)
     {

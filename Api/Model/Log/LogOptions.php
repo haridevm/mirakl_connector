@@ -1,14 +1,11 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\Log;
 
 class LogOptions
 {
-    public const LOG_DISABLED      = 0;
-    public const LOG_REQUESTS_ONLY = 1;
-    public const LOG_ALL           = 2;
+    const LOG_DISABLED      = 0;
+    const LOG_REQUESTS_ONLY = 1;
+    const LOG_ALL           = 2;
 
     /**
      * @var array
@@ -20,7 +17,7 @@ class LogOptions
     ];
 
     /**
-     * @return array
+     * @return  array
      */
     public static function getOptions()
     {

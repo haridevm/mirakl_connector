@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\Offer\Grid;
 
 use Magento\Backend\Block\Widget\Context;
@@ -29,8 +26,7 @@ class Container extends \Magento\Backend\Block\Widget\Grid\Container
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return void
      */
     protected function _construct()
     {
@@ -48,7 +44,7 @@ class Container extends \Magento\Backend\Block\Widget\Grid\Container
                 'class' => 'save primary',
                 'onclick' => 'confirmSetLocation(\'' . __(
                     'Are you sure? This will update all modified offers since the last synchronization.'
-                ) . '\', \'' . $this->getSyncOffersUrl() . '\')'
+                    ) . '\', \'' . $this->getSyncOffersUrl() . '\')'
             ]
         );
     }

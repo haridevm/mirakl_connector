@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\Invoice;
 
 use Magento\Framework\DataObject;
@@ -23,10 +20,10 @@ class Totals extends Template
     protected $invoiceManagement;
 
     /**
-     * @param Template\Context  $context
-     * @param TaxConfig         $taxConfig
-     * @param InvoiceManagement $invoiceManagement
-     * @param array             $data
+     * @param   Template\Context    $context
+     * @param   TaxConfig           $taxConfig
+     * @param   InvoiceManagement   $invoiceManagement
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -40,7 +37,7 @@ class Totals extends Template
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function initTotals()
     {
@@ -93,8 +90,8 @@ class Totals extends Template
     }
 
     /**
-     * @param Invoice $invoice
-     * @return float
+     * @param   Invoice $invoice
+     * @return  float
      */
     protected function getMiraklBaseShippingExclTax(Invoice $invoice)
     {
@@ -102,8 +99,8 @@ class Totals extends Template
     }
 
     /**
-     * @param Invoice $invoice
-     * @return float
+     * @param   Invoice $invoice
+     * @return  float
      */
     protected function getMiraklBaseShippingInclTax(Invoice $invoice)
     {
@@ -111,8 +108,8 @@ class Totals extends Template
     }
 
     /**
-     * @param Invoice $invoice
-     * @return float
+     * @param   Invoice $invoice
+     * @return  float
      */
     protected function getMiraklShippingExclTax(Invoice $invoice)
     {
@@ -120,8 +117,8 @@ class Totals extends Template
     }
 
     /**
-     * @param Invoice $invoice
-     * @return float
+     * @param   Invoice $invoice
+     * @return  float
      */
     protected function getMiraklShippingInclTax(Invoice $invoice)
     {
@@ -129,9 +126,9 @@ class Totals extends Template
     }
 
     /**
-     * @param Invoice $invoice
-     * @param string  $field
-     * @return float
+     * @param   Invoice $invoice
+     * @param   string  $field
+     * @return  float
      */
     protected function getAmount(Invoice $invoice, $field)
     {
@@ -145,12 +142,11 @@ class Totals extends Template
         foreach ($invoice->getItems() as $item) {
             $orderItem = $item->getOrderItem();
 
-            if (
-                $item->getQty() <= 0 ||
+            if ($item->getQty() <= 0 ||
                 $orderItem->isDummy() ||
                 !$orderItem->getMiraklOfferId() ||
-                !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId())
-            ) {
+                !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId()))
+            {
                 continue;
             }
 

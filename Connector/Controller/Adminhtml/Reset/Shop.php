@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Reset;
 
 use Mirakl\Connector\Controller\Adminhtml\AbstractReset;

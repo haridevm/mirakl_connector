@@ -1,25 +1,21 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
-use Magento\Backend\App\Action;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ResourceModel\Process as ProcessResource;
 
-abstract class AbstractProcessAction extends Action
+abstract class AbstractProcessAction extends \Magento\Backend\App\Action
 {
     use RedirectRefererTrait;
 
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Process::process';
+    const ADMIN_RESOURCE = 'Mirakl_Process::process';
 
     /**
-     * @return Process
+     * @return  Process
      */
     protected function getProcess()
     {
@@ -33,7 +29,7 @@ abstract class AbstractProcessAction extends Action
     }
 
     /**
-     * @return Process
+     * @return  Process
      */
     protected function getProcessModel()
     {
@@ -41,7 +37,7 @@ abstract class AbstractProcessAction extends Action
     }
 
     /**
-     * @return ProcessResource
+     * @return  ProcessResource
      */
     protected function getProcessResource()
     {
@@ -49,9 +45,9 @@ abstract class AbstractProcessAction extends Action
     }
 
     /**
-     * @param string $errorMessage
-     * @param bool   $referer
-     * @return \Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
+     * @param   string  $errorMessage
+     * @param   bool    $referer
+     * @return  \Magento\Framework\Controller\Result\Redirect|\Magento\Framework\Controller\ResultInterface
      */
     protected function redirectError($errorMessage, $referer = false)
     {

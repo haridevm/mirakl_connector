@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Event\Observer\Api;
@@ -12,7 +11,7 @@ use Mirakl\Event\Model\Event;
 class AddEventsUserAgentObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

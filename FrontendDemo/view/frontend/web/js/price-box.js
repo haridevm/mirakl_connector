@@ -6,8 +6,7 @@ define([
     'use strict';
 
     $.widget('mage.priceBox', $.mage.priceBox, {
-        _init: function initPriceBox()
-        {
+        _init: function initPriceBox() {
             let box = this.element;
             let $addToCartButton = $('#product-addtocart-button, #product-updatecart-button');
 
@@ -18,8 +17,7 @@ define([
             this.cache.displayPrices = utils.deepClone(this.options.prices);
         },
 
-        reloadPrice: function reDrawPrices()
-        {
+        reloadPrice: function reDrawPrices() {
             this._super();
             this.reloadOffer();
         },
@@ -27,8 +25,7 @@ define([
         /**
          * Render min shipping price and price additional info and stock and state
          */
-        reloadOffer: function reloadOffer()
-        {
+        reloadOffer: function reloadOffer() {
             let offerData,
                 $priceBox = $('.product-info-main'),
                 $offerListElements = $('#product-offers-list').find('tr.offer'),
@@ -67,17 +64,6 @@ define([
                 $('.product-info-price .price-box').html(
                     $offerListElementsVisible.find('td.price').first().html()
                 );
-
-                if (offerData) {
-                    // show shipping details for selected offer
-                    let offerId = offerData.offerId;
-                    let shippingDetails = $('.offer-shipping.best-offer-shipping[data-shipping-offer-id="' + offerId + '"]').first();
-                    if (shippingDetails) {
-                        shippingDetails = shippingDetails.clone();
-                        $('.product-info-price .price-box').append(shippingDetails);
-                        shippingDetails.wrapAll('<span class="offer-wrapper"></span>');
-                    }
-                }
             }
 
             if (offerData) {
@@ -101,8 +87,8 @@ define([
                     $priceBox.find('.offer-data .offer-seller-rating').hide();
                 }
 
+                $priceBox.find('.offer-wrapper').show();
                 $priceBox.find('.price-box .offer-price-description').show();
-                $priceBox.find('.product-info-stock-sku .stock').hide();
                 $priceBox.find('.product-info-stock-sku .stock.offer').show();
                 $priceBox.find('.product-info-stock-sku .offer-state').show();
                 $priceBox.find('.offer-data').show();
@@ -111,7 +97,6 @@ define([
                 $priceBox.find('#product-addtocart-button').attr('data-offer', '');
                 $priceBox.find('.price-box .offer-wrapper').hide();
                 $priceBox.find('.price-box .offer-price-description').hide();
-                $priceBox.find('.product-info-stock-sku .stock').show();
                 $priceBox.find('.product-info-stock-sku .stock.offer').hide();
                 $priceBox.find('.product-info-stock-sku .offer-state').hide();
                 $priceBox.find('.offer-data').hide();
@@ -119,8 +104,7 @@ define([
             }
         },
 
-        updateProductTierPrice: function updateProductTierPrice()
-        {
+        updateProductTierPrice: function updateProductTierPrice() {
             if (this.options.prices.finalPrice) {
                 this._super(); // Execute default code only if it's not a full marketplace product
             }

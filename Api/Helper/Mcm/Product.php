@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper\Mcm;
 
 use Mirakl\Api\Helper\ClientHelper\MCM as ClientMCM;
@@ -20,12 +17,11 @@ class Product extends ClientMCM implements SynchroResultInterface, ExportDataInt
      * (CM51) Export products CSV file
      *
      * Delta export of the MCM products that are accepted and valid in CSV format.
-     * The exported product file uses the product attribute codes as headers,
-     * and has an additional column named mirakl-product-id.
+     * The exported product file uses the product attribute codes as headers, and has an additional column named mirakl-product-id.
      * This column contains the Mirakl unique identifier for each exported product.
      *
-     * @param array $data
-     * @return \SplFileObject
+     * @param   array   $data
+     * @return  \SplFileObject
      */
     public function import(array $data)
     {
@@ -82,9 +78,9 @@ class Product extends ClientMCM implements SynchroResultInterface, ExportDataInt
     /**
      * (CM61) Export deleted products
      *
-     * @param mixed $deletedFrom
-     * @param array $productIds
-     * @return array
+     * @param   mixed   $deletedFrom
+     * @param   array   $productIds
+     * @return  array
      */
     public function getDeleteProducts($deletedFrom = null, array $productIds = [])
     {
@@ -107,8 +103,8 @@ class Product extends ClientMCM implements SynchroResultInterface, ExportDataInt
 
         $response = $this->send($request, true);
 
-        if ($response->getStatusCode() === 204) {
-            return []; // No products to delete
+        if ($response->getStatusCode() === 204) { // No products to delete
+            return [];
         }
 
         return \Mirakl\parse_json_response($response);
@@ -117,8 +113,8 @@ class Product extends ClientMCM implements SynchroResultInterface, ExportDataInt
     /**
      * (CM22) Send product synchronization status request to Mirakl platform
      *
-     * @param string $synchroId
-     * @return \Mirakl\MCM\Front\Domain\Product\Synchronization\ProductSynchronizationStatus
+     * @param   string  $synchroId
+     * @return  \Mirakl\MCM\Front\Domain\Product\Synchronization\ProductSynchronizationStatus
      */
     public function getSynchroResult($synchroId)
     {
@@ -130,8 +126,8 @@ class Product extends ClientMCM implements SynchroResultInterface, ExportDataInt
     /**
      * (CM23) Get product synchronization report from Mirakl platform
      *
-     * @param string $synchroId
-     * @return \SplFileObject
+     * @param   string  $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {

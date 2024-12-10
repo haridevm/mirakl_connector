@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Setup\Patch\Data;
@@ -15,6 +14,7 @@ class DisableProcessAutoAsyncExecutionByDefault extends AbstractDefaultConfigApp
     public function apply(): void
     {
         $this->setup->startSetup();
+
         if ($this->isFreshInstall->execute()) {
             // We set process auto async execution by default to NO
             $this->configWriter->save(ProcessConfig::XML_PATH_AUTO_ASYNC_EXECUTION, 0);

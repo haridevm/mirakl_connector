@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Magento\Framework\Exception\LocalizedException;
@@ -20,18 +17,15 @@ use Mirakl\MMP\FrontOperator\Request\Payment\Debit\GetOrderDebitsRequest;
 use Mirakl\MMP\FrontOperator\Request\Payment\Refund\ConfirmOrderRefundRequest;
 use Mirakl\MMP\FrontOperator\Request\Payment\Refund\GetOrderRefundsRequest;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Payment extends ClientHelper\MMP
 {
-    public const PAY_ON_DELIVERY   = 'PAY_ON_DELIVERY';
-    public const PAY_ON_ACCEPTANCE = 'PAY_ON_ACCEPTANCE';
-    public const PAY_ON_DUE_DATE   = 'PAY_ON_DUE_DATE';
+    const PAY_ON_DELIVERY   = 'PAY_ON_DELIVERY';
+    const PAY_ON_ACCEPTANCE = 'PAY_ON_ACCEPTANCE';
+    const PAY_ON_DUE_DATE   = 'PAY_ON_DUE_DATE';
 
     /**
-     * @param MiraklOrder $miraklOrder
-     * @return bool
+     * @param   MiraklOrder $miraklOrder
+     * @return  bool
      */
     public function canDebitOrder(MiraklOrder $miraklOrder)
     {
@@ -45,9 +39,9 @@ class Payment extends ClientHelper\MMP
     }
 
     /**
-     * @param MiraklOrder\OrderLine $miraklOrderLine
-     * @param MiraklOrder           $miraklOrder
-     * @return bool
+     * @param   MiraklOrder\OrderLine   $miraklOrderLine
+     * @param   MiraklOrder             $miraklOrder
+     * @return  bool
      */
     public function canDebitOrderLine(MiraklOrder\OrderLine $miraklOrderLine, MiraklOrder $miraklOrder)
     {
@@ -67,7 +61,7 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA01) Validates or refuses Mirakl order payments
      *
-     * @param OrderPaymentCollection $orderPayments
+     * @param   OrderPaymentCollection  $orderPayments
      */
     public function confirmOrderDebit(OrderPaymentCollection $orderPayments)
     {
@@ -84,7 +78,7 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA02) Validates or refuses Mirakl order refunds
      *
-     * @param OrderLineRefundCollection $orderLineRefunds
+     * @param   OrderLineRefundCollection   $orderLineRefunds
      */
     public function confirmOrderRefund(OrderLineRefundCollection $orderLineRefunds)
     {
@@ -101,12 +95,12 @@ class Payment extends ClientHelper\MMP
     /**
      * Validates payment of a Mirakl order
      *
-     * @param MiraklOrder      $miraklOrder
-     * @param string           $customerId
-     * @param string           $status
-     * @param string           $transactionNumber
-     * @param string|\DateTime $transactionDate
-     * @throws LocalizedException
+     * @param   MiraklOrder         $miraklOrder
+     * @param   string              $customerId
+     * @param   string              $status
+     * @param   string              $transactionNumber
+     * @param   string|\DateTime    $transactionDate
+     * @throws  LocalizedException
      */
     public function debitPayment(
         MiraklOrder $miraklOrder,
@@ -133,7 +127,6 @@ class Payment extends ClientHelper\MMP
             foreach ($orderLine->getTaxes() as $tax) {
                 $totalPrice += $tax->getAmount();
             }
-
             foreach ($orderLine->getShippingTaxes() as $tax) {
                 $totalPrice += $tax->getAmount();
             }
@@ -168,14 +161,13 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA11) List ALL pending order debits in "PAY_ON_ACCEPTANCE" workflow and order status is "WAITING_DEBIT_PAYMENT"
      *
-     * @return DebitOrderCollection
+     * @return  DebitOrderCollection
      */
     public function getAllOrderDebits()
     {
         $offset = 0;
         $max = 100;
         $debits = [];
-
         while (true) {
             $result = $this->getOrderDebits(true, $offset, $max);
             $debits = array_merge($debits, $result->getItems());
@@ -191,10 +183,10 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA11) List pending order debits in "PAY_ON_ACCEPTANCE" workflow and order status is "WAITING_DEBIT_PAYMENT"
      *
-     * @param bool $paginate
-     * @param int  $offset
-     * @param int  $max
-     * @return DebitOrderCollection
+     * @param   bool    $paginate
+     * @param   int     $offset
+     * @param   int     $max
+     * @return  DebitOrderCollection
      */
     public function getOrderDebits($paginate = false, $offset = 0, $max = 10)
     {
@@ -219,14 +211,13 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA12) Lists ALL order refunds where refund state is RefundState::WAITING_REFUND_PAYMENT
      *
-     * @return RefundOrderCollection
+     * @return  RefundOrderCollection
      */
     public function getAllOrderRefunds()
     {
         $offset = 0;
         $max = 100;
         $refunds = [];
-
         while (true) {
             $result = $this->getOrderRefunds(true, $offset, $max);
             $refunds = array_merge($refunds, $result->getItems());
@@ -242,10 +233,10 @@ class Payment extends ClientHelper\MMP
     /**
      * (PA12) Lists order refunds where refund state is RefundState::WAITING_REFUND_PAYMENT
      *
-     * @param bool $paginate
-     * @param int  $offset
-     * @param int  $max
-     * @return RefundOrderCollection
+     * @param   bool    $paginate
+     * @param   int     $offset
+     * @param   int     $max
+     * @return  RefundOrderCollection
      */
     public function getOrderRefunds($paginate = false, $offset = 0, $max = 10)
     {
@@ -268,8 +259,8 @@ class Payment extends ClientHelper\MMP
     }
 
     /**
-     * @param string $paymentMethod
-     * @return array
+     * @param   string  $paymentMethod
+     * @return  array
      */
     public static function getOrderStatusesForPaymentMethod($paymentMethod = self::PAY_ON_ACCEPTANCE)
     {
@@ -293,12 +284,11 @@ class Payment extends ClientHelper\MMP
     /**
      * Refund payment of a Mirakl order
      *
-     * @param MiraklOrder      $miraklOrder
-     * @param string           $status
-     * @param string           $refundId
-     * @param string           $transactionNumber
-     * @param string|\DateTime $transactionDate
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   MiraklOrder         $miraklOrder
+     * @param   string              $status
+     * @param   string              $refundId
+     * @param   string              $transactionNumber
+     * @param   string|\DateTime    $transactionDate
      */
     public function refundPayment(
         MiraklOrder $miraklOrder,

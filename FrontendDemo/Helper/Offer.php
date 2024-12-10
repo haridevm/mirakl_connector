@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -37,10 +34,10 @@ class Offer extends AbstractHelper
     protected $isOperatorProductAvailable;
 
     /**
-     * @param Context                    $context
-     * @param Config                     $config
-     * @param ConnectorOfferHelper       $connectorOfferHelper
-     * @param StockQtyHelper             $stockQtyHelper
+     * @param Context $context
+     * @param Config $config
+     * @param ConnectorOfferHelper $connectorOfferHelper
+     * @param StockQtyHelper $stockQtyHelper
      * @param IsOperatorProductAvailable $isOperatorProductAvailable
      */
     public function __construct(
@@ -60,8 +57,8 @@ class Offer extends AbstractHelper
     /**
      * Get the first item to display
      *
-     * @param Product $product
-     * @return OfferModel|null
+     * @param   Product $product
+     * @return  OfferModel|null
      */
     public function getBestOffer(Product $product)
     {
@@ -77,8 +74,8 @@ class Offer extends AbstractHelper
     /**
      * Get the product with the min price and stock qty > 0
      *
-     * @param Product $product
-     * @return Product|null
+     * @param   Product $product
+     * @return  Product|null
      */
     public function getBestOperatorOffer(Product $product)
     {
@@ -111,8 +108,8 @@ class Offer extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return bool
+     * @param   Product     $product
+     * @return  bool
      */
     public function isOperatorProductAvailable(Product $product)
     {
@@ -127,8 +124,8 @@ class Offer extends AbstractHelper
     /**
      * Indicates whether the specified offer is at New state or not
      *
-     * @param OfferModel $offer
-     * @return bool
+     * @param   OfferModel  $offer
+     * @return  bool
      */
     public function isProductNew(OfferModel $offer)
     {
@@ -138,8 +135,8 @@ class Offer extends AbstractHelper
     /**
      * Sort given offers array by new state and price
      *
-     * @param OfferModel[] $offers
-     * @return void
+     * @param   OfferModel[]    $offers
+     * @return  void
      */
     public function sortOffers(array &$offers)
     {
@@ -164,9 +161,9 @@ class Offer extends AbstractHelper
     /**
      * Get all offers
      *
-     * @param Product   $product
-     * @param int|array $excludeOfferIds
-     * @return OfferModel[]
+     * @param   Product     $product
+     * @param   int|array   $excludeOfferIds
+     * @return  OfferModel[]
      */
     public function getAllOffers(Product $product, $excludeOfferIds = null)
     {
@@ -183,8 +180,8 @@ class Offer extends AbstractHelper
     /**
      * Get store name
      *
-     * @param Product $product
-     * @return string
+     * @param   Product $product
+     * @return  string
      */
     public function getStoreName(Product $product)
     {
@@ -194,8 +191,8 @@ class Offer extends AbstractHelper
     /**
      * Return if product has available offer
      *
-     * @param Product $product
-     * @return bool
+     * @param   Product $product
+     * @return  bool
      */
     public function hasAvailableOffersForProduct($product)
     {
@@ -205,8 +202,8 @@ class Offer extends AbstractHelper
     /**
      * Returns shop of specified offer if available
      *
-     * @param OfferModel $offer
-     * @return Shop
+     * @param   OfferModel  $offer
+     * @return  Shop
      */
     public function getOfferShop(OfferModel $offer)
     {
@@ -216,8 +213,8 @@ class Offer extends AbstractHelper
     /**
      * Returns condition name of specified offer
      *
-     * @param OfferModel $offer
-     * @return string
+     * @param   OfferModel  $offer
+     * @return  string
      */
     public function getOfferCondition(OfferModel $offer)
     {
@@ -225,8 +222,8 @@ class Offer extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return array
+     * @param   Product $product
+     * @return  array
      */
     public function getOffersSummary(Product $product)
     {
@@ -253,8 +250,8 @@ class Offer extends AbstractHelper
     }
 
     /**
-     * @param OfferModel $offer
-     * @return array
+     * @param   OfferModel  $offer
+     * @return  array
      */
     public function getOfferData(OfferModel $offer)
     {
@@ -262,7 +259,7 @@ class Offer extends AbstractHelper
 
         return [
             'priceAdditionalInfo'  => $offer->getPriceAdditionalInfo(),
-            'conditionLabel'       => __($offer->getConditionName())->render(),
+            'conditionLabel'       => $offer->getConditionName(),
             'stock'                => $offer->getQuantity(),
             'type'                 => 'offer',
             'offerId'              => $offer->getId(),

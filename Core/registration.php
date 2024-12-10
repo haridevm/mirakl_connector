@@ -1,5 +1,4 @@
 <?php
-// phpcs:ignoreFile
 define('MIRAKL_BP', dirname(__DIR__));
 
 \Magento\Framework\Component\ComponentRegistrar::register(

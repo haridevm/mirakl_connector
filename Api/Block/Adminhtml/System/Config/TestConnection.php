@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Block\Adminhtml\System\Config;
@@ -11,7 +10,6 @@ class TestConnection extends Field
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'Mirakl_Api::system/config/test-connection.phtml';
 
@@ -28,8 +26,8 @@ class TestConnection extends Field
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @param AbstractElement $element
+     * @return string
      */
     protected function _getElementHtml(AbstractElement $element): string
     {

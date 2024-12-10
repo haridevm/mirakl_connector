@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -11,23 +8,23 @@ use Mirakl\Mci\Helper\Data as MciHelper;
 
 class Data extends MciHelper
 {
-    public const CSV_MIRAKL_PRODUCT_ID                 = 'mirakl-product-id';
-    public const CSV_MIRAKL_PRODUCT_SKU                = 'mirakl-product-sku';
-    public const CSV_MIRAKL_VARIANT_GROUP_CODE         = 'variant_group_code';
-    public const JSON_MIRAKL_PRODUCT_ID                = 'mirakl_product_id';
-    public const JSON_MIRAKL_PRODUCT_SKU               = 'product_sku';
-    public const JSON_MIRAKL_VARIANT_GROUP_CODE        = 'variant_group_code';
-    public const ATTRIBUTE_MIRAKL_PRODUCT_SKU          = 'sku';
-    public const ATTRIBUTE_MIRAKL_PRODUCT_ID           = 'mirakl_mcm_product_id';
-    public const ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER   = 'mirakl_mcm_is_operator_master';
-    public const ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE   = 'mirakl_mcm_variant_group_code';
+    const CSV_MIRAKL_PRODUCT_ID                 = 'mirakl-product-id';
+    const CSV_MIRAKL_PRODUCT_SKU                = 'mirakl-product-sku';
+    const CSV_MIRAKL_VARIANT_GROUP_CODE         = 'variant_group_code';
+    const JSON_MIRAKL_PRODUCT_ID                = 'mirakl_product_id';
+    const JSON_MIRAKL_PRODUCT_SKU               = 'product_sku';
+    const JSON_MIRAKL_VARIANT_GROUP_CODE        = 'variant_group_code';
+    const ATTRIBUTE_MIRAKL_PRODUCT_SKU          = 'sku';
+    const ATTRIBUTE_MIRAKL_PRODUCT_ID           = 'mirakl_mcm_product_id';
+    const ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER   = 'mirakl_mcm_is_operator_master';
+    const ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE   = 'mirakl_mcm_variant_group_code';
 
     /**
      * Adds Mirakl product id to specified product
      *
-     * @param DataObject $product
-     * @param string     $miraklProductId
-     * @return DataObject
+     * @param   DataObject  $product
+     * @param   string      $miraklProductId
+     * @return  DataObject
      */
     public function addProductMiraklProductId(DataObject $product, $miraklProductId)
     {
@@ -42,8 +39,8 @@ class Data extends MciHelper
     /**
      * Tries to find a simple product by Mirakl product id
      *
-     * @param string $miraklProductId
-     * @return Product|null
+     * @param   string  $miraklProductId
+     * @return  Product|null
      */
     public function findSimpleProductByDeduplication($miraklProductId)
     {
@@ -51,9 +48,7 @@ class Data extends MciHelper
 
         if (!empty($miraklProductId)) {
             $product = $this->findProductByAttribute(
-                self::ATTRIBUTE_MIRAKL_PRODUCT_ID,
-                $miraklProductId,
-                Product\Type::TYPE_SIMPLE
+                self::ATTRIBUTE_MIRAKL_PRODUCT_ID, $miraklProductId, Product\Type::TYPE_SIMPLE
             );
         }
 
@@ -63,8 +58,8 @@ class Data extends MciHelper
     /**
      * Tries to find a simple product by Mirakl product sku
      *
-     * @param string $miraklProductSku
-     * @return Product|null
+     * @param   string  $miraklProductSku
+     * @return  Product|null
      */
     public function findProductBySku($miraklProductSku)
     {
@@ -72,9 +67,7 @@ class Data extends MciHelper
 
         if (!empty($miraklProductSku)) {
             $product = $this->findProductByAttribute(
-                self::ATTRIBUTE_MIRAKL_PRODUCT_SKU,
-                $miraklProductSku,
-                Product\Type::TYPE_SIMPLE
+                self::ATTRIBUTE_MIRAKL_PRODUCT_SKU, $miraklProductSku, Product\Type::TYPE_SIMPLE
             );
         }
 
@@ -84,17 +77,15 @@ class Data extends MciHelper
     /**
      * Verify that provided Mirakl Product Id does not contain a forbidden char
      *
-     * @param string $miraklProductId
-     * @return $this
-     * @throws LocalizedException
+     * @param   string  $miraklProductId
+     * @return  $this
+     * @throws  LocalizedException
      */
     public function validateMiraklProductId($miraklProductId)
     {
         foreach ($this->_forbiddenChars as $char) {
             if (false !== strpos($miraklProductId, $char)) {
-                throw new LocalizedException(
-                    __('Invalid Mirakl Product Id specified, char %1 is not allowed.', $char)
-                );
+                throw new LocalizedException(__('Invalid Mirakl Product Id specified, char %1 is not allowed.', $char));
             }
         }
 
@@ -102,9 +93,9 @@ class Data extends MciHelper
     }
 
     /**
-     * @param string $variantId
-     * @param string $type
-     * @return \Magento\Catalog\Model\ResourceModel\Product\Collection
+     * @param   string  $variantId
+     * @param   string  $type
+     * @return  \Magento\Catalog\Model\ResourceModel\Product\Collection
      */
     public function findProductsByVariantId($variantId, $type = null)
     {
@@ -123,9 +114,9 @@ class Data extends MciHelper
     }
 
     /**
-     * @param string $variantId
-     * @param string $type
-     * @return Product|null
+     * @param   string  $variantId
+     * @param   string  $type
+     * @return  Product|null
      */
     public function findMcmProductByVariantId($variantId, $type = null)
     {
@@ -135,7 +126,7 @@ class Data extends MciHelper
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function addProductVariantId(DataObject $product, $variantId)
     {

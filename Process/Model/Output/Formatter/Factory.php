@@ -1,11 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Output\Formatter;
 
 use Magento\Framework\ObjectManagerInterface;
-
 use function Mirakl\pascalize;
 
 class Factory

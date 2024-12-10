@@ -2,13 +2,13 @@
     "name": "mirakl/connector-magento2-plugin",
     "description": "Official Magento 2 Connector for the Mirakl Marketplace Platform.",
     "type": "magento2-component",
-    "version": "1.26.1",
+    "version": "1.24.2",
     "license": [
         "Mirakl"
     ],
     "require": {
         "php": ">=8.1.0",
-        "mirakl/sdk-php-front": "^1.21.1",
+        "mirakl/sdk-php-front": "^1.20.0",
         "ext-exif": "*"
     },
     "autoload": {
@@ -16,21 +16,20 @@
             "registration.php"
         ],
         "psr-4": {
-            "Mirakl\\Adminhtml\\": "Adminhtml/",
             "Mirakl\\Api\\": "Api/",
             "Mirakl\\Catalog\\": "Catalog/",
             "Mirakl\\Connector\\": "Connector/",
+            "Mirakl\\Adminhtml\\": "Adminhtml/",
             "Mirakl\\Core\\": "Core/",
             "Mirakl\\Event\\": "Event/",
             "Mirakl\\FrontendDemo\\": "FrontendDemo/",
-            "Mirakl\\GraphQl\\": "GraphQl/",
             "Mirakl\\Mci\\": "Mci/",
-            "Mirakl\\Mcm\\": "Mcm/",
-            "Mirakl\\OfferIndexer\\": "OfferIndexer/",
-            "Mirakl\\Payout\\": "Payout/",
             "Mirakl\\Process\\": "Process/",
+            "Mirakl\\OfferIndexer\\": "OfferIndexer/",
             "Mirakl\\SalesChannels\\": "SalesChannels/",
-            "Mirakl\\Sync\\": "Sync/"
+            "Mirakl\\Sync\\": "Sync/",
+            "Mirakl\\Mcm\\": "Mcm/",
+            "Mirakl\\GraphQl\\": "GraphQl/"
         }
     }
 }

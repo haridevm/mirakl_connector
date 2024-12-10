@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Product;
 
 use Magento\Catalog\Model\Product;
@@ -15,7 +12,7 @@ use Mirakl\Process\Model\Process;
 class SaveAfterObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -64,7 +61,7 @@ class SaveAfterObserver extends AbstractObserver implements ObserverInterface
 
         /**
          * $childrenIds contains the real simple product ids associated to the current configurable product in Magento.
-         * $variantIds contains the product ids with the same variant group code as the current configurable product.
+         * $variantIds contains the product ids that have the same variant group code as the current configurable product.
          * The goal is to compare both product ids arrays to retrieve the variant product ids that are not linked to
          * the configurable product anymore in Magento (parent-child relationship removed in Magento).
          */

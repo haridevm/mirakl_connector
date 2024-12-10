@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Document;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -9,8 +6,9 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 class Type extends AbstractDb
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Initialize resource model
+     *
+     * @return  void
      */
     protected function _construct()
     {

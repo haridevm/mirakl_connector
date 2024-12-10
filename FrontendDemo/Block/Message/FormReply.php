@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Mirakl\MMP\FrontOperator\Domain\Reason;
@@ -10,18 +7,16 @@ class FormReply extends FormNew
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_formTitle = 'Answer';
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_reasonsLabel = 'Update Topic';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFormAction()
     {
@@ -33,7 +28,7 @@ class FormReply extends FormNew
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFormField($field)
     {
@@ -41,7 +36,7 @@ class FormReply extends FormNew
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isReasonSelected(Reason $reason)
     {

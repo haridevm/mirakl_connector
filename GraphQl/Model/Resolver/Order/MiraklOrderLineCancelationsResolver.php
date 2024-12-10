@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Order;
@@ -53,3 +52,4 @@ class MiraklOrderLineCancelationsResolver implements ResolverInterface
         return $cancelations;
     }
 }
+

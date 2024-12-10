@@ -1,11 +1,9 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
+
 use Mirakl\Connector\Helper\Order as OrderHelper;
 
 class UpdateEmailOrderShippingObserver implements ObserverInterface
@@ -16,18 +14,18 @@ class UpdateEmailOrderShippingObserver implements ObserverInterface
     private $orderHelper;
 
     /**
-     * @param OrderHelper $orderHelper
+     * @param   OrderHelper $orderHelper
      */
-    public function __construct(OrderHelper $orderHelper)
-    {
+    public function __construct(
+        OrderHelper $orderHelper
+    ) {
         $this->orderHelper = $orderHelper;
     }
 
     /**
      * Set shipping description for marketplace order
      *
-     * @param Observer $observer
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   Observer    $observer
      */
     public function execute(Observer $observer)
     {

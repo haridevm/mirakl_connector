@@ -1,20 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Observer\Quote\Address;
 
 use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 
-/**
- * @codingStandardsIgnoreFile
- */
 class AddMiraklTaxesAppliedObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote;
 
 use Magento\Framework\Event\ManagerInterface as EventManagerInterface;
@@ -29,9 +26,6 @@ use Mirakl\MMP\Front\Domain\Shipping\ShippingFeeType;
 use Mirakl\MMP\Front\Domain\Shipping\ShippingRateOffer;
 use Psr\Log\LoggerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Updater
 {
     /**
@@ -100,20 +94,19 @@ class Updater
     protected $logger;
 
     /**
-     * @param QuoteResourceFactory        $quoteResourceFactory
-     * @param QuoteItemResourceFactory    $quoteItemResourceFactory
-     * @param CustomOptionResourceFactory $customOptionResourceFactory
-     * @param PriceCurrencyInterface      $priceCurrency
-     * @param TaxCalculationFactory       $taxCalculationFactory
-     * @param EventManagerInterface       $eventManager
-     * @param OfferResourceFactory        $offerResourceFactory
-     * @param Config                      $config
-     * @param OfferCollector              $offerCollector
-     * @param Synchronizer                $quoteSynchronizer
-     * @param QuoteHelper                 $quoteHelper
-     * @param TaxHelper                   $taxHelper
-     * @param LoggerInterface             $logger
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   QuoteResourceFactory        $quoteResourceFactory
+     * @param   QuoteItemResourceFactory    $quoteItemResourceFactory
+     * @param   CustomOptionResourceFactory $customOptionResourceFactory
+     * @param   PriceCurrencyInterface      $priceCurrency
+     * @param   TaxCalculationFactory       $taxCalculationFactory
+     * @param   EventManagerInterface       $eventManager
+     * @param   OfferResourceFactory        $offerResourceFactory
+     * @param   Config                      $config
+     * @param   OfferCollector              $offerCollector
+     * @param   Synchronizer                $quoteSynchronizer
+     * @param   QuoteHelper                 $quoteHelper
+     * @param   TaxHelper                   $taxHelper
+     * @param   LoggerInterface             $logger
      */
     public function __construct(
         QuoteResourceFactory $quoteResourceFactory,
@@ -148,8 +141,8 @@ class Updater
     /**
      * Returns selected shipping fee type
      *
-     * @param CartItemInterface $item
-     * @return ShippingFeeType
+     * @param   CartItemInterface   $item
+     * @return  ShippingFeeType
      */
     public function getItemSelectedShippingType(CartItemInterface $item)
     {
@@ -167,8 +160,8 @@ class Updater
     /**
      * Returns shipping fee offer of given item (item that is a Mirakl offer)
      *
-     * @param CartItemInterface $item
-     * @return ShippingRateOffer
+     * @param   CartItemInterface   $item
+     * @return  ShippingRateOffer
      */
     public function getItemShippingRateOffer(CartItemInterface $item)
     {
@@ -188,9 +181,9 @@ class Updater
     /**
      * Returns shipping fee type by code
      *
-     * @param CartItemInterface $item
-     * @param string            $shippingTypeCode
-     * @return ShippingFeeType
+     * @param   CartItemInterface   $item
+     * @param   string              $shippingTypeCode
+     * @return  ShippingFeeType
      */
     public function getItemShippingTypeByCode(CartItemInterface $item, $shippingTypeCode)
     {
@@ -208,9 +201,9 @@ class Updater
     /**
      * Returns available shipping methods for given quote item
      *
-     * @param CartItemInterface     $item
-     * @param AddressInterface|null $shippingAddress
-     * @return ShippingFeeTypeCollection
+     * @param   CartItemInterface       $item
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  ShippingFeeTypeCollection
      */
     public function getItemShippingTypes(CartItemInterface $item, $shippingAddress = null)
     {
@@ -225,24 +218,19 @@ class Updater
                 if ($item->getQuote()->getMiraklIsShippingInclTax()) {
                     // Shipping prices INCLUDING tax
                     $shippingPriceInclTax = $shippingType->getTotalShippingPrice();
-                    $shippingPriceExclTax = $this->taxHelper
-                        ->getShippingPriceExclTax($shippingPriceInclTax, $shippingAddress);
+                    $shippingPriceExclTax = $this->taxHelper->getShippingPriceExclTax($shippingPriceInclTax, $shippingAddress);
                     $shippingType->setTotalShippingPrice($this->priceCurrency->convert($shippingPriceInclTax));
                 } else {
                     // Shipping prices EXCLUDING tax
                     $shippingPriceExclTax = $shippingType->getTotalShippingPrice();
-                    $shippingPriceInclTax = $this->taxHelper
-                        ->getShippingPriceInclTax($shippingPriceExclTax, $shippingAddress);
+                    $shippingPriceInclTax = $this->taxHelper->getShippingPriceInclTax($shippingPriceExclTax, $shippingAddress);
                     $shippingType->setTotalShippingPrice($this->priceCurrency->convert($shippingPriceExclTax));
                 }
 
                 $shippingType->setData('item_id', $item->getId());
                 $shippingType->setData('price_incl_tax', $this->priceCurrency->convert($shippingPriceInclTax));
                 $shippingType->setData('price_excl_tax', $this->priceCurrency->convert($shippingPriceExclTax));
-                $shippingType->setData(
-                    'total_shipping_price_incl_tax',
-                    $this->priceCurrency->convert($shippingPriceInclTax)
-                );
+                $shippingType->setData('total_shipping_price_incl_tax', $this->priceCurrency->convert($shippingPriceInclTax));
             }
 
             return $shippingTypes;
@@ -254,8 +242,8 @@ class Updater
     /**
      * Returns order shipping fee of given quote item (that is linked to a Mirakl offer)
      *
-     * @param CartItemInterface $item
-     * @return OrderShippingFee
+     * @param   CartItemInterface   $item
+     * @return  OrderShippingFee
      */
     public function getItemOrderShippingFee(CartItemInterface $item)
     {
@@ -282,16 +270,15 @@ class Updater
     /**
      * Prepares custom Mirakl taxes before being saved into quote item
      *
-     * @param CartItemInterface $item
-     * @param ShippingRateOffer $shippingRateOffer
-     * @return array
+     * @param   CartItemInterface   $item
+     * @param   ShippingRateOffer   $shippingRateOffer
+     * @return  array
      */
     protected function prepareCustomTaxes(CartItemInterface $item, ShippingRateOffer $shippingRateOffer)
     {
         $customTaxes = [];
 
-        if (
-            ($shippingRateOffer->getShippingTaxes() && $shippingRateOffer->getShippingTaxes()->count()) ||
+        if (($shippingRateOffer->getShippingTaxes() && $shippingRateOffer->getShippingTaxes()->count()) ||
             ($shippingRateOffer->getTaxes() && $shippingRateOffer->getTaxes()->count())
         ) {
             $offerTaxes = $shippingRateOffer->getTaxes()->toArray();
@@ -315,8 +302,8 @@ class Updater
     }
 
     /**
-     * @param CartInterface $quote
-     * @return $this
+     * @param   CartInterface   $quote
+     * @return  $this
      */
     protected function resetQuoteShippingFields(CartInterface $quote)
     {
@@ -340,8 +327,8 @@ class Updater
     /**
      * Reset all quote shipping methods
      *
-     * @param CartInterface $quote
-     * @return $this
+     * @param   CartInterface   $quote
+     * @return  $this
      */
     public function resetQuoteShippingTypes(CartInterface $quote)
     {
@@ -357,8 +344,8 @@ class Updater
     /**
      * Reset quote item shipping method
      *
-     * @param CartItemInterface $item
-     * @return $this
+     * @param   CartItemInterface   $item
+     * @return  $this
      */
     public function resetItemShippingType(CartItemInterface $item)
     {
@@ -370,9 +357,9 @@ class Updater
     /**
      * Update quote item shipping fee information
      *
-     * @param CartItemInterface $item
-     * @param ShippingType      $shippingType
-     * @return $this
+     * @param   CartItemInterface   $item
+     * @param   ShippingType        $shippingType
+     * @return  $this
      */
     public function setItemShippingType(CartItemInterface $item, ShippingType $shippingType)
     {
@@ -385,9 +372,9 @@ class Updater
     /**
      * Update quote item shipping method information
      *
-     * @param CartItemInterface $item
-     * @param string            $shippingTypeCode
-     * @return $this
+     * @param   CartItemInterface   $item
+     * @param   string              $shippingTypeCode
+     * @return  $this
      */
     public function setItemShippingTypeByCode(CartItemInterface $item, $shippingTypeCode)
     {
@@ -400,9 +387,9 @@ class Updater
     /**
      * Update quote item shipping fee amount
      *
-     * @param CartItemInterface $item
-     * @param ShippingRateOffer $shippingRateOffer
-     * @return $this
+     * @param   CartItemInterface   $item
+     * @param   ShippingRateOffer   $shippingRateOffer
+     * @return  $this
      */
     public function setItemShippingFee(CartItemInterface $item, ShippingRateOffer $shippingRateOffer)
     {
@@ -417,7 +404,7 @@ class Updater
 
         if (!empty($customTaxApplied)) {
             // If Mirakl custom taxes are available, store them
-            $item->setMiraklCustomTaxApplied(serialize($customTaxApplied)); // phpcs:ignore
+            $item->setMiraklCustomTaxApplied(serialize($customTaxApplied));
             if (isset($customTaxApplied['shipping_taxes'])) {
                 $shippingTaxAmount = 0;
                 $shippingTaxBaseAmount = 0;
@@ -464,32 +451,26 @@ class Updater
                 $miraklShippingTaxAmount = $convertedShippingFee - ($convertedShippingFee / (1 + $rate / 100));
                 $miraklBaseShippingTaxAmount = $baseShippingFee - ($baseShippingFee / (1 + $rate / 100));
                 foreach ($taxApplied as $i => $taxInfo) {
-                    $taxApplied[$i]['amount'] =
-                        ($convertedShippingFee - $miraklShippingTaxAmount) * $taxInfo['percent'] / 100;
-                    $taxApplied[$i]['base_amount'] =
-                        ($baseShippingFee - $miraklBaseShippingTaxAmount) * $taxInfo['percent'] / 100;
+                    $taxApplied[$i]['amount'] = ($convertedShippingFee - $miraklShippingTaxAmount) * $taxInfo['percent'] / 100;
+                    $taxApplied[$i]['base_amount'] = ($baseShippingFee - $miraklBaseShippingTaxAmount) * $taxInfo['percent'] / 100;
                 }
             }
 
             $item->setMiraklShippingTaxAmount($miraklShippingTaxAmount);
             $item->setMiraklBaseShippingTaxAmount($miraklBaseShippingTaxAmount);
-            $item->setMiraklShippingTaxApplied(serialize($taxApplied)); // phpcs:ignore
+            $item->setMiraklShippingTaxApplied(serialize($taxApplied));
         }
 
         // Calculate and save shipping amounts fields
-        if (isset($quote) && $quote->getMiraklIsShippingInclTax()) {
+        if ($quote->getMiraklIsShippingInclTax()) {
             $shippingBaseInclTax = $shippingRateOffer->getLineShippingPrice();
             $shippingInclTax = $this->priceCurrency->convert($shippingBaseInclTax, $item->getStore());
-            $shippingBaseExclTax = $shippingBaseInclTax
-                - $item->getMiraklBaseCustomShippingTaxAmount()
-                - $item->getMiraklBaseShippingTaxAmount();
+            $shippingBaseExclTax = $shippingBaseInclTax - $item->getMiraklBaseCustomShippingTaxAmount() - $item->getMiraklBaseShippingTaxAmount();
             $shippingExclTax = $this->priceCurrency->convert($shippingBaseExclTax, $item->getStore());
         } else {
             $shippingBaseExclTax = $shippingRateOffer->getLineShippingPrice();
             $shippingExclTax = $this->priceCurrency->convert($shippingBaseExclTax, $item->getStore());
-            $shippingBaseInclTax = $shippingBaseExclTax
-                + $item->getMiraklBaseCustomShippingTaxAmount()
-                + $item->getMiraklBaseShippingTaxAmount();
+            $shippingBaseInclTax = $shippingBaseExclTax + $item->getMiraklBaseCustomShippingTaxAmount() + $item->getMiraklBaseShippingTaxAmount();;
             $shippingInclTax = $this->priceCurrency->convert($shippingBaseInclTax, $item->getStore());
         }
 
@@ -504,9 +485,9 @@ class Updater
     /**
      * Update quote item shop information
      *
-     * @param CartItemInterface $item
-     * @param Offer             $offer
-     * @return $this
+     * @param   CartItemInterface   $item
+     * @param   Offer               $offer
+     * @return  $this
      */
     public function setShopToItem(CartItemInterface $item, Offer $offer)
     {
@@ -519,10 +500,7 @@ class Updater
     /**
      * Verify that offers in cart are still valid and synchronize them if needed (quantity, price, ...)
      *
-     * @param CartInterface $quote
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @param   CartInterface   $quote
      */
     public function synchronize(CartInterface $quote)
     {
@@ -533,8 +511,8 @@ class Updater
         }
 
         $hasError = false;
-        $defaultErrorMessage = __('An error occurred while processing your shopping cart.'
-            . ' Please contact store owner if the problem persists.');
+        $defaultErrorMessage = __('An error occurred while processing your shopping cart.' .
+            ' Please contact store owner if the problem persists.');
 
         $offerResource = $this->offerResourceFactory->create();
 
@@ -547,7 +525,7 @@ class Updater
             $shippingFees = $this->quoteSynchronizer->getShippingFees($quote);
 
             $this->eventManager->dispatch('mirakl_check_quote_offers_before', [
-                'quote'         => $quote,
+                'quote' => $quote,
                 'shipping_fees' => $shippingFees,
             ]);
 
@@ -561,9 +539,7 @@ class Updater
 
             // Update offer data on quote item if it has changed
             $updateItemOffer = function (
-                CartItemInterface $item,
-                Offer $offer,
-                $offerFinalPrice = null
+                CartItemInterface $item, Offer $offer, $offerFinalPrice = null
             ) use ($offerResource) {
                 $offerResource->load($offer, $offer->getId()); // reload offer data
                 /** @var \Magento\Quote\Model\Quote\Item\Option $customOption */
@@ -598,24 +574,22 @@ class Updater
                         if ($error->getErrorCode() == 'OFFER_NOT_FOUND') {
                             if ($this->config->isAutoRemoveOffers()) {
                                 $offerResource->delete($offer);
-                                $message = __('Offer for product "%1" is not available anymore. '
-                                    . 'It has been removed from your cart.', $item->getName());
+                                $message = __(
+                                    'Offer for product "%1" is not available anymore. It has been removed from your cart.',
+                                    $item->getName()
+                                );
                                 $addQuoteError($message);
                                 $quote->removeItem($item->getId());
                             } else {
                                 $addItemError($item, __('This offer no longer exists.'));
                             }
-                        } elseif (
-                            $error->getErrorCode() == 'SHIPPING_TYPE_NOT_ALLOWED'
-                            && $error->getShippingTypeCode()
-                        ) {
-                            // Message on item are displayed only on cart view so
-                            // modifications need to be made in cart controller
+                        } elseif ($error->getErrorCode() == 'SHIPPING_TYPE_NOT_ALLOWED' && $error->getShippingTypeCode()) {
+                            // Message on item are displed only on cart view so modifications need to be made in cart controler
                             $item->setMiraklShippingType('');
                             $item->setMiraklShippingTypeLabel('');
                             $addItemError($item, __(
-                                'The selected shipping method is not allowed for this offer, it has been reset. '
-                                . 'Please refresh the page to list available shipping methods.'
+                                'The selected shipping method is not allowed for this offer, it has been reset. ' .
+                                'Please refresh the page to list available shipping methods.'
                             ));
                         } else {
                             $addItemError($item, __(
@@ -642,8 +616,7 @@ class Updater
 
                 // Check if offer quantity has changed
                 if ($offer->getQty() != $shippingRateOffer->getQuantity()) {
-                    // Message on item are displayed only on cart view so
-                    // modifications need to be made in cart controller
+                    // Message on item is displayed only on cart view so modifications need to be made in cart controller
                     if ($this->config->isAutoUpdateOffers()) {
                         $offerResource->updateOrderConditions($offerId);
                         $updateItemOffer($item, $offer);
@@ -668,26 +641,20 @@ class Updater
                         $sdkOffer = $offerResource->updateOrderConditions($offerId);
                         $updateItemOffer($item, $offer);
 
-                        if (
-                            $sdkOffer->getMinOrderQuantity()
-                            && $shippingRateOffer->getLineOriginalQuantity() < $sdkOffer->getMinOrderQuantity()
-                        ) {
+                        if ($sdkOffer->getMinOrderQuantity()
+                                && $shippingRateOffer->getLineOriginalQuantity() < $sdkOffer->getMinOrderQuantity()) {
                             $addItemError($item, __(
                                 'The fewest you may purchase is %1.',
                                 $sdkOffer->getMinOrderQuantity() * 1
                             ));
-                        } elseif (
-                            $sdkOffer->getMaxOrderQuantity()
-                            && $shippingRateOffer->getLineOriginalQuantity() > $sdkOffer->getMaxOrderQuantity()
-                        ) {
+                        } elseif ($sdkOffer->getMaxOrderQuantity()
+                                && $shippingRateOffer->getLineOriginalQuantity() > $sdkOffer->getMaxOrderQuantity()) {
                             $addItemError($item, __(
                                 'The most you may purchase is %1.',
                                 $sdkOffer->getMaxOrderQuantity() * 1
                             ));
-                        } elseif (
-                            $sdkOffer->getPackageQuantity() > 1
-                            && $shippingRateOffer->getLineOriginalQuantity() % $sdkOffer->getPackageQuantity() != 0
-                        ) {
+                        } elseif ($sdkOffer->getPackageQuantity() > 1
+                                && $shippingRateOffer->getLineOriginalQuantity() % $sdkOffer->getPackageQuantity() != 0) {
                             $addItemError($item, __(
                                 'You can buy this product only in quantities of %1 at a time.',
                                 $sdkOffer->getPackageQuantity()
@@ -737,7 +704,7 @@ class Updater
             $this->quoteResourceFactory->create()->save($quote);
 
             $this->eventManager->dispatch('mirakl_check_quote_offers_after', [
-                'quote'         => $quote,
+                'quote' => $quote,
                 'shipping_fees' => $shippingFees,
             ]);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
@@ -766,18 +733,14 @@ class Updater
     }
 
     /**
-     * @param array              $offersShippingTypes
-     * @param CartInterface|null $quote
-     * @param bool               $resetAll
-     * @param bool               $saveItem
-     * @return $this
+     * @param   array               $offersShippingTypes
+     * @param   CartInterface|null  $quote
+     * @param   bool                $resetAll
+     * @param   bool                $saveItem
+     * @return  $this
      */
-    public function updateOffersShippingTypes(
-        array $offersShippingTypes,
-        CartInterface $quote = null,
-        $resetAll = true,
-        $saveItem = false
-    ) {
+    public function updateOffersShippingTypes(array $offersShippingTypes, CartInterface $quote = null, $resetAll = true, $saveItem = false)
+    {
         if ($resetAll) {
             // Reset all Mirakl items shipping methods
             $this->resetQuoteShippingTypes($quote);

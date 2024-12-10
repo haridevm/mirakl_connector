@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Offer;
@@ -9,10 +8,9 @@ use Mirakl\Connector\Model\Offer;
 class FinalPrice implements FinalPriceInterface
 {
     /**
-     * @param Offer    $offer
+     * @param Offer $offer
      * @param int|null $qty
      * @return float
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function get(Offer $offer, ?int $qty = null): float
     {

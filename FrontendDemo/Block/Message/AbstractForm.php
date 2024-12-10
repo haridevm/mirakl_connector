@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Framework\Data\Form\FormKey;
@@ -19,8 +16,6 @@ use Mirakl\MMP\FrontOperator\Domain\Reason;
 /**
  * @method bool  getAsModal()
  * @method $this setAsModal(bool $asModal)
- *
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
  */
 abstract class AbstractForm extends Template
 {
@@ -70,13 +65,13 @@ abstract class AbstractForm extends Template
     protected $_postMessage;
 
     /**
-     * @param Context       $context
-     * @param Registry      $coreRegistry
-     * @param FormKey       $formKey
-     * @param ReasonApi     $reasonApi
-     * @param CoreConfig    $coreConfig
-     * @param MessageHelper $messageHelper
-     * @param array         $data
+     * @param   Context         $context
+     * @param   Registry        $coreRegistry
+     * @param   FormKey         $formKey
+     * @param   ReasonApi       $reasonApi
+     * @param   CoreConfig      $coreConfig
+     * @param   MessageHelper   $messageHelper
+     * @param   array           $data
      */
     public function __construct(
         Context $context,
@@ -96,9 +91,9 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
-    abstract public function getFormAction();
+    abstract function getFormAction();
 
     /**
      * @return string
@@ -109,8 +104,8 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @param string $field
-     * @return string
+     * @param   string  $field
+     * @return  string
      */
     public function getFormField($field)
     {
@@ -118,7 +113,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return \Magento\Framework\Phrase
+     * @return  \Magento\Framework\Phrase
      */
     public function getFormTitle()
     {
@@ -126,7 +121,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return MiraklOrder
+     * @return  MiraklOrder
      */
     public function getMiraklOrder()
     {
@@ -134,7 +129,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return \Magento\Sales\Model\Order|null
+     * @return  \Magento\Sales\Model\Order|null
      */
     public function getOrder()
     {
@@ -144,8 +139,8 @@ abstract class AbstractForm extends Template
     /**
      * Retrieve form data stored in session
      *
-     * @param string|null $field
-     * @return array|string
+     * @param   string|null $field
+     * @return  array|string
      */
     public function getPostMessage($field = null)
     {
@@ -161,7 +156,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return \Magento\Framework\Phrase
+     * @return  \Magento\Framework\Phrase
      */
     public function getReasonsLabel()
     {
@@ -169,7 +164,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getReasons()
     {
@@ -177,8 +172,8 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @param Reason $reason
-     * @return string
+     * @param   Reason  $reason
+     * @return  string
      */
     public function getReasonValue(Reason $reason)
     {
@@ -186,7 +181,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getRecipients()
     {
@@ -200,7 +195,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getSellerName()
     {
@@ -219,7 +214,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return ThreadDetails
+     * @return  ThreadDetails
      */
     public function getThread()
     {
@@ -227,9 +222,8 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @param Reason $reason
-     * @return bool
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @param   Reason  $reason
+     * @return  bool
      */
     public function isReasonSelected(Reason $reason)
     {
@@ -237,7 +231,7 @@ abstract class AbstractForm extends Template
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function withFile()
     {

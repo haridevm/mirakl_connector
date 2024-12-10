@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper\Offer;
 
 use Magento\CatalogInventory\Model\Configuration;
@@ -14,10 +11,6 @@ use Mirakl\Connector\Model\ResourceModel\Offer\Collection as OfferCollection;
 use Mirakl\Connector\Model\ResourceModel\Offer\CollectionFactory as OfferCollectionFactory;
 use Mirakl\Core\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Stock extends AbstractHelper
 {
     /**
@@ -69,11 +62,11 @@ class Stock extends AbstractHelper
     protected $productCollectionFactory;
 
     /**
-     * @param Context                  $context
-     * @param StockResource            $stockResource
-     * @param OfferFactory             $offerFactory
-     * @param OfferCollectionFactory   $offerCollectionFactory
-     * @param ProductCollectionFactory $productCollectionFactory
+     * @param   Context                     $context
+     * @param   StockResource               $stockResource
+     * @param   OfferFactory                $offerFactory
+     * @param   OfferCollectionFactory      $offerCollectionFactory
+     * @param   ProductCollectionFactory    $productCollectionFactory
      */
     public function __construct(
         Context $context,
@@ -92,7 +85,7 @@ class Stock extends AbstractHelper
     /**
      * Load some inventory configuration settings
      *
-     * @return void
+     * @return  void
      */
     protected function _initConfig()
     {
@@ -115,7 +108,7 @@ class Stock extends AbstractHelper
     }
 
     /**
-     * @return OfferCollection
+     * @return  OfferCollection
      * @deprecated Not used anymore
      */
     protected function getActiveOffers()
@@ -134,8 +127,8 @@ class Stock extends AbstractHelper
     /**
      * Update In Stock status for products out of stock with active offers
      *
-     * @param array $skus
-     * @return void
+     * @param   array   $skus
+     * @return  void
      * @deprecated Not used anymore
      */
     public function updateInStock(array $skus = [])
@@ -167,9 +160,9 @@ class Stock extends AbstractHelper
 
         // Prepare the where condition for products currently out of stock
         $where = sprintf(
-            'is_in_stock = 0'
-            . ' AND ((use_config_manage_stock = 1 AND 1 = %1$d) OR (use_config_manage_stock = 0 AND manage_stock = 1))'
-            . ' AND %2$s',
+            'is_in_stock = 0' .
+            ' AND ((use_config_manage_stock = 1 AND 1 = %1$d) OR (use_config_manage_stock = 0 AND manage_stock = 1))' .
+            ' AND %2$s',
             $this->_isConfigManageStock,
             $connection->quoteInto('product_id IN (?)', $productIds)
         );
@@ -195,8 +188,8 @@ class Stock extends AbstractHelper
     /**
      * Update In Stock status for products without offer and without operator offer
      *
-     * @param array $skus
-     * @return void
+     * @param   array   $skus
+     * @return  void
      * @deprecated Not used anymore
      */
     public function updateOutOfStock(array $skus = [])
@@ -232,11 +225,11 @@ class Stock extends AbstractHelper
 
         // Prepare the where condition for products currently in stock
         $where = sprintf(
-            'is_in_stock = 1'
-            . ' AND ((use_config_manage_stock = 1 AND 1 = %1$d) OR (use_config_manage_stock = 0 AND manage_stock = 1))'
-            . ' AND ((use_config_backorders = 1 AND %2$d = %3$d) OR (use_config_backorders = 0 AND backorders = %2$d))'
-            . ' AND ((use_config_min_qty = 1 AND qty <= %4$d) OR (use_config_min_qty = 0 AND qty <= min_qty))'
-            . ' AND %5$s',
+            'is_in_stock = 1' .
+            ' AND ((use_config_manage_stock = 1 AND 1 = %1$d) OR (use_config_manage_stock = 0 AND manage_stock = 1))' .
+            ' AND ((use_config_backorders = 1 AND %2$d = %3$d) OR (use_config_backorders = 0 AND backorders = %2$d))' .
+            ' AND ((use_config_min_qty = 1 AND qty <= %4$d) OR (use_config_min_qty = 0 AND qty <= min_qty))' .
+            ' AND %5$s',
             $this->_isConfigManageStock,
             \Magento\CatalogInventory\Model\Stock::BACKORDERS_NO,
             $this->_isConfigBackorders,

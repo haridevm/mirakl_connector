@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Ui\Component\Filters\Type\Order;
 
 class Flag extends \Magento\Ui\Component\Filters\Type\Select
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function applyFilter()
     {

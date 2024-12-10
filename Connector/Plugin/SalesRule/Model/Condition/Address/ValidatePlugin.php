@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Mirakl\Connector\Plugin\SalesRule\Model\Condition\Address;
 
@@ -20,7 +19,7 @@ use Mirakl\Connector\Helper\Quote as QuoteHelper;
 class ValidatePlugin
 {
     /**
-     * @var QuoteHelper
+     * @var
      */
     private $quoteHelper;
 
@@ -34,8 +33,8 @@ class ValidatePlugin
 
     /**
      * @param AddressCondition $subject
-     * @param \Closure         $proceed
-     * @param AbstractModel    $model
+     * @param \Closure $proceed
+     * @param AbstractModel $model
      * @return bool
      */
     public function aroundValidate(
@@ -68,12 +67,8 @@ class ValidatePlugin
 
         $validationAddress = clone $address;
 
-        $validationAddress->setBaseSubtotalWithDiscount(
-            $this->getOperatorTotal($validationAddress, 'base_subtotal_with_discount')
-        );
-        $validationAddress->setBaseSubtotalTotalInclTax(
-            $this->getOperatorTotal($validationAddress, 'base_row_total_incl_tax')
-        );
+        $validationAddress->setBaseSubtotalWithDiscount($this->getOperatorTotal($validationAddress, 'base_subtotal_with_discount'));
+        $validationAddress->setBaseSubtotalTotalInclTax($this->getOperatorTotal($validationAddress, 'base_row_total_incl_tax'));
         $validationAddress->setBaseSubtotal($this->getOperatorTotal($validationAddress, 'base_row_total'));
         $validationAddress->setTotalQty($this->getOperatorTotal($validationAddress, 'qty'));
         $validationAddress->setTotalWeight($this->getOperatorTotal($validationAddress, 'weight'));
@@ -83,7 +78,7 @@ class ValidatePlugin
 
     /**
      * @param QuoteAddress $address
-     * @param string       $field
+     * @param string $field
      * @return float
      */
     private function getOperatorTotal(QuoteAddress $address, string $field)

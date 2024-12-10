@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
@@ -33,16 +32,16 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
 
-     * @param string $csv
-     * @param array  $miraklProductIds
-     * @param string $variantCode
+     * @param   string  $csv
+     * @param   array   $miraklProductIds
+     * @param   string  $variantCode
      */
     public function testVariantProductMcmImport(string $csv, array $miraklProductIds, string $variantCode)
     {
-        $process = $this->runImport($csv);
+        $this->runImport($csv);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         foreach ($miraklProductIds as $miraklProductId) {
             $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
@@ -55,10 +54,7 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
             $parentProduct = $this->coreHelper->getParentProduct($newProduct);
             $this->assertNotNull($parentProduct);
             $this->productResource->load($parentProduct, $parentProduct->getId());
-            $this->assertEquals(
-                $parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE),
-                $variantCode
-            );
+            $this->assertEquals($parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE), $variantCode);
         }
     }
 
@@ -78,10 +74,10 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/single_mcm_product.php
      *
-     * @param string $singleProductFile
-     * @param string $variantProductFile
-     * @param string $miraklProductId
-     * @param string $variantCode
+     * @param   string  $singleProductFile
+     * @param   string  $variantProductFile
+     * @param   string  $miraklProductId
+     * @param   string  $variantCode
      */
     public function testCreateParentVariantProductMcmImport(
         string $singleProductFile,
@@ -90,10 +86,10 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
         string $variantCode
     ) {
         // Import #1
-        $process = $this->runImport($singleProductFile);
+        $this->runImport($singleProductFile);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
         $this->assertNotNull($newProduct);
@@ -101,16 +97,16 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
         $this->assertEquals($newProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID), $miraklProductId);
 
         // Import #2
-        $process = $this->runImport($variantProductFile);
+        $this->runImport($variantProductFile);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
         $this->assertNotNull($newProduct);
         $this->assertInstanceOf(\Magento\Catalog\Model\Product::class, $newProduct);
         $this->assertEquals($newProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID), $miraklProductId);
-        $this->assertEquals($newProduct->getData('name'), 'Slim Fit Polo');
+        $this->assertEquals($newProduct->getData('name'), 'Slim Fit Polo UPDATE');
 
         // Test parent creation
         $parentProduct = $this->coreHelper->getParentProduct($newProduct);
@@ -134,18 +130,17 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $updateVariantProductFile
+     * @param   string  $updateVariantProductFile
      */
     public function testUpdateAlreadyVariantProductMcmImport(string $updateVariantProductFile)
     {
-        $process = $this->runImport($updateVariantProductFile);
-
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->runImport($updateVariantProductFile);
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importUpdateVariantAlreadyPresentMcmDataProvider(): array
     {
@@ -155,31 +150,22 @@ class BulkImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importVariantMcmDataProvider(): array
     {
         return [
-            [
-                'CM51_multi_variant_product.csv',
-                ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'],
-                'variant_code'
-            ],
+            ['CM51_multi_variant_product.csv', ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'], 'variant_code'],
         ];
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importCreateParentVariantMcmDataProvider(): array
     {
         return [
-            [
-                'CM51_single_product.csv',
-                'CM51_create_parent_variant_product.csv',
-                'abc5-4cf1-acdb-56152a77bc56',
-                'variant_code'
-            ],
+            ['CM51_single_product.csv', 'CM51_create_parent_variant_product.csv', 'abc5-4cf1-acdb-56152a77bc56', 'variant_code'],
         ];
     }
 }

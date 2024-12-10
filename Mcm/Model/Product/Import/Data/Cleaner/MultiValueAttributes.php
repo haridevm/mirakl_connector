@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data\Cleaner;
@@ -24,8 +23,10 @@ class MultiValueAttributes implements CleanerInterface
      * @param ProductAttributesFinder $attributesFinder
      * @param ParserInterface         $multiValueParser
      */
-    public function __construct(ProductAttributesFinder $attributesFinder, ParserInterface $multiValueParser)
-    {
+    public function __construct(
+        ProductAttributesFinder $attributesFinder,
+        ParserInterface $multiValueParser
+    ) {
         $this->attributesFinder = $attributesFinder;
         $this->multiValueParser = $multiValueParser;
     }
@@ -36,6 +37,7 @@ class MultiValueAttributes implements CleanerInterface
     public function clean(array &$data): void
     {
         $attributes = $this->attributesFinder->getAttributesByCode();
+
         foreach ($attributes as $key => $attribute) {
             if (!empty($data[$key]) && $this->isMultiValue($attribute)) {
                 $data[$key] = $this->multiValueParser->parse($data[$key]);

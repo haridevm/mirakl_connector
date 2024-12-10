@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Test\Integration\Model\Offer\Import;
 
 use Mirakl\Connector\Helper\Offer\Import as OffersImport;
@@ -55,7 +52,7 @@ class ImportOffersLegacyTest extends TestCase
         array_walk($offers, function (&$offer) {
             unset($offer['additional_info']);
         });
-        $expectedRows = $this->getJsonFileContents($expectedRowsFile);
+        $expectedRows = $this->_getJsonFileContents($expectedRowsFile);
         $this->assertEquals($expectedRows, $offers);
     }
 

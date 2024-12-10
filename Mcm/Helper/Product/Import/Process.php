@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper\Product\Import;
 
 use Mirakl\Process\Model\Process as ProcessModel;
@@ -22,8 +19,8 @@ class Process
     protected $processResourceFactory;
 
     /**
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
      */
     public function __construct(
         ProcessFactory $processFactory,
@@ -36,8 +33,8 @@ class Process
     /**
      * Imports products from CM51 into Magento from specified process
      *
-     * @param \DateTime      $since
-     * @param \DateTime|null $until
+     * @param   \DateTime       $since
+     * @param   \DateTime|null  $until
      */
     public function runApi($since, $until = null)
     {

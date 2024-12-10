@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
@@ -7,7 +6,6 @@ namespace Mirakl\Mcm\Test\Integration\Model\Product;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Mirakl\Mcm\Helper\Data as McmDataHelper;
-use Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter;
 use Mirakl\Mcm\Test\Integration\Model\Product\AbstractImportMcmProductTestCase as MiraklBaseTestCase;
 
 /**
@@ -35,15 +33,15 @@ class BulkImportProductDeduplicationTest extends MiraklBaseTestCase
      * @magentoConfigFixture current_store mirakl_mcm/import_product/default_tax_class 2
      * @magentoConfigFixture current_store mirakl_mcm/import_product/default_visibility 4
      *
-     * @param string $updateCsv
-     * @param string $miraklProductId
+     * @param   string  $updateCsv
+     * @param   string  $miraklProductId
      */
     public function testDeduplicationProductMcmImport(string $updateCsv, string $miraklProductId)
     {
-        $process = $this->runImport($updateCsv);
+        $this->runImport($updateCsv);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
         $this->assertInstanceOf(Product::class, $newProduct);
@@ -57,26 +55,19 @@ class BulkImportProductDeduplicationTest extends MiraklBaseTestCase
             'description'        => 'This ...UPDATE',
             'color'              => '54',
             'size'               => '167',
-            'material'           => '33,146',
             'mirakl_image_1'     => 'https://magento.mirakl.net/public/ms02-gray_main_1.jpg',
             'status'             => Status::STATUS_ENABLED,
         ];
 
         // Check that visibility and tax class id did not change after update.
         $this->assertEquals(0, $newProduct->getTaxClassId());
-
-        // Variant product
-        $this->assertEquals(Product\Visibility::VISIBILITY_NOT_VISIBLE, $newProduct->getVisibility());
+        $this->assertEquals(Product\Visibility::VISIBILITY_NOT_VISIBLE, $newProduct->getVisibility()); // Variant product
 
         $this->validateAllProductValues([$miraklProductId], $values);
-
-        /** @var \Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\Mcm $adapter */
-        $adapter = $this->objectManager->get(EntityAdapter\Mcm::class);
-        $this->assertCount(1, $adapter->getOldSku());
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importDeduplicationMcmDataProvider(): array
     {

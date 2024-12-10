@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Block\Adminhtml\System\Config\Button;
 
 use Magento\Config\Block\System\Config\Form\Field;
@@ -24,10 +21,10 @@ class Log extends Field
     protected $coreHelper;
 
     /**
-     * @param Template\Context $context
-     * @param LoggerManager    $loggerManager
-     * @param CoreHelper       $coreHelper
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   LoggerManager       $loggerManager
+     * @param   CoreHelper          $coreHelper
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -60,8 +57,7 @@ class Log extends Field
     ];
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _getElementHtml(AbstractElement $element)
     {

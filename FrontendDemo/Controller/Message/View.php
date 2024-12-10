@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Message;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class View extends AbstractMessage implements HttpGetActionInterface
+class View extends AbstractMessage
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

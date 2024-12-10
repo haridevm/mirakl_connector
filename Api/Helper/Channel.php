@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Helper;
@@ -12,8 +11,8 @@ class Channel extends ClientHelper\MMP
     /**
      * (CH11) Fetches all active Mirakl channels
      *
-     * @param string|null $locale
-     * @return ChannelCollection
+     * @param   string  $locale
+     * @return  ChannelCollection
      */
     public function getChannels(?string $locale = null)
     {

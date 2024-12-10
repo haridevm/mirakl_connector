@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Template\Grid\Renderer;
 
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
@@ -10,7 +7,10 @@ use Magento\Framework\DataObject;
 class Logo extends AbstractRenderer
 {
     /**
-     * @inheritdoc
+     * Render grid column
+     *
+     * @param   DataObject $row
+     * @return  string
      */
     public function render(DataObject $row)
     {
@@ -22,8 +22,8 @@ class Logo extends AbstractRenderer
     /**
      * Show logo as image instead of URL
      *
-     * @param string $value
-     * @return string
+     * @param   string  $value
+     * @return  string
      */
     public function decorateLogo($value)
     {

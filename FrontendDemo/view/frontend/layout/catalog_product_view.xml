@@ -8,6 +8,13 @@
             <block class="Mirakl\FrontendDemo\Block\Product\View\Tab\Offers" name="mirakl_offers.tab" as="marketplace_offers" template="Mirakl_FrontendDemo::product/view/mirakl_offers.phtml" group="detailed_info">
                 <arguments>
                     <argument name="sort_order" xsi:type="string">40</argument>
+                    <argument name="jsLayout" xsi:type="array">
+                        <item name="components" xsi:type="array">
+                            <item name="customerShippingMethods" xsi:type="array">
+                                <item name="component" xsi:type="string">Mirakl_FrontendDemo/js/view/customer-shipping-methods</item>
+                            </item>
+                        </item>
+                    </argument>
                 </arguments>
             </block>
         </referenceBlock>

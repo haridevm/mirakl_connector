@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Model\Sales;
 
 use Magento\Framework\Registry;
@@ -21,8 +18,8 @@ class OrderPlugin
     protected $coreRegistry;
 
     /**
-     * @param OrderHelper $orderHelper
-     * @param Registry    $registry
+     * @param   OrderHelper $orderHelper
+     * @param   Registry    $registry
      */
     public function __construct(OrderHelper $orderHelper, Registry $registry)
     {
@@ -31,9 +28,9 @@ class OrderPlugin
     }
 
     /**
-     * @param Order    $subject
-     * @param \Closure $proceed
-     * @return string
+     * @param   Order       $subject
+     * @param   \Closure    $proceed
+     * @return  string
      */
     public function aroundGetShippingDescription(Order $subject, \Closure $proceed)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Quote\Item;
 
 use Magento\Quote\Model\Quote\Item;

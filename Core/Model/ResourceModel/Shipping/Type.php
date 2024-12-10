@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Shipping;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -16,8 +13,9 @@ class Type extends AbstractDb
     private $json;
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Initialize main table
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -34,7 +32,10 @@ class Type extends AbstractDb
         Json $json,
         $connectionName = null
     ) {
-        parent::__construct($context, $connectionName);
+        parent::__construct(
+            $context,
+            $connectionName
+        );
         $this->json = $json;
     }
 

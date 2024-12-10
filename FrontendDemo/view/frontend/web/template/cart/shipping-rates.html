@@ -28,12 +28,12 @@
                                         disabled: false,
                                         name: method.marketplace ? carrier_code : 'operator'
                                     }
-                                ">
+                                "/>
                     <label class="label" data-bind="attr: {for: 's_method_' + carrier_code + '_' + method_code}">
                         <!-- ko text: $data.method_title --><!-- /ko -->
                         <!-- ko if: (element.getRegion('price')().length) -->
                             <!-- ko if: (amount > 0) -->
-                                <each args="element.getRegion('price')" render=""></each>
+                                <each args="element.getRegion('price')" render="" />
                             <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko ifnot: (element.getRegion('price')().length) -->

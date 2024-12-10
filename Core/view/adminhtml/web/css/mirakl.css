@@ -34,7 +34,6 @@
 .config-nav-block._collapsed.mirakl ._collapsible,
 .config-nav-block._collapsed.mirakl ._collapsible:hover,
 .x-tree-node-el.mirakl > a,
-.jstree-node.mirakl > a,
 #mirakl_send_order {
     background-image: url('../images/logo_blue_256px.png');
     background-repeat: no-repeat;
@@ -59,9 +58,7 @@
 }
 
 .catalog-category-add .x-tree-node-el.mirakl > a,
-.catalog-category-edit .x-tree-node-el.mirakl > a,
-.catalog-category-add .jstree-node.mirakl > a,
-.catalog-category-edit .jstree-node.mirakl > a {
+.catalog-category-edit .x-tree-node-el.mirakl > a {
     background-repeat: no-repeat;
     background-position: right center;
     background-size: 16px;

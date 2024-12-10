@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Offer;
@@ -27,8 +26,8 @@ class PriceResolver extends AbstractResolver implements ResolverInterface
     private $discount;
 
     /**
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param Discount               $discount
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   Discount                $discount
      */
     public function __construct(PriceCurrencyInterface $priceCurrency, Discount $discount)
     {
@@ -37,7 +36,7 @@ class PriceResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
@@ -65,10 +64,10 @@ class PriceResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @param float          $regularPrice
-     * @param float          $finalPrice
-     * @param StoreInterface $store
-     * @return array
+     * @param   float           $regularPrice
+     * @param   float           $finalPrice
+     * @param   StoreInterface  $store
+     * @return  array
      */
     private function formatPrice(float $regularPrice, float $finalPrice, StoreInterface $store): array
     {

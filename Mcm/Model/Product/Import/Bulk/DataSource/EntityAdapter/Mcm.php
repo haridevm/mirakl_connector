@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter;
@@ -7,9 +6,6 @@ namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter;
 use Mirakl\Mcm\Helper\Data as McmHelper;
 use Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\DataSourceInterface;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Mcm extends \Magento\CatalogImportExport\Model\Import\Product implements EntityAdapterInterface
 {
     /**
@@ -20,18 +16,6 @@ class Mcm extends \Magento\CatalogImportExport\Model\Import\Product implements E
         McmHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID,
         McmHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE,
     ];
-
-    /**
-     * @inheritdoc
-     */
-    public function parseMultiselectValues($values, $delimiter = '')
-    {
-        if ('' === $delimiter) {
-            $delimiter = self::PSEUDO_MULTI_LINE_SEPARATOR;
-        }
-
-        return parent::parseMultiselectValues($values, $delimiter);
-    }
 
     /**
      * @inheritdoc
@@ -92,7 +76,7 @@ class Mcm extends \Magento\CatalogImportExport\Model\Import\Product implements E
         while ($bunch = $this->_dataSourceModel->getNextBunch()) {
             $data = array_fill_keys($this->staticFields, []);
             foreach ($bunch as $rowData) {
-                $sku = strtolower($rowData['sku']);
+                $sku = $rowData['sku'];
                 foreach ($this->staticFields as $field) {
                     if (isset($rowData[$field]) && isset($oldSku[$sku])) {
                         $data[$field][] = [

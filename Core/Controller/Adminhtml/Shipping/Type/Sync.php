@@ -1,26 +1,22 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Type;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Api\Helper\Config as ApiConfig;
 use Mirakl\Connector\Helper\Config as ConnectorConfig;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 use Mirakl\Core\Model\Shipping\Type\Synchronizer;
 use Psr\Log\LoggerInterface;
 
-class Sync extends Action implements HttpGetActionInterface
+class Sync extends Action
 {
     use RedirectRefererTrait;
 
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Config::sync';
+    const ADMIN_RESOURCE = 'Mirakl_Config::sync';
 
     /**
      * @var ApiConfig
@@ -53,7 +49,7 @@ class Sync extends Action implements HttpGetActionInterface
         Context $context,
         ApiConfig $apiConfig,
         ConnectorConfig $connectorConfig,
-        Synchronizer $shippingTypeSynchronizer,
+        Synchronizer  $shippingTypeSynchronizer,
         LoggerInterface $logger
     ) {
         parent::__construct($context);
@@ -75,6 +71,7 @@ class Sync extends Action implements HttpGetActionInterface
 
             $this->shippingTypeSynchronizer->synchronize();
             $this->messageManager->addSuccessMessage(__('Shipping methods were synchronized successfully.'));
+
         } catch (\Exception $e) {
             $this->logger->critical($e);
             $this->messageManager->addErrorMessage(
@@ -88,7 +85,7 @@ class Sync extends Action implements HttpGetActionInterface
     /**
      * Will redirect with an error if Mirakl Connector is disabled in config
      *
-     * @return bool
+     * @return  bool
      */
     private function checkConnectorEnabled()
     {

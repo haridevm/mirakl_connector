@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\ResourceModel\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\LinkedProductSelectBuilderByBasePrice;
@@ -9,9 +6,9 @@ use Magento\Catalog\Model\ResourceModel\Product\LinkedProductSelectBuilderByBase
 class LinkedProductSelectBuilderByBasePricePlugin extends AbstractLinkedProductSelectBuilderPlugin
 {
     /**
-     * @param LinkedProductSelectBuilderByBasePrice $subject
-     * @param \Magento\Framework\DB\Select[]        $result
-     * @return \Magento\Framework\DB\Select[]
+     * @param   LinkedProductSelectBuilderByBasePrice   $subject
+     * @param   \Magento\Framework\DB\Select[]          $result
+     * @return  \Magento\Framework\DB\Select[]
      */
     public function afterBuild(LinkedProductSelectBuilderByBasePrice $subject, $result)
     {

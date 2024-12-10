@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Tax;
@@ -11,7 +10,7 @@ class Calculator
     /**
      * @param TaxDetailsItemInterface $itemTaxDetails
      * @param TaxDetailsItemInterface $baseItemTaxDetails
-     * @param array                   $taxes
+     * @param array $taxes
      */
     public function addMiraklTaxesToTaxItems(
         TaxDetailsItemInterface $itemTaxDetails,

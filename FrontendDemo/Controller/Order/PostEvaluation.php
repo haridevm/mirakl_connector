@@ -1,22 +1,18 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Mirakl\MMP\Front\Domain\Collection\Order\Evaluation\CreateOrderEvaluationAssessmentCollection;
 use Mirakl\MMP\Front\Domain\Order\Evaluation\CreateOrderEvaluation;
 use Mirakl\MMP\Front\Domain\Order\Evaluation\CreateOrderEvaluationAssessment;
 
-class PostEvaluation extends AbstractOrder implements HttpPostActionInterface
+class PostEvaluation extends AbstractOrder
 {
     /**
      * Submit new message action
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {

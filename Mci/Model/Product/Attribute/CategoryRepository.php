@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Model\Product\Attribute;
@@ -33,7 +32,7 @@ class CategoryRepository
 
     /**
      * @param CategoryCollectionFactory $categoryCollectionFactory
-     * @param Config                    $config
+     * @param Config $config
      */
     public function __construct(
         CategoryCollectionFactory $categoryCollectionFactory,
@@ -86,7 +85,7 @@ class CategoryRepository
     }
 
     /**
-     * @return int
+     * @return  int
      */
     private function getRootCategoryId()
     {
@@ -94,7 +93,7 @@ class CategoryRepository
     }
 
     /**
-     * @return StoreInterface
+     * @return  StoreInterface
      */
     private function getStore()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Import\Indexer;
 
 use Magento\Catalog\Helper\Product as ProductHelper;
@@ -26,13 +23,13 @@ class Indexer extends MciIndexer
     public $productIdsForIndexers = [];
 
     /**
-     * @param MciConfigHelper       $mciConfigHelper
-     * @param McmConfigHelper       $mcmConfigHelper
-     * @param ProductHelper         $catalogProduct
-     * @param IndexerRegistry       $indexerRegistry
-     * @param Registry              $registry
-     * @param CollectionFactory     $indexerCollectionFactory
-     * @param EventManagerInterface $eventManager
+     * @param   MciConfigHelper         $mciConfigHelper
+     * @param   McmConfigHelper         $mcmConfigHelper
+     * @param   ProductHelper           $catalogProduct
+     * @param   IndexerRegistry         $indexerRegistry
+     * @param   Registry                $registry
+     * @param   CollectionFactory       $indexerCollectionFactory
+     * @param   EventManagerInterface   $eventManager
      */
     public function __construct(
         MciConfigHelper $mciConfigHelper,
@@ -56,7 +53,7 @@ class Indexer extends MciIndexer
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function shouldIndex()
     {
@@ -68,7 +65,7 @@ class Indexer extends MciIndexer
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function shouldReindex()
     {

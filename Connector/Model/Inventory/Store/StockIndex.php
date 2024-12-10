@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Inventory\Store;
@@ -19,7 +18,7 @@ class StockIndex implements StockIndexInterface
     private $table;
 
     /**
-     * @param int    $stockId
+     * @param int $stockId
      * @param string $table
      */
     public function __construct(int $stockId, string $table)
@@ -29,7 +28,7 @@ class StockIndex implements StockIndexInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getStockId(): int
     {
@@ -37,7 +36,7 @@ class StockIndex implements StockIndexInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTable(): string
     {
@@ -45,7 +44,7 @@ class StockIndex implements StockIndexInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isDefaultStock(): bool
     {

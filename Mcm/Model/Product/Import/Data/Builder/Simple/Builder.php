@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data\Builder\Simple;
@@ -26,8 +25,8 @@ class Builder implements BuilderInterface, Data\Builder\LoaderInterface
     private $productRepository;
 
     /**
-     * @param Data\Cleaner       $dataCleaner
-     * @param Data\Processor     $dataProcessor
+     * @param Data\Cleaner $dataCleaner
+     * @param Data\Processor $dataProcessor
      * @param Repository\Product $productRepository
      */
     public function __construct(

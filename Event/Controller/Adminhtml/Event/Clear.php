@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Controller\Adminhtml\Event;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Clear extends AbstractEventAction implements HttpGetActionInterface
+class Clear extends AbstractEventAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -22,6 +17,6 @@ class Clear extends AbstractEventAction implements HttpGetActionInterface
             );
         }
 
-        return $this->_redirect('*/*/');
+        $this->_redirect('*/*/');
     }
 }

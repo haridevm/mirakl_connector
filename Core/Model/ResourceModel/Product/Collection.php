@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Product;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -10,11 +7,6 @@ use Magento\Framework\Exception\LocalizedException;
 /**
  * /!\ This is not an override of the default Magento product collection but just an extension
  * in order to manipulate collection items as arrays instead of product objects for better performances.
- *
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @SuppressWarnings(PHPMD.NPathComplexity)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
  */
 class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
 {
@@ -24,7 +16,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     protected $_isEnterprise;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _construct()
     {
@@ -33,8 +25,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @param EavAttribute $attribute
-     * @return $this
+     * @param   EavAttribute    $attribute
+     * @return  $this
      */
     public function addAttributeOptionValue(EavAttribute $attribute)
     {
@@ -79,8 +71,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
         $optionTable2   = $attributeCode . '_option_value_t2';
         $tableJoinCond1 = "{$optionTable1}.option_id = {$valueExpr} AND {$optionTable1}.store_id = 0";
         $tableJoinCond2 = "{$optionTable2}.option_id = {$valueExpr} AND {$optionTable2}.store_id = {$storeId}";
-        $valueExpr      = $this->_conn->getCheckSql(
-            "{$optionTable2}.value_id IS NULL",
+        $valueExpr      = $this->_conn->getCheckSql("{$optionTable2}.value_id IS NULL",
             "{$optionTable1}.value",
             "{$optionTable2}.value"
         );
@@ -103,8 +94,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Add category ids to loaded items
      *
-     * @param bool $fallbackToParent
-     * @return $this
+     * @param   bool    $fallbackToParent
+     * @return  $this
      */
     public function addCategoryIds($fallbackToParent = true)
     {
@@ -155,7 +146,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Add category paths to loaded items
      *
-     * @return $this
+     * @return  $this
      */
     public function addCategoryPaths()
     {
@@ -232,8 +223,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Add image URL to loaded items
      *
-     * @param string $key
-     * @return $this
+     * @param   string  $key
+     * @return  $this
      */
     public function addMediaGalleryAttribute($key = 'images')
     {
@@ -284,8 +275,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @param string $file
-     * @return string
+     * @param   string  $file
+     * @return  string
      */
     protected function getMediaUrl($file)
     {
@@ -322,8 +313,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Returns parent ids of specified product ids
      *
-     * @param array $productIds
-     * @return array
+     * @param   array   $productIds
+     * @return  array
      */
     public function getParentProductIds(array $productIds)
     {
@@ -346,8 +337,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Returns parent skus of specified product skus
      *
-     * @param array $childrenSkus
-     * @return array
+     * @param   array   $childrenSkus
+     * @return  array
      */
     public function getParentProductSkus(array $childrenSkus)
     {
@@ -357,23 +348,11 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
 
         $entityCol = $this->getEntity()->getLinkField();
         $select = $this->_conn->select()
-            ->from(
-                ['cpe1' => $this->getTable('catalog_product_entity')],
-                ['child_sku' => 'sku']
-            )
-            ->join(
-                ['cpsl' => $this->getTable('catalog_product_super_link')],
-                "cpe1.entity_id = cpsl.product_id",
-                []
-            )
-            ->join(
-                ['cpe2' => $this->getTable('catalog_product_entity')],
-                "cpe2.$entityCol = cpsl.parent_id",
-                ['parent_sku' => 'sku']
-            );
+            ->from(['cpe1' => $this->getTable('catalog_product_entity')], ['child_sku' => 'sku'])
+            ->join(['cpsl' => $this->getTable('catalog_product_super_link')], "cpe1.entity_id = cpsl.product_id", [])
+            ->join(['cpe2' => $this->getTable('catalog_product_entity')], "cpe2.$entityCol = cpsl.parent_id", ['parent_sku' => 'sku']);
 
         $parentSkus = array_fill_keys($childrenSkus, []);
-
         foreach ($this->_conn->fetchAll($select) as $row) {
             if (isset($parentSkus[$row['child_sku']])) {
                 $parentSkus[$row['child_sku']][] = $row['parent_sku'];
@@ -384,8 +363,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @param array $productIds
-     * @param array $cols
+     * @param   array   $productIds
+     * @param   array   $cols
      * @return \Magento\Framework\DB\Select
      */
     public function getParentProductsSelect(array $productIds, array $cols)
@@ -405,8 +384,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @param array $productIds
-     * @return array
+     * @param   array   $productIds
+     * @return  array
      */
     public function getProductCategoryIds(array $productIds)
     {
@@ -418,7 +397,6 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
         $categoryIds = [];
 
         $stmt = $this->_conn->query($select);
-
         while ($row = $stmt->fetch()) {
             $productId = $row['product_id'];
             if (!isset($categoryIds[$productId])) {
@@ -428,15 +406,14 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
                 $categoryIds[$productId][] = (int) $row['category_id'];
             }
         }
-
         unset($stmt);
 
         return $categoryIds;
     }
 
     /**
-     * @param array $productIds
-     * @return array
+     * @param   array   $productIds
+     * @return  array
      */
     public function getProductImages(array $productIds)
     {
@@ -455,7 +432,6 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
         $entityCol = $this->getEntity()->getLinkField();
 
         $select = $this->_conn->select()
-            ->distinct()
             ->from(['cpe' => $this->getTable('catalog_product_entity')], 'entity_id')
             ->joinLeft(
                 ['mgv' => $this->getTable('catalog_product_entity_media_gallery_value')],
@@ -490,17 +466,12 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
                 ['base_image_default' => 'value_id']
             )
             ->where('cpe.entity_id IN (?)', $productIds)
-            ->order(
-                [
-                    'base_image DESC', 'base_image_default DESC', 'position ASC',
-                    'position_default ASC', 'file ASC', 'file_default ASC',
-                ]
-            );
+            ->order(['base_image DESC', 'base_image_default DESC', 'position ASC', 'position_default ASC', 'file ASC', 'file_default ASC'])
+            ->distinct();
 
         $images = [];
         $stmt = $this->_conn->query($select);
         $files = [];
-
         while ($row = $stmt->fetch()) {
             if (empty($row['file']) && empty($row['file_default'])) {
                 continue;
@@ -517,8 +488,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
             $images[$productId][] = $row;
             $files[$productId][] = $file;
         }
-
-        unset($files, $stmt);
+        unset($files);
+        unset($stmt);
 
         return $images;
     }
@@ -526,8 +497,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     /**
      * Checks if specified attribute is using options or not
      *
-     * @param EavAttribute $attribute
-     * @return bool
+     * @param   EavAttribute    $attribute
+     * @return  bool
      */
     public function isAttributeUsingOptions(EavAttribute $attribute)
     {
@@ -540,7 +511,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function load($printQuery = false, $logQuery = false)
     {
@@ -560,8 +531,8 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @param array $attribute
-     * @return $this
+     * @param   array   $attribute
+     * @return  $this
      */
     public function overrideByParentData($attribute)
     {
@@ -617,7 +588,7 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function _loadEntities($printQuery = false, $logQuery = false)
     {
@@ -633,12 +604,11 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
             $query = $this->getSelect();
             $rows = $this->_fetchAll($query);
         } catch (\Exception $e) {
-            $this->printLogQuery(true, true, $query ?? null);
+            $this->printLogQuery(true, true, $query);
             throw $e;
         }
 
         $entityIdField = $this->getEntity()->getEntityIdField();
-
         foreach ($rows as $row) {
             $entityId = $row[$entityIdField];
             $this->_items[$entityId] = $row;
@@ -653,19 +623,17 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _setItemAttributeValue($valueInfo)
     {
         $entityIdField = $this->getEntity()->getEntityIdField();
         $entityId      = $valueInfo[$entityIdField];
-
         if (!isset($this->_itemsById[$entityId])) {
             throw new LocalizedException(__('Data integrity: No header row found for attribute'));
         }
 
         $attributeCode = array_search($valueInfo['attribute_id'], $this->_selectAttributes);
-
         if (!$attributeCode) {
             $attribute = $this->_eavConfig->getAttribute(
                 $this->getEntity()->getType(),
@@ -678,7 +646,6 @@ class Collection extends \Magento\Catalog\Model\ResourceModel\Product\Collection
             $data[$attributeCode] = $valueInfo['value'];
             $this->_items[$entityId][$attributeCode] = $valueInfo['value'];
         }
-
         unset($data);
 
         return $this;

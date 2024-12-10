@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product\Offer;
 
 use Magento\Catalog\Model\Product;
@@ -14,16 +11,15 @@ use Mirakl\Connector\Model\Offer;
 use Mirakl\FrontendDemo\Helper\Tax as TaxHelper;
 
 /**
- * @method Offer   getOffer
- * @method $this   setOffer(Offer $offer)
- * @method Product getProduct
- * @method $this   setProduct(Product $product)
+ * @method  Offer   getOffer
+ * @method  $this   setOffer(Offer $offer)
+ * @method  Product getProduct
+ * @method  $this   setProduct(Product $product)
  */
 class Price extends Template
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'product/offer/price.phtml';
 
@@ -63,13 +59,13 @@ class Price extends Template
     protected $displayShippingPrice = true;
 
     /**
-     * @param Template\Context       $context
-     * @param ConnectorConfig        $connectorConfig
-     * @param TaxHelper              $taxHelper
-     * @param TaxCalculationFactory  $taxCalculationFactory
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param MagentoTaxHelper       $magentoTaxHelper
-     * @param array                  $data
+     * @param   Template\Context        $context
+     * @param   ConnectorConfig         $connectorConfig
+     * @param   TaxHelper               $taxHelper
+     * @param   TaxCalculationFactory   $taxCalculationFactory
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   MagentoTaxHelper        $magentoTaxHelper
+     * @param   array                   $data
      */
     public function __construct(
         Template\Context $context,
@@ -92,10 +88,10 @@ class Price extends Template
     /**
      * Format price value
      *
-     * @param float $amount
-     * @param bool  $includeContainer
-     * @param int   $precision
-     * @return float
+     * @param   float   $amount
+     * @param   bool    $includeContainer
+     * @param   int     $precision
+     * @return  float
      */
     public function formatCurrency(
         $amount,
@@ -106,8 +102,7 @@ class Price extends Template
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getDisplayShippingPrice()
     {
@@ -115,7 +110,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferPriceAmount()
     {
@@ -127,7 +122,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferPriceExclTax()
     {
@@ -140,7 +135,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferPriceInclTax()
     {
@@ -153,7 +148,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferOriginPriceExclTax()
     {
@@ -166,7 +161,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferOriginPriceInclTax()
     {
@@ -179,7 +174,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferMinShippingPriceExclTax()
     {
@@ -192,7 +187,7 @@ class Price extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOfferMinShippingPriceInclTax()
     {
@@ -205,8 +200,8 @@ class Price extends Template
     }
 
     /**
-     * @param float $price
-     * @return float
+     * @param   float   $price
+     * @return  float
      */
     public function getPriceExclTax($price)
     {
@@ -218,8 +213,8 @@ class Price extends Template
     }
 
     /**
-     * @param float $price
-     * @return float
+     * @param   float   $price
+     * @return  float
      */
     public function getPriceInclTax($price)
     {
@@ -231,7 +226,7 @@ class Price extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getPriceRangesHtml()
     {
@@ -244,8 +239,8 @@ class Price extends Template
     }
 
     /**
-     * @param bool $flag
-     * @return $this
+     * @param   bool    $flag
+     * @return  $this
      */
     public function setDisplayShippingPrice($flag)
     {

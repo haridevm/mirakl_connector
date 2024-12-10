@@ -1,15 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Controller\Adminhtml\Event;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class ShowData extends AbstractEventAction implements HttpGetActionInterface
+/**
+ * @method \Magento\Framework\App\Response\Http getResponse()
+ */
+class ShowData extends AbstractEventAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -31,14 +29,12 @@ class ShowData extends AbstractEventAction implements HttpGetActionInterface
             $csvData = [$eventData];
             array_unshift($csvData, array_keys(reset($csvData)));
             $file = \Mirakl\create_temp_csv_file($csvData);
-            $body = @$file->fread($file->fstat()['size']); // phpcs:ignore
+            $body = @$file->fread($file->fstat()['size']);
         }
 
-        $this->_response
+        $this->getResponse()
             ->setHeader('Content-Type', 'text/html; charset=UTF-8')
             ->setBody('<pre>' . htmlentities($body) . '</pre>')
             ->sendResponse();
-
-        return $this->_response;
     }
 }

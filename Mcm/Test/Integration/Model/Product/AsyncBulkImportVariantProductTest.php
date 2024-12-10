@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
@@ -15,8 +14,6 @@ use Mirakl\Mcm\Helper\Data as McmDataHelper;
  *
  * @magentoDbIsolation enabled
  * @magentoAppIsolation enabled
- *
- * phpcs:disable Generic.Files.LineLength.TooLong
  */
 class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
 {
@@ -35,17 +32,17 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/attributes_variant.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
-     *
-     * @param string $jsonFileName
-     * @param array  $miraklProductIds
-     * @param string $variantCode
+
+     * @param   string  $jsonFileName
+     * @param   array   $miraklProductIds
+     * @param   string  $variantCode
      */
     public function testVariantProductMcmAsyncImport(string $jsonFileName, array $miraklProductIds, string $variantCode)
     {
-        $process = $this->runAsyncImport($jsonFileName);
+        $this->runAsyncImport($jsonFileName);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         foreach ($miraklProductIds as $miraklProductId) {
             $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
@@ -58,24 +55,17 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
             $parentProduct = $this->coreHelper->getParentProduct($newProduct);
             $this->assertNotNull($parentProduct);
             $this->productResource->load($parentProduct, $parentProduct->getId());
-            $this->assertEquals(
-                $parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE),
-                $variantCode
-            );
+            $this->assertEquals($parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE), $variantCode);
         }
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function asyncImportVariantMcmDataProvider(): array
     {
         return [
-            [
-                'CM54_multi_variant_product.json',
-                ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'],
-                'variant_code'
-            ],
+            ['CM54_multi_variant_product.json', ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'], 'variant_code'],
         ];
     }
 
@@ -96,19 +86,19 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/single_mcm_product.php
      *
-     * @param string $variantProductFile
-     * @param string $miraklProductId
-     * @param string $variantCode
+     * @param   string  $variantProductFile
+     * @param   string  $miraklProductId
+     * @param   string  $variantCode
      */
     public function testCreateParentVariantProductMcmAsyncImport(
         string $variantProductFile,
         string $miraklProductId,
         string $variantCode
     ) {
-        $process = $this->runAsyncImport($variantProductFile);
+        $this->runAsyncImport($variantProductFile);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         // Test simple product update
         $newProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
@@ -125,7 +115,7 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function asyncImportCreateParentVariantMcmDataProvider(): array
     {
@@ -151,17 +141,17 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/single_mcm_product.php
      *
-     * @param string $updateVariantProductFileName
+     * @param   string  $updateVariantProductFileName
      */
     public function testUpdateAlreadyVariantProductMcmAsyncImport(
         string $updateVariantProductFileName,
         string $miraklProductId,
         string $variantCode,
     ) {
-        $process = $this->runAsyncImport($updateVariantProductFileName);
+        $this->runAsyncImport($updateVariantProductFileName);
 
-        $this->assertStringContainsString('Bulk import time', $process->getOutput());
-        $this->assertStringContainsString('invalid rows: 0', $process->getOutput());
+        $this->assertStringContainsString('Bulk import time', $this->processModel->getOutput());
+        $this->assertStringContainsString('invalid rows: 0', $this->processModel->getOutput());
 
         $updatedProduct = $this->mcmDatahelper->findSimpleProductByDeduplication($miraklProductId);
         $this->assertEquals($updatedProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID), $miraklProductId);
@@ -171,7 +161,7 @@ class AsyncBulkImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function asyncImportUpdateVariantAlreadyPresentMcmDataProvider(): array
     {

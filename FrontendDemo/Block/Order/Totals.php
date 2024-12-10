@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Sales\Model\Order;
@@ -9,7 +6,7 @@ use Magento\Sales\Model\Order;
 class Totals extends \Mirakl\Connector\Block\Sales\Order\Totals
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function initTotals()
     {

@@ -88,7 +88,7 @@ define([
 
                     var firstPrice = $shown.first();
                     var price = parseFloat(firstPrice.find('[data-price-amount]').first().attr('data-price-amount'));
-                    $shown.each(function () {
+                    $shown.each(function() {
                         var linePrice = parseFloat($(this).find('[data-price-amount]').first().attr('data-price-amount'));
                         if (linePrice < price) {
                             price = linePrice;

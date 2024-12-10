@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -26,7 +23,7 @@ class CleanQuoteCacheObserver implements ObserverInterface
     /**
      * Clear quote cache used by the Mirakl connector if cart has changed
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Plugin\Helper\Mcm\Product\Export;
 
 use Mirakl\MCM\Front\Domain\Product\Export\ProductAcceptanceStatus as ProductAcceptance;
@@ -23,8 +20,8 @@ class ProcessPlugin
     protected $eventHelper;
 
     /**
-     * @param EventConfig $eventConfig
-     * @param EventHelper $eventHelper
+     * @param   EventConfig $eventConfig
+     * @param   EventHelper $eventHelper
      */
     public function __construct(EventConfig $eventConfig, EventHelper $eventHelper)
     {
@@ -33,10 +30,10 @@ class ProcessPlugin
     }
 
     /**
-     * @param string $code
-     * @param string $action
-     * @param array  $data
-     * @return Event
+     * @param   string  $code
+     * @param   string  $action
+     * @param   array   $data
+     * @return  Event
      */
     public function addEvent($code, $action, array $data)
     {
@@ -44,11 +41,11 @@ class ProcessPlugin
     }
 
     /**
-     * @param ProcessHelper $subject
-     * @param \Closure      $proceed
-     * @param int           $productId
-     * @param string        $acceptance
-     * @return int|false|null
+     * @param   ProcessHelper   $subject
+     * @param   \Closure        $proceed
+     * @param   int             $productId
+     * @param   string          $acceptance
+     * @return  int|false|null
      */
     public function aroundExportProduct(
         ProcessHelper $subject,
@@ -70,7 +67,7 @@ class ProcessPlugin
     /**
      * Returns the event type constant
      *
-     * @return int
+     * @return  int
      */
     protected function getEventType()
     {
@@ -80,7 +77,7 @@ class ProcessPlugin
     /**
      * Checks if this export must be done in asynchronous or synchronous mode according to config
      *
-     * @return bool
+     * @return  bool
      */
     protected function isAsynchronousEnabled()
     {

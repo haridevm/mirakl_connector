@@ -1,0 +1,39 @@
+name: Magento Env - Update
+
+run-name: Update "${{ inputs.name }}" on ${{ inputs.server }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      server:
+        type: choice
+        description: 'Server'
+        options:
+          - 'magento.mirakl.net'
+          - 'magentodemo.mirakl.net'
+          - 'magentotrail.mirakl.net'
+        default: 'magento.mirakl.net'
+      name:
+        type: string
+        description: 'Name (use comma separator to update multiple environments)'
+        required: true
+
+jobs:
+  deploy:
+    name: Update Magento environment
+    runs-on: mirakl-hosted
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Execute remote update script
+        run: |
+          NAME="${{ inputs.name }}"
+          for instance_name in ${NAME//,/ }; do
+            ssh -o StrictHostKeyChecking=no "root@${{ inputs.server }}" "export TERM=xterm-256color && cd /var/www/_install_/ && source install.env && ./update.sh -n $instance_name"
+          done

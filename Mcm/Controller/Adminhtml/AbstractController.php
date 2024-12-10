@@ -1,24 +1,20 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Connector\Helper\Config as ConnectorConfig;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 use Mirakl\Mcm\Helper\Config as McmConfig;
 
-abstract class AbstractController extends Action implements HttpGetActionInterface
+abstract class AbstractController extends Action
 {
     use RedirectRefererTrait;
 
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Mcm::sync';
+    const ADMIN_RESOURCE = 'Mirakl_Mcm::sync';
 
     /**
      * @var ConnectorConfig
@@ -31,9 +27,9 @@ abstract class AbstractController extends Action implements HttpGetActionInterfa
     protected $mcmConfig;
 
     /**
-     * @param Context         $context
-     * @param ConnectorConfig $connectorConfig
-     * @param McmConfig       $mcmConfig
+     * @param   Context         $context
+     * @param   ConnectorConfig $connectorConfig
+     * @param   McmConfig       $mcmConfig
      */
     public function __construct(
         Context $context,

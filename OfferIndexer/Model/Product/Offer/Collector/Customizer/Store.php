@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Product\Offer\Collector\Customizer;
@@ -25,7 +24,7 @@ class Store implements CustomizerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function customize(Product $product, OfferCollection $collection): void
     {

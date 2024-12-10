@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -23,8 +20,8 @@ class Order extends AbstractHelper
     protected $evaluations = [];
 
     /**
-     * @param Context  $context
-     * @param OrderApi $orderApi
+     * @param   Context     $context
+     * @param   OrderApi    $orderApi
      */
     public function __construct(Context $context, OrderApi $orderApi)
     {
@@ -35,8 +32,8 @@ class Order extends AbstractHelper
     /**
      * Filters specified order totals excluding amounts of Mirakl orders
      *
-     * @param \Magento\Sales\Model\Order $order
-     * @return $this
+     * @param   \Magento\Sales\Model\Order  $order
+     * @return  $this
      */
     public function filterOrderTotals(\Magento\Sales\Model\Order $order)
     {
@@ -75,9 +72,9 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param MiraklOrder $miraklOrder
-     * @return Evaluation
-     * @throws \Exception
+     * @param   MiraklOrder $miraklOrder
+     * @return  Evaluation
+     * @throws  \Exception
      */
     public function getOrderEvaluation(MiraklOrder $miraklOrder)
     {

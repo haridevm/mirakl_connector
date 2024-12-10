@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model;
 
 use Mirakl\Core\Domain\MiraklObject;
@@ -10,12 +7,12 @@ class Collection extends \Magento\Framework\Data\Collection
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_itemObjectClass = MiraklObject::class;
 
     /**
-     * @inheritdoc
+     * @param   array   $items
+     * @return  $this
      */
     public function setItems(array $items)
     {
@@ -25,7 +22,8 @@ class Collection extends \Magento\Framework\Data\Collection
     }
 
     /**
-     * @inheritdoc
+     * @param   int $count
+     * @return  $this
      */
     public function setTotalRecords($count)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -24,9 +21,6 @@ use Mirakl\MMP\Front\Domain\Order\Create\CreatedOrders;
 use Mirakl\MMP\FrontOperator\Domain\Order\OrderLine;
 use Mirakl\MMP\FrontOperator\Domain\Order as MiraklOrder;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Order extends AbstractHelper
 {
     /**
@@ -97,8 +91,8 @@ class Order extends AbstractHelper
     /**
      * Adds Mirakl orders information to specified Magento orders
      *
-     * @param OrderCollection $collection
-     * @return $this
+     * @param   OrderCollection  $collection
+     * @return  $this
      */
     public function addMiraklOrdersToCollection(OrderCollection $collection)
     {
@@ -130,9 +124,9 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return OrderModel
-     * @throws \Exception
+     * @param   OrderModel  $order
+     * @return  OrderModel
+     * @throws  \Exception
      */
     public function autoCreateMiraklOrder(OrderModel $order)
     {
@@ -153,10 +147,10 @@ class Order extends AbstractHelper
     /**
      * Creates Mirakl order and set Magento order as sent if creation succeeded
      *
-     * @param OrderModel $order
-     * @param bool       $markAsSent
-     * @return CreatedOrders
-     * @throws \Exception
+     * @param   OrderModel  $order
+     * @param   bool        $markAsSent
+     * @return  CreatedOrders
+     * @throws  \Exception
      */
     public function createMiraklOrder(OrderModel $order, $markAsSent = true)
     {
@@ -173,9 +167,9 @@ class Order extends AbstractHelper
     /**
      * Returns shipping price in base currency of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklBaseShippingPriceInclTax(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -185,9 +179,9 @@ class Order extends AbstractHelper
     /**
      * Returns shipping price of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklShippingPriceInclTax(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -197,9 +191,9 @@ class Order extends AbstractHelper
     /**
      * Returns shipping price excluding tax of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklShippingPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -209,9 +203,9 @@ class Order extends AbstractHelper
     /**
      * Returns subtotal price of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklSubtotalPrice(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -221,9 +215,9 @@ class Order extends AbstractHelper
     /**
      * Returns subtotal price excluding tax of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklSubtotalPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -233,9 +227,9 @@ class Order extends AbstractHelper
     /**
      * Returns base total price of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklBaseTotalPrice(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -248,9 +242,9 @@ class Order extends AbstractHelper
     /**
      * Returns total price of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklTotalPrice(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -260,8 +254,8 @@ class Order extends AbstractHelper
     /**
      * Returns final total amount paid by customer in case of cancelations/rejections and refunds
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklPaidTotal(OrderModel $order, MiraklOrder $miraklOrder)
@@ -275,8 +269,8 @@ class Order extends AbstractHelper
     /**
      * Checks if order has Mirakl refunds
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return bool
      */
     public function hasMiraklRefunds(OrderModel $order, MiraklOrder $miraklOrder)
@@ -303,8 +297,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl refund total
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklRefundTotal(OrderModel $order, MiraklOrder $miraklOrder)
@@ -339,8 +333,8 @@ class Order extends AbstractHelper
     /**
      * Check if order has rejected Mirakl items by seller
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return bool
      */
     public function hasRejectedMiraklItems(OrderModel $order, MiraklOrder $miraklOrder)
@@ -350,11 +344,9 @@ class Order extends AbstractHelper
             if ($item->getMiraklOfferId()) {
                 /** @var OrderLine $orderLine */
                 foreach ($miraklOrder->getOrderLines() as $orderLine) {
-                    if (
-                        $orderLine->getOffer()
+                    if ($orderLine->getOffer()
                         && $orderLine->getOffer()->getId() == $item->getMiraklOfferId()
-                        && $this->isOrderLineRefused($orderLine)
-                    ) {
+                        && $this->isOrderLineRefused($orderLine)) {
                         return true;
                     }
                 }
@@ -367,8 +359,8 @@ class Order extends AbstractHelper
     /**
      * Check if order has canceled Mirakl items by seller
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return bool
      */
     public function hasCancelations(OrderModel $order, MiraklOrder $miraklOrder)
@@ -393,8 +385,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl canceled/refused items total including tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklCanceledAndRefusedItemsTotalInclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -430,8 +422,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl canceled/refused items total excluding tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklCanceledItemsTotalExclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -461,8 +453,7 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl final subtotal (after cancelations/rejetctions) including tax
      *
-     * @param OrderLine   $orderLine
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderLine $orderLine
      * @return float
      */
     public function getOrderFinalSubtotalInclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -476,8 +467,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl final subtotal (after cancelations/rejections) excluding tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderFinalSubtotalExclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -491,8 +482,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl canceled/refused items shipping price including tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderCanceledAndRefusedShippingPriceInclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -528,8 +519,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl canceled/refused items shipping price excluding tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderCanceledAndRefusedShippingPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -559,8 +550,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl final shipping price (after cancelations/rejections) including tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderFinalShippingPriceInclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -575,8 +566,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl final shipping price (after cancelations/rejections) excluding tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderFinalShippingPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -588,10 +579,11 @@ class Order extends AbstractHelper
         return $shippingPriceAfterCancelationExclTax > 0 ? $shippingPriceAfterCancelationExclTax : 0;
     }
 
+
     /**
      * Returns order line price including tax after cancelations
      *
-     * @param OrderLine $orderLine
+     * @param  OrderLine $orderLine
      * @return float
      */
     public function getOrderLinePriceAfterCancelationInclTax(OrderLine $orderLine)
@@ -607,8 +599,8 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl order final total price (after cancelations, rejections) excluding tax
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getOrderFinalTotalPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -622,8 +614,7 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl order final total price (after cancelations, rejections) including tax
      *
-     * @param OrderLine   $orderLine
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderLine $orderLine
      * @return float
      */
     public function getOrderFinalTotalPriceInclTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -637,7 +628,7 @@ class Order extends AbstractHelper
     /**
      * Checks if order line is cancelled (full or partial cancellation)
      *
-     * @param OrderLine $orderLine
+     * @param  OrderLine $orderLine
      * @return bool
      */
     public function isOrderLineCanceled(OrderLine $orderLine)
@@ -648,7 +639,7 @@ class Order extends AbstractHelper
     /**
      * Returns cancelled qty of an order line
      *
-     * @param OrderLine $orderLine
+     * @param  OrderLine $orderLine
      * @return int
      */
     public function getCanceledOrderLineQuantity(OrderLine $orderLine)
@@ -669,14 +660,14 @@ class Order extends AbstractHelper
      */
     public function getOrderLineTotalQuantity(OrderLine $orderLine)
     {
-        return (int) ($orderLine->getQuantity() + $this->getCanceledOrderLineQuantity($orderLine));
+       return (int) ($orderLine->getQuantity() + $this->getCanceledOrderLineQuantity($orderLine));
     }
 
     /**
      * Returns total tax amount of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklTotalTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -691,8 +682,8 @@ class Order extends AbstractHelper
     /**
      * Returns final total tax of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  OrderModel  $order
+     * @param  MiraklOrder $miraklOrder
      * @return float
      */
     public function getMiraklFinalTotalTax(OrderModel $order, MiraklOrder $miraklOrder)
@@ -711,9 +702,9 @@ class Order extends AbstractHelper
     /**
      * Returns total price excluding tax of specified Magento order including only Mirakl items
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklTotalPriceExclTax(OrderModel $order, MiraklOrder $miraklOrder)
     {
@@ -724,10 +715,10 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl order total of specified order item fields
      *
-     * @param OrderModel  $order
-     * @param MiraklOrder $miraklOrder
-     * @param array       $orderItemFields
-     * @return float
+     * @param   OrderModel  $order
+     * @param   MiraklOrder $miraklOrder
+     * @param   array       $orderItemFields
+     * @return  float
      */
     private function getMiraklTotal(OrderModel $order, MiraklOrder $miraklOrder, array $orderItemFields)
     {
@@ -753,9 +744,9 @@ class Order extends AbstractHelper
     /**
      * Returns Mirakl order associated with specified order commercial id and remote id
      *
-     * @param string $commercialId
-     * @param string $remoteId
-     * @return MiraklOrder
+     * @param   string  $commercialId
+     * @param   string  $remoteId
+     * @return  MiraklOrder
      */
     public function getMiraklOrderById($commercialId, $remoteId)
     {
@@ -772,8 +763,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorBaseGrandTotalInclTax(OrderModel $order)
     {
@@ -790,8 +781,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorBaseShippingExclTax(OrderModel $order)
     {
@@ -799,8 +790,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorBaseShippingInclTax(OrderModel $order)
     {
@@ -808,8 +799,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorGrandTotalInclTax(OrderModel $order)
     {
@@ -826,8 +817,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorShippingExclTax(OrderModel $order)
     {
@@ -835,8 +826,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return float
+     * @param   OrderModel  $order
+     * @return  float
      */
     public function getOperatorShippingInclTax(OrderModel $order)
     {
@@ -846,8 +837,8 @@ class Order extends AbstractHelper
     /**
      * Returns shipping description of specified order including Mirakl order items
      *
-     * @param OrderModel $order
-     * @return string
+     * @param   OrderModel  $order
+     * @return  string
      */
     public function getShippingDescription(OrderModel $order)
     {
@@ -873,7 +864,7 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     private function isAdmin()
     {
@@ -883,8 +874,8 @@ class Order extends AbstractHelper
     /**
      * Returns true if the given Magento order contains ONLY Mirakl offers
      *
-     * @param OrderModel $order
-     * @return bool
+     * @param   OrderModel  $order
+     * @return  bool
      */
     public function isFullMiraklOrder(OrderModel $order)
     {
@@ -901,8 +892,8 @@ class Order extends AbstractHelper
     /**
      * Returns true if given order line has an incident open
      *
-     * @param OrderLine $orderLine
-     * @return bool
+     * @param   OrderLine   $orderLine
+     * @return  bool
      */
     public function isOrderLineIncident(OrderLine $orderLine)
     {
@@ -912,8 +903,8 @@ class Order extends AbstractHelper
     /**
      * Returns true if given order line has been refused by the seller
      *
-     * @param OrderLine $orderLine
-     * @return bool
+     * @param   OrderLine   $orderLine
+     * @return  bool
      */
     public function isOrderLineRefused(OrderLine $orderLine)
     {
@@ -923,8 +914,8 @@ class Order extends AbstractHelper
     /**
      * Returns true if the given Magento order contains SOME Mirakl offers
      *
-     * @param OrderModel $order
-     * @return bool
+     * @param   OrderModel  $order
+     * @return  bool
      */
     public function isMiraklOrder(OrderModel $order)
     {
@@ -939,8 +930,8 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param OrderModel $order
-     * @return bool
+     * @param   OrderModel  $order
+     * @return  bool
      */
     public function isShippingPricesIncludeTax(OrderModel $order)
     {
@@ -952,15 +943,13 @@ class Order extends AbstractHelper
     }
 
     /**
-     * @param MiraklOrder $miraklOrder
+     * @param  MiraklOrder $miraklOrder
      * @return bool
      */
     public function canReceiveOrder(MiraklOrder $miraklOrder)
     {
-        if (
-            $miraklOrder->getPaymentWorkflow() != PaymentWorkflow::PAY_ON_DUE_DATE
-            && !$miraklOrder->getCustomerDebitedDate()
-        ) {
+        if ($miraklOrder->getPaymentWorkflow() != PaymentWorkflow::PAY_ON_DUE_DATE
+            && !$miraklOrder->getCustomerDebitedDate()) {
             return false;
         }
 

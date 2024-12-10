@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Core\Model\File;
@@ -10,10 +9,10 @@ trait CsvFileTrait
 {
     /**
      * @param ReadInterface $file
-     * @param int           $length
-     * @param string        $delimiter
-     * @param string        $enclosure
-     * @param string        $escape
+     * @param int $length
+     * @param string $delimiter
+     * @param string $enclosure
+     * @param string $escape
      * @return array|bool
      */
     public function readCsv(

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Pricing\Price\ConfigurableProduct;
 
 use Magento\ConfigurableProduct\Pricing\Price\FinalPrice;
@@ -15,7 +12,7 @@ class FinalPricePlugin
     protected $offerHelper;
 
     /**
-     * @param OfferHelper $offerHelper
+     * @param   OfferHelper $offerHelper
      */
     public function __construct(OfferHelper $offerHelper)
     {
@@ -23,9 +20,9 @@ class FinalPricePlugin
     }
 
     /**
-     * @param FinalPrice $subject
-     * @param \Closure   $proceed
-     * @return float
+     * @param   FinalPrice  $subject
+     * @param   \Closure    $proceed
+     * @return  float
      */
     public function aroundGetValue(FinalPrice $subject, \Closure $proceed)
     {

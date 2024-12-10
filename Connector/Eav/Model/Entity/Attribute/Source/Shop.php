@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Eav\Model\Entity\Attribute\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
@@ -22,8 +19,8 @@ class Shop extends AbstractSource
     private $collectionFactory;
 
     /**
-     * @param AttributeFactory  $eavAttrEntity
-     * @param CollectionFactory $collectionFactory
+     * @param   AttributeFactory    $eavAttrEntity
+     * @param   CollectionFactory   $collectionFactory
      */
     public function __construct(AttributeFactory $eavAttrEntity, CollectionFactory $collectionFactory)
     {
@@ -32,7 +29,10 @@ class Shop extends AbstractSource
     }
 
     /**
-     * @inheritdoc
+     * Get list of all available shops
+     *
+     * @param   bool    $withEmpty  Add empty option to array
+     * @return  array
      */
     public function getAllOptions($withEmpty = true)
     {
@@ -49,7 +49,7 @@ class Shop extends AbstractSource
 
         // Sort options by shop name
         usort($options, function ($opt1, $opt2) {
-            return strcmp((string) $opt1['label'], (string) $opt2['label']);
+            return strcmp($opt1['label'], $opt2['label']);
         });
 
         return $options;
@@ -58,9 +58,9 @@ class Shop extends AbstractSource
     /**
      * Retrieve option values array by ids
      *
-     * @param string|array $ids
-     * @param bool         $withEmpty Add empty option to array
-     * @return array
+     * @param   string|array    $ids
+     * @param   bool            $withEmpty  Add empty option to array
+     * @return  array
      */
     public function getSpecificOptions($ids, $withEmpty = true)
     {
@@ -80,7 +80,7 @@ class Shop extends AbstractSource
     /**
      * Retrieve flat column definition
      *
-     * @return array
+     * @return  array
      */
     public function getFlatColums()
     {
@@ -101,8 +101,8 @@ class Shop extends AbstractSource
     /**
      * Retrieve Select For Flat Attribute update
      *
-     * @param int $store
-     * @return \Magento\Framework\DB\Select|null
+     * @param   int $store
+     * @return  \Magento\Framework\DB\Select|null
      */
     public function getFlatUpdateSelect($store)
     {

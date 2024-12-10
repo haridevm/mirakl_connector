@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Catalog;
 
 use Magento\Catalog\Model\Product;
@@ -22,8 +19,8 @@ class ProductPlugin
     protected $connectorOfferHelper;
 
     /**
-     * @param OfferFactory         $offerFactory
-     * @param ConnectorOfferHelper $offerHelper
+     * @param   OfferFactory            $offerFactory
+     * @param   ConnectorOfferHelper    $offerHelper
      */
     public function __construct(
         OfferFactory $offerFactory,
@@ -36,9 +33,9 @@ class ProductPlugin
     /**
      * Return base price for Mirakl offer
      *
-     * @param Product  $product
-     * @param \Closure $proceed
-     * @return float
+     * @param   Product     $product
+     * @param   \Closure    $proceed
+     * @return  float
      */
     public function aroundGetPrice(Product $product, \Closure $proceed)
     {
@@ -52,10 +49,10 @@ class ProductPlugin
     /**
      * Returns final price for Mirakl offer with potential promotions
      *
-     * @param Product    $product
-     * @param \Closure   $proceed
-     * @param float|null $qty
-     * @return float
+     * @param   Product     $product
+     * @param   \Closure    $proceed
+     * @param   float|null  $qty
+     * @return  float
      */
     public function aroundGetFinalPrice(Product $product, \Closure $proceed, $qty = null)
     {
@@ -67,8 +64,8 @@ class ProductPlugin
     }
 
     /**
-     * @param Product $product
-     * @return Offer|null
+     * @param   Product $product
+     * @return  Offer|null
      */
     private function getOfferFromProduct(Product $product)
     {

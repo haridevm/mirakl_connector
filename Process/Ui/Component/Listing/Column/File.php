@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Ui\Component\Listing\Column;
@@ -83,7 +82,7 @@ class File extends Column
     }
 
     /**
-     * @param array $row
+     * @param  array $row
      * @return string
      */
     public function decorate(array $row): string
@@ -92,8 +91,7 @@ class File extends Column
         $file = $row[$this->getName()];
         $html = '';
         if ($fileSize = $this->getFileSizeFormatted($file, '&nbsp;')) {
-            $html = sprintf(
-                '<a href="%s">%s</a>&nbsp;(%s)',
+            $html = sprintf('<a href="%s">%s</a>&nbsp;(%s)',
                 $this->getDownloadFileUrl($row['id'], $isMirakl),
                 __('Download'),
                 $fileSize
@@ -113,8 +111,8 @@ class File extends Column
     }
 
     /**
-     * @param string      $file
-     * @param string|null $separator
+     * @param  string      $file
+     * @param  string|null $separator
      * @return string|false
      */
     protected function getFileSizeFormatted(string $file, ?string $separator = ' ')
@@ -127,8 +125,8 @@ class File extends Column
     }
 
     /**
-     * @param int  $processId
-     * @param bool $isMirakl
+     * @param  int  $processId
+     * @param  bool $isMirakl
      * @return string
      */
     protected function getDownloadFileUrl($processId, bool $isMirakl): string
@@ -140,7 +138,7 @@ class File extends Column
     }
 
     /**
-     * @param string $file
+     * @param  string $file
      * @return bool
      */
     protected function canShowFile(string $file): bool

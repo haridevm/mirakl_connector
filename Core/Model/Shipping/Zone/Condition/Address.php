@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Shipping\Zone\Condition;
 
 class Address extends \Magento\SalesRule\Model\Rule\Condition\Address
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function loadAttributeOptions()
     {
@@ -15,7 +12,7 @@ class Address extends \Magento\SalesRule\Model\Rule\Condition\Address
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public static function getAttributes()
     {

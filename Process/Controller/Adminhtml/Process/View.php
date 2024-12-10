@@ -1,15 +1,11 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Result\PageFactory;
 
-class View extends AbstractProcessAction implements HttpGetActionInterface
+class View extends AbstractProcessAction
 {
     /**
      * @var PageFactory
@@ -38,7 +34,7 @@ class View extends AbstractProcessAction implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

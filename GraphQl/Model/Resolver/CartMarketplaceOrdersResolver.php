@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver;
@@ -25,8 +24,8 @@ class CartMarketplaceOrdersResolver implements ResolverInterface
     protected $quoteSynchronizer;
 
     /**
-     * @param QuoteHelper       $quoteHelper
-     * @param QuoteSynchronizer $quoteSynchronizer
+     * @param   QuoteHelper         $quoteHelper
+     * @param   QuoteSynchronizer   $quoteSynchronizer
      */
     public function __construct(
         QuoteHelper $quoteHelper,

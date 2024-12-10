@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Handler\File;
@@ -33,10 +32,10 @@ class Loader
     protected $processHelper;
 
     /**
-     * @param Api             $api
+     * @param Api $api
      * @param ConnectorConfig $connectorConfig
-     * @param CoreHelper      $coreHelper
-     * @param ProcessHelper   $processHelper
+     * @param CoreHelper $coreHelper
+     * @param ProcessHelper $processHelper
      */
     public function __construct(
         Api $api,
@@ -51,12 +50,10 @@ class Loader
     }
 
     /**
-     * @param Process        $process
+     * @param Process $process
      * @param \DateTime|null $since
      * @param \DateTime|null $until
      * @return string|null
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function load(Process $process, ?\DateTime $since, ?\DateTime $until = null): ?string
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Block\Product\View;
 
 use Magento\Catalog\Block\Product\View\AbstractView;
@@ -16,7 +13,7 @@ class AbstractViewPlugin
     protected $offerHelper;
 
     /**
-     * @param OfferHelper $offerHelper
+     * @param   OfferHelper $offerHelper
      */
     public function __construct(OfferHelper $offerHelper)
     {
@@ -24,9 +21,9 @@ class AbstractViewPlugin
     }
 
     /**
-     * @param AbstractView $subject
-     * @param \Closure     $proceed
-     * @return Product
+     * @param   AbstractView    $subject
+     * @param   \Closure        $proceed
+     * @return  Product
      */
     public function aroundGetProduct(AbstractView $subject, \Closure $proceed)
     {

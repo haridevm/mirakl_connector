@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Sales\Model\Order;
@@ -17,23 +14,20 @@ class OpenIncident extends AbstractForm
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_formTitle = 'Open Incident';
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return void
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->setAsModal(true);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getButtonClass()
     {
@@ -41,7 +35,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFormAction()
     {
@@ -53,7 +47,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @return ReasonCollection
+     * @return  ReasonCollection
      */
     public function getReasons()
     {
@@ -63,7 +57,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReasonValue(Reason $reason)
     {
@@ -71,7 +65,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @return Order
+     * @return  Order
      */
     public function getOrder()
     {
@@ -79,7 +73,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @return MiraklOrder
+     * @return  MiraklOrder
      */
     public function getMiraklOrder()
     {
@@ -87,7 +81,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function withFile()
     {
@@ -95,7 +89,7 @@ class OpenIncident extends AbstractForm
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isReasonSelected(Reason $reason)
     {

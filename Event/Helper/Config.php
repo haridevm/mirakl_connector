@@ -1,16 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper;
 
 class Config extends \Mirakl\Core\Helper\Config
 {
-    public const XML_PATH_EVENT_ASYNC_ACTIVE      = 'mirakl_event/general/event_async_active';
-    public const XML_PATH_EVENT_HISTORY_KEEP_DAYS = 'mirakl_event/history/clear_keep_days';
+    const XML_PATH_EVENT_ASYNC_ACTIVE      = 'mirakl_event/general/event_async_active';
+    const XML_PATH_EVENT_HISTORY_KEEP_DAYS = 'mirakl_event/history/clear_keep_days';
 
     /**
-     * @return array
+     * @return  array
      */
     public function getAsyncEvents()
     {

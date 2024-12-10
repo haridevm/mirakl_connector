@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Block\Adminhtml\Process\View;
@@ -7,8 +6,7 @@ namespace Mirakl\Process\Block\Adminhtml\Process\View;
 class MiraklInfo extends AbstractView
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct(): void
     {
@@ -26,7 +24,7 @@ class MiraklInfo extends AbstractView
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getCheckMiraklStatusUrl(): string
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Setup\Patch\Data;
@@ -36,7 +35,7 @@ class UpdateMiraklMciAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -45,26 +44,14 @@ class UpdateMiraklMciAttributes implements DataPatchInterface
 
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            MciHelper::ATTRIBUTE_SHOPS_SKUS,
-            'frontend_input',
-            'textarea'
-        );
-
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            MciHelper::ATTRIBUTE_VARIANT_GROUP_CODES,
-            'frontend_input',
-            'textarea'
-        );
+        $eavSetup->updateAttribute(Product::ENTITY, MciHelper::ATTRIBUTE_SHOPS_SKUS, 'frontend_input', 'textarea');
+        $eavSetup->updateAttribute(Product::ENTITY, MciHelper::ATTRIBUTE_VARIANT_GROUP_CODES, 'frontend_input', 'textarea');
 
         $setup->endSetup();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -74,7 +61,7 @@ class UpdateMiraklMciAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

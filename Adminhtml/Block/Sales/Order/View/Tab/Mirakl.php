@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\Order\View\Tab;
 
 use Magento\Framework\Registry;
@@ -17,14 +14,13 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
 
     /**
      * @var Registry
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $registry
-     * @param array    $data
+     * @param   Context     $context
+     * @param   Registry    $registry
+     * @param   array       $data
      */
     public function __construct(
         Context $context,
@@ -36,6 +32,8 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
+     * Get Tab Class
+     *
      * @return string
      */
     public function getTabClass()
@@ -44,6 +42,8 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
+     * Get Class
+     *
      * @return string
      */
     public function getClass()
@@ -52,7 +52,7 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @return \Magento\Sales\Model\Order
+     * @return  \Magento\Sales\Model\Order
      */
     public function getOrder()
     {
@@ -60,7 +60,7 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTabLabel()
     {
@@ -68,7 +68,7 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTabTitle()
     {
@@ -76,7 +76,9 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @inheritdoc
+     * Return URL link to Tab content
+     *
+     * @return string
      */
     public function getTabUrl()
     {
@@ -84,7 +86,7 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function canShowTab()
     {
@@ -92,7 +94,7 @@ class Mirakl extends TabWrapper implements \Magento\Backend\Block\Widget\Tab\Tab
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isHidden()
     {

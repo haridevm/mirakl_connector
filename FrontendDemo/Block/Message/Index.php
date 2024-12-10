@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Customer\Model\Session;
@@ -33,7 +30,6 @@ class Index extends Template
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'Mirakl_FrontendDemo::message/index.phtml';
 
@@ -53,11 +49,11 @@ class Index extends Template
     protected $limit = 10;
 
     /**
-     * @param Registry   $coreRegistry
-     * @param MessageApi $messageApi
-     * @param Session    $customerSession
-     * @param Context    $context
-     * @param array      $data
+     * @param   Registry    $coreRegistry
+     * @param   MessageApi  $messageApi
+     * @param   Session     $customerSession
+     * @param   Context     $context
+     * @param   array       $data
      */
     public function __construct(
         Registry $coreRegistry,
@@ -73,8 +69,7 @@ class Index extends Template
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct()
     {
@@ -83,7 +78,7 @@ class Index extends Template
     }
 
     /**
-     * @return SeekableCollection
+     * @return  SeekableCollection
      */
     public function getThreads()
     {
@@ -127,8 +122,8 @@ class Index extends Template
     }
 
     /**
-     * @param Thread $thread
-     * @return string
+     * @param   Thread  $thread
+     * @return  string
      */
     public function getMessageUrl(Thread $thread)
     {
@@ -136,8 +131,8 @@ class Index extends Template
     }
 
     /**
-     * @param \DateTimeInterface|string $date
-     * @return string
+     * @param   \DateTimeInterface|string   $date
+     * @return  string
      */
     public function formatDateShort($date)
     {
@@ -156,7 +151,7 @@ class Index extends Template
     }
 
     /**
-     * @return MiraklOrder
+     * @return  MiraklOrder
      */
     public function getMiraklOrder()
     {
@@ -164,7 +159,7 @@ class Index extends Template
     }
 
     /**
-     * @return Offer
+     * @return  Offer
      */
     public function getMiraklOffer()
     {
@@ -172,8 +167,8 @@ class Index extends Template
     }
 
     /**
-     * @param string $token
-     * @return string
+     * @param   string  $token
+     * @return  string
      */
     public function getSeekPageUrl($token)
     {
@@ -181,7 +176,7 @@ class Index extends Template
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getAvailableLimit()
     {
@@ -189,8 +184,8 @@ class Index extends Template
     }
 
     /**
-     * @param string $key
-     * @return bool
+     * @param   string  $key
+     * @return  bool
      */
     public function isLimitCurrent($key)
     {
@@ -198,8 +193,8 @@ class Index extends Template
     }
 
     /**
-     * @param string $key
-     * @return string
+     * @param   string  $key
+     * @return  string
      */
     public function getLimitUrl($key)
     {

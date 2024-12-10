@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Block\Adminhtml\System\Config\Form\Field;
@@ -11,10 +10,6 @@ use Mirakl\Api\Helper\Channel as ChannelApi;
 use Mirakl\SalesChannels\Model\Config;
 use Mirakl\MMP\Common\Domain\Collection\Channel\ChannelCollection;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class ChannelMapping extends AbstractFieldArray
 {
     /**
@@ -38,10 +33,10 @@ class ChannelMapping extends AbstractFieldArray
     private $miraklChannels;
 
     /**
-     * @param Context    $context
+     * @param Context $context
      * @param ChannelApi $channelApi
-     * @param Config     $config
-     * @param array      $data
+     * @param Config $config
+     * @param array $data
      */
     public function __construct(
         Context $context,
@@ -49,13 +44,16 @@ class ChannelMapping extends AbstractFieldArray
         Config $config,
         array $data = []
     ) {
-        parent::__construct($context, $data);
+        parent::__construct(
+            $context,
+            $data
+        );
         $this->channelApi = $channelApi;
         $this->config = $config;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _prepareToRender()
     {

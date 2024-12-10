@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper\Offer;
 
 use Magento\Catalog\Model\Product\Attribute\Repository as AttributeRepository;

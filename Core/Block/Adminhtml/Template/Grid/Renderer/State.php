@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Template\Grid\Renderer;
 
 use Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer;
@@ -11,7 +8,10 @@ use Mirakl\Core\Model\Shop;
 class State extends AbstractRenderer
 {
     /**
-     * @inheritdoc
+     * Render grid column
+     *
+     * @param   DataObject  $row
+     * @return  string
      */
     public function render(DataObject $row)
     {
@@ -22,9 +22,9 @@ class State extends AbstractRenderer
     }
 
     /**
-     * @param string $value
-     * @param Shop   $row
-     * @return string
+     * @param   string  $value
+     * @param   Shop    $row
+     * @return  string
      */
     public function decorateState($value, $row)
     {

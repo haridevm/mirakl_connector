@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\CatalogInventory\Api\StockManagementInterface;
@@ -28,9 +25,9 @@ class SubtractQuoteInventoryObserver implements ObserverInterface
     protected $itemsForReindex;
 
     /**
-     * @param StockManagementInterface $stockManagement
-     * @param ProductQty               $productQty
-     * @param ItemsForReindex          $itemsForReindex
+     * @param   StockManagementInterface    $stockManagement
+     * @param   ProductQty                  $productQty
+     * @param   ItemsForReindex             $itemsForReindex
      */
     public function __construct(
         StockManagementInterface $stockManagement,
@@ -46,7 +43,7 @@ class SubtractQuoteInventoryObserver implements ObserverInterface
      * This observer will override the default one:
      * @see \Magento\CatalogInventory\Observer\SubtractQuoteInventoryObserver::execute()
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

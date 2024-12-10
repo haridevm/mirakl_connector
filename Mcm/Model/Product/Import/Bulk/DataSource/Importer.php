@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource;
@@ -65,7 +64,6 @@ class Importer extends \Magento\ImportExport\Model\Import implements ImporterInt
 
     /**
      * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
      */
     protected function _getEntityAdapter()
     {

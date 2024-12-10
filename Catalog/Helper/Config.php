@@ -1,19 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Helper;
 
 class Config extends \Mirakl\Connector\Helper\Config
 {
-    public const XML_PATH_ATTRIBUTE_STORE        = 'mirakl_connector/product_attributes/products_heading/store';
-    public const XML_PATH_ATTRIBUTE_BRAND        = 'mirakl_connector/product_attributes/products_heading/brand';
-    public const XML_PATH_ATTRIBUTE_IDENTIFIERS  = 'mirakl_connector/product_attributes/products_heading/identifiers';
-    public const XML_PATH_ENABLE_SYNC_CATEGORIES = 'mirakl_sync/categories/enable_categories';
-    public const XML_PATH_ENABLE_SYNC_PRODUCTS   = 'mirakl_sync/products/enable_products';
+    const XML_PATH_ATTRIBUTE_STORE        = 'mirakl_connector/product_attributes/products_heading/store';
+    const XML_PATH_ATTRIBUTE_BRAND        = 'mirakl_connector/product_attributes/products_heading/brand';
+    const XML_PATH_ATTRIBUTE_IDENTIFIERS  = 'mirakl_connector/product_attributes/products_heading/identifiers';
+    const XML_PATH_ENABLE_SYNC_CATEGORIES = 'mirakl_sync/categories/enable_categories';
+    const XML_PATH_ENABLE_SYNC_PRODUCTS   = 'mirakl_sync/products/enable_products';
 
     /**
-     * @return int
+     * @return  int
      */
     public function getStoreId()
     {
@@ -21,7 +18,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getBrandAttributeCode()
     {
@@ -29,7 +26,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getIdentifiersAttributeCodes()
     {
@@ -39,7 +36,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncCategories()
     {
@@ -47,7 +44,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncProducts()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Quote\Model\Quote;
@@ -10,34 +7,32 @@ use Magento\Store\Model\ScopeInterface;
 
 class Config extends \Mirakl\Core\Helper\Config
 {
-    // phpcs:disable
-    public const XML_PATH_TRANSLATION_STORE                  = 'mirakl_connector/general/translation_store';
-    public const XML_PATH_LOCALE_CODES_FOR_LABEL_TRANSLATION = 'mirakl_connector/general/locale_codes_for_labels_translation';
-    public const XML_PATH_TAX_OFFER_PRICES                   = 'mirakl_connector/tax/offer_prices';
-    public const XML_PATH_TAX_SHIPPING_PRICES                = 'mirakl_connector/tax/shipping_prices';
-    public const XML_PATH_TAX_CALCULATE_US_TAXES             = 'mirakl_connector/tax/calculate_us_taxes';
-    public const XML_PATH_AUTO_REMOVE_OFFERS                 = 'mirakl_connector/shopping_cart/auto_remove_offers';
-    public const XML_PATH_AUTO_UPDATE_OFFERS                 = 'mirakl_connector/shopping_cart/auto_update_offers';
-    public const XML_PATH_AUTO_CREATE_ORDER                  = 'mirakl_connector/order_workflow/auto_create_order';
-    public const XML_PATH_AUTO_CREATE_ORDER_STATUSES         = 'mirakl_connector/order_workflow/auto_create_order_statuses';
-    public const XML_PATH_AUTO_SCORE_ORDER                   = 'mirakl_connector/order_workflow/auto_score_order';
-    public const XML_PATH_SEND_ORDER_LINE_ID                 = 'mirakl_connector/order_workflow/send_order_line_id';
-    public const XML_PATH_PAYMENT_WORKFLOW                   = 'mirakl_connector/order_workflow/payment_workflow';
-    public const XML_PATH_ENABLE_MULTIPLE_SHIPMENTS          = 'mirakl_connector/order_workflow/enable_multiple_shipments';
-    public const XML_PATH_LOCK_MIRAKL_ITEMS_INVOICING        = 'mirakl_connector/order_workflow/lock_mirakl_items_invoicing';
-    public const XML_PATH_LOCK_MIRAKL_ITEMS_SHIPPING         = 'mirakl_connector/order_workflow/lock_mirakl_items_shipping';
-    public const XML_PATH_MULTIVALUE_ATTRIBUTES_SEPARATOR    = 'mirakl_connector/product_attributes/general/multivalue_separator';
-    public const XML_PATH_OFFERS_IMPORT_CLEAR_CACHE          = 'mirakl_connector/indexes_caches/offers_import/clear_cache';
+    const XML_PATH_TRANSLATION_STORE                  = 'mirakl_connector/general/translation_store';
+    const XML_PATH_LOCALE_CODES_FOR_LABEL_TRANSLATION = 'mirakl_connector/general/locale_codes_for_labels_translation';
+    const XML_PATH_TAX_OFFER_PRICES                   = 'mirakl_connector/tax/offer_prices';
+    const XML_PATH_TAX_SHIPPING_PRICES                = 'mirakl_connector/tax/shipping_prices';
+    const XML_PATH_TAX_CALCULATE_US_TAXES             = 'mirakl_connector/tax/calculate_us_taxes';
+    const XML_PATH_AUTO_REMOVE_OFFERS                 = 'mirakl_connector/shopping_cart/auto_remove_offers';
+    const XML_PATH_AUTO_UPDATE_OFFERS                 = 'mirakl_connector/shopping_cart/auto_update_offers';
+    const XML_PATH_AUTO_CREATE_ORDER                  = 'mirakl_connector/order_workflow/auto_create_order';
+    const XML_PATH_AUTO_CREATE_ORDER_STATUSES         = 'mirakl_connector/order_workflow/auto_create_order_statuses';
+    const XML_PATH_AUTO_SCORE_ORDER                   = 'mirakl_connector/order_workflow/auto_score_order';
+    const XML_PATH_SEND_ORDER_LINE_ID                 = 'mirakl_connector/order_workflow/send_order_line_id';
+    const XML_PATH_PAYMENT_WORKFLOW                   = 'mirakl_connector/order_workflow/payment_workflow';
+    const XML_PATH_ENABLE_MULTIPLE_SHIPMENTS          = 'mirakl_connector/order_workflow/enable_multiple_shipments';
+    const XML_PATH_LOCK_MIRAKL_ITEMS_INVOICING        = 'mirakl_connector/order_workflow/lock_mirakl_items_invoicing';
+    const XML_PATH_LOCK_MIRAKL_ITEMS_SHIPPING         = 'mirakl_connector/order_workflow/lock_mirakl_items_shipping';
+    const XML_PATH_MULTIVALUE_ATTRIBUTES_SEPARATOR    = 'mirakl_connector/product_attributes/general/multivalue_separator';
+    const XML_PATH_OFFERS_IMPORT_CLEAR_CACHE          = 'mirakl_connector/indexes_caches/offers_import/clear_cache';
 
     // Deprecated
-    public const XML_PATH_OFFERS_IMPORT_ENABLE              = 'mirakl_sync/offers/enable';
-    public const XML_PATH_OFFERS_USE_DIRECT_DATABASE_IMPORT = 'mirakl_sync/offers/use_direct_database_import';
+    const XML_PATH_OFFERS_IMPORT_ENABLE              = 'mirakl_sync/offers/enable';
+    const XML_PATH_OFFERS_USE_DIRECT_DATABASE_IMPORT = 'mirakl_sync/offers/use_direct_database_import';
 
-    public const XML_PATH_OFFERS_IMPORT_ASYNC_ENABLE                     = 'mirakl_sync/offers_async/enable';
-    public const XML_PATH_OFFERS_IMPORT_ASYNC_USE_DIRECT_DATABASE_IMPORT = 'mirakl_sync/offers_async/use_direct_database_import';
+    const XML_PATH_OFFERS_IMPORT_ASYNC_ENABLE                     = 'mirakl_sync/offers_async/enable';
+    const XML_PATH_OFFERS_IMPORT_ASYNC_USE_DIRECT_DATABASE_IMPORT = 'mirakl_sync/offers_async/use_direct_database_import';
 
-    public const XML_PATH_IGNORE_OFFERS_NEW_IMPORT_NOTIFICATION = 'mirakl_sync/offers/ignore_new_import_notification';
-    // phpcs:enable
+    const XML_PATH_IGNORE_OFFERS_NEW_IMPORT_NOTIFICATION = 'mirakl_sync/offers/ignore_new_import_notification';
 
     /**
      * @var StoreInterface[]
@@ -47,7 +42,7 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns store to use for catalog integration
      *
-     * @return StoreInterface
+     * @return  StoreInterface
      */
     public function getCatalogIntegrationStore()
     {
@@ -60,8 +55,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return array
+     * @param   mixed   $store
+     * @return  array
      */
     public function getCreateOrderStatuses($store = null)
     {
@@ -73,8 +68,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns default country code
      *
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getDefaultCountry($store = null)
     {
@@ -84,9 +79,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Whether offer prices from Mirakl include tax
      *
-     * @param mixed $store
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @param   mixed   $store
+     * @return  bool
      */
     public function getOffersIncludeTax($store = null)
     {
@@ -94,7 +88,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getPaymentWorkflow()
     {
@@ -104,10 +98,9 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Whether shipping prices from Mirakl include tax
      *
-     * @param mixed $store
-     * @param Quote $quote
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @param   mixed   $store
+     * @param   Quote   $quote
+     * @return  bool
      */
     public function getShippingPricesIncludeTax($store = null, $quote = null)
     {
@@ -121,7 +114,7 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns stores to use for label translation
      *
-     * @return array
+     * @return  array
      */
     public function getStoresForLabelTranslation()
     {
@@ -145,9 +138,9 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param string $entity
-     * @param mixed  $store
-     * @return \DateTime|null
+     * @param   string  $entity
+     * @param   mixed   $store
+     * @return  \DateTime|null
      */
     public function getSyncDate($entity, $store = null)
     {
@@ -164,7 +157,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function resetConfig()
     {
@@ -174,8 +167,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param string $entity
-     * @return $this
+     * @param   string  $entity
+     * @return  $this
      */
     public function resetSyncDate($entity)
     {
@@ -185,9 +178,9 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param string $entity
-     * @param string $time
-     * @return $this
+     * @param   string  $entity
+     * @param   string  $time
+     * @return  $this
      */
     public function setSyncDate($entity, $time = 'now')
     {
@@ -200,8 +193,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we remove Mirakl offers automatically when processing shopping cart?
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isAutoRemoveOffers($store = null)
     {
@@ -211,8 +204,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we update Mirakl offers automatically when processing shopping cart?
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isAutoUpdateOffers($store = null)
     {
@@ -222,8 +215,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns true if Mirakl order has to be created automatically when a Magento order is placed
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isAutoCreateOrder($store = null)
     {
@@ -233,8 +226,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns true if Mirakl order has to be scored automatically during creation (OR01)
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isAutoScoreOrder($store = null)
     {
@@ -244,8 +237,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we let Mirakl calculate taxes for US shipments?
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isCalculateUSTaxes($store = null)
     {
@@ -253,8 +246,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isEnableMultiShipments($store = null)
     {
@@ -262,7 +255,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isIgnoreNewImportNotification()
     {
@@ -270,8 +263,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isLockMiraklItemsInvoicing($store = null)
     {
@@ -279,8 +272,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isLockMiraklItemsShipping($store = null)
     {
@@ -290,8 +283,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we send the order line id when sending the Magento order to Mirakl? (API OR01)
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isSendOrderLineId($store = null)
     {
@@ -299,8 +292,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param StoreInterface $store
-     * @return bool
+     * @param   StoreInterface  $store
+     * @return  bool
      */
     public function isStoreInLabelTranslation(StoreInterface $store)
     {
@@ -316,8 +309,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns true if SYNCHRONOUS offers import is enabled, false otherwise
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isOffersImportEnabled($store = null)
     {
@@ -327,8 +320,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Returns true if ASYNCHRONOUS offers import is enabled, false otherwise
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isOffersImportAsyncEnabled($store = null)
     {
@@ -338,7 +331,7 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we clean cache after offers import?
      *
-     * @return bool
+     * @return  bool
      */
     public function isOffersImportClearCache()
     {
@@ -348,7 +341,7 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we use fast MySQL import (LOAD DATA INFILE) for SYNCHRONOUS offers import or a regular PHP script?
      *
-     * @return bool
+     * @return  bool
      */
     public function isOffersUseDirectDatabaseImport()
     {
@@ -358,7 +351,7 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Should we use fast MySQL import (LOAD DATA INFILE) for ASYNCHRONOUS offers import or a regular PHP script?
      *
-     * @return bool
+     * @return  bool
      */
     public function isOffersAsyncUseDirectDatabaseImport()
     {

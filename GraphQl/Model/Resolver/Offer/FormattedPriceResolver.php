@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Offer;
@@ -13,7 +12,7 @@ use Mirakl\GraphQl\Model\Resolver\AbstractResolver;
 class FormattedPriceResolver extends AbstractResolver implements ResolverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

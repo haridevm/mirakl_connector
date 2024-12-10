@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Setup\Patch\Data;
@@ -45,7 +44,7 @@ class CreateMiraklImageStatusAttribute implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -68,9 +67,7 @@ class CreateMiraklImageStatusAttribute implements DataPatchInterface
     {
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        $eavSetup->addAttribute(
-            Product::ENTITY,
-            MciHelper::ATTRIBUTE_IMAGES_STATUS,
+        $eavSetup->addAttribute(Product::ENTITY, MciHelper::ATTRIBUTE_IMAGES_STATUS,
             [
                 'type'                    => 'static',
                 'input'                   => 'text',
@@ -82,10 +79,8 @@ class CreateMiraklImageStatusAttribute implements DataPatchInterface
 
         $tableProduct = $setup->getTable('catalog_product_entity');
 
-        $setup->getConnection()->update(
-            $tableProduct,
-            [MciHelper::ATTRIBUTE_IMAGES_STATUS => ImageHelper::IMAGES_IMPORT_STATUS_PROCESSED]
-        );
+        $setup->getConnection()
+            ->update($tableProduct, [MciHelper::ATTRIBUTE_IMAGES_STATUS => ImageHelper::IMAGES_IMPORT_STATUS_PROCESSED]);
     }
 
     /**
@@ -99,7 +94,7 @@ class CreateMiraklImageStatusAttribute implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -107,7 +102,7 @@ class CreateMiraklImageStatusAttribute implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Observer\Attribute;
 
 use Magento\Framework\Event\Observer;
@@ -41,11 +38,11 @@ class PrepareTreeObserver implements ObserverInterface
     protected $mciHelper;
 
     /**
-     * @param EventHelper            $eventHelper
-     * @param EventFactory           $eventFactory
-     * @param EventResourceFactory   $eventResourceFactory
-     * @param EventCollectionFactory $eventCollectionFactory
-     * @param MciHelper              $mciHelper
+     * @param   EventHelper             $eventHelper
+     * @param   EventFactory            $eventFactory
+     * @param   EventResourceFactory    $eventResourceFactory
+     * @param   EventCollectionFactory  $eventCollectionFactory
+     * @param   MciHelper               $mciHelper
      */
     public function __construct(
         EventHelper $eventHelper,
@@ -62,7 +59,7 @@ class PrepareTreeObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

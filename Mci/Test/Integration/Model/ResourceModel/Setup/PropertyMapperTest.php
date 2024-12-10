@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Test\Integration\Model\ResourceModel\Setup;

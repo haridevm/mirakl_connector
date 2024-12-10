@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Offer\Channel;
@@ -23,7 +22,7 @@ class DataOverrider implements DataOverriderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function override(ChannelOfferInterface $offer): void
     {

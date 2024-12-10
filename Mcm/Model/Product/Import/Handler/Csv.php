@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Import\Handler;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -18,14 +15,11 @@ use Mirakl\Mcm\Model\Product\Import\Handler\File\Loader;
 use Mirakl\MCM\Front\Domain\Product\Export\ProductAcceptanceStatus as ProductAcceptance;
 use Mirakl\Process\Model\Process;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Csv
 {
     use CsvFileTrait;
 
-    public const CODE = 'CM51';
+    const CODE = 'CM51';
 
     /**
      * @var AdapterInterface
@@ -68,14 +62,14 @@ class Csv
     protected $cm21BatchSize;
 
     /**
-     * @param AdapterFactory   $adapterFactory
-     * @param ReportInterface  $successReport
-     * @param ReportInterface  $errorReport
-     * @param McmConfig        $config
+     * @param AdapterFactory $adapterFactory
+     * @param ReportInterface $successReport
+     * @param ReportInterface $errorReport
+     * @param McmConfig $config
      * @param ProductApiHelper $productApiHelper
-     * @param Loader           $loader
-     * @param Filesystem       $filesystem
-     * @param int              $cm21BatchSize
+     * @param Loader $loader
+     * @param Filesystem $filesystem
+     * @param int $cm21BatchSize
      */
     public function __construct(
         AdapterFactory $adapterFactory,
@@ -98,10 +92,10 @@ class Csv
     }
 
     /**
-     * @param Process        $process
-     * @param \DateTime|null $since
-     * @param \DateTime|null $until
-     * @return string|null
+     * @param   Process         $process
+     * @param   \DateTime|null  $since
+     * @param   \DateTime|null  $until
+     * @return  string|null
      */
     public function getApiFile(Process $process, $since, $until = null)
     {
@@ -109,13 +103,12 @@ class Csv
     }
 
     /**
-     * @param Process        $process
-     * @param \DateTime|null $since
-     * @param bool           $sendReport
-     * @param \DateTime|null $until
-     * @return $this
-     * @throws \Exception
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   Process         $process
+     * @param   \DateTime|null  $since
+     * @param   bool            $sendReport
+     * @param   \DateTime|null  $until
+     * @return  $this
+     * @throws  \Exception
      */
     public function run(Process $process, $since, $sendReport = true, $until = null)
     {
@@ -170,13 +163,11 @@ class Csv
 
                     $sku = $this->adapter->import($data);
 
-                    $process->output(
-                        __('[OK] Product has been processed for line %1 (SKU: %2)', $i, $sku),
-                        $i % 100 === 0
-                    );
+                    $process->output(__('[OK] Product has been processed for line %1 (SKU: %2)', $i, $sku), $i % 100 === 0);
 
                     // Register report not only on product creation
                     $this->writeSuccessReport($miraklProductId, $sku);
+
                 } catch (WarningException $e) {
                     $message = __('Warning on line %1: %2', $i, $e->getMessage());
                     $process->output($message);
@@ -212,8 +203,8 @@ class Csv
     /**
      * Sends integration report to Mirakl (CM21)
      *
-     * @param Process $process
-     * @return void
+     * @param   Process $process
+     * @return  void
      */
     private function sendIntegrationReport(Process $process)
     {
@@ -233,21 +224,21 @@ class Csv
     /**
      * Validate presence and value of the identifier
      *
-     * @param array $data
-     * @return string
-     * @throws \Exception
+     * @param   array   $data
+     * @return  string
+     * @throws  \Exception
      */
     protected function validateIdentifier($data)
     {
         if (empty($data[McmHelper::CSV_MIRAKL_PRODUCT_ID])) {
             throw new \Exception(
-                __('Column "%1" cannot be empty', McmHelper::CSV_MIRAKL_PRODUCT_ID)->render()
+                __('Column "%1" cannot be empty', McmHelper::CSV_MIRAKL_PRODUCT_ID)
             );
         }
 
         if (!isset($data[McmHelper::CSV_MIRAKL_PRODUCT_SKU])) {
             throw new \Exception(
-                __('Could not find "%1" column in product data', McmHelper::CSV_MIRAKL_PRODUCT_SKU)->render()
+                __('Could not find "%1" column in product data', McmHelper::CSV_MIRAKL_PRODUCT_SKU)
             );
         }
 
@@ -255,8 +246,8 @@ class Csv
     }
 
     /**
-     * @param string $miraklProductId
-     * @param string $productSku
+     * @param   string  $miraklProductId
+     * @param   string  $productSku
      */
     private function writeSuccessReport($miraklProductId, $productSku)
     {
@@ -268,9 +259,9 @@ class Csv
     }
 
     /**
-     * @param string $miraklProductId
-     * @param string $productSku
-     * @param string $message
+     * @param   string  $miraklProductId
+     * @param   string  $productSku
+     * @param   string  $message
      */
     private function writeErrorReport($miraklProductId, $productSku, $message)
     {

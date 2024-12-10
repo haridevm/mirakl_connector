@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Api;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -24,17 +21,17 @@ class GetSynchronizationErrorReportObserver implements ObserverInterface
     protected $processHelper;
 
     /**
-     * @param Filesystem    $filesystem
+     * @param   Filesystem  $filesystem
      * @param ProcessHelper $processHelper
      */
-    public function __construct(Filesystem $filesystem, ProcessHelper $processHelper)
+    public function __construct(Filesystem $filesystem,ProcessHelper $processHelper)
     {
         $this->filesystem = $filesystem;
         $this->processHelper = $processHelper;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

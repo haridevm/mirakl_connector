@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Console\Command;
 
 use Symfony\Component\Console\Input\InputOption;
@@ -9,8 +6,8 @@ use Symfony\Component\Console\Input\InputOption;
 trait TimeoutCommandTrait
 {
     /**
-     * @param array $options
-     * @return void
+     * @param   array   $options
+     * @return  void
      */
     public function addTimeoutCommandOption(array &$options)
     {

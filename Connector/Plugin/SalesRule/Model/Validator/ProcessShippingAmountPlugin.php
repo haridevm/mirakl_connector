@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Mirakl\Connector\Plugin\SalesRule\Model\Validator;
 
@@ -71,9 +70,6 @@ class ProcessShippingAmountPlugin
      * @param \Closure  $proceed
      * @param Address   $address
      * @return Validator
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
      */
     public function aroundProcessShippingAmount(
         Validator $subject,

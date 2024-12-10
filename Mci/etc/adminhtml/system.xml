@@ -49,7 +49,7 @@
                 <field id="incremental_sync" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="35" translate="label comment" type="select">
                     <label>Enable Incremental Synchronization</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[If enabled, incremental synchronization (after creation, deletion or modification) will be activated (synchronously or via connector events).]]></comment>
+                    <comment><![CDATA[If enabled, incremental synchronization (after creation, deletion or modification) will be activated (synchronously or via Mirakl events).]]></comment>
                     <depends>
                         <field id="mirakl_sync/attributes/enable_attributes">1</field>
                     </depends>

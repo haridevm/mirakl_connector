@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Helper;
@@ -65,8 +64,8 @@ class DocumentRequest extends ClientHelper\MMP
     /**
      * Downloads a single accounting document
      *
-     * @param string $docId
-     * @return FileWrapper
+     * @param   string  $docId
+     * @return  FileWrapper
      */
     public function downloadAccountingDocument($docId)
     {
@@ -76,8 +75,8 @@ class DocumentRequest extends ClientHelper\MMP
     /**
      * (DR73) Downloads multiple accounting documents
      *
-     * @param string[] $docIds
-     * @return FileWrapper
+     * @param   string[]    $docIds
+     * @return  FileWrapper
      */
     public function downloadAccountingDocuments(array $docIds)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Handler;
 
 use Magento\Framework\Filesystem\File\ReadInterface;
@@ -22,10 +19,10 @@ trait CsvTrait
     ];
 
     /**
-     * @param ReadInterface|resource $fh
-     * @param string                 $delimiter
-     * @param string                 $enclosure
-     * @return string|false
+     * @param   ReadInterface|resource    $fh
+     * @param   string                    $delimiter
+     * @param   string                    $enclosure
+     * @return  string|false
      */
     public function getValidDelimiter($fh, $delimiter, $enclosure = '"')
     {
@@ -60,7 +57,7 @@ trait CsvTrait
     }
 
     /**
-     * @param ReadInterface|resource $fh
+     * @param  ReadInterface|resource $fh
      */
     protected function rewind($fh)
     {
@@ -72,10 +69,10 @@ trait CsvTrait
     }
 
     /**
-     * @param ReadInterface|resource $fh
-     * @param string                 $delimiter
-     * @param string                 $enclosure
-     * @return array|bool
+     * @param   ReadInterface|resource    $fh
+     * @param   string                    $delimiter
+     * @param   string                    $enclosure
+     * @return  array|bool
      */
     protected function getCsv($fh, $delimiter, $enclosure)
     {

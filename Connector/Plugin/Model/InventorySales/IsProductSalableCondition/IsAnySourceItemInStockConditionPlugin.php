@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Plugin\Model\InventorySales\IsProductSalableCondition;
@@ -24,9 +23,9 @@ class IsAnySourceItemInStockConditionPlugin
 
     /**
      * @param IsAnySourceItemInStockCondition $subject
-     * @param bool                            $result
-     * @param string                          $sku
-     * @param int                             $stockId
+     * @param bool $result
+     * @param string $sku
+     * @param int $stockId
      * @return bool
      */
     public function afterExecute(

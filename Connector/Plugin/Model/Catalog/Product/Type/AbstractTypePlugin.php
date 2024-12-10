@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Plugin\Model\Catalog\Product\Type;
@@ -28,7 +27,7 @@ class AbstractTypePlugin
      * Add Mirakl offer if present in request
      *
      * @param DataObject $buyRequest
-     * @param Product    $product
+     * @param Product $product
      * @return void
      */
     private function addMiraklOffer(DataObject $buyRequest, Product $product): void
@@ -38,8 +37,8 @@ class AbstractTypePlugin
 
     /**
      * @param AbstractType $abstractType
-     * @param DataObject   $buyRequest
-     * @param Product      $product
+     * @param DataObject $buyRequest
+     * @param Product $product
      */
     public function beforeProcessConfiguration(AbstractType $abstractType, DataObject $buyRequest, Product $product)
     {
@@ -48,8 +47,8 @@ class AbstractTypePlugin
 
     /**
      * @param AbstractType $abstractType
-     * @param DataObject   $buyRequest
-     * @param Product      $product
+     * @param DataObject $buyRequest
+     * @param Product $product
      */
     public function beforePrepareForCartAdvanced(AbstractType $abstractType, DataObject $buyRequest, Product $product)
     {

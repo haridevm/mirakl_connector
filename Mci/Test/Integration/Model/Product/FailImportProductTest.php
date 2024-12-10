@@ -1,69 +1,60 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Integration\Model\Product;
 
 use Mirakl\Mci\Test\Integration\Model\Product\AbstractImportProductTestCase as MiraklBaseTestCase;
 
-/**
- * @group MCI
- * @group import
- *
- * @magentoDbIsolation enabled
- * @magentoAppIsolation enabled
- */
 class FailImportProductTest extends MiraklBaseTestCase
 {
     /**
      * @dataProvider importMciAttributeSetErrorDataProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set_rollback.php
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      *
-     * @param string $csv
-     * @param array  $errors
+     * @param   string  $csv
+     * @param   array   $errors
      */
     public function testDataAttributeSetErrorMciImport($csv, $errors)
     {
-        $process = $this->runImport('2010', $csv);
+        $this->runImport('2010', $csv);
 
         foreach ($errors as $error) {
-            $this->assertStringContainsString($error, $process->getOutput());
+            $this->assertStringContainsString($error, $this->processModel->getOutput());
         }
     }
 
     /**
      * @dataProvider importMciErrorDataProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      *
-     * @param string $csv
-     * @param array  $errors
+     * @param   string  $csv
+     * @param   array   $errors
      */
     public function testDataErrorMciImport($csv, $errors)
     {
         try {
-            $process = $this->runImport('2010', $csv);
-
-            $this->assertGreaterThan(0, count($errors));
-
-            foreach ($errors as $error) {
-                $this->assertStringContainsString($error, $process->getOutput());
-            }
+            $this->runImport('2010', $csv);
         } catch (\Exception $e) {
             // Do not stop test on exception
-            $this->markTestSkipped($e->getMessage());
+        }
+
+        foreach ($errors as $error) {
+            $this->assertStringContainsString($error, $this->processModel->getOutput());
         }
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMciErrorDataProvider()
     {
@@ -77,7 +68,7 @@ class FailImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMciAttributeSetErrorDataProvider()
     {

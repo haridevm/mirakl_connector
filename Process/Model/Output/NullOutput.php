@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Output;
@@ -7,7 +6,7 @@ namespace Mirakl\Process\Model\Output;
 class NullOutput extends AbstractOutput
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function display($str): self
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -21,9 +18,6 @@ use Mirakl\Core\Model\ResourceModel\ShopFactory as ShopResourceFactory;
 use Mirakl\Core\Model\ShopFactory;
 use Mirakl\Core\Model\Shop as ShopModel;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Offer extends AbstractHelper
 {
     /**
@@ -115,8 +109,8 @@ class Offer extends AbstractHelper
     /**
      * Return the number of available offers for given product
      *
-     * @param Product $product
-     * @return int
+     * @param   Product $product
+     * @return  int
      */
     public function countAvailableOffersForProduct($product)
     {
@@ -126,7 +120,7 @@ class Offer extends AbstractHelper
     /**
      * Returns offer state collection
      *
-     * @return OfferStateCollection
+     * @return  OfferStateCollection
      */
     public function getAllConditions()
     {
@@ -140,14 +134,14 @@ class Offer extends AbstractHelper
     /**
      * Get available offers for a product
      *
-     * @param Product   $product
-     * @param int|array $excludeOfferIds
-     * @return OfferCollection
+     * @param   Product     $product
+     * @param   int|array   $excludeOfferIds
+     * @return  OfferCollection
      */
     public function getAvailableOffersForProduct(Product $product, $excludeOfferIds = null)
     {
         static $productsOffers = [];
-        $cacheId = md5(serialize([$product->getId() => $excludeOfferIds])); // phpcs:ignore
+        $cacheId = md5(serialize([$product->getId() => $excludeOfferIds]));
 
         if (!isset($productsOffers[$cacheId])) {
             $offers = $this->productOfferCollector->collect($product);
@@ -165,11 +159,11 @@ class Offer extends AbstractHelper
     /**
      * Get available offers for a product sku and a currency code
      *
-     * @param string|array $sku
-     * @param string       $currencyCode
-     * @param int|array    $excludeOfferIds
-     * @param int|null     $storeId
-     * @return OfferCollection
+     * @param   string|array    $sku
+     * @param   string          $currencyCode
+     * @param   int|array       $excludeOfferIds
+     * @param   int|null        $storeId
+     * @return  OfferCollection
      * @deprecated Not used anymore
      */
     public function getAvailableOffersForProductSku($sku, $currencyCode, $excludeOfferIds = null, $storeId = null)
@@ -195,8 +189,8 @@ class Offer extends AbstractHelper
     /**
      * Returns offer state matching specified state id
      *
-     * @param int $stateId
-     * @return string
+     * @param   int $stateId
+     * @return  string
      */
     public function getConditionNameById($stateId)
     {
@@ -209,8 +203,8 @@ class Offer extends AbstractHelper
     /**
      * Retrieve offer based on given offer id
      *
-     * @param string $offerId
-     * @return OfferModel
+     * @param   string  $offerId
+     * @return  OfferModel
      */
     public function getOfferById($offerId)
     {
@@ -223,8 +217,8 @@ class Offer extends AbstractHelper
     /**
      * Returns condition name of specified offer
      *
-     * @param OfferModel $offer
-     * @return string
+     * @param   OfferModel  $offer
+     * @return  string
      */
     public function getOfferCondition(OfferModel $offer)
     {
@@ -232,21 +226,21 @@ class Offer extends AbstractHelper
     }
 
     /**
-     * @param OfferModel $offer
-     * @param int|null   $qty
-     * @return float
+     * @param   OfferModel  $offer
+     * @param   int|null    $qty
+     * @return  float
      * @deprecated Use \Mirakl\Connector\Model\Offer\FinalPrice instead
      */
     public function getOfferFinalPrice(OfferModel $offer, $qty = null)
     {
-        return $this->offerFinalPrice->get($offer, $qty ? (int) $qty : null);
+        return $this->offerFinalPrice->get($offer, $qty);
     }
 
     /**
      * Returns shop of specified offer if available
      *
-     * @param OfferModel $offer
-     * @return ShopModel
+     * @param   OfferModel  $offer
+     * @return  ShopModel
      */
     public function getOfferShop(OfferModel $offer)
     {
@@ -260,8 +254,8 @@ class Offer extends AbstractHelper
     /**
      * Returns true if product has available offers
      *
-     * @param Product $product
-     * @return bool
+     * @param   Product $product
+     * @return  bool
      */
     public function hasAvailableOffersForProduct($product)
     {
@@ -271,7 +265,7 @@ class Offer extends AbstractHelper
     /**
      * Get the StockState object
      *
-     * @return StockStateInterface
+     * @return  StockStateInterface
      */
     public function getStockState()
     {

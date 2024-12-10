@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Mirakl\Core\Model\File\FieldCollector;
 
@@ -31,7 +30,6 @@ class Json implements CollectorInterface
      * $fieldCode will be used as key in result array
      *
      * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function collect(ReadInterface $file, array $fields): array
     {

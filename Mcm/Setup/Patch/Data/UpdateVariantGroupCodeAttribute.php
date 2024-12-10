@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
@@ -37,7 +34,7 @@ class UpdateVariantGroupCodeAttribute implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -46,18 +43,13 @@ class UpdateVariantGroupCodeAttribute implements DataPatchInterface
 
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            McmHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE,
-            'apply_to',
-            'simple,configurable'
-        );
+        $eavSetup->updateAttribute(Product::ENTITY, McmHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE, 'apply_to', 'simple,configurable');
 
         $setup->endSetup();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -68,7 +60,7 @@ class UpdateVariantGroupCodeAttribute implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

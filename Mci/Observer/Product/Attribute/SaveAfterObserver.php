@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product\Attribute;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -11,7 +8,7 @@ use Magento\Framework\Event\ObserverInterface;
 class SaveAfterObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -27,10 +24,7 @@ class SaveAfterObserver extends AbstractObserver implements ObserverInterface
             $this->valueListHelper->update($attribute);
         }
 
-        if (
-            $this->mciConfigHelper->isSyncAttributes()
-            && $this->mciConfigHelper->isIncrementalAttributesSyncEnabled()
-        ) {
+        if ($this->mciConfigHelper->isSyncAttributes() && $this->mciConfigHelper->isIncrementalAttributesSyncEnabled()) {
             if ($option = $attribute->getOption()) {
                 $values = $option['value'] ?? [];
                 $delete = array_keys($option['delete'] ?? [], '1', true);

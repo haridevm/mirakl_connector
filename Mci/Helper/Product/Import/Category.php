@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Category as CategoryModel;
@@ -16,9 +13,6 @@ use Magento\Eav\Model\ResourceModel\Entity\Attribute\Set\CollectionFactory as At
 use Magento\Framework\Exception\NotFoundException;
 use Mirakl\Mci\Helper\Config;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Category
 {
     /**
@@ -57,11 +51,11 @@ class Category
     private $attributeSets;
 
     /**
-     * @param Config                        $config
-     * @param CategoryFactory               $categoryFactory
-     * @param CategoryResourceFactory       $categoryResourceFactory
-     * @param CategoryCollectionFactory     $categoryCollectionFactory
-     * @param AttributeSetCollectionFactory $attrSetCollectionFactory
+     * @param   Config                          $config
+     * @param   CategoryFactory                 $categoryFactory
+     * @param   CategoryResourceFactory         $categoryResourceFactory
+     * @param   CategoryCollectionFactory       $categoryCollectionFactory
+     * @param   AttributeSetCollectionFactory   $attrSetCollectionFactory
      */
     public function __construct(
         Config $config,
@@ -80,9 +74,9 @@ class Category
     /**
      * Adds specified category to product
      *
-     * @param ProductModel  $product
-     * @param CategoryModel $category
-     * @return ProductModel
+     * @param   ProductModel    $product
+     * @param   CategoryModel   $category
+     * @return  ProductModel
      */
     public function addCategoryToProduct(ProductModel $product, CategoryModel $category)
     {
@@ -94,7 +88,7 @@ class Category
     }
 
     /**
-     * @return AttributeSetCollection
+     * @return  AttributeSetCollection
      */
     public function getAttributeSets()
     {
@@ -106,8 +100,8 @@ class Category
     }
 
     /**
-     * @return CategoryCollection
-     * @throws \Exception
+     * @return  CategoryCollection
+     * @throws  \Exception
      */
     public function getCategories()
     {
@@ -135,9 +129,9 @@ class Category
     /**
      * Tries to retrieve attribute set associated to specified category
      *
-     * @param CategoryModel $category
-     * @return AttributeSet
-     * @throws NotFoundException
+     * @param   CategoryModel   $category
+     * @return  AttributeSet
+     * @throws  NotFoundException
      */
     public function getCategoryAttributeSet(CategoryModel $category)
     {
@@ -169,9 +163,9 @@ class Category
     /**
      * Tries to retrieve category by given id
      *
-     * @param int $categoryId
-     * @return CategoryModel
-     * @throws NotFoundException
+     * @param   int $categoryId
+     * @return  CategoryModel
+     * @throws  NotFoundException
      */
     public function getCategoryById($categoryId)
     {

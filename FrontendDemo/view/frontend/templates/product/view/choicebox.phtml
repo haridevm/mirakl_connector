@@ -25,12 +25,12 @@ if (!count($offers['offers'])) return;
 ?>
 
 <?php if ($product->isSaleable() || $offers): ?>
-<div class="block" id="product-offers-choicebox" <?php if ($block->isConfigurableProduct()): ?> style="display: none;"<?php endif ?>>
+<div class="block" id="product-offers-choicebox" <?php if ($block->isConfigurableProduct()):?> style="display: none;"<?php endif ?>>
     <div class="block-content">
-        <h3><?= /* @escapeNotVerified */ $storeName ? __('Others Sellers on %1', $storeName) : __('Other Sellers'); ?></h3>
+        <h3><?php echo $storeName ? __('Others Sellers on %1', $storeName) : __('Other Sellers'); ?></h3>
         <div class="table-wrapper product-offers">
-            <table data-max-offers="<?= /* @escapeNotVerified */ $offers['max_count']; ?>" class="data table table-offers" id="choicebox-product-offers-list">
-                <caption class="table-caption"><?= /* @escapeNotVerified */ __('All Offers') ?></caption>
+            <table data-max-offers="<?php echo $offers['max_count']; ?>" class="data table table-offers" id="choicebox-product-offers-list">
+                <caption class="table-caption"><?php echo __('All Offers') ?></caption>
                 <tbody>
                     <?php $i = 0;?>
                     <?php foreach ($offers['offers'] as $offer): ?>
@@ -38,36 +38,33 @@ if (!count($offers['offers'])) return;
                             /** @var \Mirakl\Connector\Model\Offer $offer */
                             $shop = $block->getOfferHelper()->getOfferShop($offer);
                         ?>
-                        <tr class="offer offer-<?= /* @escapeNotVerified */ $offer->getId() ?> sku-<?= /* @escapeNotVerified */ $offer->getProductSku() ?>" <?php if (++$i > $offers['max_count']):?>style="display: none;"<?php endif;?>>
-                            <td data-th="<?= $block->escapeHtml(__('Price')) ?>" class="cell price">
-                                <?= $block->getOfferPriceBlock($offer)
-                                          ->setDisplayShippingPrice(false)
-                                          ->toHtml() ?>
-                                <div class="offer-state"><?= /* @escapeNotVerified */ __($offer->getConditionName()) ?></div>
+                        <tr class="offer offer-<?php echo $offer->getId() ?> sku-<?php echo $offer->getProductSku()?>" <?php if (++$i > $offers['max_count']):?>style="display: none;"<?php endif;?>>
+                            <td data-th="<?php echo $block->escapeHtml(__('Price')) ?>" class="cell price">
+                                <?php echo $block->getOfferPriceHtml($offer) ?>
                             </td>
-                            <td data-th="<?= $block->escapeHtml(__('Shipping Methods')) ?>" class="cell label shipping" style="display: none">
-                                <div class="offer-shipping best-offer-shipping" data-shipping-offer-id="<?= /* @escapeNotVerified */ $offer->getId()?>" style="display: none"></div>
+                            <td data-th="<?php echo $block->escapeHtml(__('Condition')) ?>" class="cell">
+                                <div class="offer-state"><?php echo __($offer->getConditionName()) ?></div>
                             </td>
-                            <td data-th="<?= $block->escapeHtml(__('Qty')) ?>" class="cell">
+                            <td data-th="<?php echo $block->escapeHtml(__('Qty')) ?>" class="cell">
                                 <div class="field qty">
                                     <div class="control">
-                                        <label class="label" for="qty"><span><?= /* @escapeNotVerified */ __('Qty') ?></span></label>
+                                        <label class="label" for="qty"><span><?php /* @escapeNotVerified */ echo __('Qty') ?></span></label>
                                         <input class="input-text qty offer-number-qty marketplace-offer"
                                                type="number"
                                                name="qty"
-                                               id="qty-choicebox-<?= /* @escapeNotVerified */ $offer->getId() ?>"
+                                               id="qty-choicebox-<?php echo $offer->getId() ?>"
                                                maxlength="12"
-                                               value="<?= /* @escapeNotVerified */ $block->getOfferDefaultQty($offer) * 1 ?>"
-                                               title="<?= /* @escapeNotVerified */ __('Qty') ?>"
-                                               data-validate='<?= $block->escapeHtml(json_encode($block->getOfferQuantityValidators($offer))) ?>' />
+                                               value="<?php /* @escapeNotVerified */ echo $block->getOfferDefaultQty($offer) * 1 ?>"
+                                               title="<?php /* @escapeNotVerified */ echo __('Qty') ?>"
+                                               data-validate='<?php echo $block->escapeHtml(json_encode($block->getOfferQuantityValidators($offer))) ?>' />
                                     </div>
                                 </div>
                                 <?php if ($shop): ?>
                                     <div class="offer-seller-name">
-                                        <?= /* @escapeNotVerified */ __('sold by') ?> <a href="<?= $block->escapeUrl($shop->getUrl()) ?>" title="<?= $block->escapeHtml($shop->getName()) ?>"><?= $block->escapeHtml($shop->getName()) ?></a>
+                                        <?php echo __('sold by') ?> <a href="<?php echo $shop->getUrl() ?>" title="<?php echo $block->escapeHtml($shop->getName()) ?>"><?php echo $block->escapeHtml($shop->getName()) ?></a>
                                     </div>
                                 <?php endif; ?>
-                                <?php if ($offer->getPackageQuantity()): ?>
+                                <?php if ($offer->getPackageQuantity()) : ?>
                                     <div class="product pricing increment">
                                         <?= /* @escapeNotVerified */ __('Available to buy in increments of %1', $offer->getPackageQuantity()) ?>
                                     </div>
@@ -75,16 +72,16 @@ if (!count($offers['offers'])) return;
                             </td>
                             <td data-th="<?= $block->escapeHtml(__('Action')) ?>" class="cell actions">
                                 <?php $cartAction = !$isConfigure ? __('Add to Cart') : __('Update Cart') ?>
-                                <button type="submit" title="<?= $block->escapeHtml($cartAction) ?>" class="action primary tocart add-offer-to-cart choicebox" id="product-addtocart-button" data-offer="<?= /* @escapeNotVerified */ $offer->getId() ?>">
-                                    <span><?= /* @escapeNotVerified */ $cartAction ?></span>
+                                <button type="submit" title="<?= $block->escapeHtml($cartAction) ?>" class="action primary tocart add-offer-to-cart choicebox" id="product-addtocart-button" data-offer="<?= $offer->getId() ?>">
+                                    <span><?= $cartAction ?></span>
                                 </button>
 
                                 <?php if ($shop): ?>
                                     <?php $evaluation = $shop->getFormattedGrade() ?>
                                     <div class="rating-summary">
                                         <?php if ($shop->getEvaluationsCount() > 0): ?>
-                                            <div class="rating-result" title="<?= /* @escapeNotVerified */ $evaluation ?>%">
-                                                <span style="width:<?= /* @escapeNotVerified */ $evaluation ?>%"><span><span itemprop="ratingValue"><?= /* @escapeNotVerified */ $evaluation ?></span>% <?= /* @escapeNotVerified */ __('of') ?> <span itemprop="bestRating">100</span></span></span>
+                                            <div class="rating-result" title="<?php echo $evaluation ?>%">
+                                                <span style="width:<?php echo $evaluation ?>%"><span><span itemprop="ratingValue"><?php echo $evaluation ?></span>% <?php echo __('of') ?> <span itemprop="bestRating">100</span></span></span>
                                             </div>
                                         <?php endif; ?>
                                     </div>
@@ -96,7 +93,7 @@ if (!count($offers['offers'])) return;
             </table>
             <div id="product-offers-summary">
                 <a class="data switch" tabindex="-1" href="#marketplace_offers" id="tab-label-marketplace_offers-title">
-                    <?= /* @escapeNotVerified */ __('%1 offer(s) from %2', '<span class="product-offers-summary-number">' . $offers['total_count'] . '</span>', $block->formatCurrency($offers['min_price'])) ?>
+                    <?php echo __('%1 offer(s) from %2', '<span class="product-offers-summary-number">'.$offers['total_count'].'</span>', $block->formatCurrency($offers['min_price'])) ?>
                 </a>
             </div>
             <script>

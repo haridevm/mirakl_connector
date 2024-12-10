@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\System\Config\Source\Attribute\Product;
 
 class Identifier extends AttributeBaseSource
@@ -9,7 +6,7 @@ class Identifier extends AttributeBaseSource
     /**
      * Retrieves all product attributes in order to choose potential identifier attributes in configuration
      *
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

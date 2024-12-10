@@ -1,11 +1,7 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Integration\Model\Product;
 
 use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
 use Magento\Catalog\Model\ResourceModel\ProductFactory as ProductResourceFactory;
 use Mirakl\Core\Test\Integration\TestCase;
 use Mirakl\Core\Helper\Data as CoreHelper;
@@ -17,15 +13,13 @@ use Mirakl\Process\Model\Process as ProcessModel;
 
 /**
  * Abstract class for testing product Mci import scenarios
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class AbstractImportProductTestCase extends TestCase
 {
     /** @var \Magento\Framework\Filesystem */
     protected $fileSystem;
 
-    /** @var ProductResource */
+    /** @var \Magento\Catalog\Model\ResourceModel\Product */
     protected $productResource;
 
     /** @var MciDataHelper */
@@ -39,6 +33,9 @@ abstract class AbstractImportProductTestCase extends TestCase
 
     /** @var ProductResourceFactory */
     protected $productResourceFactory;
+
+    /** @var ProcessModel */
+    protected $processModel;
 
     /** @var MciHandler */
     protected $mciHandler;
@@ -56,9 +53,10 @@ abstract class AbstractImportProductTestCase extends TestCase
     {
         parent::setUp();
         $this->fileSystem             = $this->objectManager->get(\Magento\Framework\Filesystem::class);
-        $this->productResource        = $this->objectManager->create(ProductResource::class);
+        $this->productResource        = $this->objectManager->create(\Magento\Catalog\Model\ResourceModel\Product::class);
         $this->mciDatahelper          = $this->objectManager->get(MciDataHelper::class);
         $this->mciImportHandler       = $this->objectManager->get(MciHandler::class);
+        $this->processModel           = $this->objectManager->create(ProcessModel::class);
         $this->coreHelper             = $this->objectManager->create(CoreHelper::class);
         $this->productResourceFactory = $this->objectManager->create(ProductResourceFactory::class);
         $this->mciHandler             = $this->objectManager->create(MciHandler::class);
@@ -69,14 +67,14 @@ abstract class AbstractImportProductTestCase extends TestCase
     /**
      * Create process to run Mci import
      *
-     * @param string $csv
-     * @param string $shopId
-     * @return ProcessModel
+     * @param   string  $csv
+     * @param   string  $shopId
+     * @return  ProcessModel
      */
     protected function createProcess($csv, $shopId)
     {
-        $process = $this->processFactory->create();
-        $process->setType(ProcessModel::TYPE_IMPORT)
+        $this->processModel = $this->processFactory->create();
+        $this->processModel->setType(ProcessModel::TYPE_IMPORT)
             ->setCode(\Mirakl\Mci\Helper\Product\Import::CODE)
             ->setName('TEST MCI products import from path')
             ->setStatus(ProcessModel::STATUS_PENDING)
@@ -84,32 +82,31 @@ abstract class AbstractImportProductTestCase extends TestCase
             ->setMethod('runFile')
             ->setParams([$shopId, $shopId]);
 
-        $this->addCsvFile($process, $csv);
+        $this->addCsvFile($csv);
 
-        return $process;
+        return $this->processModel;
     }
 
     /**
      * Execute fixtures
      *
-     * @param ProcessModel $process
-     * @param string       $csv
-     * @return void
+     * @param   string  $csv
+     * @return  void
      */
-    protected function addCsvFile(ProcessModel $process, $csv)
+    protected function addCsvFile($csv)
     {
         if (!empty($csv)) {
             $file = $this->processHelper->saveFile($this->getFilePath($csv));
-            $process->setFile($file);
+            $this->processModel->setFile($file);
         }
     }
 
     /**
      * Test product values
      *
-     * @param string $shopId
-     * @param array  $values
-     * @return Product
+     * @param   string  $shopId
+     * @param   array   $values
+     * @return  Product
      */
     public function validateAllProductValues($shopId, $values)
     {
@@ -118,25 +115,25 @@ abstract class AbstractImportProductTestCase extends TestCase
         $this->assertNotNull($newProduct);
 
         if (isset($values['ean'])) {
-            $this->assertEquals($values['ean'], $newProduct->getData('ean'));
+            $this->assertEquals($newProduct->getData('ean'), $values['ean']);
         }
 
         if (isset($values['shop_skus'])) {
-            $this->assertEquals($values['shop_skus'], $newProduct->getData(MciDataHelper::ATTRIBUTE_SHOPS_SKUS));
+            $this->assertEquals($newProduct->getData(MciDataHelper::ATTRIBUTE_SHOPS_SKUS), $values['shop_skus']);
         }
 
         if (isset($values['mirakl_sync'])) {
-            $this->assertEquals($values['mirakl_sync'], $newProduct->getData('mirakl_sync'));
+            $this->assertEquals($newProduct->getData('mirakl_sync'), $values['mirakl_sync']);
         }
 
         $this->assertStringContainsString($shopId, $newProduct->getData(MciDataHelper::ATTRIBUTE_SHOPS_SKUS));
-        $this->assertEquals($values['name'], $newProduct->getData('name'));
-        $this->assertEquals($values['description'], $newProduct->getData('description'));
-        $this->assertEquals($values['color'], $newProduct->getData('color'));
-        $this->assertEquals($values['size'], $newProduct->getData('size'));
-        $this->assertEquals($values['status'], $newProduct->getStatus());
-        $this->assertEquals($values['mirakl_image_1'], $newProduct->getData('mirakl_image_1'));
-        $this->assertEquals($values['brand'], $newProduct->getData('brand'));
+        $this->assertEquals($newProduct->getData('name'), $values['name']);
+        $this->assertEquals($newProduct->getData('description'), $values['description']);
+        $this->assertEquals($newProduct->getData('color'), $values['color']);
+        $this->assertEquals($newProduct->getData('size'), $values['size']);
+        $this->assertEquals($newProduct->getStatus(), $values['status']);
+        $this->assertEquals($newProduct->getData('mirakl_image_1'), $values['mirakl_image_1']);
+        $this->assertEquals($newProduct->getData('brand'), $values['brand']);
 
         return $newProduct;
     }
@@ -144,24 +141,21 @@ abstract class AbstractImportProductTestCase extends TestCase
     /**
      * Run a Mci import
      *
-     * @param string $shopId
-     * @param string $csv
-     * @return ProcessModel
+     * @param   string  $shopId
+     * @param   string  $csv
      */
     protected function runImport($shopId, $csv)
     {
-        $process = $this->createProcess($csv, $shopId);
-        $process->setQuiet(true);
-        $process->run();
-
-        return $process;
+        $this->createProcess($csv, $shopId);
+        $this->processModel->setQuiet(true);
+        $this->processModel->run();
     }
 
     /**
      * Creates a Mirakl process
      *
-     * @param array $productIds
-     * @return ProcessModel
+     * @param   array   $productIds
+     * @return  ProcessModel
      */
     protected function createImageCommandProcess(array $productIds)
     {

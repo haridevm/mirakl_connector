@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Export\Formatter;
@@ -30,8 +29,7 @@ class Category implements FormatterInterface
         if (!empty($data['mirakl_category_id'])) {
             $data[MciHelper::ATTRIBUTE_CATEGORY] = (string) $data['mirakl_category_id'];
         } elseif (!empty($data['category_paths'])) {
-            $data[MciHelper::ATTRIBUTE_CATEGORY] =
-                (string) $this->categoryHelper->getCategoryIdFromPaths($data['category_paths']);
+            $data[MciHelper::ATTRIBUTE_CATEGORY] = (string) $this->categoryHelper->getCategoryIdFromPaths($data['category_paths']);
         }
     }
 }

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Directory\Model\CurrencyFactory;
@@ -15,9 +12,6 @@ use Mirakl\Connector\Helper\Tax as TaxHelper;
 use Mirakl\MMP\Common\Domain\Shipment\Shipment;
 use Mirakl\MMP\Common\Domain\Shipment\ShipmentStatus;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Shipments extends View
 {
     /**
@@ -32,7 +26,6 @@ class Shipments extends View
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/shipments.phtml';
 
@@ -72,8 +65,8 @@ class Shipments extends View
     }
 
     /**
-     * @param Shipment $shipment
-     * @return bool
+     * @param   Shipment    $shipment
+     * @return  bool
      */
     public function canReceiveShipment(Shipment $shipment)
     {
@@ -85,7 +78,7 @@ class Shipments extends View
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnableMultiShipments()
     {
@@ -93,8 +86,8 @@ class Shipments extends View
     }
 
     /**
-     * @param int $itemId
-     * @return \Magento\Framework\DataObject|\Magento\Sales\Model\Order\Item|null
+     * @param   int $itemId
+     * @return  \Magento\Framework\DataObject|\Magento\Sales\Model\Order\Item|null
      */
     public function getOrderItemById($itemId)
     {
@@ -102,8 +95,8 @@ class Shipments extends View
     }
 
     /**
-     * @param int $limit
-     * @return \Mirakl\MMP\Common\Domain\Collection\SeekableCollection|null
+     * @param   int $limit
+     * @return  \Mirakl\MMP\Common\Domain\Collection\SeekableCollection|null
      */
     public function getShipments($limit = 100)
     {
@@ -118,8 +111,8 @@ class Shipments extends View
     }
 
     /**
-     * @param string $code
-     * @return string
+     * @param   string  $code
+     * @return  string
      */
     public function getStatusLabel($code)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -14,7 +11,7 @@ use Mirakl\Process\Model\Process;
 
 class Shop extends AbstractHelper
 {
-    public const CODE = 'S20';
+    const CODE = 'S20';
 
     /**
      * @var Config
@@ -37,11 +34,11 @@ class Shop extends AbstractHelper
     private $shopImportHandler;
 
     /**
-     * @param Context             $context
-     * @param Config              $config
-     * @param ShopFactory         $shopFactory
+     * @param Context $context
+     * @param Config $config
+     * @param ShopFactory $shopFactory
      * @param ShopResourceFactory $shopResourceFactory
-     * @param ShopImportHandler   $shopImportHandler
+     * @param ShopImportHandler $shopImportHandler
      */
     public function __construct(
         Context $context,
@@ -68,7 +65,7 @@ class Shop extends AbstractHelper
     /**
      * @deprecated Use Mirakl\Connector\Model\Shop\Import\Handler::execute() instead
      *
-     * @param Process        $process
+     * @param Process $process
      * @param \DateTime|null $since
      * @return array
      * @throws \Exception

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer;
@@ -23,7 +22,7 @@ class Collector implements CollectorInterface
 
     /**
      * @param OfferCollectionFactory $offerCollectionFactory
-     * @param CustomizerInterface[]  $customizers
+     * @param CustomizerInterface[] $customizers
      */
     public function __construct(
         OfferCollectionFactory $offerCollectionFactory,
@@ -34,7 +33,7 @@ class Collector implements CollectorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function collect(Product $product): OfferCollection
     {

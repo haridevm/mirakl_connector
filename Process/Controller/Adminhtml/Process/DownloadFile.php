@@ -1,11 +1,7 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Controller\Result\Raw;
 use Magento\Framework\Controller\ResultFactory;
@@ -15,7 +11,7 @@ use Mirakl\Process\Helper\Data;
 /**
  * @method \Magento\Framework\App\Response\Http getResponse()
  */
-class DownloadFile extends AbstractProcessAction implements HttpGetActionInterface
+class DownloadFile extends AbstractProcessAction
 {
     /**
      * @var Filesystem
@@ -43,7 +39,7 @@ class DownloadFile extends AbstractProcessAction implements HttpGetActionInterfa
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -68,7 +64,7 @@ class DownloadFile extends AbstractProcessAction implements HttpGetActionInterfa
         $result->setHttpResponseCode(200)
             ->setHeader('Pragma', 'public', true)
             ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
-            ->setHeader('Content-Type', 'application/octet-stream', true)
+            ->setHeader('Content-type', 'application/octet-stream', true)
             ->setHeader('Content-Length', $this->helper->getFileSize($path))
             ->setHeader('Content-Disposition', 'attachment; filename=' . $fileName);
         $result->setContents($file->readAll());

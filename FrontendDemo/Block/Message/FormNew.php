@@ -1,25 +1,20 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 class FormNew extends AbstractForm
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_formTitle = 'Start a Conversation';
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_reasonsLabel = 'Topic';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFormAction()
     {
@@ -42,7 +37,7 @@ class FormNew extends AbstractForm
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getReasons()
     {
@@ -68,7 +63,7 @@ class FormNew extends AbstractForm
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function withFile()
     {

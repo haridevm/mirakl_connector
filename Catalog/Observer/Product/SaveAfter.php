@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Observer\Product;
 
 use Magento\Framework\Event\Observer;
@@ -10,7 +7,7 @@ use Magento\Framework\Event\ObserverInterface;
 class SaveAfter extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -25,7 +22,6 @@ class SaveAfter extends AbstractObserver implements ObserverInterface
                     $old->setSku($product->getOrigData('sku'));
                     $this->productHelper->delete($old);
                 }
-
                 // Update product on Mirakl platform
                 $this->productHelper->update($product);
             } elseif ($product->getOrigData('mirakl_sync')) {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="mirakl_event" resource="default" engine="innodb" comment="Connector Events">
+    <table name="mirakl_event" resource="default" engine="innodb" comment="Mirakl Events">
         <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true" comment="Event Id"/>
         <column xsi:type="varchar" name="code" length="100" comment="Code"/>
         <column xsi:type="smallint" name="action" unsigned="true" nullable="false" default="0" comment="Action"/>

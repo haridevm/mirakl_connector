@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Output;
@@ -7,7 +6,7 @@ namespace Mirakl\Process\Model\Output;
 class Cli extends AbstractOutput
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function display($str): self
     {
@@ -15,19 +14,10 @@ class Cli extends AbstractOutput
             if ($this->process->getParentId()) {
                 $str = "    $str";
             }
-            echo $this->format($str) . PHP_EOL; // phpcs:ignore
-            $this->flush();
+            echo $this->format($str) . PHP_EOL;
+            @ob_flush();
         }
 
         return $this;
-    }
-
-    /**
-     * @return void
-     * @codeCoverageIgnore
-     */
-    public function flush(): void
-    {
-        @ob_flush(); // phpcs:ignore
     }
 }

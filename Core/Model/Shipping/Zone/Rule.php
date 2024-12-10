@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Shipping\Zone;
 
 use Magento\Framework\Data\Collection\AbstractDb;
@@ -20,14 +17,14 @@ class Rule extends \Magento\Rule\Model\AbstractModel
     protected $conditionsFactory;
 
     /**
-     * @param Context                     $context
-     * @param Registry                    $registry
-     * @param FormFactory                 $formFactory
-     * @param TimezoneInterface           $localeDate
-     * @param ZoneConditionCombineFactory $conditionsFactory
-     * @param AbstractResource|null       $resource
-     * @param AbstractDb|null             $resourceCollection
-     * @param array                       $data
+     * @param   Context                     $context
+     * @param   Registry                    $registry
+     * @param   FormFactory                 $formFactory
+     * @param   TimezoneInterface           $localeDate
+     * @param   ZoneConditionCombineFactory $conditionsFactory
+     * @param   AbstractResource|null       $resource
+     * @param   AbstractDb|null             $resourceCollection
+     * @param   array                       $data
      */
     public function __construct(
         Context $context,
@@ -52,7 +49,7 @@ class Rule extends \Magento\Rule\Model\AbstractModel
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getConditionsInstance()
     {
@@ -60,7 +57,7 @@ class Rule extends \Magento\Rule\Model\AbstractModel
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getActionsInstance()
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Repository;
@@ -49,8 +48,6 @@ class Product
      * @param array  $values
      * @param string $index
      * @return array
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function load(array $values, string $index): array
     {

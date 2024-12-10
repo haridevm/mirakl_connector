@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\Core\Domain\FileWrapper;
@@ -36,22 +33,19 @@ use Mirakl\MMP\FrontOperator\Request\Order\Incident\CloseIncidentRequest;
 use Mirakl\MMP\FrontOperator\Request\Order\Incident\OpenIncidentRequest;
 use Mirakl\MMP\FrontOperator\Request\Order\Workflow\ReceiveOrderRequest;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Order extends ClientHelper\MMP
 {
-    public const MIRAKL_PAGINATION_MAX_VALUE = 100; // 100 is maximum value authorized by Mirakl
+    const MIRAKL_PAGINATION_MAX_VALUE = 100; // 100 is maximum value authorized by Mirakl
 
     /**
      * (OR01) Creates a new order on the Mirakl platform
      *
-     * @param CreateOrder $order
-     * @return CreatedOrders
+     * @param   CreateOrder  $order
+     * @return  CreatedOrders
      */
     public function createOrder(CreateOrder $order)
     {
-        if (!$this->validateLocale($order->getCustomer()->getLocale())) {
+        if (!$locale = $this->validateLocale($order->getCustomer()->getLocale())) {
             $order->getCustomer()->unsetData('locale'); // Reset the locale if not handled by Mirakl
         }
 
@@ -65,7 +59,7 @@ class Order extends ClientHelper\MMP
     /**
      * (OR02) Validates a commercial order which is in STAGING state
      *
-     * @param string $commercialId
+     * @param   string  $commercialId
      */
     public function validateOrder($commercialId)
     {
@@ -79,7 +73,7 @@ class Order extends ClientHelper\MMP
     /**
      * (OR03) Invalidates a commercial order which is in STAGING state
      *
-     * @param string $commercialId
+     * @param   string  $commercialId
      */
     public function invalidateOrder($commercialId)
     {
@@ -93,10 +87,10 @@ class Order extends ClientHelper\MMP
     /**
      * Fetches Mirakl orders associated with the specified commercial id
      *
-     * @param string|array $commercialIds
-     * @param bool         $paginate
-     * @param string       $locale
-     * @return OrderCollection
+     * @param   string|array    $commercialIds
+     * @param   bool            $paginate
+     * @param   string          $locale
+     * @return  OrderCollection
      */
     public function getOrdersByCommercialId($commercialIds, $paginate = false, $locale = null)
     {
@@ -110,10 +104,10 @@ class Order extends ClientHelper\MMP
     /**
      * (OR11) Fetches multiple orders matching specified parameters
      *
-     * @param array  $params
-     * @param bool   $paginate
-     * @param string $locale
-     * @return OrderCollection
+     * @param   array   $params
+     * @param   bool    $paginate
+     * @param   string  $locale
+     * @return  OrderCollection
      */
     public function getOrders(array $params, $paginate = false, $locale = null)
     {
@@ -153,9 +147,9 @@ class Order extends ClientHelper\MMP
     /**
      * (OR62) Opens an incident on a Mirakl order line
      *
-     * @param MiraklOrder $miraklOrder
-     * @param string      $orderLineId
-     * @param string      $reason
+     * @param   MiraklOrder $miraklOrder
+     * @param   string      $orderLineId
+     * @param   string      $reason
      */
     public function openIncident(MiraklOrder $miraklOrder, $orderLineId, $reason)
     {
@@ -172,9 +166,9 @@ class Order extends ClientHelper\MMP
     /**
      * (OR63) Closes an incident opened on a Mirakl order line
      *
-     * @param MiraklOrder $miraklOrder
-     * @param string      $orderLineId
-     * @param string      $reason
+     * @param   MiraklOrder $miraklOrder
+     * @param   string      $orderLineId
+     * @param   string      $reason
      */
     public function closeIncident(MiraklOrder $miraklOrder, $orderLineId, $reason)
     {
@@ -191,10 +185,10 @@ class Order extends ClientHelper\MMP
     /**
      * (OR41) Fetches messages of a Mirakl order
      *
-     * @param MiraklOrder $miraklOrder
-     * @param string      $userType
-     * @param bool        $paginate
-     * @return OrderMessageCollection
+     * @param   MiraklOrder $miraklOrder
+     * @param   string      $userType
+     * @param   bool        $paginate
+     * @return  OrderMessageCollection
      */
     public function getOrderMessages(MiraklOrder $miraklOrder, $userType = UserType::ALL, $paginate = false)
     {
@@ -214,9 +208,9 @@ class Order extends ClientHelper\MMP
     /**
      * (OR42) Posts a message on a Mirakl order
      *
-     * @param MiraklOrder        $miraklOrder
-     * @param CreateOrderMessage $message
-     * @return MessageCreated
+     * @param   MiraklOrder         $miraklOrder
+     * @param   CreateOrderMessage  $message
+     * @return  MessageCreated
      */
     public function createOrderMessage(MiraklOrder $miraklOrder, CreateOrderMessage $message)
     {
@@ -233,15 +227,14 @@ class Order extends ClientHelper\MMP
     /**
      * (OR43) Create a thread on an order
      *
-     * @param MiraklOrder       $miraklOrder
-     * @param CreateOrderThread $thread
-     * @param FileWrapper[]     $files
+     * @param  MiraklOrder          $miraklOrder
+     * @param  CreateOrderThread    $thread
+     * @param  FileWrapper[]        $files
      * @return ThreadCreated
      */
     public function createOrderThread(MiraklOrder $miraklOrder, CreateOrderThread $thread, $files = [])
     {
         $request = new CreateOrderThreadRequest($miraklOrder->getId(), $thread);
-
         if (count($files)) {
             $request->setFiles($files);
         }
@@ -257,7 +250,7 @@ class Order extends ClientHelper\MMP
     /**
      * (OR25) Marks a Mirakl order as RECEIVED
      *
-     * @param MiraklOrder $miraklOrder
+     * @param   MiraklOrder $miraklOrder
      */
     public function receiveOrder(MiraklOrder $miraklOrder)
     {
@@ -274,8 +267,8 @@ class Order extends ClientHelper\MMP
     /**
      * (OR52) Sends an evaluation on a Mirakl order
      *
-     * @param MiraklOrder           $miraklOrder
-     * @param CreateOrderEvaluation $evaluation
+     * @param   MiraklOrder             $miraklOrder
+     * @param   CreateOrderEvaluation   $evaluation
      */
     public function evaluateOrder(MiraklOrder $miraklOrder, CreateOrderEvaluation $evaluation)
     {
@@ -292,8 +285,8 @@ class Order extends ClientHelper\MMP
     /**
      * (OR51) Fetches evaluation of a Mirakl order
      *
-     * @param MiraklOrder $miraklOrder
-     * @return MiraklEvaluation
+     * @param   MiraklOrder $miraklOrder
+     * @return  MiraklEvaluation
      */
     public function getOrderEvaluation(MiraklOrder $miraklOrder)
     {
@@ -310,8 +303,8 @@ class Order extends ClientHelper\MMP
     /**
      * Fetches documents of a single Mirakl order
      *
-     * @param MiraklOrder $miraklOrder
-     * @return OrderDocumentCollection
+     * @param   MiraklOrder $miraklOrder
+     * @return  OrderDocumentCollection
      */
     public function getOrderDocuments(MiraklOrder $miraklOrder)
     {
@@ -321,8 +314,8 @@ class Order extends ClientHelper\MMP
     /**
      * (OR72) Fetches documents of multiple Mirakl orders
      *
-     * @param array $orderIds
-     * @return OrderDocumentCollection
+     * @param   array   $orderIds
+     * @return  OrderDocumentCollection
      */
     public function getOrdersDocuments(array $orderIds)
     {
@@ -338,7 +331,7 @@ class Order extends ClientHelper\MMP
     /**
      * (OR75) Fetches Mirakl configured taxes
      *
-     * @return OrderTaxCollection
+     * @return  OrderTaxCollection
      */
     public function getOrderTaxes()
     {
@@ -354,8 +347,8 @@ class Order extends ClientHelper\MMP
     /**
      * Downloads a single order document
      *
-     * @param int $docId
-     * @return FileWrapper
+     * @param   int $docId
+     * @return  FileWrapper
      */
     public function downloadDocument($docId)
     {
@@ -365,8 +358,8 @@ class Order extends ClientHelper\MMP
     /**
      * (OR73) Downloads multiple order documents
      *
-     * @param array $docIds
-     * @return FileWrapper
+     * @param   array   $docIds
+     * @return  FileWrapper
      */
     public function downloadDocuments(array $docIds)
     {

@@ -16,7 +16,6 @@ $categoryResource = $objectManager->create(CategoryResource::class);
 /** @var Category $category */
 $category = $categoryFactory->create();
 $category->isObjectNew(true);
-// @phpstan-ignore-next-line
 $category->setId(3)
     ->setName('Category 1')
     ->setParentId(2)

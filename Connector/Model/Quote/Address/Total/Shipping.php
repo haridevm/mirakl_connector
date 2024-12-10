@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote\Address\Total;
 
 use Magento\Catalog\Model\Product;
@@ -25,8 +22,8 @@ class Shipping extends Address\Total\AbstractTotal
     protected $quoteSynchronizer;
 
     /**
-     * @param QuoteHelper       $quoteHelper
-     * @param QuoteSynchronizer $quoteSynchronizer
+     * @param   QuoteHelper         $quoteHelper
+     * @param   QuoteSynchronizer   $quoteSynchronizer
      */
     public function __construct(QuoteHelper $quoteHelper, QuoteSynchronizer $quoteSynchronizer)
     {
@@ -35,7 +32,7 @@ class Shipping extends Address\Total\AbstractTotal
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function collect(
         Quote $quote,
@@ -111,7 +108,7 @@ class Shipping extends Address\Total\AbstractTotal
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function fetch(Quote $quote, Address\Total $total)
     {
@@ -123,7 +120,7 @@ class Shipping extends Address\Total\AbstractTotal
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getLabel()
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\Collector\Customizer;
@@ -11,7 +10,7 @@ use Mirakl\Connector\Model\ResourceModel\Offer\Collection as OfferCollection;
 class Skus implements CustomizerInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function customize(Product $product, OfferCollection $collection): void
     {

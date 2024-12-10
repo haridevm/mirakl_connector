@@ -7,11 +7,11 @@ $_coreHelper = $this->helper('Mirakl\Core\Helper\Data');
 
 <div class="block block-order-details-view">
     <div class="block-title">
-        <strong><?= /* @escapeNotVerified */ __('Order Accounting Documents') ?></strong>
+        <strong><?php /* @escapeNotVerified */ echo __('Order Accounting Documents') ?></strong>
     </div>
     <div class="block-content">
         <?php if (!$_accountingDocs || !$_accountingDocs->count()): ?>
-            <p><?= $block->escapeHtml(__('There is no accounting documents attached to this order.')) ?></p>
+            <p><?php echo __('There is no accounting documents attached to this order.') ?></p>
         <?php else: ?>
             <ul>
                 <?php foreach ($_accountingDocs as $_accountingDoc): ?>
@@ -20,9 +20,9 @@ $_coreHelper = $this->helper('Mirakl\Core\Helper\Data');
                         <?php /** @var \Mirakl\MMP\Front\Domain\DocumentRequest\DocumentResponse $_doc */ ?>
                         <li>
                             <?php if ($_type = $_doc->getFormat()): ?>
-                                <strong><?= $block->escapeHtml(__('%1: ', $_type)) ?></strong>
+                                <strong><?php echo __('%1: ', $_type) ?></strong>
                             <?php endif ?>
-                            <a href="<?= $block->escapeUrl($block->getDownloadUrl($_doc)) ?>"><?= $block->escapeHtml($_doc->getFilename()) ?></a> (<?= $block->escapeHtml($_coreHelper->formatDateTime($_doc->getDateUploaded())) ?>)
+                            <a href="<?php echo $block->getDownloadUrl($_doc) ?>"><?php echo $_doc->getFilename() ?></a> (<?php echo $_coreHelper->formatDateTime($_doc->getDateUploaded()) ?>)
                         </li>
                     <?php endforeach ?>
                 <?php endforeach ?>

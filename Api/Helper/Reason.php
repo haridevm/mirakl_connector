@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\Common\Domain\Reason\ReasonType;
@@ -18,8 +15,8 @@ class Reason extends ClientHelper\MMP
     /**
      * (RE01) Fetches reasons from Mirakl platform that can be used for opening incident or create a refund.
      *
-     * @param string $locale
-     * @return ReasonCollection
+     * @param   string  $locale
+     * @return  ReasonCollection
      */
     public function getReasons($locale = null)
     {
@@ -32,9 +29,9 @@ class Reason extends ClientHelper\MMP
     /**
      * Returns reasons by type
      *
-     * @param string $type
-     * @param string $locale
-     * @return ReasonCollection
+     * @param   string  $type
+     * @param   string  $locale
+     * @return  ReasonCollection
      */
     public function getTypeReasons($type = ReasonType::INCIDENT_OPEN, $locale = null)
     {
@@ -58,8 +55,8 @@ class Reason extends ClientHelper\MMP
     /**
      * Fetches reasons for opening an incident
      *
-     * @param string $locale
-     * @return ReasonCollection
+     * @param   string  $locale
+     * @return  ReasonCollection
      */
     public function getOpenIncidentReasons($locale = null)
     {
@@ -69,8 +66,8 @@ class Reason extends ClientHelper\MMP
     /**
      * Fetches reasons for closing an incident
      *
-     * @param string $locale
-     * @return ReasonCollection
+     * @param   string  $locale
+     * @return  ReasonCollection
      */
     public function getCloseIncidentReasons($locale = null)
     {
@@ -80,8 +77,8 @@ class Reason extends ClientHelper\MMP
     /**
      * Fetches reasons for sending an order message
      *
-     * @param string $locale
-     * @return ReasonCollection
+     * @param   string  $locale
+     * @return  ReasonCollection
      */
     public function getOrderMessageReasons($locale = null)
     {

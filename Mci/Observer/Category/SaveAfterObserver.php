@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Category;
 
 use Magento\Catalog\Model\Category;
@@ -11,7 +8,7 @@ use Magento\Framework\Event\ObserverInterface;
 class SaveAfterObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -25,8 +22,8 @@ class SaveAfterObserver extends AbstractObserver implements ObserverInterface
     }
 
     /**
-     * @param Category $category
-     * @return bool
+     * @param   Category    $category
+     * @return  bool
      */
     protected function canUpdate(Category $category)
     {

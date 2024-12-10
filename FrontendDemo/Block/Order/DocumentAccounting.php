@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\Data\Form\FormKey;
@@ -32,7 +29,6 @@ class DocumentAccounting extends Template
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/document_accounting.phtml';
 

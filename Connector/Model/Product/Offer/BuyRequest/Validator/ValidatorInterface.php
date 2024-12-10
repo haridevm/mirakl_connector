@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\BuyRequest\Validator;
@@ -12,8 +11,8 @@ interface ValidatorInterface
 {
     /**
      * @param DataObject $buyRequest
-     * @param Product    $product
-     * @param Offer      $offer
+     * @param Product $product
+     * @param Offer $offer
      * @return bool
      */
     public function validate(DataObject $buyRequest, Product $product, Offer $offer): bool;

@@ -1,0 +1,84 @@
+name: Magento Env - Create
+
+run-name: Create "${{ inputs.name }}" on ${{ inputs.server }} using ${{ inputs.edition }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      server:
+        type: choice
+        description: 'Server'
+        options:
+          - 'magento.mirakl.net'
+          - 'magentodemo.mirakl.net'
+          - 'magentotrail.mirakl.net'
+        default: 'magento.mirakl.net'
+      name:
+        type: string
+        description: 'Name'
+        required: true
+      edition:
+        type: choice
+        description: 'Edition'
+        options:
+          - 'Magento Open Source'
+          - 'Adobe Commerce'
+        default: 'Magento Open Source'
+      with_sample_data:
+        type: boolean
+        description: 'With sample data'
+        default: true
+      with_connector:
+        type: boolean
+        description: 'With connector'
+        default: true
+      from:
+        type: string
+        description: 'From env (will be used to create the environment)'
+      magento_version:
+        type: string
+        description: 'Magento version (ex: 2.4.6)'
+      custom_args:
+        type: string
+        description: 'Custom arguments (will be passed to the installation script)'
+
+jobs:
+  deploy:
+    name: Create Magento environment
+    runs-on: mirakl-hosted
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@dc588b651fe13675774614f8e6a936a468676387
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Init BRANCH and TAG variables
+        if: ${{ inputs.with_connector }}
+        run: |
+          if [[ "${{ github.ref_name }}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "TAG=${{ github.ref_name }}" >> $GITHUB_ENV
+            echo "BRANCH=" >> $GITHUB_ENV
+          else
+            echo "TAG=" >> $GITHUB_ENV
+            echo "BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+          fi
+
+      - name: Build installation options
+        run: |
+          INSTALL_OPTIONS="-n ${{ inputs.name }}"
+          [ "${{ inputs.edition }}" == "Adobe Commerce" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -e -B"
+          [ ! ${{ inputs.with_sample_data }} ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -S"
+          [ ! ${{ inputs.with_connector }} ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -w"
+          [ ! -z "$BRANCH" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -b $BRANCH"
+          [ ! -z "$TAG" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -t $TAG"
+          [ ! -z "${{ inputs.from }}" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -f ${{ inputs.from }}"
+          [ ! -z "${{ inputs.magento_version }}" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS -M ${{ inputs.magento_version }}"
+          [ ! -z "${{ inputs.custom_args }}" ] && INSTALL_OPTIONS="$INSTALL_OPTIONS ${{ inputs.custom_args }}"
+          echo "INSTALL_OPTIONS=$INSTALL_OPTIONS" >> $GITHUB_ENV
+
+      - name: Execute remote installation script
+        run: |
+          ssh -o StrictHostKeyChecking=no "root@${{ inputs.server }}" "cd /var/www/_install_/magento2 && source ../install.env && ./install.sh $INSTALL_OPTIONS"

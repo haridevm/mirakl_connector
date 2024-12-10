@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Observer;
@@ -22,7 +21,7 @@ class GetShippingRatesApiBeforeObserver implements ObserverInterface
     private $channelResolver;
 
     /**
-     * @param Config                    $config
+     * @param Config $config
      * @param Channel\ResolverInterface $channelResolver
      */
     public function __construct(
@@ -34,7 +33,7 @@ class GetShippingRatesApiBeforeObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Ui\Component\MassDelete\Product;
 
 use Magento\Framework\Data\Collection\AbstractDb;
@@ -9,7 +6,7 @@ use Magento\Framework\Data\Collection\AbstractDb;
 class Filter extends \Magento\Ui\Component\MassAction\Filter
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function applySelection(AbstractDb $collection)
     {

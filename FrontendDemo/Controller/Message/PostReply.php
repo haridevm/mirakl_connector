@@ -1,21 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Message;
 
 use GuzzleHttp\Exception\BadResponseException;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Mirakl\Core\Domain\FileWrapper;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadDetails;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadParticipant;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadReplyMessageInput;
 
-class PostReply extends AbstractMessage implements HttpPostActionInterface
+class PostReply extends AbstractMessage
 {
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -87,9 +82,9 @@ class PostReply extends AbstractMessage implements HttpPostActionInterface
     }
 
     /**
-     * @param ThreadDetails $thread
-     * @param string        $recipients
-     * @return array
+     * @param   ThreadDetails   $thread
+     * @param   string          $recipients
+     * @return  array
      */
     protected function getTo(ThreadDetails $thread, $recipients)
     {

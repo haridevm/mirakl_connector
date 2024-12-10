@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Catalog\Setup\Patch\Data;
@@ -35,7 +34,7 @@ class UpdateMiraklCatalogAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -44,26 +43,23 @@ class UpdateMiraklCatalogAttributes implements DataPatchInterface
 
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            'mirakl_authorized_shop_ids',
-            'backend_type',
-            'varchar'
-        );
+        $eavSetup->updateAttribute(Product::ENTITY, 'mirakl_authorized_shop_ids', 'backend_type', 'varchar');
 
         $this->setup->endSetup();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
-        return [CreateMiraklCatalogAttributes::class];
+        return [
+            CreateMiraklCatalogAttributes::class
+        ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

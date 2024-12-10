@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Order;
 
 use Magento\Framework\Event\ManagerInterface as EventManagerInterface;
@@ -20,8 +17,8 @@ class Payment
     protected $paymentApi;
 
     /**
-     * @param EventManagerInterface $eventManager
-     * @param PaymentApi            $paymentApi
+     * @param   EventManagerInterface   $eventManager
+     * @param   PaymentApi              $paymentApi
      */
     public function __construct(EventManagerInterface $eventManager, PaymentApi $paymentApi)
     {
@@ -32,7 +29,7 @@ class Payment
     /**
      * Collect all order debits and send them in a specific event so they are sent to the PSP by the operator
      *
-     * @return void
+     * @return  void
      */
     public function collectDebits()
     {
@@ -44,7 +41,7 @@ class Payment
     /**
      * Collect all order refunds and send them in a specific event so they are sent to the PSP by the operator
      *
-     * @return void
+     * @return  void
      */
     public function collectRefunds()
     {

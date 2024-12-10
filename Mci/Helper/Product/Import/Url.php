@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Api\ProductRepositoryInterface;
@@ -41,11 +38,11 @@ class Url
     private $mciHelper;
 
     /**
-     * @param ProductUrlRewriteGenerator $productUrlRewriteGenerator
-     * @param UrlPersistInterface        $urlPersist
-     * @param ProductRepositoryInterface $productRepository
-     * @param ProductResourceFactory     $productResourceFactory
-     * @param MciHelper                  $mciHelper
+     * @param   ProductUrlRewriteGenerator  $productUrlRewriteGenerator
+     * @param   UrlPersistInterface         $urlPersist
+     * @param   ProductRepositoryInterface  $productRepository
+     * @param   ProductResourceFactory      $productResourceFactory
+     * @param   MciHelper                   $mciHelper
      */
     public function __construct(
         ProductUrlRewriteGenerator $productUrlRewriteGenerator,
@@ -62,7 +59,7 @@ class Url
     }
 
     /**
-     * @param Product $product
+     * @param   Product $product
      */
     public function generateUrlKey(Product $product)
     {
@@ -87,7 +84,7 @@ class Url
     }
 
     /**
-     * @param Product $product
+     * @param   Product $product
      */
     public function deleteProductUrlRewrites($product)
     {
@@ -100,8 +97,8 @@ class Url
     }
 
     /**
-     * @param int $productId
-     * @param int $storeId
+     * @param   int $productId
+     * @param   int $storeId
      */
     public function refreshProductUrlRewrites($productId, $storeId)
     {

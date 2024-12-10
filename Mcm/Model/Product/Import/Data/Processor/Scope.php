@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data\Processor;
@@ -27,7 +26,7 @@ class Scope implements ProcessorInterface
 
     /**
      * @param StoreManagerInterface $storeManager
-     * @param Config                $config
+     * @param Config $config
      */
     public function __construct(
         StoreManagerInterface $storeManager,

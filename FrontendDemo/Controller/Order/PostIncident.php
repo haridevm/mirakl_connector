@@ -1,21 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
 use GuzzleHttp\Exception\BadResponseException;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Mirakl\MMP\Common\Domain\Order\Message\CreateOrderThread;
 
-class PostIncident extends PostThread implements HttpPostActionInterface
+class PostIncident extends PostThread
 {
     /**
      * Submit incident action
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {
@@ -28,7 +24,6 @@ class PostIncident extends PostThread implements HttpPostActionInterface
         }
 
         $result = $this->initOrders();
-
         if ($result !== true) {
             return $result;
         }
@@ -82,8 +77,9 @@ class PostIncident extends PostThread implements HttpPostActionInterface
                 $message = $response['message'] ?? $e->getMessage();
                 $this->session->setFormData($data);
                 $this->logger->critical($message);
-                $this->messageManager->addErrorMessage(__('An error occurred while sending the message. '
-                        . 'Please contact store owner if the problem persists.'));
+                $this->messageManager->addErrorMessage(
+                    __('An error occurred while sending the message. Please contact store owner if the problem persists.')
+                );
             } catch (\Exception $e) {
                 $this->session->setFormData($data);
                 $this->logger->warning($e->getMessage());
@@ -96,7 +92,7 @@ class PostIncident extends PostThread implements HttpPostActionInterface
         }
 
         $resultRedirect->setUrl($this->url->getUrl('marketplace/order/view', [
-            'order_id'  => $order->getId(),
+            'order_id' => $order->getId(),
             'remote_id' => $miraklOrder->getId(),
         ]));
 

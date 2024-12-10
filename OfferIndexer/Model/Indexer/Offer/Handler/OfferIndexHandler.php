@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Indexer\Offer\Handler;
@@ -43,7 +42,7 @@ class OfferIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clear(array $skus = []): void
     {
@@ -51,7 +50,7 @@ class OfferIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function update(array $data): void
     {
@@ -59,7 +58,7 @@ class OfferIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(Collection $collection, StoreInterface $store): array
     {

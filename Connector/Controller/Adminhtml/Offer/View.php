@@ -1,20 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Offer;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Registry;
 
-class View extends Action implements HttpGetActionInterface
+class View extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
+    const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
 
     /**
      * @var Registry
@@ -22,8 +18,8 @@ class View extends Action implements HttpGetActionInterface
     protected $coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $coreRegistry
+     * @param   Context     $context
+     * @param   Registry    $coreRegistry
      */
     public function __construct(
         Context $context,
@@ -34,7 +30,7 @@ class View extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -59,7 +55,5 @@ class View extends Action implements HttpGetActionInterface
         $this->_setActiveMenu('Mirakl_Connector::offers');
         $this->_view->getPage()->getConfig()->getTitle()->prepend(__('Offer #%1', $model->getId()));
         $this->_view->renderLayout();
-
-        return $this->_response;
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Plugin\Model\InventorySales\OrderManagement;
@@ -45,10 +44,10 @@ class AppendReservationsAfterOrderPlacementPlugin
 
     /**
      * @param PlaceReservationsForSalesEventInterface $placeReservationsForSalesEvent
-     * @param ItemToSellInterfaceFactory              $itemsToSellFactory
-     * @param SalesChannelInterfaceFactory            $salesChannelFactory
-     * @param SalesEventInterfaceFactory              $salesEventFactory
-     * @param SalesEventExtensionFactory              $salesEventExtensionFactory
+     * @param ItemToSellInterfaceFactory $itemsToSellFactory
+     * @param SalesChannelInterfaceFactory $salesChannelFactory
+     * @param SalesEventInterfaceFactory $salesEventFactory
+     * @param SalesEventExtensionFactory $salesEventExtensionFactory
      */
     public function __construct(
         PlaceReservationsForSalesEventInterface $placeReservationsForSalesEvent,
@@ -71,11 +70,11 @@ class AppendReservationsAfterOrderPlacementPlugin
      *
      * @see AppendReservationsAfterOrderPlacementPlugin::afterPlace
      *
-     * @param Plugin                   $plugin
-     * @param \Closure                 $proceed
-     * @param OrderManagementInterface $orderManagement
-     * @param OrderInterface           $order
-     * @return OrderInterface
+     * @param   Plugin                      $plugin
+     * @param   \Closure                    $proceed
+     * @param   OrderManagementInterface    $orderManagement
+     * @param   OrderInterface              $order
+     * @return  OrderInterface
      */
     public function aroundAfterPlace(
         Plugin $plugin,
@@ -111,7 +110,7 @@ class AppendReservationsAfterOrderPlacementPlugin
      *
      * @see AppendReservationsAfterOrderPlacementPlugin::aroundPlace
      *
-     * @param Plugin         $plugin
+     * @param Plugin $plugin
      * @param OrderInterface $order
      * @return OrderInterface
      */

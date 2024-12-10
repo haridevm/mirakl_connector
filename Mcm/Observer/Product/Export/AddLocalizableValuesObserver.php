@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Product\Export;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -36,10 +33,10 @@ class AddLocalizableValuesObserver implements ObserverInterface
     private $descriptionFilter;
 
     /**
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ProductAttributesFinder  $productAttributesFinder
-     * @param Config                   $config
-     * @param Filter\Description       $descriptionFilter
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ProductAttributesFinder     $productAttributesFinder
+     * @param   Config                      $config
+     * @param   Filter\Description          $descriptionFilter
      */
     public function __construct(
         ProductCollectionFactory $productCollectionFactory,
@@ -54,7 +51,7 @@ class AddLocalizableValuesObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -111,7 +108,7 @@ class AddLocalizableValuesObserver implements ObserverInterface
     /**
      * Retrieve stores sorted by locale
      *
-     * @return \Magento\Store\Api\Data\StoreInterface[]
+     * @return  \Magento\Store\Api\Data\StoreInterface[]
      */
     private function getStores()
     {
@@ -128,7 +125,7 @@ class AddLocalizableValuesObserver implements ObserverInterface
     }
 
     /**
-     * @return string[]
+     * @return  string[]
      */
     private function getLocalizableAttributesCodes()
     {

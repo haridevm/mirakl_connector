@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Product;
 
 use Magento\Framework\Event\Observer;
@@ -12,8 +9,7 @@ use Mirakl\MCM\Front\Domain\Product\Export\ProductAcceptanceStatus as ProductAcc
 class AttributeUpdateBeforeObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -28,10 +24,8 @@ class AttributeUpdateBeforeObserver extends AbstractObserver implements Observer
         if (isset($attributesData['mirakl_sync'])) {
             // If mirakl_sync attribute has been modified, export products to Mirakl according to attribute value.
             if ($attributesData['mirakl_sync']) {
-                if (
-                    isset($attributesData[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER])
-                    && !$attributesData[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER]
-                ) {
+                if (isset($attributesData[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER])
+                    && !$attributesData[McmHelper::ATTRIBUTE_MIRAKL_IS_OPERATOR_MASTER]) {
                     return;
                 }
 
@@ -89,8 +83,8 @@ class AttributeUpdateBeforeObserver extends AbstractObserver implements Observer
     }
 
     /**
-     * @param array $productIds
-     * @return \Mirakl\Core\Model\ResourceModel\Product\Collection
+     * @param   array   $productIds
+     * @return  \Mirakl\Core\Model\ResourceModel\Product\Collection
      */
     private function getCollection(array $productIds)
     {

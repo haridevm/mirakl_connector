@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Image;
 
 use GuzzleHttp;
@@ -11,7 +8,7 @@ use Psr\Http\Message\ResponseInterface;
 
 class Downloader
 {
-    public const HEADER_MIRAKL_IMAGE_URL = 'X-Mirakl-Image-Url';
+    const HEADER_MIRAKL_IMAGE_URL = 'X-Mirakl-Image-Url';
 
     /**
      * @var MciConfigHelper
@@ -27,8 +24,8 @@ class Downloader
     }
 
     /**
-     * @param string $url
-     * @return resource|false
+     * @param   string  $url
+     * @return  resource|false
      */
     public function download($url)
     {
@@ -45,7 +42,7 @@ class Downloader
             $opts['http']['header'] = $headers;
         }
 
-        set_error_handler(function ($errno, $errstr) {
+        set_error_handler(function($errno, $errstr) {
             if ($errno == E_WARNING) {
                 throw new \ErrorException('Download error: ' . $errstr);
             }
@@ -59,7 +56,7 @@ class Downloader
     }
 
     /**
-     * @return GuzzleHttp\Client
+     * @return  GuzzleHttp\Client
      */
     public function getHttpClient()
     {
@@ -98,17 +95,13 @@ class Downloader
     }
 
     /**
-     * @param GuzzleHttp\Client $client
-     * @param string[]          $urls
-     * @param callable          $onFulfilled
-     * @param callable          $onRejected
+     * @param   GuzzleHttp\Client   $client
+     * @param   string[]            $urls
+     * @param   callable            $onFulfilled
+     * @param   callable            $onRejected
      */
-    public function downloadMultiple(
-        GuzzleHttp\Client $client,
-        array $urls,
-        callable $onFulfilled,
-        callable $onRejected
-    ) {
+    public function downloadMultiple(GuzzleHttp\Client $client, array $urls, callable $onFulfilled, callable $onRejected)
+    {
         $requests = function () use ($urls) {
             foreach ($urls as $key => $url) {
                 yield $key => new GuzzleHttp\Psr7\Request('GET', $url);

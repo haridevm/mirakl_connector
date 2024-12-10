@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper\Process;
 
 use Mirakl\Event\Model\Event;
@@ -12,7 +9,7 @@ class ExportType extends AbstractProcess
     /**
      * Export asynchronously all events in 'waiting' status for a specific API and action
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Process $process, $type, $action, $executeAllTypes = true)
     {

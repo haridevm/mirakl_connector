@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\Common\Domain\Collection\Shipping\ShippingTypeWithDescriptionCollection;
@@ -15,12 +12,12 @@ class Shipping extends ClientHelper\MMP
     /**
      * (SH02) List shipping rates of offers
      *
-     * @param string $zone
-     * @param array  $offers
-     * @param string $locale
-     * @param bool   $computeOrderTaxes
-     * @param array  $customerShippingToAddress
-     * @return OrderShippingFeeCollection
+     * @param   string  $zone
+     * @param   array   $offers
+     * @param   string  $locale
+     * @param   bool    $computeOrderTaxes
+     * @param   array   $customerShippingToAddress
+     * @return  OrderShippingFeeCollection
      */
     public function getShippingFees(
         $zone,
@@ -30,7 +27,6 @@ class Shipping extends ClientHelper\MMP
         array $customerShippingToAddress = []
     ) {
         $fees = new OrderShippingFeeCollection();
-
         if (!empty($offers)) {
             $request = new GetShippingRatesRequest($zone, $offers);
             $request->setLocale($this->validateLocale($locale));
@@ -64,7 +60,6 @@ class Shipping extends ClientHelper\MMP
     {
         $request = new GetShippingTypesRequest();
         $request->setLocale($this->validateLocale($locale));
-
         $this->_eventManager->dispatch('mirakl_api_get_shipping_types_before', [
             'request' => $request,
             'locale'  => $locale

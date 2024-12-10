@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\FrontendDemo\Setup\Patch\Data;
@@ -23,7 +22,7 @@ class UpdateOffersConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -51,7 +50,7 @@ class UpdateOffersConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -59,7 +58,7 @@ class UpdateOffersConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product;
 
 use Mirakl\Connector\Model\Offer;
@@ -9,8 +6,8 @@ use Mirakl\Connector\Model\Offer;
 trait OfferQuantityTrait
 {
     /**
-     * @param Offer $offer
-     * @return int
+     * @param   Offer   $offer
+     * @return  int
      */
     public function getOfferDefaultQty($offer)
     {
@@ -18,8 +15,8 @@ trait OfferQuantityTrait
     }
 
     /**
-     * @param Offer $offer
-     * @return array
+     * @param   Offer   $offer
+     * @return  array
      */
     public function getOfferQuantityValidators($offer)
     {

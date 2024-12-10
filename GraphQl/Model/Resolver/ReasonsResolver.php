@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver;
@@ -17,7 +16,7 @@ class ReasonsResolver extends AbstractResolver implements ResolverInterface
     protected $reasonHelper;
 
     /**
-     * @param ReasonHelper $reasonHelper
+     * @param  ReasonHelper $reasonHelper
      */
     public function __construct(ReasonHelper $reasonHelper)
     {
@@ -25,7 +24,7 @@ class ReasonsResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

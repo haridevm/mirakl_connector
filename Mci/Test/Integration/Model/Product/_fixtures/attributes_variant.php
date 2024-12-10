@@ -13,6 +13,5 @@ foreach ($variantAttributes as $attrCode) {
     $attribute->setData('mirakl_is_variant', 1);
     try {
         $objectManager->create(AttributeResource::class)->save($attribute);
-    } catch (\Exception $e) {
-    }
+    } catch(\Exception $e) {}
 }

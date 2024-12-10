@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Test\Unit\Model\Offer\Channel\FieldCollector;
@@ -10,9 +9,7 @@ use Mirakl\SalesChannels\Model\Offer\ChannelOffer;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @group sales_channels
  * @group OF51
- * @coversDefaultClass \Mirakl\SalesChannels\Model\Offer\Channel\FieldCollector\Prices
  */
 class PricesTest extends TestCase
 {
@@ -21,8 +18,8 @@ class PricesTest extends TestCase
      * @param array  $fields
      * @param array  $additionalInfo
      * @param array  $expected
+     *
      * @dataProvider getTestCollectDataProvider
-     * @covers ::collect
      */
     public function testCollect(string $channel, array $fields, array $additionalInfo, array $expected)
     {

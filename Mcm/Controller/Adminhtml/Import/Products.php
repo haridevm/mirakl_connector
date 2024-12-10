@@ -1,14 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Controller\Adminhtml\Import;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Controller\ResultFactory;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Core\Controller\Adminhtml\RawMessagesTrait;
 use Mirakl\Mcm\Model\Product\Import\Handler\Csv as McmHandler;
@@ -17,7 +13,7 @@ use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 use Psr\Log\LoggerInterface;
 
-class Products extends Action implements HttpGetActionInterface
+class Products extends Action
 {
     use RawMessagesTrait;
 
@@ -47,11 +43,11 @@ class Products extends Action implements HttpGetActionInterface
     protected $logger;
 
     /**
-     * @param Context                $context
-     * @param Config                 $config
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param LoggerInterface        $logger
+     * @param   Context                 $context
+     * @param   Config                  $config
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   LoggerInterface         $logger
      */
     public function __construct(
         Context $context,
@@ -89,6 +85,7 @@ class Products extends Action implements HttpGetActionInterface
             $this->addRawSuccessMessage(
                 __('Click <a href="%1">here</a> to view process output.', $process->getUrl())
             );
+
         } catch (\Exception $e) {
             $this->logger->critical($e->getMessage());
             $this->messageManager->addErrorMessage(

@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class CheckMiraklStatus extends AbstractProcessAction implements HttpGetActionInterface
+class CheckMiraklStatus extends AbstractProcessAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -32,6 +27,6 @@ class CheckMiraklStatus extends AbstractProcessAction implements HttpGetActionIn
             );
         }
 
-        return $this->_redirect('*/*/view', ['id' => $process->getId()]);
+        $this->_redirect('*/*/view', ['id' => $process->getId()]);
     }
 }

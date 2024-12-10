@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Invoice;
 
 use Magento\Framework\DataObject;
@@ -10,7 +7,7 @@ use Magento\Sales\Model\Order\Invoice;
 class Totals extends \Mirakl\Connector\Block\Sales\Order\Totals
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function initTotals()
     {
@@ -46,19 +43,11 @@ class Totals extends \Mirakl\Connector\Block\Sales\Order\Totals
         } else {
             $displayIncl = $this->taxConfig->displaySalesShippingInclTax($store);
 
-            $value = $displayIncl
-                ? $invoice->getMiraklShippingInclTax()
-                : $invoice->getMiraklShippingExclTax();
-
-            $baseValue = $displayIncl
-                ? $invoice->getMiraklBaseShippingInclTax()
-                : $invoice->getMiraklBaseShippingExclTax();
-
             $total = new DataObject([
                 'code'       => 'mirakl_shipping',
                 'label'      => __('Marketplace Shipping'),
-                'value'      => $value,
-                'base_value' => $baseValue,
+                'value'      => $displayIncl ? $invoice->getMiraklShippingInclTax() : $invoice->getMiraklShippingExclTax(),
+                'base_value' => $displayIncl ? $invoice->getMiraklBaseShippingInclTax() : $invoice->getMiraklBaseShippingExclTax(),
             ]);
 
             $parent->addTotal($total, 'shipping');

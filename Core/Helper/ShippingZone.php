@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -31,10 +28,10 @@ class ShippingZone extends AbstractHelper
     protected $storeManager;
 
     /**
-     * @param Context                       $context
-     * @param ShippingZoneFactory           $shippingZoneFactory
-     * @param ShippingZoneCollectionFactory $shippingZoneCollectionFactory
-     * @param StoreManagerInterface         $storeManager
+     * @param   Context                         $context
+     * @param   ShippingZoneFactory             $shippingZoneFactory
+     * @param   ShippingZoneCollectionFactory   $shippingZoneCollectionFactory
+     * @param   StoreManagerInterface           $storeManager
      */
     public function __construct(
         Context $context,
@@ -51,10 +48,10 @@ class ShippingZone extends AbstractHelper
     /**
      * Returns shipping zone code matching specified address data
      *
-     * @param DataObject $address
-     * @param mixed      $store
-     * @return string
-     * @throws ShippingZoneNotFound
+     * @param   DataObject  $address
+     * @param   mixed       $store
+     * @return  string
+     * @throws  ShippingZoneNotFound
      */
     public function getShippingZoneCode(DataObject $address, $store = null)
     {
@@ -72,8 +69,8 @@ class ShippingZone extends AbstractHelper
     /**
      * Returns active shipping zone rules for current or specified store (sorted by priority)
      *
-     * @param mixed $store
-     * @return ShippingZoneCollection
+     * @param   mixed   $store
+     * @return  ShippingZoneCollection
      */
     public function getShippingZoneRules($store = null)
     {

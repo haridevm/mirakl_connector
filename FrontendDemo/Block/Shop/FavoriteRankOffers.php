@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Shop;
 
 use Magento\Catalog\Block\Product\ImageBuilder;
@@ -16,10 +13,6 @@ use Magento\Catalog\Model\ResourceModel\Product\Collection\ProductLimitationFact
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class FavoriteRankOffers extends View
 {
     /**
@@ -53,7 +46,7 @@ class FavoriteRankOffers extends View
     protected $_productStatus;
 
     /**
-     * @var int
+     * @var integer
      */
     protected $_favoriteProductsLimit;
 
@@ -63,16 +56,16 @@ class FavoriteRankOffers extends View
     protected $_isEnterprise;
 
     /**
-     * @param Context                  $context
-     * @param Registry                 $registry
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ImageBuilder             $imageBuilder
-     * @param CatalogConfig            $catalogConfig
-     * @param ProductVisibility        $productVisibility
-     * @param ProductStatus            $productStatus
-     * @param int                      $favoriteProductsLimit
-     * @param array                    $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                     $context
+     * @param   Registry                    $registry
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ImageBuilder                $imageBuilder
+     * @param   CatalogConfig               $catalogConfig
+     * @param   ProductLimitationFactory    $productLimitationFactory
+     * @param   ProductVisibility           $productVisibility
+     * @param   ProductStatus               $productStatus
+     * @param   integer                     $favoriteProductsLimit
+     * @param   array                       $data
      */
     public function __construct(
         Context $context,
@@ -80,6 +73,7 @@ class FavoriteRankOffers extends View
         ProductCollectionFactory $productCollectionFactory,
         ImageBuilder $imageBuilder,
         CatalogConfig $catalogConfig,
+        ProductCollection\ProductLimitationFactory $productLimitationFactory,
         ProductVisibility $productVisibility,
         ProductStatus $productStatus,
         $favoriteProductsLimit,
@@ -96,7 +90,9 @@ class FavoriteRankOffers extends View
     }
 
     /**
-     * @inheritdoc
+     * Render block HTML
+     *
+     * @return string
      */
     protected function _toHtml()
     {
@@ -112,7 +108,7 @@ class FavoriteRankOffers extends View
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _prepareLayout()
     {
@@ -176,8 +172,6 @@ class FavoriteRankOffers extends View
 
     /**
      * Apply result's limit on the aggregated collection
-     *
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
      */
     protected function _applyCollectionByLimit()
     {
@@ -267,7 +261,7 @@ class FavoriteRankOffers extends View
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _setTabTitle()
     {
@@ -278,10 +272,10 @@ class FavoriteRankOffers extends View
     /**
      * Retrieve product image
      *
-     * @param Product $product
-     * @param string  $imageId
-     * @param array   $attributes
-     * @return ProductImage
+     * @param   Product         $product
+     * @param   string          $imageId
+     * @param   array           $attributes
+     * @return  ProductImage
      */
     public function getImage($product, $imageId, $attributes = [])
     {
@@ -296,9 +290,9 @@ class FavoriteRankOffers extends View
     /**
      * Retrieve Product URL using UrlDataObject
      *
-     * @param Product $product
-     * @param array   $additional
-     * @return string
+     * @param   Product     $product
+     * @param   array       $additional the route params
+     * @return  string
      */
     public function getProductUrl($product, $additional = [])
     {
@@ -316,8 +310,8 @@ class FavoriteRankOffers extends View
     /**
      * Check Product has URL
      *
-     * @param Product $product
-     * @return bool
+     * @param   Product     $product
+     * @return  bool
      */
     protected function _hasProductUrl($product)
     {

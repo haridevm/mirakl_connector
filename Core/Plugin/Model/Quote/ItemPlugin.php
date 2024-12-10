@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Plugin\Model\Quote;
 
 use Magento\Catalog\Model\Product;
@@ -10,9 +7,9 @@ use Magento\Quote\Model\Quote\Item;
 class ItemPlugin
 {
     /**
-     * @param Item     $item
-     * @param \Closure $proceed
-     * @return Product
+     * @param   Item        $item
+     * @param   \Closure    $proceed
+     * @return  Product
      */
     public function aroundGetProduct(Item $item, \Closure $proceed)
     {

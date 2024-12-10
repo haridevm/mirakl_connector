@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Console\Command\Product\Import;
 
 use Magento\Framework\App\Area;
@@ -27,8 +24,9 @@ class ImagesCommand extends Command
     use ParallelCommandTrait;
     use TimeoutCommandTrait;
 
-    public const PROCESS_NAME = 'Products images import';
-    public const LIMIT_OPTION = 'limit';
+    const PROCESS_NAME = 'Products images import';
+
+    const LIMIT_OPTION = 'limit';
 
     /**
      * @var State
@@ -61,13 +59,13 @@ class ImagesCommand extends Command
     private $timeoutManager;
 
     /**
-     * @param State              $state
-     * @param ProcessFactory     $processFactory
-     * @param ProcessHelper      $helper
-     * @param Config             $config
-     * @param ImageProcessHelper $imageProcessHelper
-     * @param TimeoutManager     $timeoutManager
-     * @param string|null        $name
+     * @param   State               $state
+     * @param   ProcessFactory      $processFactory
+     * @param   ProcessHelper       $helper
+     * @param   Config              $config
+     * @param   ImageProcessHelper  $imageProcessHelper
+     * @param   TimeoutManager      $timeoutManager
+     * @param   string|null         $name
      */
     public function __construct(
         State $state,
@@ -88,7 +86,7 @@ class ImagesCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -112,9 +110,8 @@ class ImagesCommand extends Command
     /**
      * Creates a Mirakl process
      *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @return Process
+     * @param   InputInterface  $input
+     * @return  Process
      */
     private function createProcess(InputInterface $input, OutputInterface $output)
     {
@@ -129,12 +126,11 @@ class ImagesCommand extends Command
 
         $timeout = $input->getOption('timeout');
 
-        return $this->imageProcessHelper
-            ->createImportProcess($limit, $timeout, Process::TYPE_CLI, Process::STATUS_IDLE);
+        return $this->imageProcessHelper->createImportProcess($limit, $timeout, Process::TYPE_CLI, Process::STATUS_IDLE);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

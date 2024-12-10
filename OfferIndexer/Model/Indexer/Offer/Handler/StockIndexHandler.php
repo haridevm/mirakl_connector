@@ -1,13 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Indexer\Offer\Handler;
 
 use Magento\Store\Api\Data\StoreInterface;
 use Mirakl\Connector\Model\Inventory\Store\StockIdResolver;
-use Mirakl\Connector\Model\ResourceModel\Offer\Collection;
 use Mirakl\Core\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
+use Mirakl\Connector\Model\ResourceModel\Offer\Collection;
 use Mirakl\OfferIndexer\Model\ResourceModel\Offer\Product\StockIndex;
 use Mirakl\OfferIndexer\Model\Offer\AvailabilityInterface;
 
@@ -57,7 +56,7 @@ class StockIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clear(array $skus = []): void
     {
@@ -77,7 +76,7 @@ class StockIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function update(array $data): void
     {
@@ -85,7 +84,7 @@ class StockIndexHandler implements IndexHandlerInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function build(Collection $collection, StoreInterface $store): array
     {
@@ -99,7 +98,7 @@ class StockIndexHandler implements IndexHandlerInterface
 
             $productId = $offer->getData('product_id');
 
-            $result[$productId][$offer->getId()] = [
+            $result[$productId] = [
                 'offer_id'   => $offer->getId(),
                 'product_id' => $productId,
                 'sku'        => $offer->getProductSku(),
@@ -107,9 +106,7 @@ class StockIndexHandler implements IndexHandlerInterface
             ];
         }
 
-        $result = $this->processParentProducts($result);
-
-        return array_merge(...array_values($result));
+        return $this->processParentProducts($result);
     }
 
     /**
@@ -118,7 +115,11 @@ class StockIndexHandler implements IndexHandlerInterface
      */
     private function getStockId(int $storeId): int
     {
-        return $this->stockIds[$storeId] ??= $this->stockIdResolver->resolve($storeId);
+        if (!isset($this->stockIds[$storeId])) {
+            $this->stockIds[$storeId] = $this->stockIdResolver->resolve($storeId);
+        }
+
+        return $this->stockIds[$storeId];
     }
 
     /**
@@ -129,20 +130,18 @@ class StockIndexHandler implements IndexHandlerInterface
     {
         $allParents = $this->productCollectionFactory->create()
             ->getParentProductsData(array_keys($result), [
-                'id'  => 'entity_id',
-                'sku' => 'sku',
+                'parent_id'  => 'entity_id',
+                'parent_sku' => 'sku',
             ]);
 
         foreach ($allParents as $childId => $parents) {
             foreach ($parents as $parent) {
-                foreach ($result[$childId] as $offerId => $data) {
-                    $result[$parent['id']][$offerId] = [
-                        'offer_id'   => $offerId,
-                        'product_id' => $parent['id'],
-                        'sku'        => $parent['sku'],
-                        'stock_id'   => $data['stock_id'],
-                    ];
-                }
+                $result[$parent['parent_id']] = [
+                    'offer_id'   => $result[$childId]['offer_id'],
+                    'product_id' => $parent['parent_id'],
+                    'sku'        => $parent['parent_sku'],
+                    'stock_id'   => $result[$childId]['stock_id'],
+                ];
             }
         }
 

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk;
@@ -10,9 +9,6 @@ use Magento\Catalog\Model\ResourceModel\ProductFactory as ProductResourceFactory
 use Magento\Framework\EntityManager\EntityMetadataInterface;
 use Magento\Framework\EntityManager\MetadataPool;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class SkuProcessor extends \Magento\CatalogImportExport\Model\Import\Product\SkuProcessor
 {
     /**
@@ -32,13 +28,13 @@ class SkuProcessor extends \Magento\CatalogImportExport\Model\Import\Product\Sku
      * couple of products.
      * @see _getSkus()
      *
-     * @var array|null
+     * @var array
      */
     private $skusFilter;
 
     /**
-     * @param ProductFactory         $productFactory
-     * @param MetadataPool           $metadataPool
+     * @param ProductFactory $productFactory
+     * @param MetadataPool $metadataPool
      * @param ProductResourceFactory $productResourceFactory
      */
     public function __construct(
@@ -49,14 +45,6 @@ class SkuProcessor extends \Magento\CatalogImportExport\Model\Import\Product\Sku
         parent::__construct($productFactory);
         $this->metadataPool = $metadataPool;
         $this->productResourceFactory = $productResourceFactory;
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getSkusFilter(): ?array
-    {
-        return $this->skusFilter;
     }
 
     /**

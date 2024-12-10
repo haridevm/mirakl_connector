@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Process;
 
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
@@ -22,7 +19,7 @@ class VariantGroupCodeCleaner
     private $productCollectionFactory;
 
     /**
-     * @param EventManagerInterface    $eventManager
+     * @param EventManagerInterface $eventManager
      * @param ProductCollectionFactory $productCollectionFactory
      */
     public function __construct(
@@ -35,8 +32,8 @@ class VariantGroupCodeCleaner
 
     /**
      * @param Process $process
-     * @param string  $vgc
-     * @param array   $variantIds
+     * @param string $vgc
+     * @param array $variantIds
      * @return void
      */
     public function execute(Process $process, $vgc, array $variantIds)

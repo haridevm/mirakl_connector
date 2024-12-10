@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Block\Adminhtml\Process\View;
@@ -31,12 +30,14 @@ abstract class AbstractView extends Container
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct(): void
     {
+        $this->_objectId = 'id';
+        $this->_mode = 'view';
         $this->_controller = 'adminhtml_process';
+        $this->_blockGroup = 'Mirakl_Process';
 
         parent::_construct();
     }

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Block\Product\Swatches\Renderer\Listing;
 
 use Magento\Catalog\Model\Product;
@@ -52,13 +49,13 @@ class ConfigurablePlugin
     protected $priceCurrency;
 
     /**
-     * @param OfferHelper            $offerHelper
-     * @param TaxHelper              $taxHelper
-     * @param MiraklTaxHelper        $miraklTaxHelper
-     * @param ConnectorConfig        $connectorConfig
-     * @param Json\DecoderInterface  $jsonDecoder
-     * @param Json\EncoderInterface  $jsonEncoder
-     * @param PriceCurrencyInterface $priceCurrency
+     * @param   OfferHelper             $offerHelper
+     * @param   TaxHelper               $taxHelper
+     * @param   MiraklTaxHelper         $miraklTaxHelper
+     * @param   ConnectorConfig         $connectorConfig
+     * @param   Json\DecoderInterface   $jsonDecoder
+     * @param   Json\EncoderInterface   $jsonEncoder
+     * @param   PriceCurrencyInterface  $priceCurrency
      */
     public function __construct(
         OfferHelper $offerHelper,
@@ -79,9 +76,9 @@ class ConfigurablePlugin
     }
 
     /**
-     * @param Configurable $subject
-     * @param \Closure     $proceed
-     * @return string
+     * @param   Configurable    $subject
+     * @param   \Closure        $proceed
+     * @return  string
      */
     public function aroundGetJsonConfig(Configurable $subject, \Closure $proceed)
     {
@@ -90,8 +87,7 @@ class ConfigurablePlugin
         $config = $this->jsonDecoder->decode($jsonConfig);
 
         $store = $subject->getCurrentStore();
-        $config['template'] = str_replace(
-            '%s',
+        $config['template'] = str_replace('%s',
             '<span class="offer-price-format"><%- data.price %></span>',
             $store->getCurrentCurrency()->getOutputFormat()
         );
@@ -105,14 +101,11 @@ class ConfigurablePlugin
         if ($bestProduct = $this->offerHelper->getBestOperatorOffer($product)) {
             // Use best product
             $priceInfo = $bestProduct->getPriceInfo();
-            $config['prices']['baseOldPrice']['amount']
-                = (float) $priceInfo->getPrice('regular_price')->getAmount()->getValue();
-            $config['prices']['oldPrice']['amount']
-                = (float) $priceInfo->getPrice('regular_price')->getAmount()->getValue();
-            $config['prices']['basePrice']['amount']
-                = (float) $priceInfo->getPrice('final_price')->getAmount()->getBaseAmount();
-            $config['prices']['finalPrice']['amount']
-                = (float) $priceInfo->getPrice('final_price')->getAmount()->getValue();
+            $config['prices']['baseOldPrice']['amount'] = (float) $priceInfo->getPrice('regular_price')->getAmount()->getValue();
+            $config['prices']['oldPrice']['amount']     = (float) $priceInfo->getPrice('regular_price')->getAmount()->getValue();
+            $config['prices']['basePrice']['amount']    = (float) $priceInfo->getPrice('final_price')->getAmount()->getBaseAmount();
+            $config['prices']['finalPrice']['amount']   = (float) $priceInfo->getPrice('final_price')->getAmount()->getValue();
+
         } elseif ($bestOffer = $this->offerHelper->getBestOffer($product)) {
             // Use best offer
             $config['prices']['oldPrice']['amount']   = (float) $this->convertPrice($bestOffer->getOriginPrice());
@@ -134,8 +127,8 @@ class ConfigurablePlugin
     }
 
     /**
-     * @param float $value
-     * @return float
+     * @param   float   $value
+     * @return  float
      */
     public function convertPrice($value)
     {
@@ -143,8 +136,8 @@ class ConfigurablePlugin
     }
 
     /**
-     * @param Offer $offer
-     * @return float
+     * @param   Offer   $offer
+     * @return  float
      */
     protected function getOfferMinShippingPriceInclTax(Offer $offer)
     {
@@ -157,9 +150,9 @@ class ConfigurablePlugin
     }
 
     /**
-     * @param Offer $offer
-     * @param int   $taxClassId
-     * @return float
+     * @param   Offer   $offer
+     * @param   int     $taxClassId
+     * @return  float
      */
     protected function getOfferPriceInclTax(Offer $offer, $taxClassId)
     {
@@ -172,8 +165,8 @@ class ConfigurablePlugin
     }
 
     /**
-     * @param array $config
-     * @param array $allowProducts
+     * @param   array   $config
+     * @param   array   $allowProducts
      */
     protected function setOffersData(array &$config, array $allowProducts)
     {
@@ -188,21 +181,19 @@ class ConfigurablePlugin
     /**
      * Set option price in array format
      *
-     * @param array      $config
-     * @param Product    $product
-     * @param Offer|null $offer
-     * @return void
+     * @param   array       $config
+     * @param   Product     $product
+     * @param   Offer|null  $offer
+     * @return  void
      */
     protected function setOptionPrice(array &$config, $product, $offer = null)
     {
         if ($offer) {
-            $offerMinShippingPriceInclTax = $this->getOfferMinShippingPriceInclTax($offer);
-
             $config['optionPrices'][$product->getId()] = [
                 'oldPrice'                => ['amount' => $this->convertPrice($offer->getOriginPrice())],
                 'basePrice'               => ['amount' => $this->convertPrice($offer->getPrice())],
                 'minShippingPrice'        => ['amount' => $this->convertPrice($offer->getMinShippingPrice())],
-                'minShippingPriceInclTax' => ['amount' => $this->convertPrice($offerMinShippingPriceInclTax)],
+                'minShippingPriceInclTax' => ['amount' => $this->convertPrice($this->getOfferMinShippingPriceInclTax($offer))],
                 'tierPrices'              => [],
             ];
 

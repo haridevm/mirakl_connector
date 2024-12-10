@@ -1,0 +1,59 @@
+name: Release - Build & Deploy
+
+run-name: Deploy v${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: 'Version (ex: 1.25.0)'
+        required: true
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: mirakl-hosted
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v4
+        with:
+          ref: v${{ inputs.version }}
+
+      - name: Set file name
+        run: echo "FILENAME=mirakl-magento2-connector-${{ inputs.version }}.zip" >> $GITHUB_ENV
+
+      - name: Build package
+        run: |
+          zip -r $FILENAME \
+            composer.json \
+            README.md \
+            registration.php \
+            LICENSE.txt \
+            Adminhtml \
+            Api/ \
+            Catalog/ \
+            Connector/ \
+            Core/ \
+            Event/ \
+            FrontendDemo/ \
+            GraphQl/ \
+            Mci/ \
+            Mcm/ \
+            OfferIndexer/ \
+            Process/ \
+            SalesChannels/ \
+            Sync/
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.S3_CUSTOMER_DOC_ROLE_ARN }}
+          aws-region: eu-west-1
+
+      - name: Upload package to S3
+        shell: bash
+        run: aws s3 cp $FILENAME s3://mirakl-customer-doc/operator/magento/2.x/$FILENAME

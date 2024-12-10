@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel;
 
 use Magento\Catalog\Model\Product\Attribute\Repository as AttributeRepository;
@@ -11,10 +8,6 @@ use Magento\Framework\Model\ResourceModel\Db\Context;
 use Mirakl\MMP\FrontOperator\Domain\Collection\Shop\ShopCollection;
 use Mirakl\Process\Model\Process;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- */
 class Shop extends AbstractDb
 {
     use ArraySerializableFieldsTrait;
@@ -37,10 +30,10 @@ class Shop extends AbstractDb
     ];
 
     /**
-     * @param Shop\CollectionFactory $collectionFactory
-     * @param AttributeRepository    $attributeRepository
-     * @param Context                $context
-     * @param mixed                  $connectionName
+     * @param   Shop\CollectionFactory      $collectionFactory
+     * @param   AttributeRepository         $attributeRepository
+     * @param   Context                     $context
+     * @param   mixed                       $connectionName
      */
     public function __construct(
         Shop\CollectionFactory $collectionFactory,
@@ -54,7 +47,9 @@ class Shop extends AbstractDb
     }
 
     /**
-     * @inheritdoc
+     * Initialize resource model
+     *
+     * @return void
      */
     protected function _construct()
     {
@@ -65,7 +60,7 @@ class Shop extends AbstractDb
     /**
      * Returns EAV option ids of shops
      *
-     * @return array
+     * @return  array
      */
     public function getEavOptionIds()
     {
@@ -76,28 +71,22 @@ class Shop extends AbstractDb
     }
 
     /**
-     * @param ShopCollection $shops
-     * @param Process        $process
-     * @param int            $chunkSize
-     * @return int
-     * @throws \Exception
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   ShopCollection  $shops
+     * @param   Process         $process
+     * @param   int             $chunkSize
+     * @return  int
+     * @throws  \Exception
      */
     public function synchronize(ShopCollection $shops, Process $process, $chunkSize = 100)
     {
         if (!$shops->count()) {
-            throw new \Exception(
-                __('Shops to synchronize cannot be empty.')->render()
-            );
+            throw new \Exception(__('Shops to synchronize cannot be empty.'));
         }
 
         // Load existing mirakl_shop_ids EAV attribute
         $attribute = $this->attributeRepository->get('mirakl_shop_ids');
         if (!$attribute) {
-            throw new \Exception(
-                __('mirakl_shop_ids attribute is not created.')->render()
-            );
+            throw new \Exception(__('mirakl_shop_ids attribute is not created.'));
         }
 
         $adapter = $this->getConnection();
@@ -118,10 +107,9 @@ class Shop extends AbstractDb
 
         foreach ($shops->toArray() as $shop) {
             // Check if EAV option exists
-            if (
-                isset($customShops[$shop['id']]) &&
-                isset($eavShopOptions[$customShops[$shop['id']]])
-            ) {
+            if (isset($customShops[$shop['id']]) &&
+                isset($eavShopOptions[$customShops[$shop['id']]]))
+            {
                 $optionId = $customShops[$shop['id']];
                 // Update EAV option if label has changed
                 if ($eavShopOptions[$optionId]->getLabel() != $shop['name']) {
@@ -150,7 +138,7 @@ class Shop extends AbstractDb
             }
             $data['free_shipping'] = $shop['shipping_info']['free_shipping'];
             $data['eav_option_id'] = $optionId;
-            $data['additional_info'] = serialize($shop); // phpcs:ignore
+            $data['additional_info'] = serialize($shop);
 
             $dateCreated = new \DateTime($shop['date_created']);
             $data['date_created'] = $dateCreated->format(Mysql::TIMESTAMP_FORMAT);

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Observer;
@@ -12,7 +11,7 @@ use Mirakl\MMP\Front\Domain\Order\Create\CreateOrder;
 class ConvertOrderAfterObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

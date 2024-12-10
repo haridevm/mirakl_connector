@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -9,9 +6,6 @@ use Magento\Framework\Event\ObserverInterface;
 use Magento\Framework\Stdlib\Cookie\CookieMetadataFactory;
 use Magento\Framework\Stdlib\Cookie\PhpCookieManager;
 
-/**
- * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
- */
 class InvalidateCartCookieObserver implements ObserverInterface
 {
     /**
@@ -25,8 +19,8 @@ class InvalidateCartCookieObserver implements ObserverInterface
     protected $cookieMetadataFactory;
 
     /**
-     * @param PhpCookieManager      $cookieManager
-     * @param CookieMetadataFactory $cookieMetadataFactory
+     * @param   PhpCookieManager        $cookieManager
+     * @param   CookieMetadataFactory   $cookieMetadataFactory
      */
     public function __construct(PhpCookieManager $cookieManager, CookieMetadataFactory $cookieMetadataFactory)
     {
@@ -37,7 +31,7 @@ class InvalidateCartCookieObserver implements ObserverInterface
     /**
      * Invalidates the cookie for minicart data refresh
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

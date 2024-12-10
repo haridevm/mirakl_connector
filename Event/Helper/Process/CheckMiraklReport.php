@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper\Process;
 
 use Mirakl\Event\Model\Event;
@@ -12,11 +9,9 @@ class CheckMiraklReport extends AbstractProcess
     /**
      * Call Mirakl API to retrieve execution report
      *
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * {@inheritdoc}
      */
-    public function execute(Process $process, $type, $action, $executeAllTypes = true)
+    public function execute(Process $process, $type, $action, $exportAllTypes = true)
     {
         $process->output(sprintf(
             'Checking Mirakl report "%s" for "%s"',
@@ -33,7 +28,7 @@ class CheckMiraklReport extends AbstractProcess
             ->setOrder('line', 'asc');
 
         if (!count($collection)) {
-            goto proceed; // phpcs:ignore
+            goto proceed;
         }
 
         $synchroId = $collection->getFirstItem()->getImportId();
@@ -47,7 +42,7 @@ class CheckMiraklReport extends AbstractProcess
                 $process->output("Import #{$synchroId} has failed!");
                 $this->updateEvents($type, $action, Event::STATUS_SENT, ['status' => Event::STATUS_MIRAKL_ERROR]);
 
-                goto proceed; // phpcs:ignore
+                goto proceed;
             }
 
             if ($synchroResult->getStatus() != 'COMPLETE') {
@@ -61,7 +56,7 @@ class CheckMiraklReport extends AbstractProcess
                 $process->output("Import #{$synchroId} is valid");
                 $this->updateEvents($type, $action, Event::STATUS_SENT, ['status' => Event::STATUS_SUCCESS]);
 
-                goto proceed; // phpcs:ignore
+                goto proceed;
             }
 
             $process->output("Parsing error report for import #{$synchroId}...");
@@ -99,14 +94,14 @@ class CheckMiraklReport extends AbstractProcess
         }
 
         proceed:
-        return $this->proceed($process, $type, $action, false, $executeAllTypes);
+        return $this->proceed($process, $type, $action, false, $exportAllTypes);
     }
 
     /**
-     * @param Event       $event
-     * @param string      $status
-     * @param string|null $message
-     * @return $this
+     * @param   Event       $event
+     * @param   string      $status
+     * @param   string|null $message
+     * @return  $this
      */
     private function updateEvent(Event $event, $status, $message = null)
     {

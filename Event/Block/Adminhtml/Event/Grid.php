@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Block\Adminhtml\Event;
 
 use Magento\Backend\Block\Widget\Grid\Container;
@@ -9,8 +6,7 @@ use Magento\Backend\Block\Widget\Grid\Container;
 class Grid extends Container
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  void
      */
     protected function _construct()
     {

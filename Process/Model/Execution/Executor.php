@@ -1,9 +1,9 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Execution;
 
+use Mirakl\Process\Model\Exception\AlreadyRunningException;
 use Mirakl\Process\Model\Exception\BadMethodException;
 use Mirakl\Process\Model\Exception\ProcessException;
 use Mirakl\Process\Model\Process;
@@ -11,26 +11,17 @@ use Mirakl\Process\Model\Process;
 class Executor
 {
     /**
-     * @var Validator
-     */
-    private $executeProcessValidator;
-
-    /**
-     * @param Validator $executeValidator
-     */
-    public function __construct(Validator $executeValidator)
-    {
-        $this->executeProcessValidator = $executeValidator;
-    }
-
-    /**
      * @param Process $process
      * @return mixed
+     * @throws AlreadyRunningException
+     * @throws BadMethodException
      * @throws ProcessException
      */
     public function execute(Process $process)
     {
-        $this->executeProcessValidator->validate($process);
+        if ($process->isProcessing()) {
+            throw new AlreadyRunningException($process, __('Process is already running. Please try again later.'));
+        }
 
         $process->setStatus(Process::STATUS_PROCESSING);
 
@@ -46,7 +37,7 @@ class Executor
             date('Y-m-d H:i:s'),
             get_class($helper),
             $method
-        )->render(), true);
+        ), true);
 
         $args = [$process];
         if ($process->getParams()) {

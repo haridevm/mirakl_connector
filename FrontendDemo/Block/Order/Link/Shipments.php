@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order\Link;
 
 class Shipments extends \Mirakl\FrontendDemo\Block\Order\Link
 {
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnableMultiShipments()
     {
@@ -15,8 +12,7 @@ class Shipments extends \Mirakl\FrontendDemo\Block\Order\Link
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _toHtml()
     {

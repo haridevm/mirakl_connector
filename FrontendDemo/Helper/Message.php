@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper;
 
 use Magento\Customer\Model\Session;
@@ -18,10 +15,6 @@ use Mirakl\MMP\Common\Domain\Message\Thread\ThreadEntity;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadParticipant;
 use Mirakl\MMP\FrontOperator\Domain\Reason;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
- */
 class Message extends AbstractHelper
 {
     /**
@@ -60,13 +53,13 @@ class Message extends AbstractHelper
     protected $orderFactory;
 
     /**
-     * @param Context          $context
-     * @param CoreConfig       $coreConfig
-     * @param MessageApi       $messageApi
-     * @param ReasonApi        $reasonApi
-     * @param Session          $customerSession
-     * @param CustomerResource $customerResource
-     * @param OrderFactory     $orderFactory
+     * @param  Context          $context
+     * @param  CoreConfig       $coreConfig
+     * @param  MessageApi       $messageApi
+     * @param  ReasonApi        $reasonApi
+     * @param  Session          $customerSession
+     * @param  CustomerResource $customerResource
+     * @param  OrderFactory     $orderFactory
      */
     public function __construct(
         Context $context,
@@ -87,8 +80,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param ThreadEntity $entity
-     * @return string
+     * @param   ThreadEntity    $entity
+     * @return  string
      */
     public function getEntityName(ThreadEntity $entity)
     {
@@ -106,9 +99,9 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param Thread $thread
-     * @param array  $excludeTypes
-     * @return array
+     * @param   Thread  $thread
+     * @param   array   $excludeTypes
+     * @return  array
      */
     public function getCurrentParticipantsNames(Thread $thread, $excludeTypes = [])
     {
@@ -116,9 +109,9 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param Thread $thread
-     * @param array  $excludeTypes
-     * @return array
+     * @param   Thread  $thread
+     * @param   array   $excludeTypes
+     * @return  array
      */
     public function getAuthorizedParticipantsNames(Thread $thread, array $excludeTypes = [])
     {
@@ -126,9 +119,9 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param ThreadParticipantCollection $participants
-     * @param array                       $excludeTypes
-     * @return array
+     * @param   ThreadParticipantCollection $participants
+     * @param   array                       $excludeTypes
+     * @return  array
      */
     protected function getParticipantsNames(ThreadParticipantCollection $participants, array $excludeTypes = [])
     {
@@ -146,8 +139,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param Thread $thread
-     * @return string
+     * @param   Thread  $thread
+     * @return  string
      */
     public function getTopic(Thread $thread)
     {
@@ -161,14 +154,14 @@ class Message extends AbstractHelper
         if ($thread['topic']['type'] == 'REASON_CODE') {
             $reasonLabels = $this->getReasonLabels();
 
-            return $reasonLabels[$topicValue] ?? '';
+            return isset($reasonLabels[$topicValue]) ? $reasonLabels[$topicValue] : '';
         }
 
         return $topicValue;
     }
 
     /**
-     * @return array
+     * @return  array
      */
     protected function getReasonLabels()
     {
@@ -187,8 +180,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param string $string
-     * @return \DateTime
+     * @param   string  $string
+     * @return  \DateTime
      */
     public function getMiraklDate($string)
     {
@@ -200,8 +193,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param string $miraklOrderId
-     * @return string
+     * @param   string  $miraklOrderId
+     * @return  string
      */
     public function getIncrementIdFromMiraklOrderId($miraklOrderId)
     {
@@ -209,8 +202,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param string $incrementId
-     * @return \Magento\Sales\Model\Order
+     * @param   string  $incrementId
+     * @return  \Magento\Sales\Model\Order
      */
     public function getOrderFromIncrementId($incrementId)
     {
@@ -221,8 +214,8 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param string $miraklOrderId
-     * @return \Magento\Sales\Model\Order
+     * @param   string  $miraklOrderId
+     * @return  \Magento\Sales\Model\Order
      */
     public function getOrderFromMiraklOrderId($miraklOrderId)
     {
@@ -232,15 +225,15 @@ class Message extends AbstractHelper
     }
 
     /**
-     * @param Thread $thread
-     * @return \Magento\Sales\Model\Order|null
+     * @param   Thread  $thread
+     * @return  \Magento\Sales\Model\Order|null
      */
     public function getOrderFromThread(Thread $thread)
     {
         $order = null;
         $entities = $thread->getEntities();
 
-        if ($entities->count()) {
+        if (!empty($entities)) {
             $miraklOrderId = $entities->first()->getId();
             if ($incrementId = $this->getIncrementIdFromMiraklOrderId($miraklOrderId)) {
                 $order = $this->getOrderFromIncrementId($incrementId);

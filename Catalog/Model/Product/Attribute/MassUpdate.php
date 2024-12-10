@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Model\Product\Attribute;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection as ProductCollection;
@@ -14,5 +11,4 @@ use Magento\Framework\DataObject;
  * @method $this             setCollection(ProductCollection $collection)
  */
 class MassUpdate extends DataObject
-{
-}
+{}

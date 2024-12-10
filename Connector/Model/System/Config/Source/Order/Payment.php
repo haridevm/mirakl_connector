@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\System\Config\Source\Order;
 
 use Magento\Framework\Data\OptionSourceInterface;

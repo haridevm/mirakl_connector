@@ -1,12 +1,8 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
-use Magento\Framework\Serialize\Serializer\Serialize;
 use Mirakl\Event\Helper\Process\ExportType;
 use Mirakl\Event\Model\EventFactory;
 use Mirakl\Event\Model\Event;
@@ -19,12 +15,9 @@ use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 use Mirakl\Process\Model\ResourceModel\Process\Collection as ProcessCollection;
 use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory as ProcessCollectionFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Data extends AbstractHelper
 {
-    public const PROCESS_NAME = 'Export event queue';
+    const PROCESS_NAME = 'Export event queue';
 
     /**
      * @var EventFactory
@@ -57,19 +50,13 @@ class Data extends AbstractHelper
     protected $processCollectionFactory;
 
     /**
-     * @var Serialize
-     */
-    protected $serializer;
-
-    /**
-     * @param Context                  $context
-     * @param EventFactory             $eventFactory
-     * @param EventResourceFactory     $eventResourceFactory
-     * @param EventCollectionFactory   $eventCollectionFactory
-     * @param ProcessFactory           $processFactory
-     * @param ProcessResourceFactory   $processResourceFactory
-     * @param ProcessCollectionFactory $processCollectionFactory
-     * @param Serialize                $serializer
+     * @param   Context                     $context
+     * @param   EventFactory                $eventFactory
+     * @param   EventResourceFactory        $eventResourceFactory
+     * @param   EventCollectionFactory      $eventCollectionFactory
+     * @param   ProcessFactory              $processFactory
+     * @param   ProcessResourceFactory      $processResourceFactory
+     * @param   ProcessCollectionFactory    $processCollectionFactory
      */
     public function __construct(
         Context $context,
@@ -78,8 +65,7 @@ class Data extends AbstractHelper
         EventCollectionFactory $eventCollectionFactory,
         ProcessFactory $processFactory,
         ProcessResourceFactory $processResourceFactory,
-        ProcessCollectionFactory $processCollectionFactory,
-        Serialize $serializer
+        ProcessCollectionFactory $processCollectionFactory
     ) {
         parent::__construct($context);
         $this->eventFactory = $eventFactory;
@@ -88,15 +74,14 @@ class Data extends AbstractHelper
         $this->processFactory = $processFactory;
         $this->processResourceFactory = $processResourceFactory;
         $this->processCollectionFactory = $processCollectionFactory;
-        $this->serializer = $serializer;
     }
 
     /**
-     * @param string            $code
-     * @param int               $action
-     * @param int               $type
-     * @param string|array|null $csvData
-     * @return Event
+     * @param   string              $code
+     * @param   int                 $action
+     * @param   int                 $type
+     * @param   string|array|null   $csvData
+     * @return  Event
      */
     public function addEvent($code, $action, $type, $csvData = null)
     {
@@ -117,7 +102,7 @@ class Data extends AbstractHelper
         }
 
         $event->setAction($action);
-        $event->setCsvData(is_array($csvData) ? $this->serializer->serialize($csvData) : $csvData);
+        $event->setCsvData(is_array($csvData) ? serialize($csvData) : $csvData);
         $this->eventResourceFactory->create()->save($event);
 
         return $event;
@@ -126,7 +111,7 @@ class Data extends AbstractHelper
     /**
      * Returns current running event processes (should contains only one max)
      *
-     * @return ProcessCollection
+     * @return  ProcessCollection
      */
     private function getRunningProcesses()
     {
@@ -141,10 +126,10 @@ class Data extends AbstractHelper
     /**
      * Get event process in idle status or create a new one
      *
-     * @param string      $processType
-     * @param string|null $eventType
-     * @return Process
-     * @throws AlreadyRunningException
+     * @param   string       $processType
+     * @param   string|null  $eventType
+     * @return  Process
+     * @throws  AlreadyRunningException
      */
     public function getOrCreateEventProcess($processType, $eventType = null)
     {
@@ -152,10 +137,8 @@ class Data extends AbstractHelper
         $runningProcesses = $this->getRunningProcesses();
 
         if (count($runningProcesses)) {
-            throw new AlreadyRunningException(
-                $runningProcesses->getFirstItem(),
-                __('Another event process is running. Please try again later.')
-            );
+            throw new AlreadyRunningException($runningProcesses->getFirstItem(),
+                __('Another event process is running. Please try again later.'));
         }
 
         // No event is currently running, try to find one in idle status or create a new one

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Thread;
@@ -18,7 +17,7 @@ abstract class AbstractThreadResolver extends AbstractResolver implements Resolv
     protected $messageHelper;
 
     /**
-     * @param Message $messageHelper
+     * @param  Message  $messageHelper
      */
     public function __construct(Message $messageHelper)
     {
@@ -26,8 +25,8 @@ abstract class AbstractThreadResolver extends AbstractResolver implements Resolv
     }
 
     /**
-     * @param string $threadId
-     * @param string $userId
+     * @param  string   $threadId
+     * @param  string   $userId
      * @return ThreadDetails
      * @throws ClientAware
      */

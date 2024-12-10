@@ -8,19 +8,19 @@ $offer = $block->getOffer();
 ?>
 <section class="admin__page-section">
     <div class="admin__page-section-title">
-        <strong class="title"><?= /* @escapeNotVerified */ __('Offer Information') ?></strong>
+        <strong class="title"><?php /* @escapeNotVerified */ echo __('Offer Information') ?></strong>
     </div>
     <div class="admin__page-section-content">
         <table class="admin__table-secondary">
             <tbody>
                 <?php foreach ($offer->getData() as $key => $value): ?>
                     <tr>
-                        <th><?= /* @escapeNotVerified */ __(ucwords(str_replace('_', ' ', $key))) ?></th>
+                        <th><?php /* @escapeNotVerified */ echo __(ucwords(str_replace('_', ' ', $key))) ?></th>
                         <td>
                             <?php if ($key === 'additional_info'): ?>
-                                <pre><?= json_encode(json_decode($value, true), JSON_PRETTY_PRINT); // phpcs:ignore ?></pre>
+                                <pre><?php echo json_encode(json_decode($value, true), JSON_PRETTY_PRINT); ?></pre>
                             <?php else: ?>
-                                <?= /* @escapeNotVerified */ $block->escapeHtml($value) ?>
+                                <?php /* @escapeNotVerified */ echo $block->escapeHtml($value) ?>
                             <?php endif; ?>
                         </td>
                     </tr>

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Inventory\Store;
@@ -33,9 +32,9 @@ class StockIndexResolver implements StockIndexResolverInterface
     private $stockIndexFactory;
 
     /**
-     * @param ObjectManagerInterface     $objectManager
-     * @param ResourceConnection         $resourceConnection
-     * @param StockIdResolver            $stockIdResolver
+     * @param ObjectManagerInterface $objectManager
+     * @param ResourceConnection $resourceConnection
+     * @param StockIdResolver $stockIdResolver
      * @param StockIndexInterfaceFactory $stockIndexFactory
      */
     public function __construct(
@@ -51,7 +50,7 @@ class StockIndexResolver implements StockIndexResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(int $storeId): StockIndexInterface
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Block\Adminhtml\System\Config\Button\Import;
 
 use Mirakl\Connector\Block\Adminhtml\System\Config\Button\AbstractButtons;
@@ -28,7 +25,7 @@ class ProductsAsync extends AbstractButtons
     ];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getButtonsHtml()
     {

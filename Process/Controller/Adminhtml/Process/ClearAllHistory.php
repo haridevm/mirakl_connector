@@ -1,19 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Process\Model\HistoryClearer;
 use Psr\Log\LoggerInterface;
 
-class ClearAllHistory extends AbstractProcessAction implements HttpGetActionInterface
+class ClearAllHistory extends AbstractProcessAction
 {
-    /**
-     * @var HistoryClearer
-     */
     private $historyClearer;
 
     /**

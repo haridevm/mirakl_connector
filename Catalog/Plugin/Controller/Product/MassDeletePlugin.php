@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Plugin\Controller\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
@@ -39,11 +36,11 @@ class MassDeletePlugin
     protected $productHelper;
 
     /**
-     * @param RequestInterface         $request
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ApiConfig                $apiConfigHelper
-     * @param CatalogConfig            $catalogConfigHelper
-     * @param ProductHelper            $productHelper
+     * @param   RequestInterface            $request
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ApiConfig                   $apiConfigHelper
+     * @param   CatalogConfig               $catalogConfigHelper
+     * @param   ProductHelper               $productHelper
      */
     public function __construct(
         RequestInterface $request,
@@ -63,7 +60,7 @@ class MassDeletePlugin
      * Handle mass product deletion in a plugin because we do not have any way to
      * retrieve products with mirakl_sync = true from the default dispatched event.
      *
-     * @return void
+     * @return  void
      */
     public function beforeExecute()
     {

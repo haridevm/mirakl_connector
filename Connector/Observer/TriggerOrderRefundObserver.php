@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -28,17 +25,17 @@ class TriggerOrderRefundObserver implements ObserverInterface
      * @var OrderHelper
      */
     protected $orderHelper;
-
+    
     /**
      * @var PaymentApi
      */
     protected $paymentApi;
 
     /**
-     * @param OrderFactory         $orderFactory
-     * @param OrderResourceFactory $orderResourceFactory
-     * @param OrderHelper          $orderHelper
-     * @param PaymentApi           $paymentApi
+     * @param   OrderFactory            $orderFactory
+     * @param   OrderResourceFactory    $orderResourceFactory
+     * @param   OrderHelper             $orderHelper
+     * @param   PaymentApi              $paymentApi
      */
     public function __construct(
         OrderFactory $orderFactory,
@@ -64,8 +61,8 @@ class TriggerOrderRefundObserver implements ObserverInterface
      * transaction_number       Transaction number of the refund (optional but recommended)
      * transaction_date         Transaction date of the refund (optional but recommended)
      *
-     * @inheritdoc
-     * @throws \Exception
+     * {@inheritdoc}
+     * @throws  \Exception
      */
     public function execute(Observer $observer)
     {

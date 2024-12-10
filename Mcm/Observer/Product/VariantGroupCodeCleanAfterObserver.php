@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Product;
 
 use Magento\Framework\Event\Observer;
@@ -11,7 +8,7 @@ use Mirakl\MCM\Front\Domain\Product\Export\ProductAcceptanceStatus as ProductAcc
 class VariantGroupCodeCleanAfterObserver extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

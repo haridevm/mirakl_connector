@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Batch;
@@ -26,8 +25,8 @@ class Shop implements BatchResolverInterface
     protected $shopMapper;
 
     /**
-     * @param ShopCollectionFactory $shopCollectionFactory
-     * @param ShopMapper            $shopMapper
+     * @param  ShopCollectionFactory  $shopCollectionFactory
+     * @param  ShopMapper             $shopMapper
      */
     public function __construct(ShopCollectionFactory $shopCollectionFactory, ShopMapper $shopMapper)
     {
@@ -48,6 +47,7 @@ class Shop implements BatchResolverInterface
                 throw new LocalizedException(__('"%1" value should be specified', 'shop_id'));
             }
             $shopIds[] = $request->getValue()['shop_id'];
+
         }
 
         if (!count($shopIds)) {
@@ -70,4 +70,5 @@ class Shop implements BatchResolverInterface
 
         return $response;
     }
+
 }

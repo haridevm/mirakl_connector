@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Adminhtml;
 
 use Magento\Config\Model\Config\Source\Yesno;
@@ -16,7 +13,7 @@ class AttributeEditFormObserver implements ObserverInterface
     private $yesNo;
 
     /**
-     * @param Yesno $yesNo
+     * @param   Yesno   $yesNo
      */
     public function __construct(Yesno $yesNo)
     {
@@ -24,7 +21,7 @@ class AttributeEditFormObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

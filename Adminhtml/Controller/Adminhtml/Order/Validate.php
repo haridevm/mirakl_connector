@@ -1,16 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Controller\Adminhtml\Order;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 
-class Validate extends \Magento\Sales\Controller\Adminhtml\Order implements HttpGetActionInterface
+class Validate extends \Magento\Sales\Controller\Adminhtml\Order
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

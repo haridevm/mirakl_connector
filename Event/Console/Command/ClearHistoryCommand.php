@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Console\Command;
 
 use Magento\Framework\Console\Cli;
@@ -17,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ClearHistoryCommand extends Command
 {
-    public const BEFORE_DATE_OPTION = 'before';
+    const BEFORE_DATE_OPTION = 'before';
 
     /**
      * @var Config
@@ -35,10 +32,7 @@ class ClearHistoryCommand extends Command
     private $processResource;
 
     /**
-     * @param Config          $config
-     * @param ProcessFactory  $processFactory
-     * @param ProcessResource $processResource
-     * @param string|null     $name
+     * @param  string|null  $name
      */
     public function __construct(
         Config $config,
@@ -53,7 +47,7 @@ class ClearHistoryCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -67,12 +61,12 @@ class ClearHistoryCommand extends Command
         ];
 
         $this->setName('mirakl:event:clear-history')
-            ->setDescription('Handles connector events history clearing')
+            ->setDescription('Handles Mirakl events history clearing')
             ->setDefinition($options);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -84,17 +78,16 @@ class ClearHistoryCommand extends Command
             return Cli::RETURN_FAILURE;
         }
 
-        $beforeDate = $beforeDate ? $beforeDate . ' 00:00:00' : $this->config->getEventClearHistoryBeforeDate();
+        $beforeDate = $beforeDate ? $beforeDate .' 00:00:00' : $this->config->getEventClearHistoryBeforeDate();
 
         /** @var Process $process */
         $process = $this->processFactory->create();
         $process->setStatus(Process::STATUS_PENDING)
-            ->setType(Process::TYPE_CLI)
-            ->setName('Clear history of events created before configured days count or a given date')
-            ->setHelper(HistoryClearer::class)
-            ->setMethod('execute')
-            ->setParams([$beforeDate]);
-
+                ->setCode(HistoryClearer::CODE)
+                ->setName('Clear history of events created before configured days count or a given date')
+                ->setHelper(HistoryClearer::class)
+                ->setMethod('execute')
+                ->setParams([$beforeDate]);
         $this->processResource->save($process);
         $process->addOutput('cli');
 

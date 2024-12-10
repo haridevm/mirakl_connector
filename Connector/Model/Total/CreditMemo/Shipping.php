@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Total\CreditMemo;
 
 use Magento\Framework\Exception\LocalizedException;
@@ -31,9 +28,9 @@ class Shipping extends AbstractTotal
     protected $priceCurrency;
 
     /**
-     * @param TaxConfig              $taxConfig
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param array                  $data
+     * @param   TaxConfig               $taxConfig
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   array                   $data
      */
     public function __construct(
         TaxConfig $taxConfig,
@@ -46,9 +43,9 @@ class Shipping extends AbstractTotal
     }
 
     /**
-     * @param Creditmemo $creditMemo
-     * @return $this
-     * @throws LocalizedException
+     * @param   Creditmemo  $creditMemo
+     * @return  $this
+     * @throws  LocalizedException
      */
     public function collect(Creditmemo $creditMemo)
     {
@@ -58,11 +55,11 @@ class Shipping extends AbstractTotal
             return $this;
         }
 
-        $miraklShippingExclTax     = $order->getMiraklShippingExclTax();
-        $miraklBaseShippingExclTax = $order->getMiraklBaseShippingExclTax();
-        $miraklShippingInclTax     = $order->getMiraklShippingInclTax();
-        $miraklBaseShippingInclTax = $order->getMiraklBaseShippingInclTax();
-        $miraklShippingTaxAmount   = $order->getMiraklShippingTaxAmount() + $order->getMiraklCustomShippingTaxAmount();
+        $miraklShippingExclTax       = $order->getMiraklShippingExclTax();
+        $miraklBaseShippingExclTax   = $order->getMiraklBaseShippingExclTax();
+        $miraklShippingInclTax       = $order->getMiraklShippingInclTax();
+        $miraklBaseShippingInclTax   = $order->getMiraklBaseShippingInclTax();
+        $miraklShippingTaxAmount     = $order->getMiraklShippingTaxAmount() + $order->getMiraklCustomShippingTaxAmount();
 
         // Amounts excluding tax
         $allowedAmount = $miraklShippingExclTax - $order->getMiraklShippingRefunded();
@@ -132,8 +129,8 @@ class Shipping extends AbstractTotal
     /**
      * Returns whether the user specified a shipping amount that already includes tax
      *
-     * @param Order $order
-     * @return bool
+     * @param   Order   $order
+     * @return  bool
      */
     private function isSuppliedShippingAmountInclTax(Order $order)
     {

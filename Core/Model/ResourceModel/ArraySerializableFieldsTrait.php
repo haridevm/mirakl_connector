@@ -1,20 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel;
 
 use Magento\Framework\DataObject;
 
 /**
  * Compatibility with Magento 2.2 that now uses JSON serializer for serializable fields
- *
- * @codingStandardsIgnoreFile
  */
 trait ArraySerializableFieldsTrait
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _serializeField(DataObject $object, $field, $defaultValue = null, $unsetEmpty = false)
     {
@@ -29,7 +24,7 @@ trait ArraySerializableFieldsTrait
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _unserializeField(DataObject $object, $field, $defaultValue = null)
     {

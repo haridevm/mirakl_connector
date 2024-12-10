@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -24,9 +21,9 @@ class Stock extends AbstractHelper
     protected $stockConfiguration;
 
     /**
-     * @param Context                        $context
-     * @param StockRegistryProviderInterface $stockRegistryProvider
-     * @param StockConfigurationInterface    $stockConfiguration
+     * @param   Context                         $context
+     * @param   StockRegistryProviderInterface  $stockRegistryProvider
+     * @param   StockConfigurationInterface     $stockConfiguration
      */
     public function __construct(
         Context $context,
@@ -43,9 +40,8 @@ class Stock extends AbstractHelper
      * Rewriting the default Magento method because it does not work for configurable product (returns 0).
      * @see \Magento\CatalogInventory\Model\StockStateProvider::getStockQty()
      *
-     * @param Product $product
-     * @return float
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   Product $product
+     * @return  float
      */
     public function getProductStockQty(Product $product)
     {
@@ -68,8 +64,7 @@ class Stock extends AbstractHelper
                 }
             }
             $stockQty = (float) $stockQty;
-            if (
-                $stockQty < 0 || !$stockItem->getManageStock() || !$stockItem->getIsInStock()
+            if ($stockQty < 0 || !$stockItem->getManageStock() || !$stockItem->getIsInStock()
                 || !$product->isSaleable()
             ) {
                 $stockQty = 0;
@@ -81,8 +76,8 @@ class Stock extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return StockItemInterface
+     * @param   Product $product
+     * @return  StockItemInterface
      */
     public function getProductStockItem(Product $product)
     {

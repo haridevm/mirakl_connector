@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Handler;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -20,9 +17,6 @@ use Mirakl\Process\Helper\Data as ProcessHelper;
 use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Csv
 {
     use CsvTrait;
@@ -103,15 +97,15 @@ class Csv
     protected $importIndexer;
 
     /**
-     * @param CoreHelper             $coreHelper
-     * @param ApiConfigHelper        $apiConfigHelper
-     * @param ProcessHelper          $processHelper
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param Filesystem             $filesystem
-     * @param HashHelper             $hashHelper
-     * @param AdapterInterface       $adapter
-     * @param Registry               $registry
-     * @param ImportIndexer          $importIndexer
+     * @param   CoreHelper              $coreHelper
+     * @param   ApiConfigHelper         $apiConfigHelper
+     * @param   ProcessHelper           $processHelper
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   Filesystem              $filesystem
+     * @param   HashHelper              $hashHelper
+     * @param   AdapterInterface        $adapter
+     * @param   Registry                $registry
+     * @param   ImportIndexer           $importIndexer
      */
     public function __construct(
         CoreHelper $coreHelper,
@@ -136,11 +130,11 @@ class Csv
     }
 
     /**
-     * @param string  $shopId
-     * @param string  $file
-     * @param Process $process
-     * @return $this
-     * @throws \Exception
+     * @param   string  $shopId
+     * @param   string  $file
+     * @param   Process $process
+     * @return  $this
+     * @throws  \Exception
      */
     public function run($shopId, $file, Process $process)
     {
@@ -199,17 +193,13 @@ class Csv
                     $data = array_combine($cols, $row);
 
                     if (!isset($data[MciHelper::ATTRIBUTE_SKU])) {
-                        throw new \Exception(
-                            __('Could not find "%1" column in product data', MciHelper::ATTRIBUTE_SKU)->render()
-                        );
+                        throw new \Exception(__('Could not find "%1" column in product data', MciHelper::ATTRIBUTE_SKU));
                     }
 
                     $sku = trim($data[MciHelper::ATTRIBUTE_SKU]);
 
                     if (empty($sku)) {
-                        throw new \Exception(
-                            __('Column "%1" cannot be empty', MciHelper::ATTRIBUTE_SKU)->render()
-                        );
+                        throw new \Exception(__('Column "%1" cannot be empty', MciHelper::ATTRIBUTE_SKU));
                     }
 
                     $hash = sha1(json_encode($data));
@@ -233,6 +223,7 @@ class Csv
                     }
 
                     $this->hashHelper->saveShopHash($shopId, $sku, $hash);
+
                 } catch (WarningException $e) {
                     $message = __('Warning on line %1: %2', $i, $e->getMessage());
                     $this->writeSuccessReport(array_merge($row, [$message]));
@@ -244,7 +235,9 @@ class Csv
                 }
             }
         } catch (\Exception $e) {
-            $this->writeErrorReport(array_merge($row ?? [], [$e->getMessage()])); // @phpstan-ignore-line
+            if (isset($row)) {
+                $this->writeErrorReport(array_merge($row, [$e->getMessage()]));
+            }
             $process->fail($e->getMessage());
             throw $e;
         } finally {
@@ -269,11 +262,11 @@ class Csv
     }
 
     /**
-     * @param string $filename
-     * @param string $openMode
-     * @param string $delimiter
-     * @param string $enclosure
-     * @return \SplFileObject
+     * @param   string  $filename
+     * @param   string  $openMode
+     * @param   string  $delimiter
+     * @param   string  $enclosure
+     * @return  \SplFileObject
      */
     private function createReportFile($filename = '', $openMode = 'w', $delimiter = ';', $enclosure = '"')
     {
@@ -288,8 +281,8 @@ class Csv
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param   array $data
+     * @return  mixed
      */
     private function writeSuccessReport(array $data)
     {
@@ -303,8 +296,8 @@ class Csv
     }
 
     /**
-     * @param array $data
-     * @return mixed
+     * @param   array $data
+     * @return  mixed
      */
     private function writeErrorReport(array $data)
     {

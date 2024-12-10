@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Test\Integration\Helper\Product;
 
 use Mirakl\Mcm\Helper\Product\Export\Product as ProductHelper;
@@ -61,6 +58,7 @@ class ExportTest extends \Mirakl\Core\Test\Integration\TestCase
      * @magentoConfigFixture current_store mirakl_mcm/import_product_async/enable_mcm 1
      * @magentoConfigFixture fr_store general/locale/code fr_FR
      * @magentoConfigFixture be_store general/locale/code fr_FR
+     *
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Helper/Product/_fixtures/stores.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Helper/Product/_fixtures/localizable_attributes.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Helper/Product/_fixtures/products.php

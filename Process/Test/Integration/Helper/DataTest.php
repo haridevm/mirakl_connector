@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Test\Integration\Helper;
@@ -12,8 +11,6 @@ use Mirakl\Process\Test\Integration\TestCase;
  * @group process
  * @group helper
  * @coversDefaultClass \Mirakl\Process\Helper\Data
- * @magentoDbIsolation enabled
- * @magentoAppIsolation enabled
  */
 class DataTest extends TestCase
 {
@@ -40,8 +37,9 @@ class DataTest extends TestCase
     }
 
     /**
-     * @covers ::getPendingProcess
      * @magentoDataFixture Mirakl_Process::Test/Integration/_files/processes.php
+     *
+     * @covers ::getPendingProcess
      */
     public function testGetOlderPendingProcess()
     {
@@ -83,6 +81,20 @@ class DataTest extends TestCase
 
         // Ensure that process #2 is a child of process #1
         $this->assertEquals($process1->getId(), $process2->getParentId());
+
+        // Mock the process helper method for test
+        $helperMock = new class {
+            public function run(Process $process)
+            {
+                $process->output('This is a test');
+            }
+        };
+
+        $process1->setHelper(get_class($helperMock));
+
+        $this->objectManagerMock->expects($this->once())
+            ->method('create')
+            ->willReturn($helperMock);
 
         $process1->run();
 

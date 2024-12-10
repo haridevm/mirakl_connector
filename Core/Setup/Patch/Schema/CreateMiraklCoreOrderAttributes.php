@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Core\Setup\Patch\Schema;
@@ -43,7 +42,7 @@ class CreateMiraklCoreOrderAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -136,7 +135,7 @@ class CreateMiraklCoreOrderAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -144,7 +143,7 @@ class CreateMiraklCoreOrderAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

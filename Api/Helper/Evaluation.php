@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\Common\Domain\Collection\Evaluation\AssessmentCollection;
@@ -12,8 +9,8 @@ class Evaluation extends ClientHelper\MMP
     /**
      * (EV01) Fetches the evaluation criterias used to evaluate an order
      *
-     * @param string $locale
-     * @return AssessmentCollection
+     * @param   string  $locale
+     * @return  AssessmentCollection
      */
     public function getAssessments($locale = null)
     {

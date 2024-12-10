@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -18,8 +15,8 @@ class Quote extends AbstractHelper
     protected $offerCollector;
 
     /**
-     * @param Context        $context
-     * @param OfferCollector $offerCollector
+     * @param   Context         $context
+     * @param   OfferCollector  $offerCollector
      */
     public function __construct(
         Context $context,
@@ -33,8 +30,8 @@ class Quote extends AbstractHelper
     /**
      * Returns true if given quote contains ONLY Mirakl products
      *
-     * @param CartInterface $quote
-     * @return bool
+     * @param   CartInterface   $quote
+     * @return  bool
      */
     public function isFullMiraklQuote(CartInterface $quote)
     {
@@ -46,8 +43,7 @@ class Quote extends AbstractHelper
         $result = true;
         foreach ($this->offerCollector->getQuoteItems($quote) as $item) {
             /** @var CartItemInterface $item */
-            if (
-                !$item->isDeleted()
+            if (!$item->isDeleted()
                 && !$item->getParentItemId()
                 && !$item->getMiraklShopId()
                 && !$item->getProduct()->getCustomOption('mirakl_offer')
@@ -65,8 +61,8 @@ class Quote extends AbstractHelper
     /**
      * Returns true if given quote contains SOME Mirakl products
      *
-     * @param CartInterface $quote
-     * @return bool
+     * @param   CartInterface   $quote
+     * @return  bool
      */
     public function isMiraklQuote(CartInterface $quote)
     {
@@ -78,8 +74,7 @@ class Quote extends AbstractHelper
         $result = false;
         foreach ($this->offerCollector->getQuoteItems($quote) as $item) {
             /** @var CartItemInterface $item */
-            if (
-                !$item->isDeleted()
+            if (!$item->isDeleted()
                 && !$item->getParentItemId()
                 && ($item->getMiraklShopId() || $item->getProduct()->getCustomOption('mirakl_offer'))
             ) {

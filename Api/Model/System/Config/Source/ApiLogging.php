@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\System\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;
@@ -10,7 +7,7 @@ use Mirakl\Api\Model\Log\LogOptions;
 class ApiLogging implements ArrayInterface
 {
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

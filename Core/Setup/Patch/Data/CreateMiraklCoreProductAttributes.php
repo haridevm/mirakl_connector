@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Core\Setup\Patch\Data;
@@ -35,7 +34,7 @@ class CreateMiraklCoreProductAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -58,64 +57,59 @@ class CreateMiraklCoreProductAttributes implements DataPatchInterface
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
 
-        /**
-         * Create attribute to stores offer's shop and offer states
+        /***
+         * Create aattribute to stores offer's shop and  offer states
          */
         $eavSetup->addAttribute(
             Product::ENTITY,
             'mirakl_shop_ids',
             [
-                'group'                   => 'Mirakl Marketplace',
-                'type'                    => 'varchar',
-                'backend'                 => \Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend::class,
-                'label'                   => 'Shops',
-                'input'                   => 'multiselect',
-                'visible'                 => true,
-                'required'                => false,
-                'user_defined'            => true,
-                'searchable'              => true,
-                'filterable'              => true,
-                'comparable'              => false,
-                'visible_on_front'        => false,
-                'used_in_product_listing' => true,
-                'unique'                  => false,
-                'apply_to'                => 'simple',
-                'note'                    => 'Selected Mirakl shops are associated with the product. '
-                    . 'This field is automatically filled.',
-                'is_configurable'         => false,
+                'group'                     => 'Mirakl Marketplace',
+                'type'                      => 'varchar',
+                'backend'                   => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+                'label'                     => 'Shops',
+                'input'                     => 'multiselect',
+                'visible'                   => true,
+                'required'                  => false,
+                'user_defined'              => true,
+                'searchable'                => true,
+                'filterable'                => true,
+                'comparable'                => false,
+                'visible_on_front'          => false,
+                'used_in_product_listing'   => true,
+                'unique'                    => false,
+                'apply_to'                  => 'simple',
+                'note'                      => 'Selected Mirakl shops are associated with the product. This field is automatically filled.',
+                'is_configurable'           => false,
             ]
         );
 
         $eavSetup->addAttribute(
-            Product::ENTITY,
-            'mirakl_offer_state_ids',
-            [
-                'group'                   => 'Mirakl Marketplace',
-                'type'                    => 'varchar',
-                'backend'                 => \Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend::class,
-                'label'                   => 'Offer Conditions',
-                'input'                   => 'multiselect',
-                'visible'                 => true,
-                'required'                => false,
-                'user_defined'            => true,
-                'searchable'              => true,
-                'filterable'              => true,
-                'comparable'              => false,
-                'visible_on_front'        => false,
-                'used_in_product_listing' => true,
-                'unique'                  => false,
-                'apply_to'                => 'simple',
-                'note'                    => 'Selected Mirakl offer conditions are associated with the product. '
-                    . 'This field is automatically filled.',
-                'is_configurable'         => false,
-            ]
-        );
+            Product::ENTITY, 'mirakl_offer_state_ids', [
+            'group'                     => 'Mirakl Marketplace',
+            'type'                      => 'varchar',
+            'backend'                   => 'Magento\Eav\Model\Entity\Attribute\Backend\ArrayBackend',
+            'label'                     => 'Offer Conditions',
+            'input'                     => 'multiselect',
+            'visible'                   => true,
+            'required'                  => false,
+            'user_defined'              => true,
+            'searchable'                => true,
+            'filterable'                => true,
+            'comparable'                => false,
+            'visible_on_front'          => false,
+            'used_in_product_listing'   => true,
+            'unique'                    => false,
+            'apply_to'                  => 'simple',
+            'note'                      => 'Selected Mirakl offer conditions are associated with the product. This field is automatically filled.',
+            'is_configurable'           => false,
+        ]);
 
         return $this;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -123,7 +117,7 @@ class CreateMiraklCoreProductAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

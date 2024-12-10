@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -11,16 +8,12 @@ use Magento\Eav\Model\Entity\Attribute\AbstractAttribute;
 use Magento\Framework\App\Helper\AbstractHelper;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\Filter\FilterManager;
-use Magento\Framework\Locale\ResolverInterface;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Data extends AbstractHelper
 {
     /**
@@ -49,12 +42,12 @@ class Data extends AbstractHelper
     protected $objectManager;
 
     /**
-     * @param Context                  $context
-     * @param StoreManagerInterface    $storeManager
-     * @param FilterManager            $filterManager
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ConfigurableFactory      $typeConfigurableFactory
-     * @param ObjectManagerInterface   $objectManager
+     * @param   Context                     $context
+     * @param   StoreManagerInterface       $storeManager
+     * @param   FilterManager               $filterManager
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ConfigurableFactory         $typeConfigurableFactory
+     * @param   ObjectManagerInterface      $objectManager
      */
     public function __construct(
         Context $context,
@@ -75,10 +68,10 @@ class Data extends AbstractHelper
     /**
      * Adds a query parameter to specified URL
      *
-     * @param string $url
-     * @param string $param
-     * @param string $value
-     * @return string
+     * @param   string  $url
+     * @param   string  $param
+     * @param   string  $value
+     * @return  string
      */
     public function addQueryParamToUrl($url, $param, $value)
     {
@@ -96,10 +89,8 @@ class Data extends AbstractHelper
     /**
      * Builds URL string from specified pieces
      *
-     * @param array $pieces
-     * @return string
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   array   $pieces
+     * @return  string
      */
     public function buildUrl(array $pieces)
     {
@@ -117,10 +108,10 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @param \DateTime $date
-     * @param int       $format
-     * @param bool      $showTime
-     * @return string
+     * @param   \DateTime    $date
+     * @param   int         $format
+     * @param   bool        $showTime
+     * @return  string
      */
     public function formatDateTime(\DateTime $date, $format = \IntlDateFormatter::MEDIUM, $showTime = true)
     {
@@ -130,8 +121,8 @@ class Data extends AbstractHelper
     /**
      * Format specified duration (in seconds) into human readable duration
      *
-     * @param int|\DateInterval $duration
-     * @return string
+     * @param   int|\DateInterval    $duration
+     * @return  string
      */
     public function formatDuration($duration)
     {
@@ -173,23 +164,23 @@ class Data extends AbstractHelper
     /**
      * Formats given size (in bytes) into an easy readable size
      *
-     * @param int    $size
-     * @param string $separator
-     * @return string
+     * @param   int     $size
+     * @param   string  $separator
+     * @return  string
      */
     public function formatSize($size, $separator = ' ')
     {
         $unit = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-        $size = round($size / pow(1024, ($k = intval(floor(log($size, 1024))))), 2);
+        $size = round($size / pow(1024, ($k = intval(floor(log($size, 1024))))), 2) . $separator . $unit[$k];
 
-        return $this->getNumberFormatter()->format($size) . $separator . __($unit[$k]);
+        return $size;
     }
 
     /**
      * Returns base media URL for specified store
      *
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getBaseMediaUrl($store = null)
     {
@@ -199,8 +190,8 @@ class Data extends AbstractHelper
     /**
      * Returns base URL for specified store
      *
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getBaseUrl($store = null)
     {
@@ -210,8 +201,8 @@ class Data extends AbstractHelper
     /**
      * Formats given date into an easy readable date
      *
-     * @param string|\DateTime $date
-     * @return string
+     * @param   string|\DateTime    $date
+     * @return  string
      */
     public function getFullDate($date)
     {
@@ -223,23 +214,7 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @return ResolverInterface
-     */
-    public function getLocaleResolver()
-    {
-        return $this->objectManager->get(ResolverInterface::class);
-    }
-
-    /**
-     * @return \NumberFormatter
-     */
-    public function getNumberFormatter()
-    {
-        return new \NumberFormatter($this->getLocaleResolver()->getLocale(), \NumberFormatter::TYPE_DEFAULT);
-    }
-
-    /**
-     * @return TimezoneInterface
+     * @return  TimezoneInterface
      */
     public function getTimezone()
     {
@@ -249,9 +224,9 @@ class Data extends AbstractHelper
     /**
      * Returns number of seconds between now and given date, formatted into readable duration if needed
      *
-     * @param mixed $date
-     * @param bool  $toDuration
-     * @return int|string
+     * @param   mixed   $date
+     * @param   bool    $toDuration
+     * @return  int|string
      */
     public function getMoment($date, $toDuration = true)
     {
@@ -266,8 +241,8 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return Product|null
+     * @param   Product $product
+     * @return  Product|null
      */
     public function getParentProduct(Product $product)
     {
@@ -290,8 +265,8 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return Store
+     * @param   mixed   $store
+     * @return  Store
      */
     public function getStore($store = null)
     {
@@ -301,41 +276,40 @@ class Data extends AbstractHelper
     /**
      * Returns current version of the Magento Connector
      *
-     * @return string
+     * @return  string
      */
     public function getVersion()
     {
         $file = MIRAKL_BP . DIRECTORY_SEPARATOR . 'composer.json';
         preg_match('#"version":\s+"(\d+\.\d+\.\d+-?.*)"#', file_get_contents($file), $matches);
 
-        return $matches[1] ?? '';
+        return isset($matches[1]) ? $matches[1] : '';
     }
 
     /**
      * Returns current version of the PHP SDK used by the Magento Connector
      *
-     * @return string
+     * @return  string
      */
     public function getVersionSDK()
     {
         $matches = [];
         $packages = ['sdk-php-front', 'sdk-php', 'sdk-php-operator']; // try different package names
         foreach ($packages as $package) {
-            // @phpstan-ignore-next-line
             $file = implode(DIRECTORY_SEPARATOR, [BP, 'vendor', 'mirakl', $package, 'composer.json']);
             if (file_exists($file)) {
                 preg_match('#"version":\s+"(\d+\.\d+\.\d+-?.*)"#', file_get_contents($file), $matches);
             }
         }
 
-        return $matches[1] ?? '';
+        return isset($matches[1]) ? $matches[1] : '';
     }
 
     /**
      * Checks if specified attribute is using options or not
      *
-     * @param AbstractAttribute $attribute
-     * @return bool
+     * @param   AbstractAttribute   $attribute
+     * @return  bool
      */
     public function isAttributeUsingOptions(AbstractAttribute $attribute)
     {
@@ -348,7 +322,7 @@ class Data extends AbstractHelper
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public static function isEnterprise()
     {
@@ -359,12 +333,12 @@ class Data extends AbstractHelper
      * Truncates a string to a certain length if necessary, appending the $etc string.
      * $remainder will contain the string that has been replaced with $etc.
      *
-     * @param string $value
-     * @param int    $length
-     * @param string $etc
-     * @param string $remainder
-     * @param bool   $breakWords
-     * @return string
+     * @param   string  $value
+     * @param   int     $length
+     * @param   string  $etc
+     * @param   string  $remainder
+     * @param   bool    $breakWords
+     * @return  string
      */
     public function truncate($value, $length = 80, $etc = '...', &$remainder = '', $breakWords = true)
     {

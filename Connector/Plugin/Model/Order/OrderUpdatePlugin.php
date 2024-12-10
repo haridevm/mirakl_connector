@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Order;
 
 use Magento\Framework\Model\AbstractModel;
@@ -24,8 +21,8 @@ class OrderUpdatePlugin
     protected $logger;
 
     /**
-     * @param OrderHelper     $orderHelper
-     * @param LoggerInterface $logger
+     * @param   OrderHelper     $orderHelper
+     * @param   LoggerInterface $logger
      */
     public function __construct(
         OrderHelper $orderHelper,
@@ -39,10 +36,10 @@ class OrderUpdatePlugin
      * Mirakl Order is created in this plugin because order item id used for setOrderLineId may not be set in
      * sales_order_save_after event. @see OrderSavePlugin for new order
      *
-     * @param OrderResourceInterface $subject
-     * @param \Closure               $proceed
-     * @param AbstractModel          $order
-     * @return OrderResourceInterface
+     * @param   OrderResourceInterface  $subject
+     * @param   \Closure                $proceed
+     * @param   AbstractModel           $order
+     * @return  OrderResourceInterface
      */
     public function aroundSave(
         OrderResourceInterface $subject,

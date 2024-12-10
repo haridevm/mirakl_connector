@@ -1,19 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
-class Download extends AbstractOrder implements HttpGetActionInterface
+class Download extends AbstractOrder
 {
     /**
      * Download a document
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {
@@ -43,9 +39,7 @@ class Download extends AbstractOrder implements HttpGetActionInterface
                     return $this->downloadFile($file, $doc->getFileName());
                 }
             }
-            throw new \Exception(
-                __('Could not find the document to download.')->render()
-            );
+            throw new \Exception(__('Could not find the document to download.'));
         } catch (\Exception $e) {
             $this->logger->warning($e->getMessage());
             $this->messageManager->addErrorMessage(

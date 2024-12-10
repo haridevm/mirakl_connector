@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Inventory\Store;
@@ -32,8 +31,8 @@ class StockIdResolver
 
     /**
      * @param ObjectManagerInterface $objectManager
-     * @param StoreManagerInterface  $storeManager
-     * @param StockHelper            $stockHelper
+     * @param StoreManagerInterface $storeManager
+     * @param StockHelper $stockHelper
      */
     public function __construct(
         ObjectManagerInterface $objectManager,

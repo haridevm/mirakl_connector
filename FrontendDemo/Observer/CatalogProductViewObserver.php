@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\FrontendDemo\Observer;
@@ -45,7 +44,7 @@ class CatalogProductViewObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      *
      * @throws NoSuchEntityException
      */

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication\Method;
@@ -9,7 +8,7 @@ interface MethodInterface
     /**
      * Constant for value of an obscured API key
      */
-    public const OBSCURED_KEY = '******';
+    const OBSCURED_KEY = '******';
 
     /**
      * @return string

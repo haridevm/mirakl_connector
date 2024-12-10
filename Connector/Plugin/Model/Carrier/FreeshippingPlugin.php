@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Carrier;
 
 use Magento\OfflineShipping\Model\Carrier\Freeshipping;
@@ -38,10 +35,10 @@ class FreeshippingPlugin
     }
 
     /**
-     * @param Freeshipping $subject
-     * @param \Closure     $proceed
-     * @param string       $field
-     * @return bool
+     * @param   Freeshipping    $subject
+     * @param   \Closure        $proceed
+     * @param   string          $field
+     * @return  bool
      */
     public function aroundGetConfigFlag(Freeshipping $subject, \Closure $proceed, $field)
     {
@@ -55,10 +52,10 @@ class FreeshippingPlugin
     }
 
     /**
-     * @param Freeshipping $subject
-     * @param \Closure     $proceed
-     * @param RateRequest  $request
-     * @return RateResult|bool
+     * @param   Freeshipping    $subject
+     * @param   \Closure        $proceed
+     * @param   RateRequest     $request
+     * @return  RateResult|bool
      */
     public function aroundCollectRates(Freeshipping $subject, \Closure $proceed, RateRequest $request)
     {
@@ -88,8 +85,8 @@ class FreeshippingPlugin
     }
 
     /**
-     * @param CartItemInterface[] $items
-     * @return CartInterface|null
+     * @param   CartItemInterface[] $items
+     * @return  CartInterface|null
      */
     private function extractQuoteFromItems(array $items)
     {

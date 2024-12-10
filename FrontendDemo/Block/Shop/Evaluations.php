@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Shop;
 
 use Magento\Framework\DataObject;
@@ -17,11 +14,6 @@ use Mirakl\MMP\Common\Domain\Collection\Evaluation\EvaluationCollection;
 use Mirakl\MMP\Common\Domain\Evaluation;
 use Psr\Log\LoggerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Evaluations extends View
 {
     use AssessmentTrait;
@@ -62,13 +54,13 @@ class Evaluations extends View
     protected $_template = 'shop/evaluations.phtml';
 
     /**
-     * @param Context                          $context
-     * @param Registry                         $registry
-     * @param ShopHelper                       $shopHelper
-     * @param LoggerInterface                  $logger
-     * @param CollectionEntityFactoryInterface $collectionEntityFactory
-     * @param ConfigHelper                     $configHelper
-     * @param array                            $data
+     * @param   Context                             $context
+     * @param   Registry                            $registry
+     * @param   ShopHelper                          $shopHelper
+     * @param   LoggerInterface                     $logger
+     * @param   CollectionEntityFactoryInterface    $collectionEntityFactory
+     * @param   ConfigHelper                        $configHelper
+     * @param   array                               $data
      */
     public function __construct(
         Context $context,
@@ -83,14 +75,13 @@ class Evaluations extends View
         $this->_logger                  = $logger;
         $this->_collectionEntityFactory = $collectionEntityFactory;
         $this->_configHelper            = $configHelper;
-
         parent::__construct($context, $registry, $data);
     }
 
     /**
      * Returns evaluations of current Mirakl shop
      *
-     * @return EvaluationCollection
+     * @return  EvaluationCollection
      */
     public function getEvaluations()
     {
@@ -116,8 +107,8 @@ class Evaluations extends View
     /**
      * Returns evaluation date
      *
-     * @param Evaluation $evaluation
-     * @return string
+     * @param   Evaluation  $evaluation
+     * @return  string
      */
     public function getEvaluationDate(Evaluation $evaluation)
     {
@@ -133,8 +124,8 @@ class Evaluations extends View
     /**
      * Returns evaluation reviewer
      *
-     * @param Evaluation $evaluation
-     * @return string
+     * @param   Evaluation  $evaluation
+     * @return  string
      */
     public function getEvaluationAuthor(Evaluation $evaluation)
     {
@@ -142,7 +133,7 @@ class Evaluations extends View
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _setTabTitle()
     {
@@ -155,7 +146,7 @@ class Evaluations extends View
     /**
      * Converts a Mirakl collection into a Magento collection
      *
-     * @return Collection
+     * @return  Collection
      */
     protected function _convertCollection()
     {
@@ -163,11 +154,13 @@ class Evaluations extends View
 
         try {
             $evaluations = $this->getEvaluations();
-            foreach ($evaluations as $evaluation) {
-                /** @var Evaluation $evaluation */
-                $collection->addItem(new DataObject($evaluation->getData()));
+            if (!empty($evaluations)) {
+                foreach ($evaluations as $evaluation) {
+                    /** @var Evaluation $evaluation */
+                    $collection->addItem(new DataObject($evaluation->getData()));
+                }
+                $collection->setTotalRecords($evaluations->getTotalCount());
             }
-            $collection->setTotalRecords($evaluations->getTotalCount());
         } catch (\Exception $e) {
             $this->_logger->critical($e->getMessage());
             $this->getLayout()->getMessagesBlock()->addError($e->getMessage());
@@ -177,7 +170,7 @@ class Evaluations extends View
     }
 
     /**
-     * @return int
+     * @return  int
      */
     protected function _getLimit()
     {
@@ -185,7 +178,7 @@ class Evaluations extends View
     }
 
     /**
-     * @return int
+     * @return  int
      */
     protected function _getOffset()
     {
@@ -193,7 +186,7 @@ class Evaluations extends View
     }
 
     /**
-     * @return Pager
+     * @return  Pager
      */
     protected function _getPager()
     {
@@ -207,7 +200,7 @@ class Evaluations extends View
     /**
      * Set Magento pager template
      *
-     * @return $this
+     * @return  $this
      */
     protected function _setPager()
     {
@@ -223,7 +216,7 @@ class Evaluations extends View
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _prepareLayout()
     {

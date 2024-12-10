@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model;
@@ -60,7 +59,7 @@ class CheckMiraklStatus
         $synchroId = $process->getSynchroId();
 
         if (empty($synchroId)) {
-            $process->output('No synchro id found for current process');
+            $process->output('No synchro id found for current process', true);
             return;
         }
 
@@ -70,7 +69,7 @@ class CheckMiraklStatus
         $helper = $process->getHelperInstance();
 
         if (!$helper instanceof SynchroResultInterface) {
-            $process->output('Helper does not implement SynchroResultInterface');
+            $process->output('Helper does not implement SynchroResultInterface', true);
             return;
         }
 
@@ -80,14 +79,14 @@ class CheckMiraklStatus
         // Not finished yet
         if ($synchroResult->getStatus() != 'COMPLETE') {
             $process->setMiraklStatus(Process::STATUS_PENDING);
-            $process->output('API call is not finished ... try again later');
+
+            $process->output('API call is not finished ... try again later', true);
             return;
         }
 
         if ($synchroResult->getData('has_report')) {
             $reportFile = $helper->getErrorReport($synchroId);
             $hasError = new DataObject(['error' => false]);
-
             if ($filepath = $this->processHelper->saveFile($reportFile, 'json')) {
                 $process->setMiraklFile($filepath);
                 // Send an event to check if there is an error in report file

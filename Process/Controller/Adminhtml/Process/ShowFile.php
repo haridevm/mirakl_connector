@@ -1,11 +1,7 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Framework\Filesystem;
 use Mirakl\Core\Model\File\CsvFileTrait;
@@ -13,7 +9,7 @@ use Mirakl\Core\Model\File\CsvFileTrait;
 /**
  * @method \Magento\Framework\App\Response\Http getResponse()
  */
-class ShowFile extends AbstractProcessAction implements HttpGetActionInterface
+class ShowFile extends AbstractProcessAction
 {
     use CsvFileTrait;
 
@@ -23,8 +19,8 @@ class ShowFile extends AbstractProcessAction implements HttpGetActionInterface
     protected $filesystem;
 
     /**
-     * @param Context    $context
-     * @param Filesystem $filesystem
+     * @param   Context     $context
+     * @param   Filesystem  $filesystem
      */
     public function __construct(
         Context $context,
@@ -35,7 +31,7 @@ class ShowFile extends AbstractProcessAction implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -76,11 +72,9 @@ class ShowFile extends AbstractProcessAction implements HttpGetActionInterface
             }
         }
 
-        $this->_response
+        $this->getResponse()
             ->setHeader('Content-Type', 'text/html; charset=UTF-8')
             ->setBody($body)
             ->sendResponse();
-
-        return $this->_response;
     }
 }

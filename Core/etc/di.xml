@@ -26,6 +26,4 @@
     </type>
     <preference for="Mirakl\Core\Model\ResourceModel\Metadata\MetadataProviderInterface"
                 type="Mirakl\Core\Model\ResourceModel\Metadata\MetadataProvider"/>
-    <preference for="Mirakl\Core\Model\File\FileHandlerInterface"
-                type="Mirakl\Core\Model\File\FileHandler"/>
 </config>

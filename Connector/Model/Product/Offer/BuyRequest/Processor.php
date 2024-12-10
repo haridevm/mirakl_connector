@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\BuyRequest;
@@ -25,7 +24,7 @@ class Processor implements ProcessorInterface
 
     /**
      * @param CustomOption\CreatorInterface $customOptionCreator
-     * @param array                         $validators
+     * @param array $validators
      */
     public function __construct(
         CustomOption\CreatorInterface $customOptionCreator,
@@ -36,7 +35,7 @@ class Processor implements ProcessorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function process(DataObject $buyRequest, Product $product): void
     {
@@ -53,8 +52,9 @@ class Processor implements ProcessorInterface
 
             foreach ($this->validators as $validator) {
                 if (!$validator->validate($buyRequest, $product, $offer)) {
-                    throw new SecurityViolationException(__('An error happened when adding the product to '
-                        . 'the cart. Please reload the page and try again.'));
+                    throw new SecurityViolationException(
+                        __('An error happened when adding the product to the cart. Please reload the page and try again.')
+                    );
                 }
             }
 

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Core\Setup\Patch\Schema;
@@ -43,7 +42,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -57,23 +56,10 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
         $this->addMiraklCustomTaxesFields($setup);
 
         // Add column 'mirakl_is_shipping_incl_tax' on quote and order entities
-        $attributes = [
-            'quote' => [
-                'mirakl_is_shipping_incl_tax' => [
-                    'type' => Table::TYPE_SMALLINT, 'default' => 1
-                ]
-            ]
-        ];
+        $attributes = ['quote' => ['mirakl_is_shipping_incl_tax' => ['type' => Table::TYPE_SMALLINT, 'default' => 1]]];
         $this->addQuoteAttributes($setup, $attributes);
 
-        $attributes = [
-            'order' => [
-                'mirakl_is_shipping_incl_tax' => [
-                    'type' => Table::TYPE_SMALLINT,
-                    'default' => 1
-                ]
-            ]
-        ];
+        $attributes = ['order' => ['mirakl_is_shipping_incl_tax' => ['type' => Table::TYPE_SMALLINT, 'default' => 1]]];
         $this->addOrderAttributes($setup, $attributes);
 
         $this->addQuoteShippingPricesTaxFields($setup);
@@ -84,7 +70,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return $this
      */
     private function addMiraklCustomTaxesFields(ModuleDataSetupInterface $setup)
@@ -121,8 +107,8 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
-     * @param array                    $attributes
+     * @param  ModuleDataSetupInterface $setup
+     * @param  array                    $attributes
      * @return $this
      */
     private function addQuoteAttributes(ModuleDataSetupInterface $setup, array $attributes)
@@ -140,8 +126,8 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
-     * @param array                    $attributes
+     * @param  ModuleDataSetupInterface $setup
+     * @param  array                    $attributes
      * @return $this
      */
     private function addOrderAttributes(ModuleDataSetupInterface $setup, array $attributes)
@@ -159,7 +145,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return $this
      */
     private function addQuotePricesExclTaxFields(ModuleDataSetupInterface $setup)
@@ -182,47 +168,23 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return $this
      */
     private function addQuoteShippingPricesTaxFields(ModuleDataSetupInterface $setup)
     {
         $attributes = [
             'quote' => [
-                'mirakl_base_shipping_excl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_fee'
-                ],
-                'mirakl_shipping_excl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_excl_tax'
-                ],
-                'mirakl_base_shipping_incl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_excl_tax'
-                ],
-                'mirakl_shipping_incl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_incl_tax'
-                ],
+                'mirakl_base_shipping_excl_tax' => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_fee'],
+                'mirakl_shipping_excl_tax'      => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_excl_tax'],
+                'mirakl_base_shipping_incl_tax' => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_excl_tax'],
+                'mirakl_shipping_incl_tax'      => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_incl_tax'],
             ],
             'quote_item' => [
-                'mirakl_base_shipping_excl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_fee'
-                ],
-                'mirakl_shipping_excl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_excl_tax'
-                ],
-                'mirakl_base_shipping_incl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_excl_tax'
-                ],
-                'mirakl_shipping_incl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_incl_tax'
-                ],
+                'mirakl_base_shipping_excl_tax' => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_fee'],
+                'mirakl_shipping_excl_tax'      => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_excl_tax'],
+                'mirakl_base_shipping_incl_tax' => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_excl_tax'],
+                'mirakl_shipping_incl_tax'      => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_incl_tax'],
             ],
         ];
 
@@ -230,7 +192,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return $this
      */
     private function addSalesPricesExclTaxFields(ModuleDataSetupInterface $setup)
@@ -253,85 +215,49 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return $this
      */
     private function addSalesShippingPricesTaxFields(ModuleDataSetupInterface $setup)
     {
         $attributes = [
             'order' => [
-                'mirakl_base_shipping_excl_tax'     => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_fee'
-                ],
-                'mirakl_shipping_excl_tax'          => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_excl_tax'
-                ],
-                'mirakl_base_shipping_incl_tax'     => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_excl_tax'
-                ],
-                'mirakl_shipping_incl_tax'          => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_incl_tax'
-                ],
-                'mirakl_base_shipping_refunded'     => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_custom_shipping_tax_amount'
-                ],
-                'mirakl_shipping_refunded'          => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_refunded'
-                ],
-                'mirakl_base_shipping_tax_refunded' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_refunded'
-                ],
-                'mirakl_shipping_tax_refunded'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_tax_refunded'
-                ],
+                'mirakl_base_shipping_excl_tax'     => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_fee'],
+                'mirakl_shipping_excl_tax'          => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_excl_tax'],
+                'mirakl_base_shipping_incl_tax'     => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_excl_tax'],
+                'mirakl_shipping_incl_tax'          => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_incl_tax'],
+                'mirakl_base_shipping_refunded'     => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_custom_shipping_tax_amount'],
+                'mirakl_shipping_refunded'          => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_refunded'],
+                'mirakl_base_shipping_tax_refunded' => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_refunded'],
+                'mirakl_shipping_tax_refunded'      => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_tax_refunded'],
             ],
             'order_item' => [
-                'mirakl_base_shipping_excl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_fee'
-                ],
-                'mirakl_shipping_excl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_excl_tax'
-                ],
-                'mirakl_base_shipping_incl_tax' => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_shipping_excl_tax'
-                ],
-                'mirakl_shipping_incl_tax'      => [
-                    'type'  => Table::TYPE_DECIMAL,
-                    'after' => 'mirakl_base_shipping_incl_tax'
-                ],
+                'mirakl_base_shipping_excl_tax'     => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_fee'],
+                'mirakl_shipping_excl_tax'          => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_excl_tax'],
+                'mirakl_base_shipping_incl_tax'     => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_shipping_excl_tax'],
+                'mirakl_shipping_incl_tax'          => ['type' => Table::TYPE_DECIMAL, 'after' => 'mirakl_base_shipping_incl_tax'],
             ],
             'invoice' => [
-                'mirakl_base_shipping_excl_tax'   => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_excl_tax'        => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_base_shipping_incl_tax'   => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_incl_tax'        => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_base_shipping_tax_amount' => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_tax_amount'      => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_excl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_excl_tax'          => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_incl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_incl_tax'          => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_tax_amount'   => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_tax_amount'        => ['type' => Table::TYPE_DECIMAL],
             ],
             'invoice_item' => [
-                'mirakl_base_shipping_excl_tax'   => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_excl_tax'        => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_base_shipping_incl_tax'   => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_incl_tax'        => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_base_shipping_tax_amount' => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_tax_amount'      => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_excl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_excl_tax'          => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_incl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_incl_tax'          => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_tax_amount'   => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_tax_amount'        => ['type' => Table::TYPE_DECIMAL],
             ],
             'creditmemo' => [
-                'mirakl_base_shipping_excl_tax' => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_excl_tax'      => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_base_shipping_incl_tax' => ['type' => Table::TYPE_DECIMAL],
-                'mirakl_shipping_incl_tax'      => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_excl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_excl_tax'          => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_base_shipping_incl_tax'     => ['type' => Table::TYPE_DECIMAL],
+                'mirakl_shipping_incl_tax'          => ['type' => Table::TYPE_DECIMAL],
             ],
         ];
 
@@ -353,26 +279,22 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
                 'mirakl_base_shipping_excl_tax = ' . $connection->getCheckSql(
                     'mirakl_is_shipping_incl_tax = 0',
                     'mirakl_base_shipping_fee',
-                    'mirakl_base_shipping_fee - IFNULL(mirakl_base_shipping_tax_amount, 0) '
-                        . '- IFNULL(mirakl_base_custom_shipping_tax_amount, 0)'
+                    'mirakl_base_shipping_fee - IFNULL(mirakl_base_shipping_tax_amount, 0) - IFNULL(mirakl_base_custom_shipping_tax_amount, 0)'
                 ),
                 'mirakl_shipping_excl_tax = ' . $connection->getCheckSql(
                     'mirakl_is_shipping_incl_tax = 0',
                     'mirakl_shipping_fee',
-                    'mirakl_shipping_fee - IFNULL(mirakl_shipping_tax_amount, 0) '
-                        . '- IFNULL(mirakl_custom_shipping_tax_amount, 0)'
+                    'mirakl_shipping_fee - IFNULL(mirakl_shipping_tax_amount, 0) - IFNULL(mirakl_custom_shipping_tax_amount, 0)'
                 ),
                 'mirakl_base_shipping_incl_tax = ' . $connection->getCheckSql(
                     'mirakl_is_shipping_incl_tax = 1',
                     'mirakl_base_shipping_fee',
-                    'mirakl_base_shipping_fee + IFNULL(mirakl_base_shipping_tax_amount, 0) '
-                        . '+ IFNULL(mirakl_base_custom_shipping_tax_amount, 0)'
+                    'mirakl_base_shipping_fee + IFNULL(mirakl_base_shipping_tax_amount, 0) + IFNULL(mirakl_base_custom_shipping_tax_amount, 0)'
                 ),
                 'mirakl_shipping_incl_tax = ' . $connection->getCheckSql(
                     'mirakl_is_shipping_incl_tax = 1',
                     'mirakl_shipping_fee',
-                    'mirakl_shipping_fee + IFNULL(mirakl_shipping_tax_amount, 0) '
-                        . '+ IFNULL(mirakl_custom_shipping_tax_amount, 0)'
+                    'mirakl_shipping_fee + IFNULL(mirakl_shipping_tax_amount, 0) + IFNULL(mirakl_custom_shipping_tax_amount, 0)'
                 ),
             ]),
             'mirakl_shipping_fee IS NOT NULL AND mirakl_shipping_excl_tax IS NULL'
@@ -388,26 +310,22 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
                 'items.mirakl_base_shipping_excl_tax = ' . $connection->getCheckSql(
                     'orders.mirakl_is_shipping_incl_tax = 0',
                     'items.mirakl_base_shipping_fee',
-                    'items.mirakl_base_shipping_fee - IFNULL(items.mirakl_base_shipping_tax_amount, 0) '
-                        . '- IFNULL(items.mirakl_base_custom_shipping_tax_amount, 0)'
+                    'items.mirakl_base_shipping_fee - IFNULL(items.mirakl_base_shipping_tax_amount, 0) - IFNULL(items.mirakl_base_custom_shipping_tax_amount, 0)'
                 ),
                 'items.mirakl_shipping_excl_tax = ' . $connection->getCheckSql(
                     'orders.mirakl_is_shipping_incl_tax = 0',
                     'items.mirakl_shipping_fee',
-                    'items.mirakl_shipping_fee - IFNULL(items.mirakl_shipping_tax_amount, 0) '
-                        . '- IFNULL(items.mirakl_custom_shipping_tax_amount, 0)'
+                    'items.mirakl_shipping_fee - IFNULL(items.mirakl_shipping_tax_amount, 0) - IFNULL(items.mirakl_custom_shipping_tax_amount, 0)'
                 ),
                 'items.mirakl_base_shipping_incl_tax = ' . $connection->getCheckSql(
                     'orders.mirakl_is_shipping_incl_tax = 1',
                     'items.mirakl_base_shipping_fee',
-                    'items.mirakl_base_shipping_fee + IFNULL(items.mirakl_base_shipping_tax_amount, 0) '
-                        . '+ IFNULL(items.mirakl_base_custom_shipping_tax_amount, 0)'
+                    'items.mirakl_base_shipping_fee + IFNULL(items.mirakl_base_shipping_tax_amount, 0) + IFNULL(items.mirakl_base_custom_shipping_tax_amount, 0)'
                 ),
                 'items.mirakl_shipping_incl_tax = ' . $connection->getCheckSql(
                     'orders.mirakl_is_shipping_incl_tax = 1',
                     'items.mirakl_shipping_fee',
-                    'items.mirakl_shipping_fee + IFNULL(items.mirakl_shipping_tax_amount, 0) '
-                        . '+ IFNULL(items.mirakl_custom_shipping_tax_amount, 0)'
+                    'items.mirakl_shipping_fee + IFNULL(items.mirakl_shipping_tax_amount, 0) + IFNULL(items.mirakl_custom_shipping_tax_amount, 0)'
                 ),
             ]),
             'items.mirakl_shipping_fee IS NOT NULL AND items.mirakl_shipping_excl_tax IS NULL'
@@ -421,22 +339,20 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
             $setup->getTable('sales_order'),
             implode(', ', [
                 'base_shipping_amount = base_shipping_amount - mirakl_base_shipping_excl_tax',
-                'base_tax_amount = base_tax_amount - mirakl_base_shipping_tax_amount '
-                    . '- mirakl_base_custom_shipping_tax_amount',
+                'base_tax_amount = base_tax_amount - mirakl_base_shipping_tax_amount - mirakl_base_custom_shipping_tax_amount',
                 'shipping_amount = shipping_amount - mirakl_shipping_excl_tax',
                 'tax_amount = tax_amount - mirakl_shipping_tax_amount - mirakl_custom_shipping_tax_amount',
                 'base_shipping_incl_tax = base_shipping_incl_tax - mirakl_base_shipping_incl_tax',
                 'shipping_incl_tax = shipping_incl_tax - mirakl_shipping_incl_tax',
             ]),
-            'mirakl_base_shipping_excl_tax > 0 AND base_grand_total - base_subtotal '
-                . '- base_shipping_amount - base_tax_amount = 0'
+            'mirakl_base_shipping_excl_tax > 0 AND base_grand_total - base_subtotal - base_shipping_amount - base_tax_amount = 0'
         );
 
         $connection->query($fixOldOrdersAmounts);
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return \Magento\Quote\Setup\QuoteSetup
      */
     private function getQuoteSetup(ModuleDataSetupInterface $setup)
@@ -445,7 +361,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param  ModuleDataSetupInterface $setup
      * @return \Magento\Sales\Setup\SalesSetup
      */
     private function getSalesSetup(ModuleDataSetupInterface $setup)
@@ -454,7 +370,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -464,7 +380,7 @@ class CreateMiraklShippingAttributes implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

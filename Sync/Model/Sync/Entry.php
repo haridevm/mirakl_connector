@@ -1,22 +1,19 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Sync\Model\Sync;
 
 use Magento\Framework\DataObject;
 
 /**
- * @method string getButtons()
- * @method $this  setButtons(string $buttons)
- * @method string getDescription()
- * @method $this  setDescription(string $description)
- * @method string getLastSyncDate()
- * @method $this  setLastSyncDate(string $lastSyncDate)
- * @method string getName()
- * @method $this  setName(string $name)
- * @method bool   getStatus()
- * @method $this  setStatus(bool $status)
+ * @method  string  getButtons()
+ * @method  $this   setButtons(string $buttons)
+ * @method  string  getDescription()
+ * @method  $this   setDescription(string $description)
+ * @method  string  getLastSyncDate()
+ * @method  $this   setLastSyncDate(string $lastSyncDate)
+ * @method  string  getName()
+ * @method  $this   setName(string $name)
+ * @method  bool    getStatus()
+ * @method  $this   setStatus(bool $status)
  */
 class Entry extends DataObject
 {
@@ -26,8 +23,8 @@ class Entry extends DataObject
     protected $collectionFactory;
 
     /**
-     * @param Entry\CollectionFactory $collectionFactory
-     * @param array                   $data
+     * @param   Entry\CollectionFactory $collectionFactory
+     * @param   array                   $data
      */
     public function __construct(Entry\CollectionFactory $collectionFactory, array $data = [])
     {
@@ -36,7 +33,7 @@ class Entry extends DataObject
     }
 
     /**
-     * @return Entry\Collection
+     * @return  Entry\Collection
      */
     public function getCollection()
     {

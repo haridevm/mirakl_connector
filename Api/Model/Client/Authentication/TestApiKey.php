@@ -1,26 +1,12 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication;
 
-use Mirakl\MMP\Front\Client\FrontApiClientFactory;
+use Mirakl\MMP\Front\Client\FrontApiClient;
 
 class TestApiKey implements TestApiKeyInterface
 {
-    /**
-     * @var FrontApiClientFactory
-     */
-    private $frontApiClientFactory;
-
-    /**
-     * @param FrontApiClientFactory $frontApiClientFactory
-     */
-    public function __construct(FrontApiClientFactory $frontApiClientFactory)
-    {
-        $this->frontApiClientFactory = $frontApiClientFactory;
-    }
-
     /**
      * @inheritdoc
      */
@@ -30,10 +16,7 @@ class TestApiKey implements TestApiKeyInterface
             return false;
         }
 
-        $client = $this->frontApiClientFactory->create([
-            'baseUrl' => $apiUrl,
-            'apiKey'  => $apiKey,
-        ]);
+        $client = new FrontApiClient($apiUrl, $apiKey);
 
         try {
             $client->getVersion(); // Will throw exception is something is wrong with API key

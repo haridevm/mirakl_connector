@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Offer;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -54,7 +51,7 @@ class ImportFileBuilder
     public function __destruct()
     {
         if ($this->tmpFile) {
-            @unlink($this->tmpFile); // phpcs:ignore
+            @unlink($this->tmpFile);
         }
     }
 

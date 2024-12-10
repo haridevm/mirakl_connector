@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Block\Adminhtml\Process;
 
 use Magento\Backend\Block\Widget\Context;
@@ -39,7 +36,6 @@ class View extends AbstractView
      *
      * @param int $limit
      * @return array
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function getErrors($limit = 100)
     {
@@ -64,21 +60,13 @@ class View extends AbstractView
                     $identifier = $item['mirakl_product_id'] ?? $item['product_sku'];
                     if (isset($item['integration_errors'])) {
                         foreach ($item['integration_errors'] as $integrationError) {
-                            $errors['products'][$identifier][] = [
-                                'integration',
-                                $integrationError['code'] ?? '',
-                                $integrationError['message'] ?? ''
-                            ];
+                            $errors['products'][$identifier][] = ['integration', $integrationError['code'] ?? '', $integrationError['message'] ?? ''];
                             $limit--;
                         }
                     }
                     if (isset($item['synchronization_errors'])) {
                         foreach ($item['synchronization_errors'] as $synchronizationError) {
-                            $errors['products'][$identifier][] = [
-                                'synchronization',
-                                $synchronizationError['code'] ?? '',
-                                $synchronizationError['message'] ?? ''
-                            ];
+                            $errors['products'][$identifier][] = ['synchronization', $synchronizationError['code'] ?? '', $synchronizationError['message'] ?? ''];
                             $limit--;
                         }
                     }
@@ -90,11 +78,7 @@ class View extends AbstractView
                     if ($limit <= 1) {
                         break;
                     }
-                    $errors['global'][] = [
-                        'global',
-                        $globalError['code'],
-                        $globalError['message']
-                    ];
+                    $errors['global'][] = ['global', $globalError['code'], $globalError['message']];
                     $limit--;
                 }
             }

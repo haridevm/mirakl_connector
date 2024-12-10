@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication\Method\OAuth2;
@@ -51,9 +50,9 @@ class TokenHandler implements TokenHandlerInterface
         $authUrl = $this->config->getOAuth2AuthUrl();
 
         if (!$clientId || !$clientSecret || !$authUrl) {
-            throw new LocalizedException(__(
-                "The following OAuth2 parameters are mandatory: 'client_id', 'client_secret' and 'auth_url'"
-            ));
+            throw new LocalizedException(
+                __("The following OAuth2 parameters are mandatory: 'client_id', 'client_secret' and 'auth_url'")
+            );
         }
 
         // Generate a new access token with current settings

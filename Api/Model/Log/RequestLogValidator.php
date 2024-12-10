@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\Log;
 
 use Mirakl\Api\Helper\Config;
@@ -15,7 +12,7 @@ class RequestLogValidator
     protected $config;
 
     /**
-     * @param Config $config
+     * @param   Config  $config
      */
     public function __construct(Config $config)
     {
@@ -23,8 +20,8 @@ class RequestLogValidator
     }
 
     /**
-     * @param RequestInterface $request
-     * @return string
+     * @param   RequestInterface    $request
+     * @return  string
      */
     private function getRequestUrl(RequestInterface $request)
     {
@@ -38,8 +35,8 @@ class RequestLogValidator
     }
 
     /**
-     * @param RequestInterface $request
-     * @return bool
+     * @param   RequestInterface    $request
+     * @return  bool
      */
     public function validate(RequestInterface $request)
     {

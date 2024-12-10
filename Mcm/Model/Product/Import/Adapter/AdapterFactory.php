@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Import\Adapter;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -21,7 +18,7 @@ class AdapterFactory
 
     /**
      * @param ObjectManagerInterface $objectManager
-     * @param Config                 $config
+     * @param Config $config
      */
     public function __construct(ObjectManagerInterface $objectManager, Config $config)
     {

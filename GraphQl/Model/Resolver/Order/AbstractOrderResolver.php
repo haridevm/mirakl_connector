@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Order;
@@ -20,7 +19,7 @@ abstract class AbstractOrderResolver extends AbstractResolver implements Resolve
     protected $orderHelper;
 
     /**
-     * @param OrderHelper $orderHelper
+     * @param  OrderHelper  $orderHelper
      */
     public function __construct(OrderHelper $orderHelper)
     {
@@ -28,8 +27,8 @@ abstract class AbstractOrderResolver extends AbstractResolver implements Resolve
     }
 
     /**
-     * @param string $orderId
-     * @param string $currentUserId
+     * @param  string $orderId
+     * @param  string $currentUserId
      * @return Order
      * @throws ClientAware
      */

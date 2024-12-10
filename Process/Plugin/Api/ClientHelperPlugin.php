@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Plugin\Api;
 
 use Mirakl\Api\Helper\ClientHelper\AbstractClientHelper;

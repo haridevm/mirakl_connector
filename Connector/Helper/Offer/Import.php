@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper\Offer;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -20,8 +17,9 @@ class Import extends AbstractHelper
 {
     use CsvFileTrait;
 
-    public const CODE = 'OF51';
-    public const PRODUCT_SKU_POSITION_IN_CSV = 1;
+    const CODE = 'OF51';
+
+    const PRODUCT_SKU_POSITION_IN_CSV = 1;
 
     /**
      * @var Config
@@ -75,8 +73,8 @@ class Import extends AbstractHelper
     /**
      * Retrieve product SKUs associated to offers present in specified CSV file
      *
-     * @param string $fileName
-     * @return array
+     * @param   string  $fileName
+     * @return  array
      */
     protected function getProductSkusFromOffersFile($fileName)
     {
@@ -105,9 +103,9 @@ class Import extends AbstractHelper
     }
 
     /**
-     * @param Process $process
-     * @param bool    $full
-     * @return $this
+     * @param   Process $process
+     * @param   bool    $full
+     * @return  $this
      */
     public function run(Process $process, $full = false)
     {

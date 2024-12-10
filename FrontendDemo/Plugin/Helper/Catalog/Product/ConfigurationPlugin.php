@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Helper\Catalog\Product;
 
 use Magento\Catalog\Helper\Product\Configuration;
@@ -22,8 +19,8 @@ class ConfigurationPlugin
     private $offerHelper;
 
     /**
-     * @param OfferFactory $offerFactory
-     * @param OfferHelper  $offerHelper
+     * @param   OfferFactory    $offerFactory
+     * @param   OfferHelper     $offerHelper
      */
     public function __construct(OfferFactory $offerFactory, OfferHelper $offerHelper)
     {
@@ -34,10 +31,10 @@ class ConfigurationPlugin
     /**
      * Retrieve offer information for configurable product
      *
-     * @param Configuration $subject
-     * @param \Closure      $proceed
-     * @param ItemInterface $item
-     * @return array
+     * @param   Configuration   $subject
+     * @param   \Closure        $proceed
+     * @param   ItemInterface   $item
+     * @return  array
      */
     public function aroundGetCustomOptions(Configuration $subject, \Closure $proceed, ItemInterface $item)
     {

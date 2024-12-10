@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -16,9 +13,6 @@ use Mirakl\MMP\Common\Domain\Reason\ReasonType;
 use Mirakl\MMP\FrontOperator\Domain\Order as MiraklOrder;
 use Mirakl\MMP\FrontOperator\Domain\Order\OrderLine;
 
-/**
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- */
 class Tax extends AbstractHelper
 {
     /**
@@ -52,12 +46,12 @@ class Tax extends AbstractHelper
     protected $taxRates = [];
 
     /**
-     * @param Context                     $context
-     * @param TaxConfig                   $taxConfig
-     * @param TaxCalculation              $taxCalculation
-     * @param TaxOrderResourceFactory     $taxOrderResourceFactory
-     * @param OrderTaxManagementInterface $orderTaxManagement
-     * @param bool                        $isAdmin
+     * @param   Context                     $context
+     * @param   TaxConfig                   $taxConfig
+     * @param   TaxCalculation              $taxCalculation
+     * @param   TaxOrderResourceFactory     $taxOrderResourceFactory
+     * @param   OrderTaxManagementInterface $orderTaxManagement
+     * @param   bool                        $isAdmin
      */
     public function __construct(
         Context $context,
@@ -65,7 +59,7 @@ class Tax extends AbstractHelper
         TaxCalculation $taxCalculation,
         TaxOrderResourceFactory $taxOrderResourceFactory,
         OrderTaxManagementInterface $orderTaxManagement,
-        bool $isAdmin = false
+        $isAdmin = false
     ) {
         parent::__construct($context);
         $this->taxConfig = $taxConfig;
@@ -76,8 +70,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesFullSummary($store = null)
     {
@@ -85,8 +79,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesPricesInclTax($store = null)
     {
@@ -94,8 +88,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesPricesExclTax($store = null)
     {
@@ -103,8 +97,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesPricesBoth($store = null)
     {
@@ -112,8 +106,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesShippingInclTax($store = null)
     {
@@ -121,8 +115,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesShippingExclTax($store = null)
     {
@@ -130,8 +124,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesShippingBoth($store = null)
     {
@@ -139,8 +133,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesSubtotalInclTax($store = null)
     {
@@ -148,8 +142,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesSubtotalExclTax($store = null)
     {
@@ -157,8 +151,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesSubtotalBoth($store = null)
     {
@@ -166,8 +160,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function displaySalesTaxWithGrandTotal($store = null)
     {
@@ -178,9 +172,8 @@ class Tax extends AbstractHelper
      * We need to add Mirakl shipping taxes on order tax details
      * (only if Magento order has not been sent to Mirakl yet)
      *
-     * @param SalesOrder $order
-     * @return array
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   SalesOrder  $order
+     * @return  array
      */
     public function getCalculatedTaxes(SalesOrder $order)
     {
@@ -202,13 +195,11 @@ class Tax extends AbstractHelper
                 if (!$item->getMiraklShippingTaxApplied()) {
                     continue;
                 }
-                if ($miraklShippingTaxApplied = unserialize($item->getMiraklShippingTaxApplied())) { // phpcs:ignore
+                if ($miraklShippingTaxApplied = unserialize($item->getMiraklShippingTaxApplied())) {
                     foreach ($miraklShippingTaxApplied as $miraklAppliedTax) {
                         if (isset($fullTaxInfo[$miraklAppliedTax['id']])) {
-                            $fullTaxInfo[$miraklAppliedTax['id']]['tax_amount']
-                                += $miraklAppliedTax['amount'];
-                            $fullTaxInfo[$miraklAppliedTax['id']]['base_tax_amount']
-                                += $miraklAppliedTax['base_amount'];
+                            $fullTaxInfo[$miraklAppliedTax['id']]['tax_amount'] += $miraklAppliedTax['amount'];
+                            $fullTaxInfo[$miraklAppliedTax['id']]['base_tax_amount'] += $miraklAppliedTax['base_amount'];
                         } else {
                             $miraklAppliedTax['title'] = $miraklAppliedTax['id'];
                             $miraklAppliedTax['tax_amount'] = $miraklAppliedTax['amount'];
@@ -221,13 +212,11 @@ class Tax extends AbstractHelper
         }
 
         if ($order->getData('mirakl_sent') && !$this->isAdmin) {
-            foreach (array_keys($fullTaxInfo) as $taxCode) {
+            foreach ($fullTaxInfo as $taxCode => $taxInfo) {
                 $taxItems = $this->getMiraklOrderTaxItemsByTaxCode($order->getId(), $taxCode);
                 foreach ($taxItems as $taxItem) {
-                    $fullTaxInfo[$taxCode]['tax_amount']
-                        -= ($taxItem['row_total'] * $taxItem['tax_percent'] / 100);
-                    $fullTaxInfo[$taxCode]['base_tax_amount']
-                        -= ($taxItem['base_row_total'] * $taxItem['tax_percent'] / 100);
+                    $fullTaxInfo[$taxCode]['tax_amount']      -= ($taxItem['row_total'] * $taxItem['tax_percent'] / 100);
+                    $fullTaxInfo[$taxCode]['base_tax_amount'] -= ($taxItem['base_row_total'] * $taxItem['tax_percent'] / 100);
                 }
             }
         }
@@ -242,8 +231,8 @@ class Tax extends AbstractHelper
     /**
      * Returns Mirakl tax details applied on specified order
      *
-     * @param SalesOrder $order
-     * @return array
+     * @param   SalesOrder  $order
+     * @return  array
      */
     public function getMiraklCalculatedTaxes(SalesOrder $order)
     {
@@ -254,7 +243,7 @@ class Tax extends AbstractHelper
             if (!$item->getMiraklCustomTaxApplied()) {
                 continue;
             }
-            if ($customTaxApplied = unserialize($item->getMiraklCustomTaxApplied())) { // phpcs:ignore
+            if ($customTaxApplied = unserialize($item->getMiraklCustomTaxApplied())) {
                 $customTaxes = array_merge($customTaxApplied['taxes'], $customTaxApplied['shipping_taxes']);
                 foreach ($customTaxes as $tax) {
                     $code = 'Marketplace ' . $tax['type'] . '-' . $tax['name'];
@@ -276,8 +265,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param SalesOrder  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  SalesOrder  $order
+     * @param  MiraklOrder $miraklOrder
      * @return array
      */
     public function getMiraklFinalCalculatedTaxes(SalesOrder $order, MiraklOrder $miraklOrder)
@@ -301,9 +290,9 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param SalesOrder  $order
-     * @param MiraklOrder $miraklOrder
-     * @return array
+     * @param   SalesOrder  $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  array
      */
     public function getMiraklOrderCalculatedTaxes($order, MiraklOrder $miraklOrder)
     {
@@ -315,13 +304,11 @@ class Tax extends AbstractHelper
                 if ($item->getMiraklOfferId() != $offerId || !$item->getMiraklShippingTaxApplied()) {
                     continue;
                 }
-                if ($miraklShippingTaxApplied = unserialize($item->getMiraklShippingTaxApplied())) { // phpcs:ignore
+                if ($miraklShippingTaxApplied = unserialize($item->getMiraklShippingTaxApplied())) {
                     foreach ($miraklShippingTaxApplied as $miraklAppliedTax) {
                         if (isset($fullTaxInfo[$miraklAppliedTax['id']])) {
-                            $fullTaxInfo[$miraklAppliedTax['id']]['tax_amount']
-                                += $miraklAppliedTax['amount'];
-                            $fullTaxInfo[$miraklAppliedTax['id']]['base_tax_amount']
-                                += $miraklAppliedTax['base_amount'];
+                            $fullTaxInfo[$miraklAppliedTax['id']]['tax_amount'] += $miraklAppliedTax['amount'];
+                            $fullTaxInfo[$miraklAppliedTax['id']]['base_tax_amount'] += $miraklAppliedTax['base_amount'];
                         } else {
                             $miraklAppliedTax['title'] = $miraklAppliedTax['id'];
                             $miraklAppliedTax['tax_amount'] = $miraklAppliedTax['amount'];
@@ -345,10 +332,8 @@ class Tax extends AbstractHelper
                         'base_tax_amount' => 0,
                     ];
                 }
-                $fullTaxInfo[$taxCode]['tax_amount']
-                    += ($taxItem['row_total'] * $taxItem['tax_percent'] / 100);
-                $fullTaxInfo[$taxCode]['base_tax_amount']
-                    += ($taxItem['base_row_total'] * $taxItem['tax_percent'] / 100);
+                $fullTaxInfo[$taxCode]['tax_amount']      += ($taxItem['row_total'] * $taxItem['tax_percent'] / 100);
+                $fullTaxInfo[$taxCode]['base_tax_amount'] += ($taxItem['base_row_total'] * $taxItem['tax_percent'] / 100);
             }
         }
 
@@ -356,8 +341,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param SalesOrder  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  SalesOrder  $order
+     * @param  MiraklOrder $miraklOrder
      * @return array
      */
     public function getMiraklOrderFinalCalculatedTaxes(SalesOrder $order, MiraklOrder $miraklOrder)
@@ -386,8 +371,8 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param SalesOrder  $order
-     * @param MiraklOrder $miraklOrder
+     * @param  SalesOrder  $order
+     * @param  MiraklOrder $miraklOrder
      * @return array
      */
     public function getMiraklCancelationAndRejectionTaxes(SalesOrder $order, MiraklOrder $miraklOrder)
@@ -395,27 +380,25 @@ class Tax extends AbstractHelper
         $cancelationAndRejectionTaxes = [];
         foreach ($order->getItemsCollection() as $item) {
             /** @var \Magento\Sales\Model\Order\Item $item */
-            if (!$item->getMiraklOfferId()) {
-                continue;
-            }
-            /** @var OrderLine $orderLine */
-            foreach ($miraklOrder->getOrderLines() as $orderLine) {
-                if (!$orderLine->getOffer() || $orderLine->getOffer()->getId() != $item->getMiraklOfferId()) {
-                    continue;
-                }
-                if ($orderLine->getStatus() && $orderLine->getStatus()->getState() == ReasonType::REFUSED) {
-                    $cancelationAndRejectionTaxes[] = $orderLine->getTaxes()->getItems();
-                    foreach ($orderLine->getShippingTaxes() as $shippingTax) {
-                        $shippingTax->setData('is_shipping', true);
-                    }
-                    $cancelationAndRejectionTaxes[] = $orderLine->getShippingTaxes()->getItems();
-                } else {
-                    foreach ($orderLine->getCancelations() as $cancelation) {
-                        $cancelationAndRejectionTaxes[] = $cancelation->getTaxes()->getItems();
-                        foreach ($cancelation->getShippingTaxes() as $shippingTax) {
-                            $shippingTax->setData('is_shipping', true);
+            if ($item->getMiraklOfferId()) {
+                /** @var OrderLine $orderLine */
+                foreach ($miraklOrder->getOrderLines() as $orderLine) {
+                    if ($orderLine->getOffer() && $orderLine->getOffer()->getId() == $item->getMiraklOfferId()) {
+                        if ($orderLine->getStatus() && $orderLine->getStatus()->getState() == ReasonType::REFUSED) {
+                            $cancelationAndRejectionTaxes[] = $orderLine->getTaxes()->getItems();
+                            foreach ($orderLine->getShippingTaxes() as $shippingTax) {
+                                $shippingTax->setData('is_shipping', true);
+                            }
+                            $cancelationAndRejectionTaxes[] = $orderLine->getShippingTaxes()->getItems();
+                        } else {
+                            foreach ($orderLine->getCancelations() as $cancelation) {
+                                $cancelationAndRejectionTaxes[] = $cancelation->getTaxes()->getItems();
+                                foreach ($cancelation->getShippingTaxes() as $shippingTax) {
+                                    $shippingTax->setData('is_shipping', true);
+                                }
+                                $cancelationAndRejectionTaxes[] = $cancelation->getShippingTaxes()->getItems();
+                            }
                         }
-                        $cancelationAndRejectionTaxes[] = $cancelation->getShippingTaxes()->getItems();
                     }
                 }
             }
@@ -427,9 +410,9 @@ class Tax extends AbstractHelper
     /**
      * Returns Magento tax items applied on a specific Mirakl offer
      *
-     * @param int $orderId
-     * @param int $offerId
-     * @return array
+     * @param   int $orderId
+     * @param   int $offerId
+     * @return  array
      */
     protected function getMiraklOrderTaxItemsByOfferId($orderId, $offerId)
     {
@@ -460,9 +443,9 @@ class Tax extends AbstractHelper
     /**
      * Returns Magento tax items applied on Mirakl order items
      *
-     * @param int    $orderId
-     * @param string $taxCode
-     * @return array
+     * @param   int     $orderId
+     * @param   string  $taxCode
+     * @return  array
      */
     protected function getMiraklOrderTaxItemsByTaxCode($orderId, $taxCode)
     {
@@ -494,10 +477,10 @@ class Tax extends AbstractHelper
     /**
      * Subtract tax amount from specified price
      *
-     * @param float                 $price
-     * @param int                   $taxClassId
-     * @param AddressInterface|null $shippingAddress
-     * @return float
+     * @param   float                   $price
+     * @param   int                     $taxClassId
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  float
      */
     public function getPriceExclTax($price, $taxClassId, $shippingAddress = null)
     {
@@ -513,10 +496,10 @@ class Tax extends AbstractHelper
     /**
      * Add tax amount to specified price
      *
-     * @param float                 $price
-     * @param int                   $taxClassId
-     * @param AddressInterface|null $shippingAddress
-     * @return float
+     * @param   float                   $price
+     * @param   int                     $taxClassId
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  float
      */
     public function getPriceInclTax($price, $taxClassId, $shippingAddress = null)
     {
@@ -532,9 +515,9 @@ class Tax extends AbstractHelper
     /**
      * Subtract tax amount from specified price
      *
-     * @param float                 $price
-     * @param AddressInterface|null $shippingAddress
-     * @return float
+     * @param   float                   $price
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  float
      */
     public function getShippingPriceExclTax($price, $shippingAddress = null)
     {
@@ -550,9 +533,9 @@ class Tax extends AbstractHelper
     /**
      * Add tax amount to specified price
      *
-     * @param float                 $price
-     * @param AddressInterface|null $shippingAddress
-     * @return float
+     * @param   float                   $price
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  float
      */
     public function getShippingPriceInclTax($price, $shippingAddress = null)
     {
@@ -566,7 +549,7 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getShippingTaxClass()
     {
@@ -574,9 +557,9 @@ class Tax extends AbstractHelper
     }
 
     /**
-     * @param int                   $taxClassId
-     * @param AddressInterface|null $shippingAddress
-     * @return float
+     * @param   int                     $taxClassId
+     * @param   AddressInterface|null   $shippingAddress
+     * @return  float
      */
     protected function getTaxRate($taxClassId, $shippingAddress = null)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\ResourceModel\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\Indexer\LinkedProductSelectBuilderByIndexPrice;
@@ -9,9 +6,9 @@ use Magento\Catalog\Model\ResourceModel\Product\Indexer\LinkedProductSelectBuild
 class LinkedProductSelectBuilderByIndexPricePlugin extends AbstractLinkedProductSelectBuilderPlugin
 {
     /**
-     * @param LinkedProductSelectBuilderByIndexPrice $subject
-     * @param \Magento\Framework\DB\Select[]         $result
-     * @return \Magento\Framework\DB\Select[]
+     * @param   LinkedProductSelectBuilderByIndexPrice  $subject
+     * @param   \Magento\Framework\DB\Select[]          $result
+     * @return  \Magento\Framework\DB\Select[]
      */
     public function afterBuild(LinkedProductSelectBuilderByIndexPrice $subject, $result)
     {

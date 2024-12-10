@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Plugin\Helper\Catalog;
 
 use Mirakl\Event\Model\Event;
@@ -10,7 +7,7 @@ use Mirakl\Event\Plugin\Helper\AbstractHelperPlugin;
 class CategoryPlugin extends AbstractHelperPlugin
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function addToEventQueue(array $data)
     {
@@ -21,7 +18,7 @@ class CategoryPlugin extends AbstractHelperPlugin
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getEventType()
     {

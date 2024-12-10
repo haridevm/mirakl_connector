@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Delete;
 
 use Magento\Catalog\Model\Product;
@@ -17,12 +14,9 @@ use Mirakl\Mcm\Helper\Data as McmHelper;
 use Mirakl\Process\Model\Process as ProcessModel;
 use Mirakl\Api\Helper\Mcm\Product as Api;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Handler
 {
-    public const CODE = 'CM61';
+    const CODE = 'CM61';
 
     /**
      * @var ProductCollectionFactory
@@ -60,13 +54,13 @@ class Handler
     private $registry;
 
     /**
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param Api                      $api
-     * @param ManagerInterface         $eventManager
-     * @param McmConfig                $mcmConfig
-     * @param State                    $appState
-     * @param ProductResource          $productResource
-     * @param Registry                 $registry
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   Api                         $api
+     * @param   ManagerInterface            $eventManager
+     * @param   McmConfig                   $mcmConfig
+     * @param   State                       $appState
+     * @param   ProductResource             $productResource
+     * @param   Registry                    $registry
      */
     public function __construct(
         ProductCollectionFactory $productCollectionFactory,
@@ -87,9 +81,9 @@ class Handler
     }
 
     /**
-     * @param ProcessModel   $process
-     * @param \DateTime|null $deletedFrom
-     * @return int|false
+     * @param   ProcessModel    $process
+     * @param   \DateTime|null  $deletedFrom
+     * @return  int|false
      */
     public function run(ProcessModel $process, \DateTime $deletedFrom = null)
     {
@@ -150,8 +144,8 @@ class Handler
     /**
      * Retrieves Magento MCM products collection to delete
      *
-     * @param string[] $mcmProductIds
-     * @return ProductCollection
+     * @param   string[]    $mcmProductIds
+     * @return  ProductCollection
      */
     private function getCollection(array $mcmProductIds)
     {
@@ -175,9 +169,9 @@ class Handler
     /**
      * Delete products collection
      *
-     * @param ProductCollection $collection
-     * @param ProcessModel      $process
-     * @return int
+     * @param   ProductCollection   $collection
+     * @param   ProcessModel        $process
+     * @return  int
      */
     private function delete(ProductCollection $collection, ProcessModel $process)
     {
@@ -200,7 +194,7 @@ class Handler
             } catch (\Exception $e) {
                 $process->output(
                     __(
-                        'An error occurred while deleting product %1 (id: %2, SKU: %3): ' . $e->getMessage(),
+                        'An error occurred while deleting product %1 (id: %2, SKU: %3): '. $e->getMessage(),
                         $product->getData(McmHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID),
                         $product->getId(),
                         $product->getSku()

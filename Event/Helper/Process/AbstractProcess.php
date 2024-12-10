@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper\Process;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -18,9 +15,6 @@ use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 abstract class AbstractProcess extends AbstractHelper
 {
     /**
@@ -59,14 +53,14 @@ abstract class AbstractProcess extends AbstractHelper
     protected $apiHelperFactory;
 
     /**
-     * @param Context                $context
-     * @param MiraklConfig           $miraklConfig
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param EventFactory           $eventFactory
-     * @param EventResourceFactory   $eventResourceFactory
-     * @param EventCollectionFactory $eventCollectionFactory
-     * @param ApiHelperFactory       $apiHelperFactory
+     * @param   Context                 $context
+     * @param   MiraklConfig            $miraklConfig
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   EventFactory            $eventFactory
+     * @param   EventResourceFactory    $eventResourceFactory
+     * @param   EventCollectionFactory  $eventCollectionFactory
+     * @param   ApiHelperFactory        $apiHelperFactory
      */
     public function __construct(
         Context $context,
@@ -89,17 +83,17 @@ abstract class AbstractProcess extends AbstractHelper
     }
 
     /**
-     * @param Process $process
-     * @param int     $type
-     * @param int     $action
-     * @param bool    $executeAllTypes
-     * @return $this
+     * @param   Process $process
+     * @param   int     $type
+     * @param   int     $action
+     * @param   bool    $executeAllTypes
+     * @return  $this
      */
     abstract public function execute(Process $process, $type, $action, $executeAllTypes);
 
     /**
-     * @param string $type
-     * @return ExportDataInterface
+     * @param   string  $type
+     * @return  ExportDataInterface
      */
     protected function getExportHelper($type)
     {
@@ -115,8 +109,8 @@ abstract class AbstractProcess extends AbstractHelper
     }
 
     /**
-     * @param string $type
-     * @return SynchroResultInterface
+     * @param   string  $type
+     * @return  SynchroResultInterface
      */
     protected function getSynchroHelper($type)
     {
@@ -134,12 +128,12 @@ abstract class AbstractProcess extends AbstractHelper
     /**
      * Set the next step to do in the process
      *
-     * @param Process $process
-     * @param int     $type
-     * @param int     $action
-     * @param bool    $checkMiraklReport
-     * @param bool    $executeAllTypes
-     * @return $this|void
+     * @param   Process $process
+     * @param   int     $type
+     * @param   int     $action
+     * @param   bool    $checkMiraklReport
+     * @param   bool    $executeAllTypes
+     * @return  $this|void
      */
     public function proceed(Process $process, $type, $action, $checkMiraklReport = false, $executeAllTypes = true)
     {
@@ -151,11 +145,12 @@ abstract class AbstractProcess extends AbstractHelper
             $helper = CheckMiraklReport::class;
         } elseif ($action == Event::ACTION_DELETE) {
             $action = Event::ACTION_UPDATE;
-        } elseif (!$executeAllTypes) {
+        } elseif (!$executeAllTypes)  {
             $process->stop();
             $this->processResourceFactory->create()->save($process);
 
             return;
+
         } else {
             $types = array_keys(Event::getTypes());
             $nextTypePosition = array_search($type, $types) + 1;
@@ -181,11 +176,11 @@ abstract class AbstractProcess extends AbstractHelper
     /**
      * Update events for a specific type, action and status
      *
-     * @param int    $type
-     * @param int    $action
-     * @param string $status
-     * @param array  $values
-     * @return int Number of lines updated
+     * @param   int     $type
+     * @param   int     $action
+     * @param   string  $status
+     * @param   array   $values
+     * @return  int     Number of lines updated
      */
     protected function updateEvents($type, $action, $status, $values)
     {
@@ -200,11 +195,11 @@ abstract class AbstractProcess extends AbstractHelper
     }
 
     /**
-     * @param Process $process
-     * @param string  $helper
-     * @param string  $method
-     * @param array   $params
-     * @return $this
+     * @param   Process $process
+     * @param   string  $helper
+     * @param   string  $method
+     * @param   array   $params
+     * @return  $this
      */
     protected function updateProcess(Process $process, $helper, $method, array $params = [])
     {

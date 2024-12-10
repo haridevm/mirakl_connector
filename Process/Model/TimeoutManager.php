@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model;
@@ -45,7 +44,6 @@ class TimeoutManager
      *
      * @param string|null $hash
      * @return ProcessCollection
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function applyTimeout($hash = null)
     {
@@ -86,8 +84,8 @@ class TimeoutManager
 
     /**
      * Indicates if given process is timed out or not.
-     *
      * Condition for a process to be timed out:
+     *
      * - Process has status "processing"
      * - A timeout delay is configured in admin
      * - Configured delay has expired since the process execution has began
@@ -103,9 +101,7 @@ class TimeoutManager
 
         if (!$delay = $process->getTimeout()) {
             $code = $process->getCode();
-            $delay = in_array($code, $this->longProcessCodes)
-                ? $this->config->getLongTimeoutDelay()
-                : $this->config->getShortTimeoutDelay();
+            $delay = in_array($code, $this->longProcessCodes) ? $this->config->getLongTimeoutDelay() : $this->config->getShortTimeoutDelay();
         }
 
         if (!$delay) {

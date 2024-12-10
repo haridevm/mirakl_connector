@@ -1,23 +1,19 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Controller\Adminhtml\Event;
 
-use Magento\Backend\App\Action;
 use Mirakl\Event\Helper\Data as EventHelper;
 use Mirakl\Event\Model\Event;
 use Mirakl\Event\Model\ResourceModel\Event as EventResource;
 
-abstract class AbstractEventAction extends Action
+abstract class AbstractEventAction extends \Magento\Backend\App\Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Event::event';
+    const ADMIN_RESOURCE = 'Mirakl_Event::event';
 
     /**
-     * @return Event
+     * @return  Event
      */
     protected function getEvent()
     {
@@ -31,7 +27,7 @@ abstract class AbstractEventAction extends Action
     }
 
     /**
-     * @return EventHelper
+     * @return  EventHelper
      */
     protected function getEventHelper()
     {
@@ -39,7 +35,7 @@ abstract class AbstractEventAction extends Action
     }
 
     /**
-     * @return Event
+     * @return  Event
      */
     protected function getEventModel()
     {
@@ -47,7 +43,7 @@ abstract class AbstractEventAction extends Action
     }
 
     /**
-     * @return EventResource
+     * @return  EventResource
      */
     protected function getEventResource()
     {
@@ -55,8 +51,8 @@ abstract class AbstractEventAction extends Action
     }
 
     /**
-     * @param string $errorMessage
-     * @return \Magento\Framework\Controller\Result\Redirect
+     * @param   string  $errorMessage
+     * @return  \Magento\Framework\Controller\Result\Redirect
      */
     protected function redirectError($errorMessage)
     {

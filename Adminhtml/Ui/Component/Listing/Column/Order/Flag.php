@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Ui\Component\Listing\Column\Order;
 
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -30,13 +27,13 @@ class Flag extends Column
     protected $orderResourceFactory;
 
     /**
-     * @param ContextInterface     $context
-     * @param UiComponentFactory   $uiComponentFactory
-     * @param OrderHelper          $orderHelper
-     * @param OrderFactory         $orderFactory
-     * @param OrderResourceFactory $orderResourceFactory
-     * @param array                $components
-     * @param array                $data
+     * @param   ContextInterface        $context
+     * @param   UiComponentFactory      $uiComponentFactory
+     * @param   OrderHelper             $orderHelper
+     * @param   OrderFactory            $orderFactory
+     * @param   OrderResourceFactory    $orderResourceFactory
+     * @param   array                   $components
+     * @param   array                   $data
      */
     public function __construct(
         ContextInterface $context,
@@ -54,8 +51,8 @@ class Flag extends Column
     }
 
     /**
-     * @param array $dataSource
-     * @return array
+     * @param   array   $dataSource
+     * @return  array
      */
     public function prepareDataSource(array $dataSource)
     {
@@ -73,8 +70,8 @@ class Flag extends Column
     /**
      * Handles decoration of the flag column
      *
-     * @param Order $order
-     * @return string
+     * @param   Order   $order
+     * @return  string
      */
     public function decorateFlag($order)
     {

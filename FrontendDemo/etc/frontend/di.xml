@@ -13,6 +13,13 @@
     <type name="Magento\Catalog\Pricing\Price\TierPrice">
         <plugin name="mirakl_frontend" type="Mirakl\FrontendDemo\Plugin\Pricing\Price\Catalog\TierPricePlugin" />
     </type>
+    <type name="Magento\Customer\CustomerData\SectionPoolInterface">
+        <arguments>
+            <argument name="sectionSourceMap" xsi:type="array">
+                <item name="customer-shipping-methods" xsi:type="string">Mirakl\FrontendDemo\CustomerData\CustomerShippingMethods</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Mirakl\FrontendDemo\Block\Shop\FavoriteRankOffers">
         <arguments>
             <argument name="favoriteProductsLimit" xsi:type="number">10</argument>

@@ -1,20 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Model\ResourceModel;
 
+use Magento\Framework\Filesystem\Io\File;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\ResourceModel\Db\Context;
 use Mirakl\Core\Model\ResourceModel\ArraySerializableFieldsTrait;
-use Mirakl\Process\Model\File\StorageInterface;
 use Mirakl\Process\Model\Process as ProcessModel;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Process extends AbstractDb
 {
     use ArraySerializableFieldsTrait;
@@ -27,34 +20,38 @@ class Process extends AbstractDb
     ];
 
     /**
-     * @var StorageInterface
+     * @var File
      */
-    protected $storage;
+    protected $file;
 
-    /**
-     * @param Context          $context
-     * @param StorageInterface $storage
-     * @param string|null      $connectionName
-     */
     public function __construct(
-        Context $context,
-        StorageInterface $storage,
-        string $connectionName = null
+       Context $context,
+       File $file,
+       $connectionName = null
     ) {
-        parent::__construct($context, $connectionName);
-        $this->storage = $storage;
+        $this->file = $file;
+        parent::__construct(
+            $context,
+            $connectionName
+        );
     }
 
     /**
-     * @inheritdoc
+     * Initialize resource model
+     *
+     * @return void
      */
     protected function _construct()
     {
+        // Table Name and Primary Key column
         $this->_init('mirakl_process', 'id');
     }
 
     /**
-     * @inheritdoc
+     * Perform actions before object save
+     *
+     * @param   AbstractModel   $object
+     * @return  $this
      */
     protected function _beforeSave(AbstractModel $object)
     {
@@ -75,26 +72,33 @@ class Process extends AbstractDb
     }
 
     /**
-     * @inheritdoc
+     * Perform actions before object delete
+     *
+     * @param   AbstractModel   $object
+     * @return  $this
      */
     protected function _beforeDelete(AbstractModel $object)
     {
-        if ($file = $object->getData('file')) {
-            $this->storage->removeFile($file);
+        $file = $object->getData('file');
+        if ($file && $this->file->fileExists($file)) {
+            $this->file->rm($file);
         }
 
-        if ($miraklFile = $object->getData('mirakl_file')) {
-            $this->storage->removeFile($miraklFile);
+        $miraklFile = $object->getData('mirakl_file');
+        if ($miraklFile && $this->file->fileExists($miraklFile)) {
+            $this->file->rm($miraklFile);
         }
 
-        return parent::_beforeDelete($object);
+        parent::_beforeDelete($object);
+
+        return $this;
     }
 
     /**
      * Deletes specified processes from database
      *
-     * @param array $ids
-     * @return bool|int
+     * @param   array   $ids
+     * @return  bool|int
      */
     public function deleteIds(array $ids)
     {
@@ -108,20 +112,20 @@ class Process extends AbstractDb
     /**
      * Mark expired processes execution as TIMEOUT according to specified delay in minutes
      *
-     * @param int $delay
-     * @return int
-     * @throws \Exception
+     * @param   int $delay
+     * @return  int
+     * @throws  \Exception
      */
     public function markAsTimeout($delay)
     {
         $delay = abs(intval($delay));
         if (!$delay) {
-            throw new \InvalidArgumentException('Delay for expired processes cannot be empty');
+            throw new \Exception('Delay for expired processes cannot be empty');
         }
 
         $now = date('Y-m-d H:i:s');
         $timestampDiffExpr = new \Zend_Db_Expr(sprintf(
-            "TIMESTAMPDIFF(MINUTE, updated_at, '%s') > %d",
+            "TIMESTAMPDIFF(MINUTE, created_at, '%s') > %d",
             $now,
             $delay
         ));
@@ -144,12 +148,14 @@ class Process extends AbstractDb
     /**
      * Overrides this in order to not unset object that calls __destruct() otherwise
      *
-     * @param AbstractModel $object
-     * @return array
+     * @param   AbstractModel   $object
+     * @return  array
      */
     protected function prepareDataForUpdate($object)
     {
-        return $this->_prepareDataForTable($object, $this->getMainTable());
+        $data = $this->_prepareDataForTable($object, $this->getMainTable());
+
+        return $data;
     }
 
     /**

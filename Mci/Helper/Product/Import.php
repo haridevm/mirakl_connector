@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -16,8 +13,9 @@ use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
 class Import
 {
-    public const CODE = 'P21';
-    public const IMPORT_PATH_MAX_FILES = 2;
+    const CODE = 'P21';
+
+    const IMPORT_PATH_MAX_FILES = 2;
 
     /**
      * @var ObjectManagerInterface
@@ -45,11 +43,11 @@ class Import
     protected $processResourceFactory;
 
     /**
-     * @param ObjectManagerInterface $objectManager
-     * @param Config                 $config
-     * @param Api                    $api
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   Config                  $config
+     * @param   Api                     $api
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -68,10 +66,10 @@ class Import
     /**
      * Imports products into Magento from specified process
      *
-     * @param Process  $process
-     * @param string   $shopId
-     * @param int|null $importId
-     * @return void
+     * @param   Process     $process
+     * @param   string      $shopId
+     * @param   int|null    $importId
+     * @return  void
      */
     public function runFile(Process $process, $shopId, $importId = null)
     {
@@ -91,9 +89,9 @@ class Import
     /**
      * Imports CSV files from specified path
      *
-     * @param string $path
-     * @param int    $maxFiles
-     * @return void
+     * @param   string  $path
+     * @param   int     $maxFiles
+     * @return  void
      */
     public function runPath($path, $maxFiles = self::IMPORT_PATH_MAX_FILES)
     {
@@ -106,9 +104,9 @@ class Import
     /**
      * Creates process that will send products import report to Mirakl (P43)
      *
-     * @param int     $importId
-     * @param Process $process
-     * @return Process
+     * @param   int     $importId
+     * @param   Process $process
+     * @return  Process
      */
     private function createImportReportProcess($importId, Process $process)
     {
@@ -130,12 +128,12 @@ class Import
     /**
      * (P43) Sends products import report
      *
-     * @param Process $process
-     * @param int     $importId
-     * @param string  $successReport
-     * @param string  $errorReport
-     * @param string  $status
-     * @return void
+     * @param   Process $process
+     * @param   int     $importId
+     * @param   string  $successReport
+     * @param   string  $errorReport
+     * @param   string  $status
+     * @return  void
      */
     public function sendImportReport(Process $process, $importId, $successReport, $errorReport, $status)
     {
@@ -166,8 +164,8 @@ class Import
     }
 
     /**
-     * @param string $report
-     * @return FileWrapper
+     * @param   string  $report
+     * @return  FileWrapper
      */
     protected function getReportFile($report)
     {

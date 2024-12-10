@@ -16,14 +16,14 @@
                     </div>
                     <div class="shipment-content">
                         <?php if ($_carrierName = $_shipment->getTracking()->getCarrierName()): ?>
-                            <p><strong><?= $block->escapeHtml(__('Carrier: ')) ?></strong><?= $block->escapeHtml($_carrierName) ?></p>
+                            <p><strong><?= __('Carrier: ') ?></strong><?= $block->escapeHtml($_carrierName) ?></p>
                         <?php endif; ?>
                         <?php if ($_trackingNumber = $_shipment->getTracking()->getTrackingNumber()): ?>
-                            <p><strong><?= $block->escapeHtml(__('Tracking Number: ')) ?></strong><?= $block->escapeHtml($_trackingNumber) ?></p>
+                            <p><strong><?= __('Tracking Number: ') ?></strong><?= $block->escapeHtml($_trackingNumber) ?></p>
                         <?php endif; ?>
                         <?php if ($_trackingUrl = $_shipment->getTracking()->getTrackingUrl()): ?>
                             <p>
-                                <strong><?= $block->escapeHtml(__('Tracking URL: ')) ?></strong>
+                                <strong><?= __('Tracking URL: ') ?></strong>
                                 <a href="<?= $block->escapeUrl($_trackingUrl) ?>"
                                    class="action track"
                                    title="<?= $block->escapeHtmlAttr(__('Track your order')) ?>"
@@ -50,7 +50,7 @@
                         </div>
                     <?php endif; ?>
                     <div class="shipment-items">
-                        <div class="shipment-items-title"><?= $block->escapeHtml(__('Shipment Items')) ?></div>
+                        <div class="shipment-items-title"><?= __('Shipment Items') ?></div>
                         <table class="data table table-order-items">
                             <caption class="table-caption"><?= $block->escapeHtml(__('Shipment Items')) ?></caption>
                             <tbody>
@@ -61,12 +61,12 @@
                                     <td>
                                         <?php if ($_orderItem): ?>
                                             <strong><?= $block->escapeHtml($_orderItem->getName()) ?></strong><br>
-                                            <?= $block->escapeHtml(__('Product SKU: ')) ?><span class="sku"><?= $block->escapeHtml($_orderItem->getSku()) ?></span>
+                                            <?= $block->escapeHtml(__('Product SKU: ')) ?><span class="sku"><?= $_orderItem->getSku() ?></span>
                                             &nbsp;|&nbsp;
                                         <?php endif; ?>
-                                        <?= $block->escapeHtml(__('Offer SKU: ')) ?><span class="sku"><?= $block->escapeHtml($_shipmentLine->getOfferSku()) ?></span>
+                                        <?= $block->escapeHtml(__('Offer SKU: ')) ?><span class="sku"><?= $_shipmentLine->getOfferSku() ?></span>
                                     </td>
-                                    <td>x&nbsp;<?= $block->escapeHtml($_shipmentLine->getQuantity()) ?></td>
+                                    <td>x&nbsp;<?= $_shipmentLine->getQuantity() ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             </tbody>

@@ -1,29 +1,24 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Document\Type\Edit;
 
 use Magento\Backend\Block\Widget\Form\Generic;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Form extends Generic
 {
     /**
-     * @inheritdoc
+     * Init class
+     *
+     * @return  void
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->setId('document_type_form');
         $this->setTitle(__('Document Type Information'));
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     protected function _prepareForm()
     {
@@ -40,7 +35,6 @@ class Form extends Generic
         if ($model->getId()) {
             $fieldset->addField('id', 'hidden', ['name' => 'id']);
         }
-
         $fieldset->addField('label', 'text', [
             'name'     => 'label',
             'label'    => __('Label'),

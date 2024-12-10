@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper\Product\Export;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -11,8 +8,8 @@ class Category extends AbstractHelper
     /**
      * Retrieve category id to use for a product that will be exported
      *
-     * @param array $paths
-     * @return int|false
+     * @param   array   $paths
+     * @return  int|false
      */
     public function getCategoryIdFromPaths(array $paths)
     {
@@ -22,8 +19,8 @@ class Category extends AbstractHelper
     /**
      * Retrieve category path (as array) to use for a product that will be exported
      *
-     * @param array $paths
-     * @return array|false
+     * @param   array   $paths
+     * @return  array|false
      */
     public function getCategoryFromPaths(array $paths)
     {
@@ -35,8 +32,8 @@ class Category extends AbstractHelper
      * - take the deepest category
      * - if several categories have the same level, take the first one alphabetically
      *
-     * @param array $paths
-     * @return array
+     * @param   array   $paths
+     * @return  array
      */
     private function sortPaths(array $paths)
     {

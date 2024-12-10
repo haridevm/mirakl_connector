@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Carrier;
 
 use Magento\Shipping\Model\Carrier\AbstractCarrier;
@@ -34,10 +31,10 @@ class CarrierFactoryPlugin
     }
 
     /**
-     * @param CarrierFactory $subject
-     * @param \Closure       $proceed
-     * @param string         $carrierCode
-     * @return AbstractCarrier|false
+     * @param   CarrierFactory  $subject
+     * @param   \Closure        $proceed
+     * @param   string          $carrierCode
+     * @return  AbstractCarrier|false
      */
     public function aroundGetIfActive(CarrierFactory $subject, \Closure $proceed, $carrierCode)
     {
@@ -51,11 +48,11 @@ class CarrierFactoryPlugin
     }
 
     /**
-     * @param CarrierFactory $subject
-     * @param \Closure       $proceed
-     * @param string         $carrierCode
-     * @param int|null       $storeId
-     * @return AbstractCarrier|false
+     * @param   CarrierFactory  $subject
+     * @param   \Closure        $proceed
+     * @param   string          $carrierCode
+     * @param   null|int        $storeId
+     * @return  AbstractCarrier|false
      */
     public function aroundCreateIfActive(CarrierFactory $subject, \Closure $proceed, $carrierCode, $storeId = null)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper\Offer;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -31,9 +28,9 @@ class MultiSourceInventory extends AbstractHelper
     protected $objectManager;
 
     /**
-     * @param Context                $context
-     * @param ResourceConnection     $resource
-     * @param ObjectManagerInterface $objectManager
+     * @param   Context                 $context
+     * @param   ResourceConnection      $resource
+     * @param   ObjectManagerInterface  $objectManager
      */
     public function __construct(
         Context $context,
@@ -47,8 +44,8 @@ class MultiSourceInventory extends AbstractHelper
     }
 
     /**
-     * @param array $skus
-     * @return int
+     * @param   array   $skus
+     * @return  int
      * @deprecated Not used anymore
      */
     public function updateInStock(array $skus = [])
@@ -78,8 +75,8 @@ class MultiSourceInventory extends AbstractHelper
     }
 
     /**
-     * @param array $skus
-     * @return int
+     * @param   array   $skus
+     * @return  int
      * @deprecated Not used anymore
      */
     public function updateOutOfStock(array $skus = [])
@@ -109,7 +106,7 @@ class MultiSourceInventory extends AbstractHelper
     }
 
     /**
-     * @param array $skus
+     * @param   array   $skus
      * @deprecated Not used anymore
      */
     public function updateIndexes(array $skus = [])
@@ -123,16 +120,14 @@ class MultiSourceInventory extends AbstractHelper
 
         if (!empty($sourceItemIds)) {
             /** @var \Magento\InventoryIndexer\Indexer\SourceItem\SourceItemIndexer $sourceItemIndexer */
-            $sourceItemIndexer = $this->objectManager->get(
-                'Magento\InventoryIndexer\Indexer\SourceItem\SourceItemIndexer'
-            );
+            $sourceItemIndexer = $this->objectManager->get('Magento\InventoryIndexer\Indexer\SourceItem\SourceItemIndexer');
             $sourceItemIndexer->executeList($sourceItemIds);
         }
     }
 
     /**
-     * @param array $skus
-     * @return array
+     * @param   array   $skus
+     * @return  array
      */
     protected function getSourceItemIdsBySkus(array $skus = [])
     {
@@ -147,7 +142,7 @@ class MultiSourceInventory extends AbstractHelper
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     protected function tableSourceItemsExists()
     {

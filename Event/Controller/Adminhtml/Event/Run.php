@@ -1,19 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Controller\Adminhtml\Event;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Core\Controller\Adminhtml\RawMessagesTrait;
 use Mirakl\Process\Model\Process;
 
-class Run extends AbstractEventAction implements HttpGetActionInterface
+class Run extends AbstractEventAction
 {
     use RawMessagesTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -30,6 +26,6 @@ class Run extends AbstractEventAction implements HttpGetActionInterface
             );
         }
 
-        return $this->_redirect('*/*/');
+        $this->_redirect('*/*/');
     }
 }

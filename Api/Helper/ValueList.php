@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MCI\Front\Request\ValueList\ValueListImportRequest;
@@ -13,8 +10,8 @@ class ValueList extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (VL01) Send a file to create, update or delete values list
      *
-     * @param array $data
-     * @return int|false
+     * @param   array   $data
+     * @return  int|false
      */
     public function export(array $data)
     {
@@ -35,8 +32,8 @@ class ValueList extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (VL03) Send values list import report request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \SplFileObject
+     * @param   int $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {
@@ -50,8 +47,8 @@ class ValueList extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (VL02) Send values list import status request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
+     * @param   int $synchroId
+     * @return  \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
      */
     public function getSynchroResult($synchroId)
     {

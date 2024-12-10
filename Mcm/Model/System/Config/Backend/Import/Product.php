@@ -1,13 +1,9 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\System\Config\Backend\Import;
 
 use Magento\Framework\App\Cache\TypeListInterface as CacheTypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Value;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Data\Collection\AbstractDb as ResourceCollection;
 use Magento\Framework\Message\ManagerInterface as MessageManagerInterface;
 use Magento\Framework\Model\Context;
@@ -24,9 +20,6 @@ use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Product extends Value
 {
     use RawMessagesTrait;
@@ -67,27 +60,20 @@ class Product extends Value
     private $mcmConfig;
 
     /**
-     * @var RequestInterface
-     */
-    private $request;
-
-    /**
-     * @param Context                 $context
-     * @param Registry                $registry
-     * @param ScopeConfigInterface    $config
-     * @param CacheTypeListInterface  $cacheTypeList
-     * @param ProcessFactory          $processFactory
-     * @param ProcessResourceFactory  $processResourceFactory
-     * @param ProcessHelper           $processHelper
-     * @param StoreManagerInterface   $storeManager
-     * @param MessageManagerInterface $messageManager
-     * @param CsvHelper               $csvHelper
-     * @param McmConfig               $mcmConfig
-     * @param RequestInterface        $request
-     * @param AbstractResource|null   $resource
-     * @param ResourceCollection|null $resourceCollection
-     * @param array                   $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                 $context
+     * @param   Registry                $registry
+     * @param   ScopeConfigInterface    $config
+     * @param   CacheTypeListInterface  $cacheTypeList
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   ProcessHelper           $processHelper
+     * @param   StoreManagerInterface   $storeManager
+     * @param   MessageManagerInterface $messageManager
+     * @param   CsvHelper               $csvHelper
+     * @param   McmConfig               $mcmConfig
+     * @param   AbstractResource|null   $resource
+     * @param   ResourceCollection|null $resourceCollection
+     * @param   array                   $data
      */
     public function __construct(
         Context $context,
@@ -101,7 +87,6 @@ class Product extends Value
         MessageManagerInterface $messageManager,
         CsvHelper $csvHelper,
         McmConfig $mcmConfig,
-        RequestInterface $request,
         AbstractResource $resource = null,
         ResourceCollection $resourceCollection = null,
         array $data = []
@@ -113,15 +98,13 @@ class Product extends Value
         $this->messageManager = $messageManager;
         $this->csvHelper = $csvHelper;
         $this->mcmConfig = $mcmConfig;
-        $this->request = $request;
-
         parent::__construct($context, $registry, $config, $cacheTypeList, $resource, $resourceCollection, $data);
     }
 
     /**
      * Do not save value
      *
-     * @return $this
+     * @return  $this
      */
     public function beforeSave()
     {
@@ -134,16 +117,13 @@ class Product extends Value
     /**
      * Import products from uploaded file if present
      *
-     * @return $this
-     * @throws \Exception
+     * @return  $this
+     * @throws  \Exception
      */
     public function afterSave()
     {
-        $files = $this->request->getFiles();
-
-        $groups = $files->get('groups') ?? [];
-        $fileName = $groups['import_product']['fields']['file']['value']['name'] ?? '';
-        $uploadedFile = $groups['import_product']['fields']['file']['value']['tmp_name'] ?? '';
+        $fileName     = @$_FILES['groups']['name']['import_product']['fields']['file']['value'];
+        $uploadedFile = @$_FILES['groups']['tmp_name']['import_product']['fields']['file']['value'];
 
         if (!$fileName) {
             return $this;
@@ -186,7 +166,7 @@ class Product extends Value
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     private function isAdmin()
     {

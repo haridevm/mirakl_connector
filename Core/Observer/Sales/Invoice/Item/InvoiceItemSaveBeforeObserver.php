@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Observer\Sales\Invoice\Item;
 
 use Magento\Framework\Event\Observer;
@@ -11,7 +8,7 @@ use Magento\Sales\Model\Order\Invoice;
 class InvoiceItemSaveBeforeObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

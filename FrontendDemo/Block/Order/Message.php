@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Directory\Model\CurrencyFactory;
@@ -19,9 +16,6 @@ use Mirakl\MMP\Common\Domain\Message\OrderMessage;
 use Mirakl\MMP\Common\Domain\UserType;
 use Mirakl\MMP\FrontOperator\Domain\Collection\Reason\ReasonCollection;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Message extends View
 {
     /**
@@ -46,13 +40,11 @@ class Message extends View
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/message.phtml';
 
     /**
      * @var array
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_postMessage;
 
@@ -68,7 +60,6 @@ class Message extends View
      * @param TaxHelper       $taxHelper
      * @param CurrencyFactory $currencyFactory
      * @param array           $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Context $context,
@@ -101,7 +92,7 @@ class Message extends View
     /**
      * Get review product post action
      *
-     * @return string
+     * @return  string
      */
     public function getAction()
     {
@@ -117,7 +108,7 @@ class Message extends View
     /**
      * Retrieves order messages visible by the customer
      *
-     * @return OrderMessageCollection
+     * @return  OrderMessageCollection
      */
     public function getMessages()
     {
@@ -127,8 +118,8 @@ class Message extends View
     /**
      * Retrieve form data stored in session
      *
-     * @param string $field
-     * @return array|string
+     * @param   string  $field
+     * @return  array|string
      */
     public function getPostMessage($field = null)
     {
@@ -144,7 +135,7 @@ class Message extends View
     }
 
     /**
-     * @return ReasonCollection
+     * @return  ReasonCollection
      */
     public function getReasons()
     {
@@ -156,8 +147,8 @@ class Message extends View
     /**
      * Builds the sender name of the specified order message
      *
-     * @param OrderMessage $message
-     * @return string
+     * @param   OrderMessage    $message
+     * @return  string
      */
     public function getSenderName(OrderMessage $message)
     {
@@ -169,8 +160,8 @@ class Message extends View
     /**
      * Returns true if the given message was sent by the customer
      *
-     * @param OrderMessage $message
-     * @return bool
+     * @param   OrderMessage    $message
+     * @return  bool
      */
     public function isCustomerMessage(OrderMessage $message)
     {
@@ -180,8 +171,8 @@ class Message extends View
     /**
      * Returns true if the given message was sent by the operator
      *
-     * @param OrderMessage $message
-     * @return bool
+     * @param   OrderMessage    $message
+     * @return  bool
      */
     public function isOperatorMessage(OrderMessage $message)
     {

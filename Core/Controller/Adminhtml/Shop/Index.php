@@ -1,12 +1,7 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shop;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Index extends Shop implements HttpGetActionInterface
+class Index extends Shop
 {
     /**
      * @return void

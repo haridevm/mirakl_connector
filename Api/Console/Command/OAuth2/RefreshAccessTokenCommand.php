@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Console\Command\OAuth2;
@@ -21,8 +20,10 @@ class RefreshAccessTokenCommand extends Command
      * @param TokenHandlerInterface $tokenHandler
      * @param string|null           $name
      */
-    public function __construct(TokenHandlerInterface $tokenHandler, string $name = null)
-    {
+    public function __construct(
+        TokenHandlerInterface $tokenHandler,
+        string $name = null
+    ) {
         parent::__construct($name);
         $this->tokenHandler = $tokenHandler;
     }

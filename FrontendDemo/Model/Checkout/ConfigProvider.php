@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Model\Checkout;
 
 use Magento\Catalog\Block\Product\Image;
@@ -55,13 +52,13 @@ class ConfigProvider implements ConfigProviderInterface
     private $quoteUpdater;
 
     /**
-     * @param QuoteHelper            $quoteHelper
-     * @param QuoteItemHelper        $quoteItemHelper
-     * @param ConnectorConfig        $connectorConfig
-     * @param ImageBuilder           $imageBuilder
-     * @param ProductConfig          $productConfig
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param QuoteUpdater           $quoteUpdater
+     * @param   QuoteHelper             $quoteHelper
+     * @param   QuoteItemHelper         $quoteItemHelper
+     * @param   ConnectorConfig         $connectorConfig
+     * @param   ImageBuilder            $imageBuilder
+     * @param   ProductConfig           $productConfig
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   QuoteUpdater            $quoteUpdater
      */
     public function __construct(
         QuoteHelper $quoteHelper,
@@ -82,7 +79,7 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getConfig()
     {
@@ -107,8 +104,8 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @param QuoteItem $quoteItem
-     * @return array
+     * @param   QuoteItem   $quoteItem
+     * @return  array
      */
     private function getItemOptions(QuoteItem $quoteItem)
     {
@@ -118,10 +115,10 @@ class ConfigProvider implements ConfigProviderInterface
     /**
      * Retrieve quote item image
      *
-     * @param QuoteItem $quoteItem
-     * @param string    $imageId
-     * @param array     $attributes
-     * @return Image
+     * @param   QuoteItem   $quoteItem
+     * @param   string      $imageId
+     * @param   array       $attributes
+     * @return  Image
      */
     private function getItemImage(QuoteItem $quoteItem, $imageId = 'product_thumbnail_image', $attributes = [])
     {
@@ -132,8 +129,8 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @param QuoteItem $quoteItem
-     * @return string
+     * @param   QuoteItem   $quoteItem
+     * @return  string
      */
     public function getItemPrice(QuoteItem $quoteItem)
     {
@@ -141,8 +138,8 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @param QuoteItem $quoteItem
-     * @return string
+     * @param   QuoteItem   $quoteItem
+     * @return  string
      */
     public function getItemPriceInclTax(QuoteItem $quoteItem)
     {
@@ -150,7 +147,7 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @return QuoteItem[]
+     * @return  QuoteItem[]
      */
     private function getItems()
     {
@@ -158,8 +155,8 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @param QuoteItem $item
-     * @return ShippingFeeType
+     * @param   QuoteItem   $item
+     * @return  ShippingFeeType
      */
     private function getItemSelectedShippingType(QuoteItem $item)
     {
@@ -171,8 +168,8 @@ class ConfigProvider implements ConfigProviderInterface
     }
 
     /**
-     * @param QuoteItem $item
-     * @return ShippingFeeTypeCollection
+     * @param   QuoteItem   $item
+     * @return  ShippingFeeTypeCollection
      */
     private function getItemShippingTypes(QuoteItem $item)
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Block\Adminhtml\System\Config\Form\Field;
@@ -14,8 +13,8 @@ class ApiKey extends Field
      */
     public function render(AbstractElement $element)
     {
-        $message = __('The API Front Key authentication is not recommended.<br>'
-            . 'Please use <strong>Access Token</strong> or <strong>OAuth 2.0 Client</strong> authentication instead.');
+        $message = __('The API Front Key authentication is not recommended.<br>' .
+            'Please use <b>Access Token</b> or <b>OAuth 2.0 Client</b> authentication instead.');
 
         $html = <<<HTML
 <tr>

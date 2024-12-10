@@ -5,7 +5,7 @@ require(['jquery'], function ($) {
                 $(this).parents('li').addClass('mirakl');
             }
         });
-        $('.adminhtml-system_config-edit .admin__page-nav-title > strong').each(function () {
+        $('.adminhtml-system-config-edit .admin__page-nav-title > strong').each(function () {
             if (0 === $(this).text().indexOf('Mirakl')) {
                 $(this).parent().parent().addClass('mirakl');
             }

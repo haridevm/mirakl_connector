@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Image;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -13,8 +10,9 @@ use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
 class Process extends AbstractHelper
 {
-    public const CODE = 'IMAGE_IMPORT';
-    public const PROCESS_NAME = 'Products images import';
+    const CODE = 'IMAGE_IMPORT';
+
+    const PROCESS_NAME = 'Products images import';
 
     /**
      * @var ProcessFactory
@@ -32,10 +30,10 @@ class Process extends AbstractHelper
     protected $imageHelper;
 
     /**
-     * @param Context                $context
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param ImageHelper            $imageHelper
+     * @param   Context                 $context
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   ImageHelper             $imageHelper
      */
     public function __construct(
         Context $context,
@@ -50,11 +48,11 @@ class Process extends AbstractHelper
     }
 
     /**
-     * @param int      $limit
-     * @param int|null $timeout
-     * @param string   $type
-     * @param string   $status
-     * @return ProcessModel
+     * @param   int         $limit
+     * @param   int|null    $timeout
+     * @param   string      $type
+     * @param   string      $status
+     * @return  ProcessModel
      */
     public function createImportProcess(
         $limit,

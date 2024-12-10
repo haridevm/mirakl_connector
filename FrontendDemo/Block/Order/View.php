@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Customer\Model\Context as CustomerContext;
@@ -19,7 +16,6 @@ class View extends Template
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/view.phtml';
 
@@ -77,7 +73,7 @@ class View extends Template
     /**
      * Return back url for logged in and guest users
      *
-     * @return string
+     * @return  string
      */
     public function getBackUrl()
     {
@@ -91,7 +87,7 @@ class View extends Template
     /**
      * Return back title for logged in and guest users
      *
-     * @return \Magento\Framework\Phrase
+     * @return  \Magento\Framework\Phrase
      */
     public function getBackTitle()
     {
@@ -105,7 +101,7 @@ class View extends Template
     /**
      * Retrieve current order model instance
      *
-     * @return Order
+     * @return  Order
      */
     public function getOrder()
     {
@@ -113,8 +109,8 @@ class View extends Template
     }
 
     /**
-     * @param OrderLine $orderLine
-     * @return \Magento\Sales\Model\Order\Item|null
+     * @param   OrderLine   $orderLine
+     * @return  \Magento\Sales\Model\Order\Item|null
      */
     private function getOrderLineItem(OrderLine $orderLine)
     {
@@ -130,8 +126,8 @@ class View extends Template
     }
 
     /**
-     * @param OrderLine $orderLine
-     * @return float
+     * @param   OrderLine   $orderLine
+     * @return  float
      */
     public function getOrderLinePrice(OrderLine $orderLine)
     {
@@ -143,8 +139,8 @@ class View extends Template
     }
 
     /**
-     * @param OrderLine $orderLine
-     * @return float
+     * @param   OrderLine   $orderLine
+     * @return  float
      */
     public function getOrderLinePriceExclTax(OrderLine $orderLine)
     {
@@ -156,8 +152,8 @@ class View extends Template
     }
 
     /**
-     * @param OrderLine $orderLine
-     * @return float
+     * @param   OrderLine   $orderLine
+     * @return  float
      */
     public function getOrderLineTotalPrice(OrderLine $orderLine)
     {
@@ -169,8 +165,8 @@ class View extends Template
     }
 
     /**
-     * @param OrderLine $orderLine
-     * @return float
+     * @param   OrderLine   $orderLine
+     * @return  float
      */
     public function getOrderLineTotalPriceExclTax(OrderLine $orderLine)
     {
@@ -182,7 +178,7 @@ class View extends Template
     }
 
     /**
-     * @return \Mirakl\MMP\FrontOperator\Domain\Order
+     * @return  \Mirakl\MMP\FrontOperator\Domain\Order
      */
     public function getMiraklOrder()
     {
@@ -190,7 +186,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderShippingPriceInclTax()
     {
@@ -198,7 +194,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderShippingPriceExclTax()
     {
@@ -206,7 +202,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderSubtotalPrice()
     {
@@ -214,7 +210,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderSubtotalPriceExclTax()
     {
@@ -222,7 +218,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderBaseTotalPrice()
     {
@@ -230,7 +226,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderTotalPrice()
     {
@@ -238,7 +234,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderTotalTax()
     {
@@ -246,7 +242,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getMiraklPaidTotal()
     {
@@ -254,7 +250,7 @@ class View extends Template
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function hasMiraklRefunds()
     {
@@ -270,7 +266,7 @@ class View extends Template
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function hasRejectedMiraklItems()
     {
@@ -278,7 +274,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getMiraklRefundTotal()
     {
@@ -286,7 +282,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderTotalPriceExclTax()
     {
@@ -294,7 +290,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getMiraklFinalTotalTax()
     {
@@ -302,7 +298,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalSubtotalInclTax()
     {
@@ -310,7 +306,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalSubtotalExclTax()
     {
@@ -318,7 +314,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalShippingPriceInclTax()
     {
@@ -326,7 +322,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalShippingPriceExclTax()
     {
@@ -334,7 +330,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalTotalPriceExclTax()
     {
@@ -342,7 +338,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalTotalPriceInclTax()
     {
@@ -350,7 +346,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderLinePriceAfterCancelationInclTax(OrderLine $orderLine)
     {
@@ -358,7 +354,7 @@ class View extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getOrderFinalBaseTotalPrice()
     {
@@ -373,16 +369,14 @@ class View extends Template
     }
 
     /**
-     * @param float  $amount
-     * @param string $currencyFrom
-     * @param string $currencyTo
-     * @return float
+     * @param   float   $amount
+     * @param   string  $currencyFrom
+     * @param   string  $currencyTo
+     * @return  float
      */
     public function convertToCurrency($amount, $currencyFrom, $currencyTo)
     {
-        $currency = $this->currencyFactory->create();
-        $currency->load($currencyFrom); // @phpstan-ignore-line
-        $rate = $currency->getAnyRate($currencyTo);
+        $rate = $this->currencyFactory->create()->load($currencyFrom)->getAnyRate($currencyTo);
 
         return (float) $amount * $rate;
     }
@@ -390,8 +384,8 @@ class View extends Template
     /**
      * Format final price without rounding (as returned by Mirakl)
      *
-     * @param float $price
-     * @return string
+     * @param   float   $price
+     * @return  string
      */
     public function formatFinalPrice($price)
     {

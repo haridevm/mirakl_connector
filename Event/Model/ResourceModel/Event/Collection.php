@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Model\ResourceModel\Event;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
@@ -13,8 +10,9 @@ use Mirakl\Event\Model\Event;
 class Collection extends AbstractCollection
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Define resource model
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -24,8 +22,8 @@ class Collection extends AbstractCollection
     /**
      * Adds action filter to current collection
      *
-     * @param string $action
-     * @return $this
+     * @param   string  $action
+     * @return  $this
      */
     public function addActionFilter($action)
     {
@@ -35,8 +33,8 @@ class Collection extends AbstractCollection
     /**
      * Adds code filter to current collection
      *
-     * @param string $code
-     * @return $this
+     * @param   string  $code
+     * @return  $this
      */
     public function addCodeFilter($code)
     {
@@ -46,7 +44,7 @@ class Collection extends AbstractCollection
     /**
      * Adds processing status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addProcessingFilter()
     {
@@ -56,7 +54,7 @@ class Collection extends AbstractCollection
     /**
      * Adds sent status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addSentFilter()
     {
@@ -66,8 +64,8 @@ class Collection extends AbstractCollection
     /**
      * Adds type filter to current collection
      *
-     * @param int $type
-     * @return $this
+     * @param   int $type
+     * @return  $this
      */
     public function addTypeFilter($type)
     {
@@ -77,7 +75,7 @@ class Collection extends AbstractCollection
     /**
      * Adds waiting status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addWaitingFilter()
     {

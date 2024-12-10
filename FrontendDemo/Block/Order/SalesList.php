@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\Message\ManagerInterface;
@@ -40,11 +37,11 @@ class SalesList extends Template
     protected $htmlClassName = 'default';
 
     /**
-     * @param Template\Context $context
-     * @param ManagerInterface $messageManager
-     * @param OrderHelper      $orderHelper
-     * @param ConfigHelper     $configHelper
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   ManagerInterface    $messageManager
+     * @param   OrderHelper         $orderHelper
+     * @param   ConfigHelper        $configHelper
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -62,7 +59,7 @@ class SalesList extends Template
     /**
      * Adds remote orders information to specified Magento orders
      *
-     * @return $this
+     * @return  $this
      */
     public function addMiraklOrdersToCollection()
     {
@@ -76,14 +73,14 @@ class SalesList extends Template
                 __('An error occurred. Please try again later or contact store owner if the problem persists.')
             );
         }
-
+    
         return $this;
     }
 
     /**
      * Returns Magento store name if configured
      *
-     * @return string
+     * @return  string
      */
     public function getStoreName()
     {
@@ -93,7 +90,7 @@ class SalesList extends Template
     /**
      * Returns commercial orders
      *
-     * @return OrderCollection
+     * @return  OrderCollection
      */
     public function getOrders()
     {
@@ -103,8 +100,8 @@ class SalesList extends Template
     /**
      * Sets commercial orders
      *
-     * @param OrderCollection $collection
-     * @return $this
+     * @param   OrderCollection $collection
+     * @return  $this
      */
     public function setOrders(OrderCollection $collection)
     {
@@ -116,7 +113,7 @@ class SalesList extends Template
     /**
      * Return main html class name
      *
-     * @return string
+     * @return  string
      */
     public function getHtmlClassName()
     {
@@ -126,8 +123,8 @@ class SalesList extends Template
     /**
      * Set main html class name
      *
-     * @param string $htmlClassName
-     * @return $this
+     * @param   string  $htmlClassName
+     * @return  $this
      */
     public function setHtmlClassName($htmlClassName)
     {
@@ -139,9 +136,9 @@ class SalesList extends Template
     /**
      * Returns view URL of specified order
      *
-     * @param Order       $order
-     * @param MiraklOrder $miraklOrder
-     * @return string
+     * @param   Order       $order
+     * @param   MiraklOrder $miraklOrder
+     * @return  string
      */
     public function getMiraklOrderViewUrl(Order $order, MiraklOrder $miraklOrder)
     {

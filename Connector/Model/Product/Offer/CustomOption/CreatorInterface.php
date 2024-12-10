@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\CustomOption;
@@ -11,7 +10,7 @@ interface CreatorInterface
 {
     /**
      * @param Product $product
-     * @param int     $offerId
+     * @param int $offerId
      * @return Offer
      */
     public function create(Product $product, int $offerId): Offer;

@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\System\Config\Source;
 
 class Visibility
 {
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

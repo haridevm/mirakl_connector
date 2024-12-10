@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Model\System\Config\Source\Event;
 
 use Mirakl\Event\Model\Event;
@@ -11,7 +8,7 @@ class Type
     /**
      * Retrieves event types
      *
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

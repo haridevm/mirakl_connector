@@ -1,73 +1,52 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Test\Unit\Model\Product\Import\Data\Parser;
 
-use Mirakl\Mcm\Helper\Config;
 use Mirakl\Mcm\Model\Product\Import\Data\Parser\MultiValue;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class MultiValueTest extends TestCase
 {
-    /**
-     * @var Config|MockObject
-     */
     protected $mcmConfigMock;
 
-    /**
-     * @inheritdoc
-     */
     protected function setUp(): void
     {
-        $this->mcmConfigMock = $this->getMockBuilder(Config::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->mcmConfigMock = $this->getMockBuilder(\Mirakl\Mcm\Helper\Config ::class)->disableOriginalConstructor()->getMock();
     }
 
     /**
-     * @param string $str
-     * @param array  $expected
+     * @param   string  $str
+     * @param   array   $expected
      *
      * @dataProvider getTestParseMultiValueAttributeDataProviderForSyncImport
      */
-    public function testParseMultiValueAttributeForSyncImport(string $str, array $expected)
+    public function testParseMultiValueAttributeForSyncImport($str, array $expected)
     {
         // MCM sync import enabled
-        $this->mcmConfigMock->expects($this->any())
-            ->method('isMcmEnabled')
-            ->willReturn(true);
-        $this->mcmConfigMock->expects($this->any())
-            ->method('isAsyncMcmEnabled')
-            ->willReturn(false);
-
-        $parser = new MultiValue();
+        $this->mcmConfigMock->expects($this->any())->method('isMcmEnabled')->willReturn(true);
+        $this->mcmConfigMock->expects($this->any())->method('isAsyncMcmEnabled')->willReturn(false);
+        $parser = new MultiValue($this->mcmConfigMock);
         $this->assertSame($expected, $parser->parse($str));
     }
 
     /**
-     * @param array $value
-     * @param array $expected
+     * @param   array  $value
+     * @param   array  $expected
      *
      * @dataProvider getTestParseMultiValueAttributeDataProviderForAsyncImport
      */
-    public function testParseMultiValueAttributeForAsyncImport(array $value, array $expected)
+    public function testParseMultiValueAttributeForAsyncImport($value, array $expected)
     {
         // MCM async import enabled
-        $this->mcmConfigMock->expects($this->any())
-            ->method('isMcmEnabled')
-            ->willReturn(false);
-        $this->mcmConfigMock->expects($this->any())
-            ->method('isAsyncMcmEnabled')
-            ->willReturn(true);
-
-        $parser = new MultiValue();
+        $this->mcmConfigMock->expects($this->any())->method('isMcmEnabled')->willReturn(false);
+        $this->mcmConfigMock->expects($this->any())->method('isAsyncMcmEnabled')->willReturn(true);
+        $parser = new MultiValue($this->mcmConfigMock);
         $this->assertSame($expected, $parser->parse($value));
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTestParseMultiValueAttributeDataProviderForSyncImport(): array
     {
@@ -82,7 +61,7 @@ class MultiValueTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTestParseMultiValueAttributeDataProviderForAsyncImport(): array
     {

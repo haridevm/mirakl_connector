@@ -24,7 +24,7 @@ $helper = $this->helper('Mirakl\Core\Helper\Data');
         </tr>
         <tr>
             <th><?= $block->escapeHtml(__('Date')) ?></th>
-            <td><?= /* @escapeNotVerified */ $block->formatDate($process->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?></td>
+            <td><?= $block->formatDate($process->getCreatedAt(), \IntlDateFormatter::MEDIUM, true) ?></td>
         </tr>
         <tr>
             <th><?= $block->escapeHtml(__('Duration')) ?></th>
@@ -34,9 +34,9 @@ $helper = $this->helper('Mirakl\Core\Helper\Data');
             <tr>
                 <td><?= $block->escapeHtml(__('File')) ?></td>
                 <td>
-                    <a href="<?= /* @escapeNotVerified */ $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;')): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                    <a href="<?= $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;')): ?>&nbsp;(<?= $fileSize ?>)<?php endif ?>
                     <?php if ($process->canShowFile()): ?>
-                        <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->escapeUrl($block->getUrl('*/*/showFile', ['id' => $process->getId()])) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
+                        <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->getUrl('*/*/showFile', ['id' => $process->getId()]) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
                     <?php endif ?>
                 </td>
             </tr>
@@ -45,7 +45,7 @@ $helper = $this->helper('Mirakl\Core\Helper\Data');
             <tr>
                 <td><?= $block->escapeHtml(__('Output')) ?></td>
                 <td>
-                    <a href="<?= /* @escapeNotVerified */ $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getOutputSizeFormatted('&nbsp;')): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                    <a href="<?= $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getOutputSizeFormatted('&nbsp;')): ?>&nbsp;(<?= $fileSize ?>)<?php endif ?>
                 </td>
             </tr>
         <?php endif ?>

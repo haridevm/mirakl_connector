@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Shipping\Type;
 
 use Magento\Backend\Block\Widget\Context;
@@ -38,15 +35,12 @@ class View extends Container
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct()
     {
         $this->_mode = false;
-
         parent::_construct();
-
         $this->removeButton('save');
         $this->removeButton('reset');
         $this->removeButton('delete');
@@ -86,8 +80,6 @@ class View extends Container
             }
         }
 
-        $html = '<table class="mirakl-shipping-types-table mirakl-shipping-type-%s">%s</table>';
-
-        return $output ? sprintf($html, $key, $output) : '';
+        return $output ? sprintf('<table class="mirakl-shipping-types-table mirakl-shipping-type-%s">', $key) . $output . '</table>' : '';
     }
 }

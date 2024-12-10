@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer;
 
 use Magento\Framework\DataObject;
@@ -25,7 +22,7 @@ class McmEnableObserver implements ObserverInterface
     protected $config;
 
     /**
-     * @param Config $config
+     * @param   Config  $config
      */
     public function __construct(Config $config)
     {
@@ -33,7 +30,7 @@ class McmEnableObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -43,7 +40,7 @@ class McmEnableObserver implements ObserverInterface
         $input  = $observer->getEvent()->getInput();
         $source = $observer->getEvent()->getSource();
 
-        if ($isMcmEnabled && $input && in_array($source, self::$sourcesToBlock)) {
+        if ($isMcmEnabled && in_array($source, self::$sourcesToBlock) && !empty($input)) {
             $input->setData('enabled', false);
         }
     }

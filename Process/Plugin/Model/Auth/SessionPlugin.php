@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Plugin\Model\Auth;
 
 use Magento\Backend\Model\Auth\Session;
@@ -15,7 +12,7 @@ class SessionPlugin
     protected $request;
 
     /**
-     * @param Http $request
+     * @param   Http    $request
      */
     public function __construct(Http $request)
     {
@@ -23,7 +20,7 @@ class SessionPlugin
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     private function isMiraklProcessAsync()
     {
@@ -31,9 +28,9 @@ class SessionPlugin
     }
 
     /**
-     * @param Session  $session
-     * @param \Closure $proceed
-     * @return void
+     * @param   Session     $session
+     * @param   \Closure    $proceed
+     * @return  void
      */
     public function aroundProlong(Session $session, $proceed)
     {

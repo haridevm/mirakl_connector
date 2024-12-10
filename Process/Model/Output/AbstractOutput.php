@@ -1,10 +1,10 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Output;
 
 use Mirakl\Core\Helper\Data as CoreHelper;
+use Mirakl\Process\Model\Output\Formatter;
 use Mirakl\Process\Model\Process;
 use Psr\Log\LoggerInterface;
 
@@ -54,12 +54,22 @@ abstract class AbstractOutput implements OutputInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     abstract public function display($str): self;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
+     */
+    public function hr($char = '-', $repeat = 50): self
+    {
+        $this->display(str_repeat($char, $repeat));
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function close(): self
     {
@@ -67,18 +77,21 @@ abstract class AbstractOutput implements OutputInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getType(): string
     {
-        $type = get_class($this);
-        $backslashPos = strrpos($type, '\\');
+        $class = get_class($this);
 
-        if (false !== $backslashPos) {
-            $type = substr($type, $backslashPos + 1);
-        }
+        return strtolower(substr($class, strrpos($class, '\\') + 1));
+    }
 
-        return strtolower($type);
+    /**
+     * @return int
+     */
+    protected function getMemoryUsage(): int
+    {
+        return memory_get_peak_usage(true);
     }
 
     /**

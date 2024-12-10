@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product;
 
 use Magento\Catalog\Model\Product;
@@ -24,8 +21,8 @@ class DeleteBeforeObserver implements ObserverInterface
     protected $productResourceFactory;
 
     /**
-     * @param HashHelper             $hashHelper
-     * @param ProductResourceFactory $productResourceFactory
+     * @param   HashHelper              $hashHelper
+     * @param   ProductResourceFactory  $productResourceFactory
      */
     public function __construct(HashHelper $hashHelper, ProductResourceFactory $productResourceFactory)
     {
@@ -34,7 +31,7 @@ class DeleteBeforeObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
@@ -52,8 +49,8 @@ class DeleteBeforeObserver implements ObserverInterface
     }
 
     /**
-     * @param Product $product
-     * @return mixed
+     * @param   Product $product
+     * @return  mixed
      */
     private function getShopsSkus(Product $product)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Shipping\Type;
 
 use Magento\Store\Model\StoreManagerInterface;
@@ -14,7 +11,7 @@ use Psr\Log\LoggerInterface;
 
 class Synchronizer
 {
-    public const CODE = 'SH12';
+    const CODE = 'SH12';
 
     /**
      * @var StoreManagerInterface
@@ -64,8 +61,6 @@ class Synchronizer
 
     /**
      * Synchronize active shipping methods from Mirakl to Magento
-     *
-     * @param ProcessModel|null $process
      */
     public function synchronize(ProcessModel $process = null)
     {
@@ -93,13 +88,12 @@ class Synchronizer
 
     /**
      * Fetch active shipping methods from Mirakl
-     *
      * @return array
      */
     private function fetchSippingTypes()
     {
         $locales = [];
-        foreach ($this->storeManager->getStores() as $store) {
+        foreach($this->storeManager->getStores() as $store) {
             $locales[] = $this->connectorConfig->getLocale($store);
         }
 
@@ -115,10 +109,8 @@ class Synchronizer
                 if (!isset($resultShippingTypes[$shippingType['code']])) {
                     $resultShippingTypes[$shippingType['code']] = $shippingType;
                 } else {
-                    $resultShippingTypes[$shippingType['code']]['label'][$locale] =
-                        $shippingType['label'][$locale];
-                    $resultShippingTypes[$shippingType['code']]['description'][$locale] =
-                        $shippingType['description'][$locale];
+                    $resultShippingTypes[$shippingType['code']]['label'][$locale] = $shippingType['label'][$locale];
+                    $resultShippingTypes[$shippingType['code']]['description'][$locale] = $shippingType['description'][$locale];
                 }
             }
         }

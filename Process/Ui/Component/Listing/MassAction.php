@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Ui\Component\Listing;
@@ -37,7 +36,7 @@ class MassAction extends \Magento\Ui\Component\MassAction
     /**
      * @inheritdoc
      */
-    public function prepare(): void
+    public function prepare() : void
     {
         $parentId = $this->getParentId();
         if ($parentId) {

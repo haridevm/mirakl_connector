@@ -69,9 +69,6 @@
             <!-- ko if: rates().length  -->
             <form class="form methods-shipping" id="co-shipping-method-form" data-bind="submit: setShippingInformation" novalidate="novalidate">
                 <div id="checkout-shipping-method-load" data-bind="style: { display: isFullMarketplaceQuote() ? 'none' : 'block' }">
-                    <h3>
-                        <strong data-bind="i18n: 'Sold by Operator'" data-role="title"></strong>
-                    </h3>
                     <table class="table-checkout-shipping-method">
                         <thead>
                             <tr class="row">
@@ -96,7 +93,7 @@
                                                     'value' : method.carrier_code + '_' + method.method_code,
                                                     'id': 's_method_' + method.method_code,
                                                     'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code
-                                                 }">
+                                                 }" />
                                 <!-- /ko -->
                                 <!--ko ifnot: ($parent.rates().length == 1)-->
                                 <input type="radio"
@@ -108,7 +105,7 @@
                                                     'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code
                                                 },
                                                 click: $parent.selectShippingMethod"
-                                       class="radio">
+                                       class="radio"/>
                                 <!--/ko-->
                                 <!-- /ko -->
                             </td>
@@ -132,7 +129,7 @@
                                     <div data-bind="text: method.error_message"></div>
                                 </div>
                                 <span class="no-display">
-                                    <input type="radio" data-bind="attr: {'value' : method.method_code, 'id': 's_method_' + method.method_code}">
+                                    <input type="radio" data-bind="attr: {'value' : method.method_code, 'id': 's_method_' + method.method_code}"/>
                                 </span>
                             </td>
                         </tr>
@@ -162,10 +159,8 @@
                             <tr class="row shop-title">
                                 <td colspan="3">
                                     <div class="step-title marketplace">
-                                        <h3>
-                                            <strong data-bind="i18n: 'Sold by: '"></strong>
-                                            <strong data-bind="i18n: method.title"></strong>
-                                        </h3>
+                                        <span data-bind="i18n: 'Sold by: '"></span>
+                                        <span data-bind="i18n: method.title"></span>
                                     </div>
                                 </td>
                             </tr>
@@ -182,7 +177,7 @@
                                                         'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code
                                                     },
                                                     click: $parent.selectMarketplaceShippingMethod"
-                                           class="radio">
+                                           class="radio"/>
                                 </td>
                                 <td class="col col-price">
                                     <!-- ko if: (method.price_incl_tax > 0) -->
@@ -194,18 +189,9 @@
                                         <span class="price"><span class="price" data-bind="i18n: 'Free'"></span></span>
                                     <!-- /ko -->
                                 </td>
-                                <!-- ko if: (method.method_details === '') -->
+
                                 <td class="col col-method"
-                                    data-bind="text: method.method_title,
-                                    attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}">
-                                </td>
-                                <!-- /ko -->
-                                <!-- ko ifnot: (method.method_details === '') -->
-                                <td class="col col-method"
-                                    data-bind="html: method.method_title + ' - ' + method.method_details,
-                                    attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}">
-                                </td>
-                                <!-- /ko -->
+                                        data-bind="text: method.method_title, attr: {'id': 'label_method_' + method.method_code + '_' + method.carrier_code}"></td>
                             </tr>
 
                             <!-- /ko -->

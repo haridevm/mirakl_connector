@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Attribute;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute;
@@ -10,8 +7,8 @@ use Mirakl\Mci\Helper\Config as MciConfig;
 
 class AttributeFormatter
 {
-    public const DATE_FORMAT   = 'yyyy-MM-dd';
-    public const MAX_FILE_SIZE = '15360';
+    const DATE_FORMAT   = 'yyyy-MM-dd';
+    const MAX_FILE_SIZE = '15360';
 
     /**
      * @var MciConfig
@@ -19,7 +16,7 @@ class AttributeFormatter
     protected $mciConfig;
 
     /**
-     * @param MciConfig $mciConfig
+     * @param   MciConfig   $mciConfig
      */
     public function __construct(MciConfig $mciConfig)
     {
@@ -29,8 +26,8 @@ class AttributeFormatter
     /**
      * Returns true if specified attribute is for image import, false otherwise
      *
-     * @param DataObject $attribute
-     * @return bool
+     * @param   DataObject  $attribute
+     * @return  bool
      */
     protected function isAttributeImage(DataObject $attribute)
     {
@@ -40,10 +37,8 @@ class AttributeFormatter
     /**
      * Maps Magento attribute types with Mirakl attribute types
      *
-     * @param DataObject $attribute
-     * @return string
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   DataObject  $attribute
+     * @return  string
      */
     public function getAttributeType(DataObject $attribute)
     {
@@ -69,10 +64,9 @@ class AttributeFormatter
                 $type = 'TEXT';
         }
 
-        if (
-            $attribute->getData('frontend_input') == 'select' ||
-            $attribute->getSourceModel() === 'Magento\Eav\Model\Entity\Attribute\Source\Boolean'
-        ) {
+        if ($attribute->getData('frontend_input') == 'select' ||
+            $attribute->getSourceModel() === 'Magento\Eav\Model\Entity\Attribute\Source\Boolean')
+        {
             $type = 'LIST';
         }
 
@@ -98,8 +92,8 @@ class AttributeFormatter
     /**
      * Returns attribute type parameter
      *
-     * @param DataObject $attribute
-     * @return string
+     * @param   DataObject  $attribute
+     * @return  string
      */
     public function getAttributeTypeParameter(DataObject $attribute)
     {

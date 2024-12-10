@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver;
@@ -17,7 +16,7 @@ class RatingTypesResolver extends AbstractResolver implements ResolverInterface
     protected $evaluationHelper;
 
     /**
-     * @param EvaluationHelper $evaluationHelper
+     * @param  EvaluationHelper $evaluationHelper
      */
     public function __construct(EvaluationHelper $evaluationHelper)
     {
@@ -25,7 +24,7 @@ class RatingTypesResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

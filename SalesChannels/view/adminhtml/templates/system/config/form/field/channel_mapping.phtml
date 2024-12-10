@@ -26,23 +26,23 @@ $channels = $block->getMiraklChannels();
                 <tr>
                     <td>
                         <input type="hidden"
-                               name="groups[sales_channels][fields][mirakl_channels][value][<?= /* @noEscape */ $store->getCode() ?>][store_code]"
-                               value="<?= /* @noEscape */ $store->getCode() ?>">
-                        <div><?= /* @noEscape */ $website->getName() ?></div>
-                        <div style="padding-left:10px;color:#aaa;"><?= /* @noEscape */ $group->getName() ?></div>
+                               name="groups[sales_channels][fields][mirakl_channels][value][<?= $store->getCode() ?>][store_code]"
+                               value="<?= $store->getCode() ?>">
+                        <div><?= $website->getName() ?></div>
+                        <div style="padding-left:10px;color:#aaa;"><?= $group->getName() ?></div>
                         <div style="padding-left:20px;">
-                            <label for="channel_<?= /* @noEscape */ $store->getCode() ?>"><strong><?= /* @noEscape */ $store->getName() ?></strong></label><br>
-                            <em><?= __('(code: %1)', /* @noEscape */ $store->getCode()) ?></em>
+                            <label for="channel_<?= $store->getCode() ?>"><strong><?= $store->getName() ?></strong></label><br>
+                            <em><?= __('(code: %1)', $store->getCode()) ?></em>
                         </div>
                     </td>
                     <td>
-                        <select id="channel_<?= /* @noEscape */ $store->getCode() ?>" name="groups[sales_channels][fields][mirakl_channels][value][<?= /* @noEscape */ $store->getCode() ?>][channel_code]"
+                        <select id="channel_<?= $store->getCode() ?>" name="groups[sales_channels][fields][mirakl_channels][value][<?= $store->getCode() ?>][channel_code]"
                                 class="admin__control-select required-entry">
                             <?php $storeChannel = $block->getSelectedChannel($store->getCode()) ?>
-                            <option value=""<?= !$storeChannel ? ' selected' : '' ?>><?= $block->escapeHtml(__('-- Select Channel --')) ?></option>
+                            <option value="" <?= !$storeChannel ? 'selected' : '' ?>><?= __('-- Select Channel --') ?></option>
                             <?php foreach ($channels as $channel): ?>
-                                <option value="<?= /* @noEscape */ $channel->getCode() ?>"<?= $storeChannel === $channel->getCode() ? ' selected' : '' ?>>
-                                    <?= $block->escapeHtml($channel->getLabel()) ?>&nbsp;(<?= /* @noEscape */ $channel->getCode() ?>)
+                                <option value="<?= $channel->getCode() ?>" <?= $storeChannel === $channel->getCode() ? 'selected' : '' ?>>
+                                    <?= $channel->getLabel() ?>&nbsp;(<?= $channel->getCode() ?>)
                                 </option>
                             <?php endforeach; ?>
                         </select>

@@ -1,20 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Widget\Grid\Column\Renderer\MiraklOrder;
 
 use Magento\Framework\DataObject;
 use Mirakl\Api\Helper\Payment;
 
-/**
- * @SuppressWarnings(PHPMD.CyclomaticComplexity)
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
 {
     /**
-     * @inheritdoc
+     * Renders column
+     *
+     * @param   DataObject   $row
+     * @return  string
      */
     public function render(DataObject $row)
     {
@@ -23,7 +19,7 @@ class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
             return '&nbsp;';
         }
 
-        if (count($actions) === 1 && !$this->getColumn()->getNoLink()) {
+        if (sizeof($actions) == 1 && !$this->getColumn()->getNoLink()) {
             foreach ($actions as $action) {
                 if (is_array($action)) {
                     return $this->_toLinkHtml($action, $row);
@@ -32,7 +28,7 @@ class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
         }
 
         $out = '<select onchange="varienGridAction.execute(this);">'
-            . '<option value="">' . __('-- Select --') . '</option>';
+            . '<option value="">'. __('-- Select --') .'</option>';
         $i = 0;
         $options = '';
         foreach ($actions as $action) {
@@ -53,7 +49,11 @@ class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
     }
 
     /**
-     * @inheritdoc
+     * Check if action to render is allowed for current row
+     *
+     * @param   array       $action
+     * @param   DataObject  $row
+     * @return  string
      */
     protected function _toOptionHtml($action, DataObject $row)
     {
@@ -77,11 +77,11 @@ class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _transformActionData(&$action, &$actionCaption, \Magento\Framework\DataObject $row)
     {
-        foreach (array_keys($action) as $attribute) {
+        foreach ($action as $attribute => $value) {
             if (isset($action[$attribute]) && !is_array($action[$attribute])) {
                 $this->getColumn()->setFormat($action[$attribute]);
                 $action[$attribute] = $this->_getValue($row);
@@ -112,8 +112,7 @@ class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
                     break;
 
                 case 'popup':
-                    $action['onclick'] =
-                        "popWin(this.href, '_blank', 'width=800,height=700,resizable=1,scrollbars=1');return false;";
+                    $action['onclick'] = "popWin(this.href, '_blank', 'width=800,height=700,resizable=1,scrollbars=1');return false;";
                     break;
             }
         }

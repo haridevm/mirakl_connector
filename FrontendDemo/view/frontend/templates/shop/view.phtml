@@ -1,65 +1,65 @@
 <?php
-/** @var Mirakl\FrontendDemo\Block\Shop\View $block */
+/** @var Mirakl\FrontendDemo\Block\Shop\View $this */
 /** @var Mirakl\Core\Model\Shop $_shop */
-$_shop = $block->getShop();
+$_shop = $this->getShop();
 $_info = $_shop->getAdditionalInfo();
 ?>
 <?php if ($_shop->getId()): ?>
     <div class="seller-shop">
         <div class="block-content">
             <?php if ($_shop->getLogo()): ?>
-                <img src="<?= $block->escapeUrl($_shop->getLogo()) ?>" alt="<?= $block->escapeHtml($_shop->getName()) ?>" title="<?= $block->escapeHtml($_shop->getName()) ?>"/>
+                <img src="<?php echo $_shop->getLogo() ?>" alt="<?php echo $this->escapeHtml($_shop->getName()) ?>" title="<?php echo $this->escapeHtml($_shop->getName()) ?>"/>
             <?php endif ?>
         </div>
         <div class="block-content seller-info">
             <ul>
                 <?php if ($_shop->getDateCreated()): ?>
                     <li>
-                        <strong><?= /* @escapeNotVerified */ __('Seller Since:') ?></strong>
-                        <?= /* @escapeNotVerified */ $block->formatDate($_shop->getDateCreated(), \IntlDateFormatter::MEDIUM) ?>
+                        <strong><?php echo __('Seller Since:') ?></strong>
+                        <?php echo $this->formatDate($_shop->getDateCreated(), \IntlDateFormatter::MEDIUM) ?>
                     </li>
                 <?php endif ?>
                 <li>
                     <?php $evaluation = $_shop->getFormattedGrade() ?>
-                    <strong><?= /* @escapeNotVerified */ __('Rating:') ?></strong>
+                    <strong><?php echo __('Rating:') ?></strong>
                     <div class="rating-summary shop-review-rate">
-                        <div class="rating-result" title="<?= /* @escapeNotVerified */ round($evaluation * 5 / 100) ?>/5">
-                            <span style="width:<?= /* @escapeNotVerified */ $evaluation ?>%">
+                        <div class="rating-result" title="<?php echo round($evaluation * 5 / 100) ?>/5">
+                            <span style="width:<?php echo $evaluation ?>%">
                                 <span>
-                                    <span><?= /* @escapeNotVerified */ $evaluation ?></span>
+                                    <span><?php echo $evaluation ?></span>
                                 </span>
                             </span>
                         </div>
-                        <span class="count">(<?= /* @escapeNotVerified */ __('%1 reviews', $_shop->getEvaluationsCount()) ?>)</span>
+                        <span class="count">(<?php echo __('%1 reviews', $_shop->getEvaluationsCount()) ?>)</span>
                     </div>
                 </li>
                 <li>
-                    <strong><?= /* @escapeNotVerified */ __('Sales Count:') ?></strong>
-                    <?= /* @escapeNotVerified */ $_info->getOrdersCount() ?>
+                    <strong><?php echo __('Sales Count:') ?></strong>
+                    <?php echo $_info->getOrdersCount() ?>
                 </li>
                 <li>
-                    <strong><?= /* @escapeNotVerified */ __('Professional Seller:') ?></strong>
-                    <?= /* @escapeNotVerified */ __($_shop->getProfessional() ? 'Yes' : 'No') ?>
+                    <strong><?php echo __('Professional Seller:') ?></strong>
+                    <?php echo __($_shop->getProfessional() ? 'Yes' : 'No') ?>
                 </li>
                 <?php $_approvalDelay = $_info->getApprovalDelay() ?>
                 <li>
-                    <strong><?= /* @escapeNotVerified */ __('Approval Period:') ?></strong>
-                    <?= /* @escapeNotVerified */ $block->formatDuration($_approvalDelay) ?>
+                    <strong><?php echo __('Approval Period:') ?></strong>
+                    <?php echo $this->formatDuration($_approvalDelay) ?>
                 </li>
                 <?php $_approvalRate = $_info->getApprovalRate() ?>
                 <li>
-                    <strong><?= /* @escapeNotVerified */ __('Approval Rate:') ?></strong>
-                    <?= /* @escapeNotVerified */ round($_approvalRate * 100) ?>%
+                    <strong><?php echo __('Approval Rate:') ?></strong>
+                    <?php echo round($_approvalRate * 100) ?>%
                 </li>
             </ul>
         </div>
         <div class="block-content banner">
             <?php if (!empty($_info['banner'])): ?>
-                <img src="<?= /* @escapeNotVerified */ $_info['banner'] ?>" alt="<?= $block->escapeHtml(__('Your banner goes here')) ?>"/>
+                <img src="<?php echo $_info['banner'] ?>" alt="<?php echo $this->escapeHtml(__('Your banner goes here')) ?>"/>
             <?php endif ?>
         </div>
         <div class="block-title">
-            <strong><?= /* @escapeNotVerified */ __('Shop Information') ?></strong>
+            <strong><?php /* @escapeNotVerified */ echo __('Shop Information') ?></strong>
         </div>
     </div>
 <?php endif ?>

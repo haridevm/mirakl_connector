@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource;
@@ -55,7 +54,11 @@ class Json extends DataSourceModel implements DataSourceInterface
         $behavior = Import::BEHAVIOR_APPEND,
         $bunchSize = 100
     ) {
-        parent::__construct($context, $jsonHelper, $connectionName);
+        parent::__construct(
+            $context,
+            $jsonHelper,
+            $connectionName
+        );
         $this->json = $json;
         $this->entityType = $entityType;
         $this->behavior = $behavior;
@@ -93,7 +96,6 @@ class Json extends DataSourceModel implements DataSourceInterface
     /**
      * @param array $ids
      * @return string
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getBehavior($ids = null): string
     {
@@ -103,7 +105,6 @@ class Json extends DataSourceModel implements DataSourceInterface
     /**
      * @param array $ids
      * @return string
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function getEntityTypeCode($ids = null): string
     {

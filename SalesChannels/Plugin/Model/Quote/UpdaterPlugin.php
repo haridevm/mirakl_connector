@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Plugin\Model\Quote;
@@ -29,8 +28,8 @@ class UpdaterPlugin
     private $channelResolver;
 
     /**
-     * @param QuoteHelper               $quoteHelper
-     * @param Config                    $config
+     * @param QuoteHelper $quoteHelper
+     * @param Config $config
      * @param Channel\ResolverInterface $channelResolver
      */
     public function __construct(
@@ -44,7 +43,7 @@ class UpdaterPlugin
     }
 
     /**
-     * @param Updater       $subject
+     * @param Updater $subject
      * @param CartInterface $quote
      * @return void
      */

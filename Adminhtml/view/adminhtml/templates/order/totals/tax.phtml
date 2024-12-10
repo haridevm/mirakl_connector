@@ -4,11 +4,11 @@
  * See COPYING.txt for license details.
  */
 
-// phpcs:ignoreFile
-/** @var \Magento\Sales\Block\Adminhtml\Order\Totals\Tax $block */
+// @codingStandardsIgnoreFile
+/** @var $block \Magento\Sales\Block\Adminhtml\Order\Totals\Tax */
 ?>
 <?php
-/** @var \Magento\Sales\Model\Order\Invoice $_source */
+/** @var $_source \Magento\Sales\Model\Order\Invoice */
 $_source    = $block->getSource();
 $_order     = $block->getOrder();
 $_fullInfo  = $this->helper('Mirakl\Connector\Helper\Order')->isMiraklOrder($_order)
@@ -27,7 +27,7 @@ $_fullInfo  = $this->helper('Mirakl\Connector\Helper\Order')->isMiraklOrder($_or
                 <?= /* @escapeNotVerified */ __('Total Tax') ?>
             <?php else: ?>
                 <?= /* @escapeNotVerified */ __('Tax') ?>
-            <?php endif; ?>
+            <?php endif;?>
         </div>
     </td>
     <td>
@@ -89,5 +89,5 @@ $_fullInfo  = $this->helper('Mirakl\Connector\Helper\Order')->isMiraklOrder($_or
             ?>
         <?php endforeach; ?>
     <?php endif; ?>
-<?php endif; ?>
+<?php endif;?>
 

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Plugin\Model\Quote\Total;
@@ -26,7 +25,7 @@ class CommonTaxCollectorPlugin
 
     /**
      * @param ConnectorConfig $connectorConfig
-     * @param TaxCalculator   $taxCalculator
+     * @param TaxCalculator $taxCalculator
      */
     public function __construct(
         ConnectorConfig $connectorConfig,
@@ -37,13 +36,13 @@ class CommonTaxCollectorPlugin
     }
 
     /**
-     * @param CommonTaxCollector               $subject
-     * @param \Closure                         $proceed
+     * @param CommonTaxCollector $subject
+     * @param \Closure $proceed
      * @param QuoteDetailsItemInterfaceFactory $itemDataObjectFactory
-     * @param Quote\Item\AbstractItem          $item
-     * @param bool                             $priceIncludesTax
-     * @param bool                             $useBaseCurrency
-     * @param string                           $parentCode
+     * @param Quote\Item\AbstractItem $item
+     * @param bool $priceIncludesTax
+     * @param bool $useBaseCurrency
+     * @param string $parentCode
      * @return mixed
      */
     public function aroundMapItem(
@@ -64,12 +63,12 @@ class CommonTaxCollectorPlugin
     }
 
     /**
-     * @param CommonTaxCollector      $subject
-     * @param \Closure                $proceed
+     * @param CommonTaxCollector $subject
+     * @param \Closure $proceed
      * @param Quote\Item\AbstractItem $quoteItem
      * @param TaxDetailsItemInterface $itemTaxDetails
      * @param TaxDetailsItemInterface $baseItemTaxDetails
-     * @param Store                   $store
+     * @param Store $store
      * @return CommonTaxCollector
      */
     public function aroundUpdateItemTaxInfo(
@@ -81,10 +80,9 @@ class CommonTaxCollectorPlugin
         $store
     ) {
         if ($miraklTaxesApplied = $quoteItem->getMiraklCustomTaxApplied()) {
-            $miraklTaxes = unserialize($miraklTaxesApplied); // phpcs:ignore
+            $miraklTaxes = unserialize($miraklTaxesApplied);
             if (!empty($miraklTaxes['taxes'])) {
-                $this->taxCalculator
-                    ->addMiraklTaxesToTaxItems($itemTaxDetails, $baseItemTaxDetails, $miraklTaxes['taxes']);
+                $this->taxCalculator->addMiraklTaxesToTaxItems($itemTaxDetails, $baseItemTaxDetails, $miraklTaxes['taxes']);
             }
         }
 

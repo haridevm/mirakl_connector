@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Channel;
@@ -26,7 +25,7 @@ class Resolver implements ResolverInterface
 
     /**
      * @param StoreManagerInterface $storeManager
-     * @param Config                $config
+     * @param Config $config
      */
     public function __construct(
         StoreManagerInterface $storeManager,

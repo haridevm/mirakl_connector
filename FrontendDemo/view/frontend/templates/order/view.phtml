@@ -15,19 +15,19 @@ $hasCancelations = $block->hasCancelations();
 ?>
 <div class="order-details-items ordered">
 <div class="order-title">
-    <strong><?= /* @escapeNotVerified */ __('Items Ordered') ?></strong>
+    <strong><?php /* @escapeNotVerified */ echo __('Items Ordered') ?></strong>
 </div>
 <div class="table-wrapper order-items">
-<table class="data table table-order-items" id="my-orders-table" summary="<?= /* @escapeNotVerified */ __('Items Ordered') ?>">
-<caption class="table-caption"><?= /* @escapeNotVerified */ __('Items Ordered') ?></caption>
+<table class="data table table-order-items" id="my-orders-table" summary="<?php /* @escapeNotVerified */ echo __('Items Ordered') ?>">
+<caption class="table-caption"><?php /* @escapeNotVerified */ echo __('Items Ordered') ?></caption>
 <thead>
     <tr>
-        <th class="col name"><?= /* @escapeNotVerified */ __('Product Name') ?></th>
-        <th class="col incident"><?= /* @escapeNotVerified */ __('Incident') ?></th>
-        <th class="col sku"><?= /* @escapeNotVerified */ __('SKU') ?></th>
-        <th class="col price"><?= /* @escapeNotVerified */ __('Price') ?></th>
-        <th class="col qty"><?= /* @escapeNotVerified */ __('Qty') ?></th>
-        <th class="col subtotal"><?= /* @escapeNotVerified */ __('Subtotal') ?></th>
+        <th class="col name"><?php /* @escapeNotVerified */ echo __('Product Name') ?></th>
+        <th class="col incident"><?php /* @escapeNotVerified */ echo __('Incident') ?></th>
+        <th class="col sku"><?php /* @escapeNotVerified */ echo __('SKU') ?></th>
+        <th class="col price"><?php /* @escapeNotVerified */ echo __('Price') ?></th>
+        <th class="col qty"><?php /* @escapeNotVerified */ echo __('Qty') ?></th>
+        <th class="col subtotal"><?php /* @escapeNotVerified */ echo __('Subtotal') ?></th>
     </tr>
 </thead>
 <tbody>
@@ -38,19 +38,19 @@ $hasCancelations = $block->hasCancelations();
     $_isRefused   = $_orderHelper->isOrderLineRefused($_orderLine);
 ?>
 <?php $orerItemClass = $_hasIncident ? 'incident': ($_isRefused ? 'refused' : '') ?>
-<tr id="order-item-row-<?= /* @escapeNotVerified */ $_orderLine->getId() ?>" class="<?= /* @escapeNotVerified */ $orerItemClass ?>">
-    <td class="col name" data-th="<?= $block->escapeHtml(__('Product Name')); ?>">
+<tr id="order-item-row-<?= /* @escapeNotVerified */ $_orderLine->getId() ?>" class="<?= $orerItemClass ?>">
+    <td class="col name" data-th="<?php echo $block->escapeHtml(__('Product Name')); ?>">
         <strong class="product name product-item-name"><?= $block->escapeHtml($_orderLine->getOffer()->getProduct()->getTitle()) ?></strong>
     </td>
-    <td class="col incident" data-th="<?= $block->escapeHtml(__('Incident')); ?>">
+    <td class="col incident" data-th="<?php echo $block->escapeHtml(__('Incident')); ?>">
         <?php if (!$_orderLine->getCanOpenIncident() && !$_hasIncident): ?>
-            <?= /* @escapeNotVerified */ __('N/A') ?>
+            <?php echo __('N/A') ?>
         <?php else: ?>
             <?php if (!$_hasIncident): ?>
-                <?= /* @escapeNotVerified */ __('No open incidents') ?>
+                <?= __('No open incidents') ?>
                 <?= $block->getLayout()->createBlock(\Mirakl\FrontendDemo\Block\Message\OpenIncident::class)
-                        ->setMiraklOrderLineId($_orderLine->getId())
-                        ->toHtml() ?>
+                    ->setMiraklOrderLineId($_orderLine->getId())
+                    ->toHtml() ?>
             <?php else: ?>
                 <?php
                     $_jsFormObject = 'incidentForm' . $_orderLine->getId();
@@ -62,22 +62,22 @@ $hasCancelations = $block->hasCancelations();
                         'remote_id' => $_miraklOrder->getId()
                     ]);
                 ?>
-                <form action="<?= /* @escapeNotVerified */ $_url ?>" id="incident-<?= /* @escapeNotVerified */ $_orderLine->getId() ?>" class="incident-form" method="post">
-                    <?= /* @escapeNotVerified */ $block->getBlockHtml('formkey'); ?>
-                    <input type="hidden" name="order_line_id" value="<?= /* @escapeNotVerified */ $_orderLine->getId() ?>" />
-                    <p><?= /* @escapeNotVerified */ __($_orderLine->getStatus()->getReason()->getLabel()) ?></p>
-                    <select name="reason" title="<?= /* @escapeNotVerified */ __('Incident') ?>" data-validate="{'validate-select':true}">
-                        <option value=""><?= /* @escapeNotVerified */ __('-- Close Incident --') ?></option>
+                <form action="<?= /* @escapeNotVerified */ $_url ?>" id="incident-<?= $_orderLine->getId() ?>" class="incident-form" method="post">
+                    <?php echo $block->getBlockHtml('formkey'); ?>
+                    <input type="hidden" name="order_line_id" value="<?php echo $_orderLine->getId() ?>" />
+                    <p><?php echo __($_orderLine->getStatus()->getReason()->getLabel()) ?></p>
+                    <select name="reason" title="<?php /* @escapeNotVerified */ echo __('Incident') ?>" data-validate="{'validate-select':true}">
+                        <option value=""><?php echo __('-- Close Incident --') ?></option>
                         <?php foreach ($_reasons as $_reason): ?>
                             <?php /** @var \Mirakl\MMP\FrontOperator\Domain\Reason $_reason */ ?>
-                            <option value="<?= $block->escapeHtmlAttr($_reason->getCode()) ?>"><?= $this->escapeHtml($_reason->getLabel()) ?></option>
+                            <option value="<?php echo $_reason->getCode() ?>"><?php echo $this->escapeHtml($_reason->getLabel()) ?></option>
                         <?php endforeach ?>
                     </select>
-                    <button type="submit" class="action submit primary"><span><?= /* @escapeNotVerified */ __('OK') ?></span></button>
+                    <button type="submit" class="action submit primary"><span><?php /* @escapeNotVerified */ echo __('OK') ?></span></button>
                 </form>
                 <script type="text/x-magento-init">
                     {
-                        "#incident-<?= /* @escapeNotVerified */ $_orderLine->getId() ?>": {
+                        "#incident-<?php echo $_orderLine->getId() ?>": {
                            "Mirakl_FrontendDemo/js/order/incident-form": {}
                         }
                     }
@@ -85,88 +85,88 @@ $hasCancelations = $block->hasCancelations();
             <?php endif; ?>
         <?php endif; ?>
     </td>
-    <td class="col sku" data-th="<?= $block->escapeHtml(__('SKU')); ?>"><?= $this->escapeHtml($_orderLine->getOffer()->getSku()) ?></td>
+    <td class="col sku" data-th="<?php echo $block->escapeHtml(__('SKU')); ?>"><?= $this->escapeHtml($_orderLine->getOffer()->getSku()) ?></td>
     <td class="col price" data-th="<?= $block->escapeHtml(__('Price')); ?>">
         <?php if ($_taxHelper->displaySalesPricesInclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-including-tax" data-label="<?= $block->escapeHtml(__('Incl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLinePrice($_orderLine)) ?>
+            <span class="price-including-tax" data-label="<?php echo $block->escapeHtml(__('Incl. Tax')); ?>">
+                <?php echo $_order->formatPrice($block->getOrderLinePrice($_orderLine)) ?>
             </span>
         <?php endif ?>
 
         <?php if ($_taxHelper->displaySalesPricesExclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-excluding-tax" data-label="<?= $block->escapeHtml(__('Excl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLinePriceExclTax($_orderLine)) ?>
+            <span class="price-excluding-tax" data-label="<?php echo $block->escapeHtml(__('Excl. Tax')); ?>">
+                <?php echo $_order->formatPrice($block->getOrderLinePriceExclTax($_orderLine)) ?>
             </span>
-        <?php endif ?>
+    <?php endif ?>
     </td>
     <?php $isOrderLineHasCancelations = $_orderHelper->isOrderLineCanceled($_orderLine) ?>
     <?php $isOrderLineRefused = $_orderHelper->isOrderLineRefused($_orderLine) ?>
-    <?php if ($isOrderLineHasCancelations): ?>
+    <?php if ($isOrderLineHasCancelations) : ?>
         <?php $totalQty = $_orderHelper->getOrderLineTotalQuantity($_orderLine) ?>
         <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>">
-            <s><?= /* @escapeNotVerified */ $totalQty ?></s>
-            <span><?= /* @escapeNotVerified */ $_orderLine->getQuantity() ?></span>
+            <s><?= $totalQty ?></s>
+            <span><?= $_orderLine->getQuantity() ?></span>
         </td>
-    <?php else: ?>
+    <?php else : ?>
         <td class="col qty" data-th="<?= $block->escapeHtml(__('Qty')); ?>">
-            <?= /* @escapeNotVerified */ $_orderLine->getQuantity() ?>
+            <?= $_orderLine->getQuantity() ?>
         </td>
     <?php endif; ?>
-    <td class="col subtotal" data-th="<?= $block->escapeHtml(__('Subtotal')); ?>">
-    <?php if ($isOrderLineHasCancelations): ?>
+    <td class="col subtotal" data-th="<?php echo $block->escapeHtml(__('Subtotal')); ?>">
+    <?php if ($isOrderLineHasCancelations) : ?>
         <?php // crossed orderLines subtotals ?>
         <?php if ($_taxHelper->displaySalesPricesInclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <s class="price-including-tax" data-label="<?= $block->escapeHtml(__('Incl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLineTotalPrice($_orderLine)) ?>
+            <s class="price-including-tax" data-label="<?php echo $block->escapeHtml(__('Incl. Tax')); ?>">
+                <?php echo $_order->formatPrice($block->getOrderLineTotalPrice($_orderLine)) ?>
             </s>
         <?php endif ?>
         <?php if ($_taxHelper->displaySalesPricesExclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <s class="price-excluding-tax" data-label="<?= $block->escapeHtml(__('Excl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLineTotalPriceExclTax($_orderLine)) ?>
+            <s class="price-excluding-tax" data-label="<?php echo $block->escapeHtml(__('Excl. Tax')); ?>">
+                <?php echo $_order->formatPrice($block->getOrderLineTotalPriceExclTax($_orderLine)) ?>
             </s>
         <?php endif ?>
-        <?php // orderLines subtotals after cancelations ?>
+        <?php //orderLines subtotals after cancelations ?>
         <?php if ($_taxHelper->displaySalesPricesInclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-including-tax" data-label="<?= $block->escapeHtml(__('Incl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getOrderLinePriceAfterCancelationInclTax($_orderLine)) ?>
+            <span class="price-including-tax" data-label="<?php echo $block->escapeHtml(__('Incl. Tax')); ?>">
+                <?= $block->formatFinalPrice($block->getOrderLinePriceAfterCancelationInclTax($_orderLine)) ?>
             </span>
         <?php endif ?>
         <?php if ($_taxHelper->displaySalesPricesExclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-excluding-tax" data-label="<?= $block->escapeHtml(__('Excl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $block->formatFinalPrice($_orderLine->getPrice()) ?>
-            </span>
+            <span class="price-excluding-tax" data-label="<?php echo $block->escapeHtml(__('Excl. Tax')); ?>">
+                              <?= $block->formatFinalPrice($_orderLine->getPrice()) ?>
+             </span>
         <?php endif ?>
-    <?php else: ?>
+    <?php else :?>
         <?php if ($_taxHelper->displaySalesPricesInclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-including-tax" data-label="<?= $block->escapeHtml(__('Incl. Tax')); ?>">
-                 <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLineTotalPrice($_orderLine)) ?>
+            <span class="price-including-tax" data-label="<?php echo $block->escapeHtml(__('Incl. Tax')); ?>">
+                 <?= $_order->formatPrice($block->getOrderLineTotalPrice($_orderLine)) ?>
              </span>
         <?php endif ?>
         <?php if ($_taxHelper->displaySalesPricesExclTax() || $_taxHelper->displaySalesPricesBoth()): ?>
-            <span class="price-excluding-tax" data-label="<?= $block->escapeHtml(__('Excl. Tax')); ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderLineTotalPriceExclTax($_orderLine)) ?>
+            <span class="price-excluding-tax" data-label="<?php echo $block->escapeHtml(__('Excl. Tax')); ?>">
+                <?= $_order->formatPrice($block->getOrderLineTotalPriceExclTax($_orderLine)) ?>
             </span>
         <?php endif ?>
-    <?php endif; ?>
+    <?php endif;?>
     </td>
 </tr>
 <?php endforeach; ?>
 </tbody>
 <tfoot class="<?= $hasCancelations || $hasRejectedItems ? 'with-crossed-out-prices' : '' ?>">
-<?php if ($hasCancelations || $hasRejectedItems): ?>
+<?php if ($hasCancelations || $hasRejectedItems) : ?>
     <?php if (!$_taxHelper->displaySalesSubtotalBoth()): ?>
     <tr class="subtotal">
-        <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal') ?></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
+        <th colspan="5" class="mark" scope="row"><?= __('Subtotal') ?></th>
+        <td class="amount" data-th="<?= __('Subtotal') ?>">
             <s>
-                <?= /* @escapeNotVerified */ $_order->formatPrice(
+                <?= $_order->formatPrice(
                     $_taxHelper->displaySalesSubtotalInclTax()
                         ? $block->getOrderSubtotalPrice()
                         : $block->getOrderSubtotalPriceExclTax()
                 ) ?>
             </s>
             <span>
-                <?= /* @escapeNotVerified */ $block->formatFinalPrice(
+                <?= $block->formatFinalPrice(
                     $_taxHelper->displaySalesSubtotalInclTax()
                         ? $block->getOrderFinalSubtotalInclTax()
                         : $block->getOrderFinalSubtotalExclTax()
@@ -176,58 +176,58 @@ $hasCancelations = $block->hasCancelations();
     </tr>
     <?php else: ?>
         <tr class="subtotal_excl">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal (Excl. Tax)') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal (Excl. Tax)')) ?>">
+            <th colspan="5" class="mark" scope="row"><?= __('Subtotal (Excl. Tax)') ?></th>
+            <td class="amount" data-th="<?= __('Subtotal (Excl. Tax)') ?>">
                 <s>
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderSubtotalPriceExclTax()) ?>
+                    <?= $_order->formatPrice($block->getOrderSubtotalPriceExclTax()) ?>
                 </s>
                 <span>
-                    <?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getOrderFinalSubtotalExclTax()) ?>
+                     <?= $block->formatFinalPrice($block->getOrderFinalSubtotalExclTax()) ?>
                 </span>
             </td>
         </tr>
         <tr class="subtotal_incl">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal (Incl. Tax)') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal (Incl. Tax)')) ?>">
+            <th colspan="5" class="mark" scope="row"><?= __('Subtotal (Incl. Tax)') ?></th>
+            <td class="amount" data-th="<?= __('Subtotal (Incl. Tax)') ?>">
                 <s>
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderSubtotalPrice()) ?>
+                    <?= $_order->formatPrice($block->getOrderSubtotalPrice()) ?>
                 </s>
                 <span>
-                    <?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getOrderFinalSubtotalInclTax()) ?>
+                     <?= $block->formatFinalPrice($block->getOrderFinalSubtotalInclTax()) ?>
                 </span>
             </td>
         </tr>
     <?php endif ?>
-<?php else: ?>
+<?php else : ?>
     <?php if (!$_taxHelper->displaySalesSubtotalBoth()): ?>
         <tr class="subtotal">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal')) ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice(
-                    $_taxHelper->displaySalesSubtotalInclTax()
-                        ? $block->getOrderSubtotalPrice()
-                        : $block->getOrderSubtotalPriceExclTax()
+            <th colspan="5" class="mark" scope="row"><?php echo __('Subtotal') ?></th>
+            <td class="amount" data-th="<?php echo __('Subtotal') ?>">
+                <?= $_order->formatPrice(
+                    $_taxHelper->displaySalesSubtotalInclTax() ?
+                        $block->getOrderSubtotalPrice() :
+                        $block->getOrderSubtotalPriceExclTax()
                 ) ?>
             </td>
         </tr>
     <?php else: ?>
             <tr class="subtotal_excl">
-                <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal (Excl. Tax)') ?></th>
-                <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal (Excl. Tax)')) ?>">
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderSubtotalPriceExclTax()) ?>
+                <th colspan="5" class="mark" scope="row"><?php echo __('Subtotal (Excl. Tax)') ?></th>
+                <td class="amount" data-th="<?= __('Subtotal (Excl. Tax)') ?>">
+                    <?= $_order->formatPrice($block->getOrderSubtotalPriceExclTax()) ?>
                 </td>
             </tr>
             <tr class="subtotal_incl">
-                <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Subtotal (Incl. Tax)') ?></th>
-                <td class="amount" data-th="<?= $block->escapeHtml(__('Subtotal (Incl. Tax)')) ?>">
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderSubtotalPrice()) ?>
+                <th colspan="5" class="mark" scope="row"><?php echo __('Subtotal (Incl. Tax)') ?></th>
+                <td class="amount" data-th="<?php echo __('Subtotal (Incl. Tax)') ?>">
+                    <?= $_order->formatPrice($block->getOrderSubtotalPrice()) ?>
                 </td>
             </tr>
     <?php endif ?>
 <?php endif; ?>
 <?php $orderShippingPriceInclTax = $block->getOrderShippingPriceInclTax() ?>
 <?php $orderShippingPriceExclTax = $block->getOrderShippingPriceExclTax() ?>
-<?php if ($hasCancelations || $hasRejectedItems): ?>
+<?php if ($hasCancelations || $hasRejectedItems) : ?>
     <?php $originalShippingPriceInclTax = $block->getOrderShippingPriceInclTax() ?>
     <?php $finalShippingPriceInclTax = $block->getOrderFinalShippingPriceInclTax() ?>
     <?php $orderFinalShippingPriceInclTax = $block->getOrderFinalShippingPriceInclTax() ?>
@@ -235,20 +235,20 @@ $hasCancelations = $block->hasCancelations();
     <?php $displayCrossedOutShippingPrice = $originalShippingPriceInclTax !== $finalShippingPriceInclTax ?>
     <?php if (!$_taxHelper->displaySalesSubtotalBoth()): ?>
     <tr class="shipping">
-        <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Shipping & Handling') ?></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Shipping & Handling')) ?>">
+        <th colspan="5" class="mark" scope="row"><?= __('Shipping & Handling') ?></th>
+        <td class="amount" data-th="<?= __('Shipping & Handling') ?>">
             <?php // we display shipping crossed prices only if there was cancelations / rejections on shipping fees ?>
-            <?php if ($displayCrossedOutShippingPrice): ?>
+            <?php if ($displayCrossedOutShippingPrice) : ?>
                 <s>
-                    <?= /* @escapeNotVerified */ $_order->formatPrice(
+                    <?= $_order->formatPrice(
                         $_taxHelper->displaySalesShippingInclTax()
                             ? $orderShippingPriceInclTax
                             : $orderShippingPriceExclTax
                     ) ?>
                 </s>
-            <?php endif; ?>
+            <?php endif;?>
                 <span>
-                    <?= /* @escapeNotVerified */ $block->formatFinalPrice(
+                    <?= $block->formatFinalPrice(
                         $_taxHelper->displaySalesShippingInclTax()
                             ? $orderFinalShippingPriceInclTax
                             : $orderFinalShippingPriceExclTax
@@ -258,28 +258,28 @@ $hasCancelations = $block->hasCancelations();
      </tr>
      <?php else: ?>
         <tr class="shipping_excl">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Shipping & Handling (Excl. Tax)') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Shipping & Handling (Excl. Tax)')) ?>">
-                <?php if ($displayCrossedOutShippingPrice): ?>
+            <th colspan="5" class="mark" scope="row"><?= __('Shipping & Handling (Excl. Tax)') ?></th>
+            <td class="amount" data-th="<?= __('Shipping & Handling (Excl. Tax)') ?>">
+                <?php if ($displayCrossedOutShippingPrice) : ?>
                     <s>
-                        <?= /* @escapeNotVerified */ $_order->formatPrice($orderShippingPriceExclTax) ?>
+                        <?= $_order->formatPrice($orderShippingPriceExclTax) ?>
                     </s>
                 <?php endif; ?>
                     <span>
-                        <?= /* @escapeNotVerified */ $block->formatFinalPrice($orderFinalShippingPriceExclTax) ?>
+                        <?= $block->formatFinalPrice($orderFinalShippingPriceExclTax) ?>
                     </span>
             </td>
         </tr>
         <tr class="shipping_incl">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Shipping & Handling (Incl. Tax)') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Shipping & Handling (Incl. Tax)')) ?>">
-                <?php if ($displayCrossedOutShippingPrice): ?>
+            <th colspan="5" class="mark" scope="row"><?= __('Shipping & Handling (Incl. Tax)') ?></th>
+            <td class="amount" data-th="<?= __('Shipping & Handling (Incl. Tax)') ?>">
+                <?php if ($displayCrossedOutShippingPrice) : ?>
                     <s>
-                        <?= /* @escapeNotVerified */ $_order->formatPrice($orderShippingPriceInclTax) ?>
+                        <?= $_order->formatPrice($orderShippingPriceInclTax) ?>
                     </s>
                 <?php endif; ?>
                     <span>
-                        <?= /* @escapeNotVerified */ $block->formatFinalPrice($orderFinalShippingPriceInclTax) ?>
+                        <?= $block->formatFinalPrice($orderFinalShippingPriceInclTax) ?>
                     </span>
             </td>
         </tr>
@@ -287,9 +287,9 @@ $hasCancelations = $block->hasCancelations();
 <?php else: ?>
     <?php if (!$_taxHelper->displaySalesSubtotalBoth()): ?>
         <tr class="shipping">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Marketplace Shipping') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Marketplace Shipping')) ?>">
-                <?= /* @escapeNotVerified */ $_order->formatPrice(
+            <th colspan="5" class="mark" scope="row"><?php echo __('Marketplace Shipping') ?></th>
+            <td class="amount" data-th="<?php echo __('Marketplace Shipping') ?>">
+                <?= $_order->formatPrice(
                     $_taxHelper->displaySalesShippingInclTax()
                         ? $orderShippingPriceInclTax
                         : $orderShippingPriceExclTax
@@ -298,31 +298,31 @@ $hasCancelations = $block->hasCancelations();
         </tr>
     <?php else: ?>
             <tr class="shipping_excl">
-                <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Marketplace Shipping (Excl. Tax)') ?></th>
-                <td class="amount" data-th="<?= $block->escapeHtml(__('Marketplace Shipping (Excl. Tax)')) ?>">
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($orderShippingPriceExclTax) ?>
+                <th colspan="5" class="mark" scope="row"><?php echo __('Marketplace Shipping (Excl. Tax)') ?></th>
+                <td class="amount" data-th="<?php echo __('Marketplace Shipping (Excl. Tax)') ?>">
+                    <?= $_order->formatPrice($orderShippingPriceExclTax) ?>
                 </td>
             </tr>
             <tr class="shipping_incl">
-                <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Marketplace Shipping (Incl. Tax)') ?></th>
-                <td class="amount" data-th="<?= $block->escapeHtml(__('Marketplace Shipping (Incl. Tax)')) ?>">
-                    <?= /* @escapeNotVerified */ $_order->formatPrice($orderShippingPriceInclTax) ?>
+                <th colspan="5" class="mark" scope="row"><?php echo __('Marketplace Shipping (Incl. Tax)') ?></th>
+                <td class="amount" data-th="<?php echo __('Marketplace Shipping (Incl. Tax)') ?>">
+                    <?= $_order->formatPrice($orderShippingPriceInclTax) ?>
                 </td>
             </tr>
     <?php endif ?>
 <?php endif; ?>
-<?php if ($hasCancelations || $hasRejectedItems): ?>
+<?php if ($hasCancelations || $hasRejectedItems) : ?>
     <?php if ($_taxHelper->displaySalesFullSummary($_order->getStore())): ?>
         <?php $_taxDetails = $_taxHelper->getMiraklFinalCalculatedTaxes($_order, $_miraklOrder) ?>
             <?php if (!empty($_taxDetails)): ?>
                 <tr class="grand_total">
-                    <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total (Excl. Tax)') ?></strong></th>
-                    <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total (Excl. Tax)')) ?>">
+                    <th colspan="5" class="mark" scope="row"><strong><?= __('Grand Total (Excl. Tax)') ?></strong></th>
+                    <td class="amount" data-th="<?= __('Grand Total (Excl. Tax)') ?>">
                         <s>
-                            <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
+                            <strong><?= $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
                         </s>
                         <span>
-                            <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderFinalTotalPriceExclTax()) ?></strong>
+                            <strong><?= $_order->formatPrice($block->getOrderFinalTotalPriceExclTax()) ?></strong>
                         </span>
                     </td>
                 </tr>
@@ -330,7 +330,7 @@ $hasCancelations = $block->hasCancelations();
                     <tr class="totals tax details">
                         <th colspan="5" class="mark" scope="row"><?= $block->escapeHtml($_tax['title']) ?></th>
                         <td class="amount" data-th="<?= $block->escapeHtml($_tax['title']) ?>">
-                            <?= /* @escapeNotVerified */ $_order->formatPrice($_tax['tax_amount']) ?>
+                            <?= $_order->formatPrice($_tax['tax_amount']) ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -338,27 +338,27 @@ $hasCancelations = $block->hasCancelations();
                 <?php $_miraklOrderTaxDetails = $_taxHelper->getMiraklOrderFinalCalculatedTaxes($_order, $_miraklOrder) ?>
                 <?php if (!empty($_miraklOrderTaxDetails)): ?>
                     <tr class="grand_total">
-                        <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total (Excl. Tax)') ?></strong></th>
-                        <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total (Excl. Tax)')) ?>">
+                        <th colspan="5" class="mark" scope="row"><strong><?= __('Grand Total (Excl. Tax)') ?></strong></th>
+                        <td class="amount" data-th="<?= __('Grand Total (Excl. Tax)') ?>">
                             <s>
-                                <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
+                                <strong><?= $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
                             </s>
                             <span>
-                                <strong><?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getOrderFinalTotalPriceExclTax()) ?></strong>
+                                 <strong><?= $block->formatFinalPrice($block->getOrderFinalTotalPriceExclTax()) ?></strong>
                             </span>
                         </td>
                     </tr>
                     <?php foreach ($_miraklOrderTaxDetails as $_tax): ?>
                         <tr class="totals tax details">
                             <th colspan="5" class="mark" scope="row">
-                                <?= /* @escapeNotVerified */ __('%1 (%2%)', $block->escapeHtml($_tax['title']), round($_tax['percent'], 2)) ?>
+                                <?= __('%1 (%2%)', $block->escapeHtml($_tax['title']), round($_tax['percent'], 2)) ?>
                             </th>
                             <td class="amount" data-th="<?= $block->escapeHtml($_tax['title']) ?>">
                                 <s>
-                                    <?= /* @escapeNotVerified */ $_order->formatPrice($_tax['tax_amount']) ?>
+                                    <?= $_order->formatPrice($_tax['tax_amount']) ?>
                                 </s>
                                 <span>
-                                    <?= /* @escapeNotVerified */ $block->formatFinalPrice($_tax['final_tax_amount']) ?>
+                                    <?= $block->formatFinalPrice($_tax['final_tax_amount']) ?>
                                 </span>
                             </td>
                         </tr>
@@ -366,21 +366,21 @@ $hasCancelations = $block->hasCancelations();
             <?php endif ?>
         <?php endif ?>
     <?php endif ?>
-<?php else: ?>
+<?php else : ?>
     <?php if ($_taxHelper->displaySalesFullSummary($_order->getStore())): ?>
         <?php $_taxDetails = $_taxHelper->getMiraklCalculatedTaxes($_order) ?>
         <?php if (!empty($_taxDetails)): ?>
             <tr class="grand_total">
-                <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total (Excl. Tax)') ?></strong></th>
-                <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total (Excl. Tax)')) ?>">
-                    <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
+                <th colspan="5" class="mark" scope="row"><strong><?php echo __('Grand Total (Excl. Tax)') ?></strong></th>
+                <td class="amount" data-th="<?php echo __('Grand Total (Excl. Tax)') ?>">
+                    <strong><?php echo $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
                 </td>
             </tr>
             <?php foreach ($_taxDetails as $_tax): ?>
                 <tr class="totals tax details">
-                    <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ $block->escapeHtml($_tax['title']) ?></th>
-                    <td class="amount" data-th="<?= $block->escapeHtml($_tax['title']) ?>">
-                        <?= /* @escapeNotVerified */ $_order->formatPrice($_tax['tax_amount']) ?>
+                    <th colspan="5" class="mark" scope="row"><?php echo $block->escapeHtml($_tax['title']) ?></th>
+                    <td class="amount" data-th="<?php echo $block->escapeHtml($_tax['title']) ?>">
+                        <?php echo $_order->formatPrice($_tax['tax_amount']) ?>
                     </td>
                 </tr>
             <?php endforeach; ?>
@@ -388,96 +388,96 @@ $hasCancelations = $block->hasCancelations();
             <?php $_miraklOrderTaxDetails = $_taxHelper->getMiraklOrderCalculatedTaxes($_order, $_miraklOrder) ?>
             <?php if (!empty($_miraklOrderTaxDetails)): ?>
                 <tr class="grand_total">
-                    <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total (Excl. Tax)') ?></strong></th>
-                    <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total (Excl. Tax)')) ?>">
-                        <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
+                    <th colspan="5" class="mark" scope="row"><strong><?php echo __('Grand Total (Excl. Tax)') ?></strong></th>
+                    <td class="amount" data-th="<?php echo __('Grand Total (Excl. Tax)') ?>">
+                        <strong><?php echo $_order->formatPrice($block->getOrderTotalPriceExclTax()) ?></strong>
                     </td>
                 </tr>
                 <?php foreach ($_miraklOrderTaxDetails as $_tax): ?>
-                    <tr class="totals tax details">
-                        <th colspan="5" class="mark" scope="row">
-                            <?= /* @escapeNotVerified */ __('%1 (%2%)', $block->escapeHtml($_tax['title']), round($_tax['percent'], 2)) ?>
-                        </th>
-                        <td class="amount" data-th="<?= $block->escapeHtml($_tax['title']) ?>">
-                            <?= /* @escapeNotVerified */ $_order->formatPrice($_tax['tax_amount']) ?>
-                        </td>
-                    </tr>
+                <tr class="totals tax details">
+                    <th colspan="5" class="mark" scope="row">
+                        <?php echo __('%1 (%2%)', $block->escapeHtml($_tax['title']), round($_tax['percent'], 2)) ?>
+                    </th>
+                    <td class="amount" data-th="<?php echo $block->escapeHtml($_tax['title']) ?>">
+                        <?php echo $_order->formatPrice($_tax['tax_amount']) ?>
+                    </td>
+                </tr>
                 <?php endforeach; ?>
             <?php endif ?>
         <?php endif ?>
     <?php endif ?>
 <?php endif; ?>
-<?php if ($hasCancelations || $hasRejectedItems): ?>
+<?php if ($hasCancelations || $hasRejectedItems) : ?>
     <tr class="tax">
-        <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Tax Total') ?></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Tax Total')) ?>">
+        <th colspan="5" class="mark" scope="row"><?php echo __('Tax Total') ?></th>
+        <td class="amount" data-th="<?php echo __('Tax Total') ?>">
             <s>
-                <?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalTax()) ?>
+                <?= $_order->formatPrice($block->getOrderTotalTax()) ?>
             </s>
             <span>
-                <?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getMiraklFinalTotalTax()) ?>
+                    <?= $block->formatFinalPrice($block->getMiraklFinalTotalTax()) ?>
             </span>
         </td>
     </tr>
-<?php else: ?>
+<?php else : ?>
     <tr class="tax">
-        <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Tax Total') ?></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Tax Total')) ?>"><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalTax()) ?></td>
+        <th colspan="5" class="mark" scope="row"><?php echo __('Tax Total') ?></th>
+        <td class="amount" data-th="<?php echo __('Tax Total') ?>"><?php echo $_order->formatPrice($block->getOrderTotalTax()) ?></td>
     </tr>
 <?php endif; ?>
-<?php if ($hasCancelations || $hasRejectedItems): ?>
+<?php if ($hasCancelations || $hasRejectedItems) : ?>
     <tr class="grand_total last">
-        <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total') ?></strong></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total')) ?>">
+        <th colspan="5" class="mark" scope="row"><strong><?= __('Grand Total') ?></strong></th>
+        <td class="amount" data-th="<?= __('Grand Total') ?>">
             <s>
-                <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPrice()) ?></strong>
+                <strong><?= $_order->formatPrice($block->getOrderTotalPrice()) ?></strong>
             </s>
             <span>
-                <strong><?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getOrderFinalTotalPriceInclTax()) ?></strong>
-            </span>
+                 <strong><?= $block->formatFinalPrice($block->getOrderFinalTotalPriceInclTax()) ?></strong>
+             </span>
         </td>
     </tr>
 <?php else: ?>
     <tr class="grand_total last">
-        <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Grand Total') ?></strong></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total')) ?>">
-            <strong><?= /* @escapeNotVerified */ $_order->formatPrice($block->getOrderTotalPrice()) ?></strong>
+        <th colspan="5" class="mark" scope="row"><strong><?= __('Grand Total') ?></strong></th>
+        <td class="amount" data-th="<?= __('Grand Total') ?>">
+            <strong><?= $_order->formatPrice($block->getOrderTotalPrice()) ?></strong>
         </td>
     </tr>
 <?php endif; ?>
 <?php if ($_order->isCurrencyDifferent()): ?>
-        <?php if ($hasCancelations || $hasRejectedItems): ?>
+        <?php if ($hasCancelations || $hasRejectedItems) : ?>
         <tr class="base_grandtotal">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Grand Total to be Charged') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total to be Charged')) ?>">
+            <th colspan="5" class="mark" scope="row"><?= __('Grand Total to be Charged') ?></th>
+            <td class="amount" data-th="<?= __('Grand Total to be Charged') ?>">
                 <s>
-                    <?= /* @escapeNotVerified */ $_order->formatBasePrice($block->getOrderBaseTotalPrice()) ?>
+                    <?= $_order->formatBasePrice($block->getOrderBaseTotalPrice()) ?>
                 </s>
                 <span>
-                    <?= /* @escapeNotVerified */ $_order->formatBasePrice($block->getOrderFinalBaseTotalPrice()) ?>
+                    <?= $_order->formatBasePrice($block->getOrderFinalBaseTotalPrice()) ?>
                 </span>
             </td>
         </tr>
         <?php else: ?>
         <tr class="base_grandtotal">
-            <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Grand Total to be Charged') ?></th>
-            <td class="amount" data-th="<?= $block->escapeHtml(__('Grand Total to be Charged')) ?>">
-                <?= /* @escapeNotVerified */ $_order->formatBasePrice($block->getOrderBaseTotalPrice()) ?>
+            <th colspan="5" class="mark" scope="row"><?php echo __('Grand Total to be Charged') ?></th>
+            <td class="amount" data-th="<?php echo __('Grand Total to be Charged') ?>">
+                <?= $_order->formatBasePrice($block->getOrderBaseTotalPrice()) ?>
             </td>
         </tr>
         <?php endif; ?>
 <?php endif ?>
 <?php if ($hasRefunds): ?>
     <tr class="tax">
-        <th colspan="5" class="mark" scope="row"><?= /* @escapeNotVerified */ __('Refunded Total') ?></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Refunded Total')) ?>">
-            <?= /* @escapeNotVerified */ $_order->formatPrice($block->getMiraklRefundTotal()) ?>
+        <th colspan="5" class="mark" scope="row"><?= __('Refunded Total') ?></th>
+        <td class="amount" data-th="<?= __('Refunded Total') ?>">
+            <?= $_order->formatPrice($block->getMiraklRefundTotal()) ?>
         </td>
     </tr>
     <tr class="grand_total last">
-        <th colspan="5" class="mark" scope="row"><strong><?= /* @escapeNotVerified */ __('Total Paid') ?></strong></th>
-        <td class="amount" data-th="<?= $block->escapeHtml(__('Total Paid')) ?>">
-            <strong><?= /* @escapeNotVerified */ $block->formatFinalPrice($block->getMiraklPaidTotal()) ?></strong>
+        <th colspan="5" class="mark" scope="row"><strong><?php echo __('Total Paid') ?></strong></th>
+        <td class="amount" data-th="<?= __('Total Paid') ?>">
+            <strong><?= $block->formatFinalPrice($block->getMiraklPaidTotal()) ?></strong>
         </td>
     </tr>
 <?php endif; ?>
@@ -486,8 +486,8 @@ $hasCancelations = $block->hasCancelations();
 </div>
 <div class="actions-toolbar">
     <div class="secondary">
-        <a class="action back" href="<?= /* @escapeNotVerified */ $block->getBackUrl() ?>">
-            <span><?= /* @escapeNotVerified */ $block->getBackTitle() ?></span>
+        <a class="action back" href="<?php /* @escapeNotVerified */ echo $block->getBackUrl() ?>">
+            <span><?php /* @escapeNotVerified */ echo $block->getBackTitle() ?></span>
         </a>
     </div>
 </div>

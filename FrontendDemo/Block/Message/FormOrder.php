@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Sales\Model\Order;
@@ -12,12 +9,11 @@ class FormOrder extends AbstractForm
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_formTitle = 'Start a Conversation';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getFormAction()
     {
@@ -28,7 +24,7 @@ class FormOrder extends AbstractForm
     }
 
     /**
-     * @return ReasonCollection
+     * @return  ReasonCollection
      */
     public function getReasons()
     {
@@ -38,7 +34,7 @@ class FormOrder extends AbstractForm
     }
 
     /**
-     * @return Order
+     * @return  Order
      */
     public function getOrder()
     {
@@ -46,7 +42,7 @@ class FormOrder extends AbstractForm
     }
 
     /**
-     * @return MiraklOrder
+     * @return  MiraklOrder
      */
     public function getMiraklOrder()
     {
@@ -54,7 +50,7 @@ class FormOrder extends AbstractForm
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function withFile()
     {

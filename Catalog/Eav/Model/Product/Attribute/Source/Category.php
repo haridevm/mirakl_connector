@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Eav\Model\Product\Attribute\Source;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
@@ -15,7 +12,7 @@ class Category extends AbstractSource
     protected $categorySource;
 
     /**
-     * @param CategorySource $categorySource
+     * @param   CategorySource  $categorySource
      */
     public function __construct(CategorySource $categorySource)
     {
@@ -23,7 +20,7 @@ class Category extends AbstractSource
     }
 
     /**
-     * @inheritdoc
+     * @return  array
      */
     public function getAllOptions()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Product;
 
 use Mirakl\Api\Helper\Config as ApiConfig;
@@ -85,14 +82,14 @@ abstract class AbstractObserver
         $this->configHelper             = $configHelper;
         $this->processHelper            = $processHelper;
         $this->productHelper            = $productHelper;
-        $this->enabled                  = $this->configHelper->isMcmEnabled() || $this->configHelper->isAsyncMcmEnabled(); // phpcs:ignore
+        $this->enabled                  = $this->configHelper->isMcmEnabled() || $this->configHelper->isAsyncMcmEnabled();
         $this->productCollectionFactory = $productCollectionFactory;
         $this->processFactory           = $processFactory;
         $this->processResourceFactory   = $processResourceFactory;
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     protected function isEnabled()
     {

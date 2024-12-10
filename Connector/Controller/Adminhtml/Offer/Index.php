@@ -1,24 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Offer;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Core\Helper\Data as CoreHelper;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
-class Index extends Action implements HttpGetActionInterface
+class Index extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
+    const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
 
     /**
      * @var Config
@@ -31,9 +24,9 @@ class Index extends Action implements HttpGetActionInterface
     protected $coreHelper;
 
     /**
-     * @param Context    $context
-     * @param Config     $connectorConfig
-     * @param CoreHelper $coreHelper
+     * @param   Context     $context
+     * @param   Config      $connectorConfig
+     * @param   CoreHelper  $coreHelper
      */
     public function __construct(
         Context $context,
@@ -46,19 +39,13 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return $this
+     * Init action
+     *
+     * @return  $this
      */
     protected function _initAction()
     {
-        if ($this->isOffersImportDisabled()) {
-            $this->messageManager->addErrorMessage(
-                __('Offers import is disabled. Go to Mirakl > Configuration > Synchronization to enable it.')
-            );
-        } else {
-            $entity = $this->connectorConfig->isOffersImportAsyncEnabled() ? 'offers_async' : 'offers';
-            $this->showLastUpdateDate($entity);
-        }
-
+        $this->showLastUpdateDate('offers');
         $this->_view->loadLayout();
 
         $this->_setActiveMenu('Mirakl_Connector::offers')
@@ -68,7 +55,7 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {
@@ -78,23 +65,15 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return bool
-     */
-    private function isOffersImportDisabled()
-    {
-        return !$this->connectorConfig->isOffersImportEnabled()
-            && !$this->connectorConfig->isOffersImportAsyncEnabled();
-    }
-
-    /**
      * Adds a notice that displays last synchronization date of specified entity
      *
-     * @param string $entity
+     * @param   string  $entity
      */
     protected function showLastUpdateDate($entity)
     {
-        if ($lastUpdateDate = $this->connectorConfig->getSyncDate($entity)) {
-            $this->messageManager->addSuccessMessage(
+        $lastUpdateDate = $this->connectorConfig->getSyncDate($entity);
+        if ($lastUpdateDate) {
+            $this->messageManager->addNoticeMessage(
                 __('Last synchronization: %1', $this->coreHelper->formatDateTime($lastUpdateDate))
             );
         }

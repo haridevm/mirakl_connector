@@ -1,9 +1,7 @@
 <?php
 
-/** @var \Magento\Catalog\Model\Product $product */
+/** @var $product \Magento\Catalog\Model\Product */
 $product = \Magento\TestFramework\Helper\Bootstrap::getObjectManager()->create(\Magento\Catalog\Model\Product::class);
-
-// @phpstan-ignore-next-line
 $product->setTypeId(\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE)
     ->setAttributeSetId(11)
     ->setName('Test Product')

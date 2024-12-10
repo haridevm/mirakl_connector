@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Block\Adminhtml\System\Config\Button\Sync;
 
 use Mirakl\Connector\Block\Adminhtml\System\Config\Button\AbstractButtons;

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\Common\Domain\Collection\SeekableCollection;
@@ -15,10 +12,10 @@ class Shipment extends ClientHelper\MMP
     /**
      * (ST11) List shipments of given orders
      *
-     * @param array $orderIds
-     * @param array $stateCodes @see \Mirakl\MMP\Common\Domain\Shipment\ShipmentStatus
-     * @param int   $limit
-     * @return SeekableCollection
+     * @param   array   $orderIds
+     * @param   array   $stateCodes     @see \Mirakl\MMP\Common\Domain\Shipment\ShipmentStatus
+     * @param   int     $limit
+     * @return  SeekableCollection
      */
     public function getShipments(array $orderIds = [], array $stateCodes = [], $limit = 10)
     {
@@ -42,8 +39,8 @@ class Shipment extends ClientHelper\MMP
     /**
      * (ST11) List shipments according to given page token
      *
-     * @param string $pageToken
-     * @return SeekableCollection
+     * @param   string  $pageToken
+     * @return  SeekableCollection
      */
     public function getShipmentsPage($pageToken)
     {
@@ -56,8 +53,8 @@ class Shipment extends ClientHelper\MMP
     /**
      * (ST25) Validate shipments as received
      *
-     * @param array $shipmentIds
-     * @return ShipmentWorkflowResponse
+     * @param   array   $shipmentIds
+     * @return  ShipmentWorkflowResponse
      */
     public function receiveShipments(array $shipmentIds)
     {

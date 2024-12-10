@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\DB\Trigger\Creator;
@@ -7,7 +6,7 @@ namespace Mirakl\OfferIndexer\DB\Trigger\Creator;
 class InventoryIndexTriggerCreator extends AbstractTriggerCreator
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function create(int $stockId): string
     {

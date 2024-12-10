@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\ResourceModel;
@@ -7,8 +6,7 @@ namespace Mirakl\OfferIndexer\Model\ResourceModel;
 class Offer extends \Mirakl\Connector\Model\ResourceModel\Offer
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _getLoadSelect($field, $value, $object)
     {
@@ -22,8 +20,7 @@ class Offer extends \Mirakl\Connector\Model\ResourceModel\Offer
                     '%s.offer_id = offer_index.offer_id AND offer_index.store_id = %d',
                     $this->getMainTable(),
                     $object->getStoreId()
-                )
-            );
+                ));
         }
 
         return $select;

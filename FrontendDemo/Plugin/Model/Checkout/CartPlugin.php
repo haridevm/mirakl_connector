@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Model\Checkout;
 
 use Magento\Catalog\Model\Product;
@@ -23,8 +20,8 @@ class CartPlugin
     private $offerFactory;
 
     /**
-     * @param StockStateInterface $stockState
-     * @param OfferFactory        $offerFactory
+     * @param   StockStateInterface $stockState
+     * @param   OfferFactory        $offerFactory
      */
     public function __construct(StockStateInterface $stockState, OfferFactory $offerFactory)
     {
@@ -35,11 +32,10 @@ class CartPlugin
     /**
      * Check offer suggested qty if quote item refer to an offer
      *
-     * @param Cart     $subject
-     * @param \Closure $proceed
-     * @param array    $data
-     * @return array
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   Cart        $subject
+     * @param   \Closure    $proceed
+     * @param   array       $data
+     * @return  array
      */
     public function aroundSuggestItemsQty(Cart $subject, \Closure $proceed, $data)
     {
@@ -102,10 +98,10 @@ class CartPlugin
 
     /**
      * Returns suggested qty that satisfies qty increments and minQty/maxQty conditions
-     * or original qty if such value does not exist.
+     * or original qty if such value does not exist
      *
-     * @param Offer     $offer
-     * @param int|float $qty
+     * @param  Offer      $offer
+     * @param  int|float  $qty
      * @return int|float
      */
     protected function suggestQty(Offer $offer, $qty)

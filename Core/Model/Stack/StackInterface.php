@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Core\Model\Stack;
@@ -8,7 +7,7 @@ interface StackInterface extends \Iterator, \Countable
 {
     /**
      * @param string $key
-     * @param mixed  $value
+     * @param mixed $value
      */
     public function add(string $key, $value): void;
 

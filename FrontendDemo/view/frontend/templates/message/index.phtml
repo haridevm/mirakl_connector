@@ -5,7 +5,7 @@ $threads = $block->getThreads();
 $helper = $this->helper('Mirakl\FrontendDemo\Helper\Message');
 $miraklOrder = $block->getMiraklOrder();
 ?>
-<?php if ($threads && $threads->getCollection()->count()): ?>
+<?php if ($threads && $threads->getCollection()->count()) : ?>
     <div class="table-wrapper customer-messages">
         <table class="data table table-customer-messages" id="my-customer-messages-table">
             <caption class="table-caption"><?= $block->escapeHtml(__('Messages')) ?></caption>
@@ -22,7 +22,7 @@ $miraklOrder = $block->getMiraklOrder();
             <?php foreach ($threads->getCollection() as $thread): ?>
             <tr>
                 <td data-th="<?= $block->escapeHtmlAttr(__('Participants')) ?>" class="col participants">
-                    <?= /* @escapeNotVerified */ implode(', ', $helper->getCurrentParticipantsNames($thread, ['CUSTOMER'])) ?>
+                    <?= implode(', ', $helper->getCurrentParticipantsNames($thread, ['CUSTOMER'])) ?>
                 </td>
                 <td data-th="<?= $block->escapeHtmlAttr(__('Topic')) ?>" class="col subject">
                     <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadEntity $entity */ ?>
@@ -33,17 +33,17 @@ $miraklOrder = $block->getMiraklOrder();
                             </div>
                         <?php endif; ?>
                         <div class="customer-messages-entity">
-                            <?= /* @escapeNotVerified */ __('%1: %2',
-                                '<span class="customer-messages-type">'
-                                    . $block->escapeHtmlAttr(__($helper->getEntityName($entity)))
-                                . '</span>',
+                            <?= __('%1: %2',
+                                '<span class="customer-messages-type">' .
+                                    $block->escapeHtmlAttr(__($helper->getEntityName($entity))) .
+                                '</span>',
                                 $block->escapeHtmlAttr($entity->getLabel())
                             ) ?>
                         </div>
                     <?php endforeach; ?>
                 </td>
                 <td data-th="<?= $block->escapeHtmlAttr(__('Last Message Date')) ?>" class="col date">
-                    <?= /* @escapeNotVerified */ $block->formatDateShort($thread->getMetadata()->getLastMessageDate()) ?>
+                    <?= $block->formatDateShort($thread->getMetadata()->getLastMessageDate()) ?>
                 </td>
                 <td data-th="<?= $block->escapeHtmlAttr(__('Action')) ?>" class="col actions">
                     <a href="<?= $block->escapeUrl($block->getMessageUrl($thread)) ?>" class="action view">
@@ -86,9 +86,9 @@ $miraklOrder = $block->getMiraklOrder();
                 <div class="limiter">
                     <strong class="limiter-label"><?= $block->escapeHtml(__('Show')) ?></strong>
                     <select id="limiter" data-mage-init='{"redirectUrl": {"event":"change"}}' class="limiter-options">
-                        <?php foreach ($block->getAvailableLimit() as $key => $limit): ?>
+                        <?php foreach ($block->getAvailableLimit() as $key => $limit) : ?>
                             <option value="<?= $block->escapeHtmlAttr($block->getLimitUrl($key)) ?>"
-                                <?php if ($block->isLimitCurrent($key)): ?>
+                                <?php if ($block->isLimitCurrent($key)) : ?>
                                     selected="selected"<?php endif ?>>
                                 <?= $block->escapeHtml($limit) ?>
                             </option>
@@ -96,6 +96,7 @@ $miraklOrder = $block->getMiraklOrder();
                     </select>
                     <span class="limiter-text"><?= $block->escapeHtml(__('per page')) ?></span>
                 </div>
+
             </div>
         </div>
     <?php endif ?>

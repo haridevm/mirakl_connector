@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Observer\Category;
 
 use Mirakl\Api\Helper\Config as ApiConfig;
@@ -31,9 +28,9 @@ abstract class AbstractObserver
     protected $enabled = true;
 
     /**
-     * @param ApiConfig      $apiConfigHelper
-     * @param CatalogConfig  $catalogConfigHelper
-     * @param CategoryHelper $categoryHelper
+     * @param   ApiConfig       $apiConfigHelper
+     * @param   CatalogConfig   $catalogConfigHelper
+     * @param   CategoryHelper  $categoryHelper
      */
     public function __construct(
         ApiConfig $apiConfigHelper,
@@ -47,7 +44,7 @@ abstract class AbstractObserver
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     protected function isEnabled()
     {

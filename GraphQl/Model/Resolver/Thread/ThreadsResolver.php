@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Thread;
@@ -11,7 +10,7 @@ use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
 class ThreadsResolver extends AbstractThreadResolver implements ResolverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

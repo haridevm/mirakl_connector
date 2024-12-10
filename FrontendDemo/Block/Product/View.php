@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product;
 
 use Magento\Catalog\Block\Product\View as BaseView;
@@ -12,7 +9,7 @@ class View extends BaseView
     use OfferQuantityTrait;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getProductDefaultQty($product = null)
     {

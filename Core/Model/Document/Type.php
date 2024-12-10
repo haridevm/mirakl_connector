@@ -1,23 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Document;
 
 use Magento\Framework\Model\AbstractModel;
 
 /**
- * @method $this  setLabel(string $label)
- * @method string getLabel()
- * @method $this  setType(string $type)
- * @method string getType()
- *
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+ * @method  $this   setLabel(string $label)
+ * @method  string  getLabel()
+ * @method  $this   setType(string $type)
+ * @method  string  getType()
  */
 class Type extends AbstractModel
 {
-    public const DOCUMENT_TYPE_ID  = 'id'; // We define the id fieldname
+    const DOCUMENT_TYPE_ID  = 'id'; // We define the id fieldname
 
     /**
      * Prefix of model events names
@@ -41,7 +35,7 @@ class Type extends AbstractModel
     protected $_idFieldName = self::DOCUMENT_TYPE_ID; // parent value is 'id'
 
     /**
-     * @inheritdoc
+     * Initialize model
      */
     protected function _construct()
     {

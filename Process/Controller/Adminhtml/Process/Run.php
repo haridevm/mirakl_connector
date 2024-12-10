@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Run extends AbstractProcessAction implements HttpGetActionInterface
+class Run extends AbstractProcessAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -32,6 +27,6 @@ class Run extends AbstractProcessAction implements HttpGetActionInterface
             );
         }
 
-        return $this->_redirect('*/*/view', ['id' => $process->getId()]);
+        $this->_redirect('*/*/view', ['id' => $process->getId()]);
     }
 }

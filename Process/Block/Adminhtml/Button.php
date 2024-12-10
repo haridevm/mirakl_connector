@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Block\Adminhtml;
@@ -17,7 +16,7 @@ class Button extends \Magento\Backend\Block\Widget\Button
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getOnClick(): string
     {

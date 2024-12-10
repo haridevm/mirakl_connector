@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Console\Command\Order;
 
 use Magento\Framework\App\Area;
@@ -28,9 +25,9 @@ class CollectDebitsCommand extends Command
     private $payment;
 
     /**
-     * @param State       $state
-     * @param Payment     $payment
-     * @param string|null $name
+     * @param   State       $state
+     * @param   Payment     $payment
+     * @param   string|null $name
      */
     public function __construct(State $state, Payment $payment, $name = null)
     {
@@ -40,7 +37,7 @@ class CollectDebitsCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -49,7 +46,7 @@ class CollectDebitsCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(InputInterface $input, OutputInterface $output)
     {

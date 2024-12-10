@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Block\Adminhtml\System\Config\Button;
 
 use Mirakl\Connector\Block\Adminhtml\System\Config\Button\AbstractButtons;

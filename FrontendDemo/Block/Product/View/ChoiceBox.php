@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product\View;
 
 use Mirakl\Connector\Model\Offer;
@@ -12,8 +9,8 @@ class ChoiceBox extends Offers
     /**
      * Get all offers
      *
-     * @param int|array $excludeOfferIds
-     * @return array
+     * @param   int|array   $excludeOfferIds
+     * @return  array
      */
     public function getAllOffers($excludeOfferIds = null)
     {
@@ -41,7 +38,7 @@ class ChoiceBox extends Offers
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabled()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Message;
 
 use Magento\Customer\Model\Session;
@@ -59,15 +56,15 @@ abstract class AbstractMessage extends Action
     protected $session;
 
     /**
-     * @param Context          $context
-     * @param Session          $customerSession
-     * @param LoggerInterface  $logger
-     * @param FormKeyValidator $formKeyValidator
-     * @param PageFactory      $resultPageFactory
-     * @param Registry         $registry
-     * @param MessageHelper    $messageHelper
-     * @param MessageApi       $messageApi
-     * @param GenericSession   $session
+     * @param   Context             $context
+     * @param   Session             $customerSession
+     * @param   LoggerInterface     $logger
+     * @param   FormKeyValidator    $formKeyValidator
+     * @param   PageFactory         $resultPageFactory
+     * @param   Registry            $registry
+     * @param   MessageHelper       $messageHelper
+     * @param   MessageApi          $messageApi
+     * @param   GenericSession      $session
      */
     public function __construct(
         Context $context,
@@ -92,7 +89,7 @@ abstract class AbstractMessage extends Action
     }
 
     /**
-     * @return ThreadDetails|null
+     * @return  ThreadDetails|null
      */
     protected function getThread()
     {
@@ -112,7 +109,7 @@ abstract class AbstractMessage extends Action
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     protected function validateFormKey()
     {

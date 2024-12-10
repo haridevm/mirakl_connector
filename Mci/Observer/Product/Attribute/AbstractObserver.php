@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product\Attribute;
 
 use Mirakl\Api\Helper\Config as ApiConfig;

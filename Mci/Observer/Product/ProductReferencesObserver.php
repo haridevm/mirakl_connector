@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Observer\Product;
 
 use Magento\Framework\Event\Observer;
@@ -22,8 +19,8 @@ class ProductReferencesObserver implements ObserverInterface
     private $mciConfig;
 
     /**
-     * @param CatalogConfig $catalogConfig
-     * @param MciConfig     $mciConfig
+     * @param   CatalogConfig   $catalogConfig
+     * @param   MciConfig       $mciConfig
      */
     public function __construct(CatalogConfig $catalogConfig, MciConfig $mciConfig)
     {
@@ -32,7 +29,7 @@ class ProductReferencesObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

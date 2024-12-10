@@ -14,16 +14,16 @@ define(
             /**
              * @override
              */
-            getShippingMethodTitle: function () {
+            getShippingMethodTitle: function() {
                 return this.isFullMarketplaceQuote() ? '' : this._super();
             },
-            isFullMarketplaceQuote: function () {
+            isFullMarketplaceQuote: function() {
                 return quoteHelper.isFullMarketplaceQuote();
             },
-            getAdditionalShippingMethods: function () {
+            getAdditionalShippingMethods: function() {
                 var methods = [];
                 var shops = {};
-                $(quote.getItems()).each(function (index, item) {
+                $(quote.getItems()).each(function(index, item) {
                     if (item.mirakl_offer_id) {
                         var shopId = item.mirakl_shop_id;
                         var leadtimeToShip = parseInt(item.mirakl_leadtime_to_ship, 10);

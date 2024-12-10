@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\System\Config\Source;
 
 use Magento\Config\Model\Config\Backend\Admin\Custom;
@@ -27,8 +24,8 @@ class MultiStore
     private $config;
 
     /**
-     * @param StoreManagerInterface $storeManager
-     * @param ScopeConfigInterface  $config
+     * @param   StoreManagerInterface   $storeManager
+     * @param   ScopeConfigInterface    $config
      */
     public function __construct(StoreManagerInterface $storeManager, ScopeConfigInterface $config)
     {
@@ -37,7 +34,7 @@ class MultiStore
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

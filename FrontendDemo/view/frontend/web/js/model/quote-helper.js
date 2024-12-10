@@ -16,13 +16,13 @@ define(
             /**
              * @returns {Boolean}
              */
-            isFullMarketplaceQuote: function () {
+            isFullMarketplaceQuote: function() {
                 if (typeof window.checkoutConfig.is_full_marketplace_quote !== 'undefined') {
                     return window.checkoutConfig.is_full_marketplace_quote;
                 }
 
                 var result = true;
-                $.each(quote.getItems(), function (i, item) {
+                $.each(quote.getItems(), function(i, item) {
                     if (!item.parent_item_id && !item.mirakl_shop_id) {
                         result = false;
                         return false;

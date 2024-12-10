@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml;
 
 use Magento\Framework\Controller\ResultFactory;
@@ -15,7 +12,7 @@ trait RedirectRefererTrait
     /**
      * Redirect to referer
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return  \Magento\Framework\Controller\ResultInterface
      */
     public function redirectReferer()
     {

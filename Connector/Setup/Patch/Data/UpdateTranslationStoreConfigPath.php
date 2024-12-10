@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Setup\Patch\Data;
@@ -15,7 +14,7 @@ class UpdateTranslationStoreConfigPath implements DataPatchInterface
     private $setup;
 
     /**
-     * @param ModuleDataSetupInterface $setup
+     * @param ModuleDataSetupInterface  $setup
      */
     public function __construct(ModuleDataSetupInterface $setup)
     {
@@ -23,7 +22,7 @@ class UpdateTranslationStoreConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -33,10 +32,8 @@ class UpdateTranslationStoreConfigPath implements DataPatchInterface
 
         $configTable  = $this->setup->getTable('core_config_data');
         $updateConfig = [
-            'mirakl_mci/general/translation_store'
-                => 'mirakl_connector/general/translation_store',
-            'mirakl_mci/general/locale_codes_for_labels_translation'
-                => 'mirakl_connector/general/locale_codes_for_labels_translation',
+            'mirakl_mci/general/translation_store' => 'mirakl_connector/general/translation_store',
+            'mirakl_mci/general/locale_codes_for_labels_translation' => 'mirakl_connector/general/locale_codes_for_labels_translation',
         ];
 
         foreach ($updateConfig as $oldKey => $newKey) {
@@ -50,7 +47,7 @@ class UpdateTranslationStoreConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -58,7 +55,7 @@ class UpdateTranslationStoreConfigPath implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

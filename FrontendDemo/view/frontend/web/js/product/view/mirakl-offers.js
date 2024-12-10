@@ -18,7 +18,7 @@ require([
         // Add offer input in buybox if it does not exist
         var $offerInput = $form.find('#offer-id');
         if ($offerInput.length === 0) {
-            $offerInput = $('<input type="hidden" name="offer_id" id="offer-id">');
+            $offerInput = $('<input type="hidden" name="offer_id" id="offer-id" />');
             $form.append($offerInput);
         }
 

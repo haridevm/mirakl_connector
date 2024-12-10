@@ -1,23 +1,19 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Offer;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 
-class IgnoreNotification extends Action implements HttpGetActionInterface
+class IgnoreNotification extends Action
 {
     use RedirectRefererTrait;
 
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
+    const ADMIN_RESOURCE = 'Mirakl_Connector::offers';
 
     /**
      * @var Config
@@ -37,7 +33,7 @@ class IgnoreNotification extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

@@ -8,30 +8,30 @@ $order = $item->getOrder();
 $taxHelper = $this->helper('Mirakl\Connector\Helper\Tax');
 ?>
 <?php if (!$item->getMiraklShopId()): ?>
-    <?= /* @escapeNotVerified */ __('N/A') ?>
+    <?php echo __('N/A') ?>
 <?php else: ?>
     <dl class="item-options">
-        <dt><strong><?= /* @escapeNotVerified */ __('Offer: ') ?></strong></dt>
-        <dd><?= /* @escapeNotVerified */ $item->getMiraklOfferId() ?></dd>
+        <dt><strong><?php echo __('Offer: ') ?></strong></dt>
+        <dd><?php echo $item->getMiraklOfferId() ?></dd>
 
-        <dt><strong><?= /* @escapeNotVerified */ __('Shop: ') ?></strong></dt>
-        <dd><?= /* @escapeNotVerified */ $item->getMiraklShopName() ?> (<?= /* @escapeNotVerified */ $item->getMiraklShopId() ?>)</dd>
+        <dt><strong><?php echo __('Shop: ') ?></strong></dt>
+        <dd><?php echo $item->getMiraklShopName() ?> (<?php echo $item->getMiraklShopId() ?>)</dd>
 
-        <dt class="nobr"><strong><?= /* @escapeNotVerified */ __('Shipping Method: ') ?></strong></dt>
-        <dd><?= /* @escapeNotVerified */ $item->getMiraklShippingTypeLabel() ?></dd>
+        <dt class="nobr"><strong><?php echo __('Shipping Method: ') ?></strong></dt>
+        <dd><?php echo $item->getMiraklShippingTypeLabel() ?></dd>
 
-        <dt class="nobr"><strong><?= /* @escapeNotVerified */ __('Shipping Charges: ') ?></strong></dt>
+        <dt class="nobr"><strong><?php echo __('Shipping Charges: ') ?></strong></dt>
         <dd>
             <?php if ($taxHelper->displaySalesShippingBoth() || $taxHelper->displaySalesShippingExclTax()): ?>
                 <div class="price-excl-tax">
                     <?php if ($taxHelper->displaySalesShippingBoth()): ?>
-                        <span class="label"><?= /* @escapeNotVerified */ __('Excl. Tax'); ?>:</span>
+                        <span class="label"><?php /* @escapeNotVerified */ echo __('Excl. Tax'); ?>:</span>
                     <?php endif; ?>
 
-                    <?= /* @escapeNotVerified */ $order->formatBasePrice($block->getItemBaseShippingPriceExclTax()) ?>
+                    <?php echo $order->formatBasePrice($block->getItemBaseShippingPriceExclTax()) ?>
 
                     <?php if ($order->isCurrencyDifferent()): ?>
-                        [<?= /* @escapeNotVerified */ $order->formatPrice($block->getItemShippingPriceExclTax()) ?>]
+                        [<?php echo $order->formatPrice($block->getItemShippingPriceExclTax()) ?>]
                     <?php endif ?>
                 </div>
             <?php endif ?>
@@ -39,25 +39,25 @@ $taxHelper = $this->helper('Mirakl\Connector\Helper\Tax');
             <?php if ($taxHelper->displaySalesShippingBoth() || $taxHelper->displaySalesShippingInclTax()): ?>
                 <div class="price-incl-tax">
                     <?php if ($taxHelper->displaySalesShippingBoth()): ?>
-                        <span class="label"><?= /* @escapeNotVerified */ __('Incl. Tax'); ?>:</span>
+                        <span class="label"><?php /* @escapeNotVerified */ echo __('Incl. Tax'); ?>:</span>
                     <?php endif; ?>
 
-                    <?= /* @escapeNotVerified */ $order->formatBasePrice($block->getItemBaseShippingPriceInclTax()) ?>
+                    <?php echo $order->formatBasePrice($block->getItemBaseShippingPriceInclTax()) ?>
 
                     <?php if ($order->isCurrencyDifferent()): ?>
-                        [<?= /* @escapeNotVerified */ $order->formatPrice($block->getItemShippingPriceInclTax()) ?>]
+                        [<?php echo $order->formatPrice($block->getItemShippingPriceInclTax()) ?>]
                     <?php endif ?>
                 </div>
             <?php endif ?>
 
             <?php if ($item->getMiraklBaseShippingTaxAmount()): ?>
                 <div class="tax-amount">
-                    <span class="label"><?= /* @escapeNotVerified */ __('Tax'); ?>:</span>
+                    <span class="label"><?php echo __('Tax'); ?>:</span>
 
-                    <?= /* @escapeNotVerified */ $order->formatBasePrice($item->getMiraklBaseShippingTaxAmount()) ?>
+                    <?php echo $order->formatBasePrice($item->getMiraklBaseShippingTaxAmount()) ?>
 
                     <?php if ($order->isCurrencyDifferent()): ?>
-                        [<?= /* @escapeNotVerified */ $order->formatPrice($item->getMiraklShippingTaxAmount()) ?>]
+                        [<?php echo $order->formatPrice($item->getMiraklShippingTaxAmount()) ?>]
                     <?php endif ?>
                 </div>
             <?php endif ?>

@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\System\Config\Source;
 
 class HttpProtocolVersion implements \Magento\Framework\Option\ArrayInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function toOptionArray()
     {
@@ -24,7 +21,7 @@ class HttpProtocolVersion implements \Magento\Framework\Option\ArrayInterface
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function toArray()
     {

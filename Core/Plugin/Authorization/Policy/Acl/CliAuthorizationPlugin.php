@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Plugin\Authorization\Policy\Acl;
 
 use Magento\Framework\Authorization\Policy\Acl;
@@ -23,12 +20,12 @@ class CliAuthorizationPlugin
     }
 
     /**
-     * @param Acl      $subject
-     * @param \Closure $proceed
-     * @param string   $roleId
-     * @param string   $resourceId
-     * @param string   $privilege
-     * @return bool
+     * @param   Acl         $subject
+     * @param   \Closure    $proceed
+     * @param   string      $roleId
+     * @param   string      $resourceId
+     * @param   string      $privilege
+     * @return  bool
      */
     public function aroundIsAllowed(Acl $subject, \Closure $proceed, $roleId, $resourceId, $privilege = null)
     {

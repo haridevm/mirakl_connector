@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Block\Adminhtml\Event\Grid\Column;
 
 use Mirakl\Event\Model\Event;
@@ -10,7 +7,7 @@ use Magento\Backend\Block\Widget\Grid\Column;
 class Type extends Column
 {
     /**
-     * @return array
+     * @return  array
      */
     public function getOptions()
     {

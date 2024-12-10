@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Model\Evaluation;
 
 class EvaluationFormatter
@@ -9,9 +6,9 @@ class EvaluationFormatter
     /**
      * Formats evaluation in order to be compatible with X stars display
      *
-     * @param float $evaluation
-     * @param int   $stars
-     * @return float
+     * @param   float   $evaluation
+     * @param   int     $stars
+     * @return  float
      */
     public static function format($evaluation, $stars = 5)
     {

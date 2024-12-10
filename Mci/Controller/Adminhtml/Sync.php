@@ -1,12 +1,8 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Api\Helper\Config as ApiConfig;
 use Mirakl\Core\Controller\Adminhtml\RawMessagesTrait;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
@@ -14,7 +10,7 @@ use Mirakl\Mci\Helper\Config as MciConfig;
 use Mirakl\Process\Model\ProcessFactory;
 use Psr\Log\LoggerInterface;
 
-abstract class Sync extends Action implements HttpGetActionInterface
+abstract class Sync extends Action
 {
     use RedirectRefererTrait;
     use RawMessagesTrait;
@@ -40,11 +36,11 @@ abstract class Sync extends Action implements HttpGetActionInterface
     protected $logger;
 
     /**
-     * @param Context         $context
-     * @param ApiConfig       $apiConfig
-     * @param MciConfig       $mciConfig
-     * @param ProcessFactory  $processFactory
-     * @param LoggerInterface $logger
+     * @param   Context         $context
+     * @param   ApiConfig       $apiConfig
+     * @param   MciConfig       $mciConfig
+     * @param   ProcessFactory  $processFactory
+     * @param   LoggerInterface $logger
      */
     public function __construct(
         Context $context,
@@ -63,7 +59,7 @@ abstract class Sync extends Action implements HttpGetActionInterface
     /**
      * Will redirect with an error if Mirakl Connector is disabled in config
      *
-     * @return bool
+     * @return  bool
      */
     protected function checkConnectorEnabled()
     {

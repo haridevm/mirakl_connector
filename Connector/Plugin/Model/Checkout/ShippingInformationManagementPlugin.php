@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Checkout;
 
 use Magento\Checkout\Api\Data\PaymentDetailsInterface;
@@ -38,10 +35,10 @@ class ShippingInformationManagementPlugin
     protected $quoteUpdater;
 
     /**
-     * @param CartRepositoryInterface     $quoteRepository
-     * @param QuoteHelper                 $quoteHelper
-     * @param QuoteAddressResourceFactory $quoteAddressResourceFactory
-     * @param QuoteUpdater                $quoteUpdater
+     * @param   CartRepositoryInterface     $quoteRepository
+     * @param   QuoteHelper                 $quoteHelper
+     * @param   QuoteAddressResourceFactory $quoteAddressResourceFactory
+     * @param   QuoteUpdater                $quoteUpdater
      */
     public function __construct(
         CartRepositoryInterface $quoteRepository,
@@ -56,13 +53,12 @@ class ShippingInformationManagementPlugin
     }
 
     /**
-     * @param ShippingInformationManagement $subject
-     * @param \Closure                      $proceed
-     * @param int                           $cartId
-     * @param ShippingInformationInterface  $addressInformation
-     * @return PaymentDetailsInterface
-     * @throws StateException
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   ShippingInformationManagement   $subject
+     * @param   \Closure                        $proceed
+     * @param   int                             $cartId
+     * @param   ShippingInformationInterface    $addressInformation
+     * @return  PaymentDetailsInterface
+     * @throws  StateException
      */
     public function aroundSaveAddressInformation(
         ShippingInformationManagement $subject,

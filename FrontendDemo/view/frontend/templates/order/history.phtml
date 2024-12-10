@@ -2,15 +2,15 @@
 /** @var \Mirakl\FrontendDemo\Block\Order\SalesList $block */
 ?>
 <?php $_orders = $block->getOrders(); ?>
-<?= $block->getChildHtml('info');?>
+<?php echo $block->getChildHtml('info');?>
 
 <?php $block->getChildBlock('sales.order.history.list')->setOrders($_orders)->setHtmlClassName('history');?>
-<?= $block->getChildHtml('sales.order.history.list');?>
+<?php echo $block->getChildHtml('sales.order.history.list');?>
 
 <?php if ($_orders && count($_orders)): ?>
     <?php if ($block->getPagerHtml()): ?>
-        <div class="order-products-toolbar toolbar bottom"><?= $block->getPagerHtml(); ?></div>
+        <div class="order-products-toolbar toolbar bottom"><?php echo $block->getPagerHtml(); ?></div>
     <?php endif ?>
 <?php else: ?>
-    <div class="message info empty"><span><?= /* @escapeNotVerified */ __('You have placed no orders.'); ?></span></div>
+    <div class="message info empty"><span><?php /* @escapeNotVerified */ echo __('You have placed no orders.'); ?></span></div>
 <?php endif ?>

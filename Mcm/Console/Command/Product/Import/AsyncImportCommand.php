@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Console\Command\Product\Import;
 
 use Magento\Framework\App\Area;
@@ -21,15 +18,12 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class AsyncImportCommand extends Command
 {
     use CommandTrait;
 
-    public const UPDATED_SINCE_OPTION = 'since';
-    public const UPDATED_UNTIL_OPTION = 'until';
+    const UPDATED_SINCE_OPTION = 'since';
+    const UPDATED_UNTIL_OPTION = 'until';
 
     /**
      * @var ObjectManagerInterface
@@ -97,7 +91,7 @@ class AsyncImportCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -113,8 +107,7 @@ class AsyncImportCommand extends Command
                 self::UPDATED_UNTIL_OPTION,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                'MCM: Export end date. Given date must respect ISO-8601 format. Example: '
-                    . '2023-10-25T15:15+00Z (Last Synchronization Date will not be changed with this parameter)',
+                'MCM: Export end date. Given date must respect ISO-8601 format. Example: 2023-10-25T15:15+00Z (Last Synchronization Date will not be changed with this parameter)',
                 null
             ),
         ];
@@ -125,7 +118,7 @@ class AsyncImportCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -150,12 +143,12 @@ class AsyncImportCommand extends Command
             /** @var Process $process */
             $process = $this->processFactory->create();
             $process->setType(Process::TYPE_IMPORT_MCM)
-                ->setStatus(Process::STATUS_PENDING)
-                ->setName('MCM products asynchronous import')
-                ->setHelper(AsyncImport::class)
-                ->setCode(AsyncImport::CODE)
-                ->setParams($params)
-                ->setMethod('execute');
+                    ->setStatus(Process::STATUS_PENDING)
+                    ->setName('MCM products asynchronous import')
+                    ->setHelper(AsyncImport::class)
+                    ->setCode(AsyncImport::CODE)
+                    ->setParams($params)
+                    ->setMethod('execute');
 
             $this->processResource->save($process);
 

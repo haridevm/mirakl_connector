@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Shipping\Zone\Condition;
 
 use Magento\Framework\DataObject;
@@ -13,21 +10,19 @@ class Combine extends \Magento\Rule\Model\Condition\Combine
 {
     /**
      * @var EventManagerInterface
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_eventManager;
 
     /**
      * @var AddressCondition
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_addressCondition;
 
     /**
-     * @param Context               $context
-     * @param EventManagerInterface $eventManager
-     * @param AddressCondition      $addressCondition
-     * @param array                 $data
+     * @param   Context                 $context
+     * @param   EventManagerInterface   $eventManager
+     * @param   AddressCondition        $addressCondition
+     * @param   array                   $data
      */
     public function __construct(
         Context $context,
@@ -37,16 +32,14 @@ class Combine extends \Magento\Rule\Model\Condition\Combine
     ) {
         $this->_eventManager = $eventManager;
         $this->_addressCondition = $addressCondition;
-
         parent::__construct($context, $data);
-
         $this->setType(\Mirakl\Core\Model\Shipping\Zone\Condition\Combine::class);
     }
 
     /**
      * Get new child select options
      *
-     * @return array
+     * @return  array
      */
     public function getNewChildSelectOptions()
     {

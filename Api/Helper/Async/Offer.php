@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Helper\Async;
@@ -18,11 +17,13 @@ class Offer extends ClientHelper\MMP
      * (OF52) Export offers asynchronously
      *
      * @param \DateTime|null $since
-     * @param int            $megabytesPerChunk
+     * @param int $megabytesPerChunk
      * @return OffersExportAsyncTrackingResult
      */
-    public function createOffersExportAsync(\DateTime $since = null, int $megabytesPerChunk = 50)
-    {
+    public function createOffersExportAsync(
+        \DateTime $since = null,
+        int $megabytesPerChunk = 50
+    ) {
         $request = new OffersExportAsyncRequest();
         $request->setMegabytesPerChunk($megabytesPerChunk);
         $request->setModels(['MARKETPLACE']);

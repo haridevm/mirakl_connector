@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\InventorySales\IsProductSalableForRequestedQtyCondition;
@@ -32,9 +31,9 @@ class IsSalableWithOfferCondition implements IsProductSalableForRequestedQtyInte
     private $offerCollectionFactory;
 
     /**
-     * @param ProductSalabilityErrorInterfaceFactory $productSalabilityErrorFactory
-     * @param ProductSalableResultInterfaceFactory   $productSalableResultFactory
-     * @param OfferCollectionFactory                 $offerCollectionFactory
+     * @param   ProductSalabilityErrorInterfaceFactory  $productSalabilityErrorFactory
+     * @param   ProductSalableResultInterfaceFactory    $productSalableResultFactory
+     * @param   OfferCollectionFactory                  $offerCollectionFactory
      */
     public function __construct(
         ProductSalabilityErrorInterfaceFactory $productSalabilityErrorFactory,

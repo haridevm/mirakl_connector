@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Import\Adapter;
 
 use Magento\Catalog\Model\Category;
@@ -27,9 +24,6 @@ use Mirakl\Mcm\Helper\Data as Helper;
 use Mirakl\Mcm\Helper\Product\Import\Product as ProductHelper;
 use Mirakl\Mcm\Model\Product\Import\Indexer\Indexer;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Mcm extends AbstractAdapter
 {
     use AdapterTrait;
@@ -105,20 +99,20 @@ class Mcm extends AbstractAdapter
     protected $eventManager;
 
     /**
-     * @param CoreHelper             $coreHelper
-     * @param Helper                 $helper
-     * @param Config                 $config
-     * @param CategoryHelper         $categoryHelper
-     * @param ProductHelper          $productHelper
-     * @param DataHelper             $dataHelper
-     * @param UrlHelper              $urlHelper
-     * @param Finder                 $finder
-     * @param ProductAction          $productAction
-     * @param ProductResourceFactory $productResourceFactory
-     * @param Indexer                $indexer
-     * @param ApiConfig              $apiConfig
-     * @param ObjectManagerInterface $objectManager
-     * @param EventManagerInterface  $eventManager
+     * @param   CoreHelper              $coreHelper
+     * @param   Helper                  $helper
+     * @param   Config                  $config
+     * @param   CategoryHelper          $categoryHelper
+     * @param   ProductHelper           $productHelper
+     * @param   DataHelper              $dataHelper
+     * @param   UrlHelper               $urlHelper
+     * @param   Finder                  $finder
+     * @param   ProductAction           $productAction
+     * @param   ProductResourceFactory  $productResourceFactory
+     * @param   Indexer                 $indexer
+     * @param   ApiConfig               $apiConfig
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   EventManagerInterface   $eventManager
      */
     public function __construct(
         CoreHelper $coreHelper,
@@ -155,7 +149,7 @@ class Mcm extends AbstractAdapter
     /**
      * Updates SKU info from data
      *
-     * @param array $data
+     * @param   array   $data
      */
     public function updateSkuAttribute(&$data)
     {
@@ -186,7 +180,9 @@ class Mcm extends AbstractAdapter
     {
         $this->apiConfig->enable();
 
-        $this->process?->output(__('Reindexing...'), true);
+        if ($this->process) {
+            $this->process->output(__('Reindexing...'), true);
+        }
 
         $this->indexer->reindex();
     }
@@ -194,8 +190,8 @@ class Mcm extends AbstractAdapter
     /**
      * Find parent product with a variantId
      *
-     * @param array $data
-     * @return Product|null
+     * @param   array   $data
+     * @return  Product|null
      */
     public function findParentProductByVariantId(&$data)
     {
@@ -204,8 +200,7 @@ class Mcm extends AbstractAdapter
         $attrCode = MciHelper::ATTRIBUTE_VARIANT_GROUP_CODE;
         if ($attrCode && isset($data[$attrCode]) && strlen($data[$attrCode])) {
             $parentProduct = $this->helper->findMcmProductByVariantId(
-                $data[$attrCode],
-                Configurable::TYPE_CODE
+                $data[$attrCode], Configurable::TYPE_CODE
             );
         }
 
@@ -215,10 +210,10 @@ class Mcm extends AbstractAdapter
     /**
      * Process parent product import
      *
-     * @param Product  $parentProduct
-     * @param array    $data
-     * @param Category $category
-     * @param int|null $unlinkProductId
+     * @param   Product     $parentProduct
+     * @param   array       $data
+     * @param   Category    $category
+     * @param   int|null    $unlinkProductId
      */
     public function processParentProduct($parentProduct, $data, $category, $unlinkProductId = null)
     {
@@ -247,8 +242,8 @@ class Mcm extends AbstractAdapter
     /**
      * Will associate variant products to specified parent product and will update according URL rewrites
      *
-     * @param Product  $parentProduct
-     * @param int|null $unlinkProductId
+     * @param   Product     $parentProduct
+     * @param   int|null    $unlinkProductId
      */
     public function processVariantProducts($parentProduct, $unlinkProductId = null)
     {
@@ -297,18 +292,14 @@ class Mcm extends AbstractAdapter
      * becomes:
      * ['name' => 'Title FR', 'name-en_US' => 'Title EN']
      *
-     * @param array $data
+     * @param   array   $data
      */
     protected function cleanLocalizableAttributes(&$data)
     {
         $defaultLocale = $this->config->getLocale();
         foreach (array_keys($data) as $attrCode) {
             $attrInfo = AttributeUtil::parse($attrCode);
-            if (
-                $attrInfo->isLocalized()
-                && $attrInfo->getLocale() == $defaultLocale
-                && empty($data[$attrInfo->getCode()])
-            ) {
+            if ($attrInfo->isLocalized() && $attrInfo->getLocale() == $defaultLocale && empty($data[$attrInfo->getCode()])) {
                 $data[$attrInfo->getCode()] = $data[$attrCode];
                 unset($data[$attrCode]);
             }
@@ -320,18 +311,14 @@ class Mcm extends AbstractAdapter
      * Verify that if a simple product is found, it is the same as the product found by shop SKU.
      * Otherwise, transfer the shop sku to main product.
      *
-     * @param array $data
-     * @return Product|null
+     * @param   array   $data
+     * @return  Product|null
      */
     public function findSimpleProductByDeduplication($data)
     {
         $product = $this->helper->findSimpleProductByDeduplication($data[Helper::ATTRIBUTE_MIRAKL_PRODUCT_ID]);
         // JSON format is used for async product import / CSV format is used for sync product import
-
-        $productSkuField = $this->config->isAsyncMcmEnabled()
-            ? Helper::JSON_MIRAKL_PRODUCT_SKU
-            : Helper::CSV_MIRAKL_PRODUCT_SKU;
-
+        $productSkuField = $this->config->isAsyncMcmEnabled() ? Helper::JSON_MIRAKL_PRODUCT_SKU : Helper::CSV_MIRAKL_PRODUCT_SKU;
         if (!$product && !empty($data[$productSkuField])) {
             $productByMiraklProductSku = $this->helper->findProductBySku($data[$productSkuField]);
             if ($productByMiraklProductSku) {
@@ -343,8 +330,8 @@ class Mcm extends AbstractAdapter
     }
 
     /**
-     * @param Product $product
-     * @return string
+     * @param   Product $product
+     * @return  string
      */
     protected function getParentProductHash(Product $product)
     {
@@ -358,7 +345,7 @@ class Mcm extends AbstractAdapter
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function import(array $data)
     {
@@ -452,8 +439,8 @@ class Mcm extends AbstractAdapter
             }
 
             // Variant attributes must not have any values in parent product
-            foreach (array_keys($this->dataHelper->getDataVariants($data)) as $code) {
-                $parentProduct->setData($code);
+            foreach ($this->dataHelper->getDataVariants($data) as $code => $value) {
+                $parentProduct->setData($code, null);
             }
         }
 
@@ -479,14 +466,8 @@ class Mcm extends AbstractAdapter
                 if (0 === strpos($attrCode, 'mirakl-')) {
                     continue; // Mirakl attributes do not have to be parsed
                 }
-
                 $attrInfo = AttributeUtil::parse($attrCode);
-
-                if (
-                    $attrInfo->isLocalized()
-                    && $data[$attrCode] != $data[$attrInfo->getCode()]
-                    && strlen(trim($data[$attrCode])) > 0
-                ) {
+                if ($attrInfo->isLocalized() && $data[$attrCode] != $data[$attrInfo->getCode()] && strlen(trim($data[$attrCode])) > 0) {
                     // Set localized data in another locale only if values are different
                     $dataLocalized[$attrInfo->getLocale()][$attrInfo->getCode()] = $data[$attrCode];
                 }
@@ -539,9 +520,9 @@ class Mcm extends AbstractAdapter
     /**
      * Validate category data for product
      *
-     * @param array $data
-     * @return Category
-     * @throws NotFoundException
+     * @param   array   $data
+     * @return  Category
+     * @throws  NotFoundException
      */
     protected function validateCategory(&$data)
     {

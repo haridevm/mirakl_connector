@@ -1,13 +1,9 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\System\Config\Backend\Import;
 
 use Magento\Framework\App\Cache\TypeListInterface as CacheTypeListInterface;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Config\Value;
-use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Data\Collection\AbstractDb as ResourceCollection;
 use Magento\Framework\Message\ManagerInterface as MessageManagerInterface;
 use Magento\Framework\Model\Context;
@@ -22,9 +18,6 @@ use Mirakl\Process\Model\Process;
 use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\ProcessFactory as ProcessResourceFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class ProductAsync extends Value
 {
     use RawMessagesTrait;
@@ -50,11 +43,6 @@ class ProductAsync extends Value
     private $messageManager;
 
     /**
-     * @var RequestInterface
-     */
-    private $request;
-
-    /**
      * @param Context                 $context
      * @param Registry                $registry
      * @param ScopeConfigInterface    $config
@@ -63,11 +51,9 @@ class ProductAsync extends Value
      * @param ProcessResourceFactory  $processResourceFactory
      * @param ProcessHelper           $processHelper
      * @param MessageManagerInterface $messageManager
-     * @param RequestInterface        $request
      * @param AbstractResource|null   $resource
      * @param ResourceCollection|null $resourceCollection
      * @param array                   $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Context $context,
@@ -78,7 +64,6 @@ class ProductAsync extends Value
         ProcessResourceFactory $processResourceFactory,
         ProcessHelper $processHelper,
         MessageManagerInterface $messageManager,
-        RequestInterface $request,
         AbstractResource $resource = null,
         ResourceCollection $resourceCollection = null,
         array $data = []
@@ -96,13 +81,12 @@ class ProductAsync extends Value
         $this->processResourceFactory = $processResourceFactory;
         $this->processHelper = $processHelper;
         $this->messageManager = $messageManager;
-        $this->request = $request;
     }
 
     /**
      * Do not save value
      *
-     * @return $this
+     * @return  $this
      */
     public function beforeSave()
     {
@@ -115,16 +99,13 @@ class ProductAsync extends Value
     /**
      * Import products from uploaded JSON file if present
      *
-     * @return $this
-     * @throws \Exception
+     * @return  $this
+     * @throws  \Exception
      */
     public function afterSave()
     {
-        $files = $this->request->getFiles();
-
-        $groups = $files->get('groups') ?? [];
-        $fileName = $groups['import_product_async']['fields']['file']['value']['name'] ?? '';
-        $uploadedFile = $groups['import_product_async']['fields']['file']['value']['tmp_name'] ?? '';
+        $fileName     = @$_FILES['groups']['name']['import_product_async']['fields']['file']['value'];
+        $uploadedFile = @$_FILES['groups']['tmp_name']['import_product_async']['fields']['file']['value'];
 
         if (!$fileName) {
             return $this;
@@ -166,7 +147,7 @@ class ProductAsync extends Value
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     private function isAdmin()
     {

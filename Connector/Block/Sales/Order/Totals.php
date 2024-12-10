@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Sales\Order;
 
 use Magento\Framework\DataObject;
@@ -22,10 +19,10 @@ class Totals extends Template
     protected $orderHelper;
 
     /**
-     * @param Template\Context $context
-     * @param TaxConfig        $taxConfig
-     * @param OrderHelper      $orderHelper
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   TaxConfig           $taxConfig
+     * @param   OrderHelper         $orderHelper
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -39,7 +36,7 @@ class Totals extends Template
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function initTotals()
     {
@@ -74,19 +71,11 @@ class Totals extends Template
         } else {
             $displayIncl = $this->taxConfig->displaySalesShippingInclTax($store);
 
-            $value = $displayIncl
-                ? $order->getMiraklShippingInclTax()
-                : $order->getMiraklShippingExclTax();
-
-            $baseValue = $displayIncl
-                ? $order->getMiraklBaseShippingInclTax()
-                : $order->getMiraklBaseShippingExclTax();
-
             $total = new DataObject([
                 'code'       => 'mirakl_shipping',
                 'label'      => __('Marketplace Shipping'),
-                'value'      => $value,
-                'base_value' => $baseValue,
+                'value'      => $displayIncl ? $order->getMiraklShippingInclTax() : $order->getMiraklShippingExclTax(),
+                'base_value' => $displayIncl ? $order->getMiraklBaseShippingInclTax() : $order->getMiraklBaseShippingExclTax(),
             ]);
 
             $parent->addTotal($total, 'shipping');

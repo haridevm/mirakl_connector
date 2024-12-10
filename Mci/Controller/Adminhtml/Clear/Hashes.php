@@ -1,17 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Controller\Adminhtml\Clear;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Mirakl\Mci\Helper\Hash as HashHelper;
 use Psr\Log\LoggerInterface;
 
-class Hashes extends Action implements HttpGetActionInterface
+class Hashes extends Action
 {
     /**
      * @var HashHelper
@@ -24,9 +20,9 @@ class Hashes extends Action implements HttpGetActionInterface
     private $logger;
 
     /**
-     * @param Context         $context
-     * @param HashHelper      $hashHelper
-     * @param LoggerInterface $logger
+     * @param   Context         $context
+     * @param   HashHelper      $hashHelper
+     * @param   LoggerInterface $logger
      */
     public function __construct(
         Context $context,

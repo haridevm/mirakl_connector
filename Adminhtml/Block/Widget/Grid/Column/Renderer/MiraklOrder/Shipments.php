@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Widget\Grid\Column\Renderer\MiraklOrder;
 
 use Magento\Backend\Block\Context;
@@ -27,10 +24,10 @@ class Shipments extends Renderer\Text
     protected $config;
 
     /**
-     * @param Context     $context
-     * @param ShipmentApi $shipmentApi
-     * @param Config      $config
-     * @param array       $data
+     * @param   Context     $context
+     * @param   ShipmentApi $shipmentApi
+     * @param   Config      $config
+     * @param   array       $data
      */
     public function __construct(
         Context $context,
@@ -44,7 +41,7 @@ class Shipments extends Renderer\Text
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function render(DataObject $row)
     {
@@ -81,7 +78,7 @@ class Shipments extends Renderer\Text
     }
 
     /**
-     * @return array
+     * @return  array
      */
     protected function getReceivedStatuses()
     {
@@ -92,7 +89,7 @@ class Shipments extends Renderer\Text
     }
 
     /**
-     * @return array
+     * @return  array
      */
     protected function getShippedStatuses()
     {
@@ -105,8 +102,8 @@ class Shipments extends Renderer\Text
     }
 
     /**
-     * @param DataObject $row
-     * @return int
+     * @param   DataObject  $row
+     * @return  int
      */
     protected function getTotalQty(DataObject $row)
     {

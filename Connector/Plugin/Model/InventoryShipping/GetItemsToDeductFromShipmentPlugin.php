@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\InventoryShipping;
 
 use Magento\InventoryShipping\Model\GetItemsToDeductFromShipment;
@@ -11,10 +8,10 @@ use Magento\Sales\Model\Order\Shipment;
 class GetItemsToDeductFromShipmentPlugin
 {
     /**
-     * @param GetItemsToDeductFromShipment $subject
-     * @param array                        $result
-     * @param Shipment                     $shipment
-     * @return ItemToDeductInterface[]
+     * @param   GetItemsToDeductFromShipment    $subject
+     * @param   array                           $result
+     * @param   Shipment                        $shipment
+     * @return  ItemToDeductInterface[]
      */
     public function afterExecute(GetItemsToDeductFromShipment $subject, array $result, Shipment $shipment)
     {

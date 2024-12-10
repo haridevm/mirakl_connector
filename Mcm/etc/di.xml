@@ -408,10 +408,6 @@
         </arguments>
     </type>
 
-    <type name="Magento\CatalogImportExport\Model\ResourceModel\ProductDataLoader">
-        <plugin name="mirakl_mcm" type="Mirakl\Mcm\Plugin\Model\ResourceModel\CatalogImportExport\ProductDataLoaderPlugin"/>
-    </type>
-
     <preference for="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\EntityAdapterInterface" type="Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\EntityAdapter\Mcm" />
     <preference for="Mirakl\Mcm\Model\Product\Import\Repository\FilterInterface" type="Mirakl\Mcm\Model\Product\Import\Repository\Filter" />
 </config>

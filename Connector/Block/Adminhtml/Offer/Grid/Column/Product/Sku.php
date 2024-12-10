@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\Offer\Grid\Column\Product;
 
 use Magento\Backend\Block\Widget\Grid\Column;
@@ -12,9 +9,9 @@ class Sku extends Column
     /**
      * Decorates column value
      *
-     * @param string $value
-     * @param Offer  $row
-     * @return string
+     * @param   string  $value
+     * @param   Offer   $row
+     * @return  string
      */
     public function decorate($value, $row)
     {
@@ -33,7 +30,7 @@ class Sku extends Column
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getFrameCallback()
     {

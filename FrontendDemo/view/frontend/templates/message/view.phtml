@@ -2,50 +2,50 @@
 /** @var \Mirakl\FrontendDemo\Block\Message\View $block */
 $helper = $block->getMessageHelper();
 $thread = $block->getThread();
-/** @var \Mirakl\Core\Helper\Data $coreHelper */
-$coreHelper = $this->helper('Mirakl\Core\Helper\Data');
 ?>
 <div class="marketplace-messages">
     <div class="block-content">
         <div class="block-title">
             <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadEntity $entity */ ?>
             <?php foreach ($thread->getEntities() as $entity): ?>
-                <span class="customer-messages-type">
-                    <?= /* @escapeNotVerified */ __($helper->getEntityName($entity)) ?><?= /* @escapeNotVerified */ __(': ') ?>
-                    <?php if ($link = $block->getEntityUrl($entity)): ?>
-                        <a href="<?= $block->escapeUrl($link) ?>"><?= /* @escapeNotVerified */ $block->escapeHtml($entity->getLabel()) ?></a>
-                    <?php else: ?>
-                        <?= /* @escapeNotVerified */ $block->escapeHtml($entity->getLabel()) ?>
-                    <?php endif; ?>
-                </span>
+                <?php
+                    $link = $block->getEntityUrl($entity);
+                    if ($link) {
+                        $entityRef = sprintf('<a href="%s">%s</a>', $link, $block->escapeHtmlAttr($entity->getLabel()));
+                    } else {
+                        $entityRef = $block->escapeHtmlAttr($entity->getLabel());
+                    }
+                    echo __('%1: %2',
+                        '<span class="customer-messages-type">' .
+                        $block->escapeHtmlAttr(__($helper->getEntityName($entity))) .
+                        '</span>',
+                        $entityRef
+                    );
+                ?>
             <?php endforeach; ?>
         </div>
         <ol class="items message-items">
             <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadMessage $message */ ?>
             <?php foreach ($thread->getMessages() as $message): ?>
-                <li class="item message-item <?= /* @escapeNotVerified */ $block->isCustomerMessage($message) ? 'message-left' : 'message-right' ?> <?= /* @escapeNotVerified */ strtolower($message->getFrom()->getType()) ?>">
+                <li class="item message-item <?php echo $block->isCustomerMessage($message) ? 'message-left' : 'message-right' ?> <?php echo strtolower($message->getFrom()->getType()) ?>">
                     <div class="meta">
-                        <?= /* @escapeNotVerified */ __(
+                        <?php echo __(
                                 'By %1 to %2 - %3',
                                 $block->getSenderName($message),
                                 implode(', ', $block->getRecipientNames($message)),
-                                $coreHelper->formatDateTime($helper->getMiraklDate($message->getDateCreated()->format(\DateTime::ISO8601)))
+                                $this->helper('Mirakl\Core\Helper\Data')->formatDateTime($helper->getMiraklDate($message->getDateCreated()->format(\DateTime::ISO8601)))
                             ) ?>
                     </div>
-                    <div class="body"><?= /* @escapeNotVerified */ nl2br($block->escapeHtml($message->getBody(), $block->getMessageAllowedTags())) ?></div>
+                    <div class="body"><?php echo nl2br($block->escapeHtml($message->getBody(), $block->getMessageAllowedTags())) ?></div>
                     <?php if (!empty($message->getAttachments())): ?>
-                        <div class="attachments">
-                            <?= /* @escapeNotVerified */ __('Attachments:') ?>
+                        <p><?= __('Attachments:') ?>
                             <?php /** @var \Mirakl\MMP\Common\Domain\Message\Thread\ThreadAttachment $attachment */ ?>
                             <?php foreach ($message->getAttachments() as $attachment): ?>
-                                <a href="<?= $block->escapeUrl($block->getAttachmentUrl($attachment)) ?>"
-                                   title="<?= $block->escapeHtmlAttr(__('Download')) ?>">
-                                    <?= /* @escapeNotVerified */ $attachment->getName() ?></a>
-                                <?php if ($attachment->getSize()): ?>
-                                    (<?= /* @escapeNotVerified */ $coreHelper->formatSize($attachment->getSize()) ?>)
-                                <?php endif ?>
+                                <a href="<?= $block->getAttachmentUrl($attachment)?>" target="_blank">
+                                    <?= $attachment->getName() ?>
+                                </a>
                             <?php endforeach; ?>
-                        </div>
+                        </p>
                     <?php endif; ?>
                 </li>
             <?php endforeach; ?>

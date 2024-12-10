@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Order;
@@ -19,8 +18,8 @@ class OrderThreadResolver extends AbstractOrderResolver implements ResolverInter
     protected $messageHelper;
 
     /**
-     * @param OrderHelper $orderHelper
-     * @param Message     $messageHelper
+     * @param  OrderHelper  $orderHelper
+     * @param  Message      $messageHelper
      */
     public function __construct(OrderHelper $orderHelper, Message $messageHelper)
     {
@@ -29,7 +28,7 @@ class OrderThreadResolver extends AbstractOrderResolver implements ResolverInter
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

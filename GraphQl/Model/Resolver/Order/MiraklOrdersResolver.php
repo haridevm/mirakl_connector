@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Order;
@@ -27,8 +26,8 @@ class MiraklOrdersResolver extends AbstractResolver implements ResolverInterface
     protected $miraklOrderHelper;
 
     /**
-     * @param MiraklOrderProvider $miraklOrderProvider
-     * @param MiraklOrderHelper   $miraklOrderHelper
+     * @param  MiraklOrderProvider $miraklOrderProvider
+     * @param  MiraklOrderHelper   $miraklOrderHelper
      */
     public function __construct(
         MiraklOrderProvider $miraklOrderProvider,
@@ -50,8 +49,7 @@ class MiraklOrdersResolver extends AbstractResolver implements ResolverInterface
         /** @var OrderInterface $order */
         $order = $value['model'];
 
-        $orderTaxMode = $this->getInput($args, 'mp_order_tax_mode')
-            ?? MiraklOrderProvider::MIRAKL_ORDER_QUERY_DEFAULT_TAX_MODE;
+        $orderTaxMode = $this->getInput($args, 'mp_order_tax_mode') ?? MiraklOrderProvider::MIRAKL_ORDER_QUERY_DEFAULT_TAX_MODE;
         $miraklOrders = $this->miraklOrderProvider->getMiraklOrders($order->getIncrementId(), $orderTaxMode);
         $baseCurrency = $order->getBaseCurrencyCode();
 
@@ -60,9 +58,11 @@ class MiraklOrdersResolver extends AbstractResolver implements ResolverInterface
             /** @var MiraklOrder $miraklOrder */
             $deliveryDate = $miraklOrder->getDeliveryDate();
             $miraklOrderData = [
-                'model'                  => $miraklOrder,
                 'order_id'               => $miraklOrder->getId(),
                 'status'                 => $miraklOrder->getStatus()->getState(),
+                'price'                  => ['value' => $miraklOrder->getPrice(), 'currency' => $baseCurrency],
+                'shipping_price'         => ['value' => $miraklOrder->getShipping()->getPrice(), 'currency' => $baseCurrency],
+                'total_price'            => ['value' => $miraklOrder->getTotalPrice(), 'currency' => $baseCurrency],
                 'shop_id'                => $miraklOrder->getShopId(),
                 'shop_name'              => $miraklOrder->getShopName(),
                 'order_tax_mode'         => $miraklOrder->getOrderTaxMode(),
@@ -76,24 +76,9 @@ class MiraklOrdersResolver extends AbstractResolver implements ResolverInterface
                 'has_invoice'            => $miraklOrder->getHasInvoice(),
                 'has_customer_messages'  => $miraklOrder->getHasCustomerMessage(),
                 'can_validate_receipt'   => $this->miraklOrderHelper->canReceiveOrder($miraklOrder),
-                'price'                  => [
-                    'value'    => $miraklOrder->getPrice(),
-                    'currency' => $baseCurrency,
-                ],
-                'shipping_price'         => [
-                    'value'    => $miraklOrder->getShipping()->getPrice(),
-                    'currency' => $baseCurrency,
-                ],
-                'total_price'            => [
-                    'value'    => $miraklOrder->getTotalPrice(),
-                    'currency' => $baseCurrency,
-                ],
-                'earliest_delivery_date' => $deliveryDate && $deliveryDate->getEarliest()
-                    ? $deliveryDate->getEarliest()->format('Y-m-d H:i:s')
-                    : null,
-                'latest_delivery_date'   => $deliveryDate && $deliveryDate->getLatest()
-                    ? $deliveryDate->getLatest()->format('Y-m-d H:i:s')
-                    : null,
+                'earliest_delivery_date' => $deliveryDate && $deliveryDate->getEarliest() ? $deliveryDate->getEarliest()->format('Y-m-d H:i:s') : null,
+                'latest_delivery_date'   => $deliveryDate && $deliveryDate->getLatest() ? $deliveryDate->getLatest()->format('Y-m-d H:i:s') : null,
+                'model'                  => $miraklOrder
             ];
 
             $miraklOrdersData[] = $miraklOrderData;

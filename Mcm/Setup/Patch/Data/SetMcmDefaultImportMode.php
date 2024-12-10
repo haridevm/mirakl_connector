@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Setup\Patch\Data;
@@ -15,6 +14,7 @@ class SetMcmDefaultImportMode extends AbstractDefaultConfigApplier
     public function apply(): void
     {
         $this->setup->startSetup();
+
         if ($this->isFreshInstall->execute()) {
             // Set default MCM products import mode to 'bulk'
             $this->configWriter->save(McmConfig::XML_PATH_MCM_PRODUCTS_IMPORT_MODE, 'bulk');

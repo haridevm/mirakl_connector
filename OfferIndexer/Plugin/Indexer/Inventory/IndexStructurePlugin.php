@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Plugin\Indexer\Inventory;
@@ -44,9 +43,9 @@ class IndexStructurePlugin
     private $triggerCreator;
 
     /**
-     * @param ResourceConnection           $resourceConnection
-     * @param TriggerFactory               $triggerFactory
-     * @param ObjectManagerInterface       $objectManager
+     * @param ResourceConnection $resourceConnection
+     * @param TriggerFactory $triggerFactory
+     * @param ObjectManagerInterface $objectManager
      * @param InventoryIndexTriggerCreator $triggerCreator
      */
     public function __construct(

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Common;
 
 use Magento\Framework\DataObject;
@@ -12,7 +9,7 @@ use Magento\Framework\DataObject;
 trait ExportTrait
 {
     /**
-     * @return bool
+     * @return  bool
      */
     public function isExportable()
     {
@@ -27,7 +24,7 @@ trait ExportTrait
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSource()
     {
@@ -37,8 +34,8 @@ trait ExportTrait
     /**
      * Updates given object to Mirakl platform
      *
-     * @param DataObject $object
-     * @return int|false
+     * @param   DataObject  $object
+     * @return  int|false
      */
     public function update(DataObject $object)
     {
@@ -48,8 +45,8 @@ trait ExportTrait
     /**
      * Deletes given object from Mirakl platform
      *
-     * @param DataObject $object
-     * @return int|false
+     * @param   DataObject  $object
+     * @return  int|false
      */
     public function delete(DataObject $object)
     {
@@ -57,9 +54,9 @@ trait ExportTrait
     }
 
     /**
-     * @param DataObject  $object
-     * @param string|null $action
-     * @return array
+     * @param   DataObject  $object
+     * @param   null|string $action
+     * @return  array
      */
     protected function wrap(DataObject $object, $action = null)
     {

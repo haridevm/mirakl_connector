@@ -1,12 +1,10 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Helper;
 
 use Magento\Framework\ObjectManagerInterface;
 use Mirakl\Api\Helper\ClientHelper\AbstractClientHelper;
-
 use function Mirakl\pascalize;
 
 class Factory

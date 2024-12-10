@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Helper;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -16,7 +13,7 @@ class ApiFactory
     protected $objectManager;
 
     /**
-     * @param ObjectManagerInterface $objectManager
+     * @param   ObjectManagerInterface  $objectManager
      */
     public function __construct(ObjectManagerInterface $objectManager)
     {
@@ -24,9 +21,9 @@ class ApiFactory
     }
 
     /**
-     * @param string $type
-     * @return Api\ExportDataInterface|Api\SynchroResultInterface
-     * @throws \InvalidArgumentException
+     * @param   string  $type
+     * @return  Api\ExportDataInterface|Api\SynchroResultInterface
+     * @throws  \InvalidArgumentException
      */
     public function create($type)
     {

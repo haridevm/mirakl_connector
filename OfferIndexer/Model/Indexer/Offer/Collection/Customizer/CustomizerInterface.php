@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Indexer\Offer\Collection\Customizer;
@@ -11,7 +10,7 @@ interface CustomizerInterface
 {
     /**
      * @param OfferCollection $collection
-     * @param StoreInterface  $store
+     * @param StoreInterface $store
      * @return void
      */
     public function customize(OfferCollection $collection, StoreInterface $store): void;

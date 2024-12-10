@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Model;
 
 use Magento\Framework\Data\Collection\AbstractDb as AbstractDbCollection;
@@ -32,8 +29,6 @@ use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory as ProcessColle
  * @method $this       setErrorReport(string $report)
  * @method string      getFile()
  * @method $this       setFile(string $file)
- * @method bool        getForceExecution()
- * @method $this       setForceExecution(bool $forceExecution)
  * @method string      getHash()
  * @method $this       setHash(string $hash)
  * @method $this       setHelper(string $helper)
@@ -65,28 +60,24 @@ use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory as ProcessColle
  * @method $this       setType(string $type)
  * @method string      getUpdatedAt()
  * @method $this       setUpdatedAt(string $updatedAt)
- *
- * @SuppressWarnings(PHPMD)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
  */
 class Process extends AbstractModel
 {
-    public const STATUS_PENDING       = 'pending';
-    public const STATUS_PENDING_RETRY = 'pending_retry';
-    public const STATUS_PROCESSING    = 'processing';
-    public const STATUS_IDLE          = 'idle';
-    public const STATUS_COMPLETED     = 'completed';
-    public const STATUS_STOPPED       = 'stopped';
-    public const STATUS_TIMEOUT       = 'timeout';
-    public const STATUS_ERROR         = 'error';
-    public const STATUS_CANCELLED     = 'cancelled';
+    const STATUS_PENDING       = 'pending';
+    const STATUS_PENDING_RETRY = 'pending_retry';
+    const STATUS_PROCESSING    = 'processing';
+    const STATUS_IDLE          = 'idle';
+    const STATUS_COMPLETED     = 'completed';
+    const STATUS_STOPPED       = 'stopped';
+    const STATUS_TIMEOUT       = 'timeout';
+    const STATUS_ERROR         = 'error';
+    const STATUS_CANCELLED     = 'cancelled';
 
-    public const TYPE_API        = 'API';
-    public const TYPE_CLI        = 'CLI';
-    public const TYPE_ADMIN      = 'ADMIN';
-    public const TYPE_IMPORT     = 'IMPORT';
-    public const TYPE_IMPORT_MCM = 'IMPORT_MCM';
+    const TYPE_API        = 'API';
+    const TYPE_CLI        = 'CLI';
+    const TYPE_ADMIN      = 'ADMIN';
+    const TYPE_IMPORT     = 'IMPORT';
+    const TYPE_IMPORT_MCM = 'IMPORT_MCM';
 
     /**
      * @var string
@@ -227,7 +218,7 @@ class Process extends AbstractModel
     }
 
     /**
-     * @inheritdoc
+     * Initialize model
      */
     protected function _construct()
     {
@@ -480,7 +471,7 @@ class Process extends AbstractModel
             if ($this->isProcessing() || $this->isStatusIdle()) {
                 $start = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getCreatedAt());
                 $duration = $start->diff(new \DateTime());
-            } elseif ($this->isEnded()) {
+            } elseif ($this->isEnded()){
                 $start = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getCreatedAt());
                 $end = \DateTime::createFromFormat('Y-m-d H:i:s', $this->getUpdatedAt());
                 $duration = $start->diff($end);
@@ -606,7 +597,7 @@ class Process extends AbstractModel
     {
         $params = $this->_getData('params');
         if (is_string($params)) {
-            $params = unserialize($params); // phpcs:ignore
+            $params = unserialize($params);
         }
 
         return is_array($params) ? $params : [];
@@ -708,11 +699,14 @@ class Process extends AbstractModel
 
     /**
      * @return $this
-     * @SuppressWarnings(PHPMD.ShortMethodName)
      */
-    public function hr($char = '-', $repeat = 50)
+    public function hr()
     {
-        return $this->output(str_repeat($char, $repeat));
+        foreach ($this->outputs as $output) {
+            $output->hr();
+        }
+
+        return $this;
     }
 
     /**
@@ -750,7 +744,7 @@ class Process extends AbstractModel
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isCompleted()
     {
@@ -865,15 +859,6 @@ class Process extends AbstractModel
     }
 
     /**
-     * @param string $message
-     * @return $this
-     */
-    public function error($message)
-    {
-        return $this->output('<error>' . $message . '</error>');
-    }
-
-    /**
      * Outputs specified string in all associated output handlers
      *
      * @param string $str
@@ -883,10 +868,10 @@ class Process extends AbstractModel
     public function output($str, $save = false)
     {
         foreach ($this->outputs as $output) {
-            $output->display((string) $str);
+            $output->display($str);
         }
 
-        return $this->appendOutput((string) $str, $save);
+        return $this->appendOutput($str, $save);
     }
 
     /**
@@ -988,9 +973,9 @@ class Process extends AbstractModel
     {
         $this->hr();
 
-        return $this->output(__(
-            'Memory Peak Usage: %1',
-            $this->processHelper->formatSize(memory_get_peak_usage(true))
-        ));
+        return $this->output(
+            __('Memory Peak Usage: %1',
+            $this->processHelper->formatSize(memory_get_peak_usage(true)))
+        );
     }
 }

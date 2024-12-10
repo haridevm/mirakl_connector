@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Adminhtml\Config;
 
 use Magento\Catalog\Model\Product;
@@ -29,17 +26,17 @@ class ConfigObserver implements ObserverInterface
     protected $mcmConfigHelper;
 
     /**
-     * @var ConfigWriterInterface
+     *  @var ConfigWriterInterface
      */
     protected $configWriter;
 
     /**
-     * @var ManagerInterface
+     *  @var ManagerInterface
      */
     protected $messageManager;
 
     /**
-     * @var TypeListInterface
+     *  @var TypeListInterface
      */
     protected $cacheTypeList;
 
@@ -49,12 +46,12 @@ class ConfigObserver implements ObserverInterface
     protected $eavSetup;
 
     /**
-     * @param CatalogConfigHelper   $catalogConfigHelper
-     * @param McmConfigHelper       $mcmConfigHelper
-     * @param ConfigWriterInterface $configWriter
-     * @param ManagerInterface      $messageManager
-     * @param TypeListInterface     $cacheTypeList
-     * @param EavSetup              $eavSetup
+     * @param   CatalogConfigHelper     $catalogConfigHelper
+     * @param   McmConfigHelper         $mcmConfigHelper
+     * @param   ConfigWriterInterface   $configWriter
+     * @param   ManagerInterface        $messageManager
+     * @param   TypeListInterface       $cacheTypeList
+     * @param   EavSetup                $eavSetup
      */
     public function __construct(
         CatalogConfigHelper $catalogConfigHelper,
@@ -73,8 +70,8 @@ class ConfigObserver implements ObserverInterface
     }
 
     /**
-     * @param string $message
-     * @return ManagerInterface
+     * @param   string  $message
+     * @return  ManagerInterface
      */
     private function addWarningMessage($message)
     {
@@ -82,7 +79,7 @@ class ConfigObserver implements ObserverInterface
     }
 
     /**
-     * @return void
+     * @return  void
      */
     private function cleanConfigCache()
     {
@@ -90,32 +87,28 @@ class ConfigObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(EventObserver $observer)
     {
         if ($this->mcmConfigHelper->isMcmEnabled() || $this->mcmConfigHelper->isAsyncMcmEnabled()) {
             if ($this->catalogConfigHelper->isSyncCategories()) {
                 $this->saveConfig(CatalogConfigHelper::XML_PATH_ENABLE_SYNC_CATEGORIES, '0');
-                // phpcs:ignore
                 $this->addWarningMessage('MCM configuration is enabled: Mirakl automatically disabled Marketplace Categories Synchronization (CA01)');
                 $this->cleanConfigCache();
             }
             if ($this->catalogConfigHelper->isSyncProducts()) {
                 $this->saveConfig(CatalogConfigHelper::XML_PATH_ENABLE_SYNC_PRODUCTS, '0');
-                // phpcs:ignore
                 $this->addWarningMessage('MCM configuration is enabled: Mirakl automatically disabled Products Synchronization (P21)');
                 $this->cleanConfigCache();
             }
             if (!$this->mcmConfigHelper->isSyncMcmProducts()) {
                 $this->saveConfig(McmConfigHelper::XML_PATH_ENABLE_SYNC_MCM_PRODUCTS, '1');
-                // phpcs:ignore
                 $this->addWarningMessage('MCM configuration is enabled: Mirakl automatically enabled MCM Products Export (CM21)');
                 $this->cleanConfigCache();
             }
         } elseif ($this->mcmConfigHelper->isSyncMcmProducts()) {
             $this->saveConfig(McmConfigHelper::XML_PATH_ENABLE_SYNC_MCM_PRODUCTS, '0');
-            // phpcs:ignore
             $this->addWarningMessage('MCM configuration is disabled: Mirakl automatically disabled MCM Products Export (CM21)');
             $this->cleanConfigCache();
         }
@@ -124,9 +117,9 @@ class ConfigObserver implements ObserverInterface
     }
 
     /**
-     * @param string $path
-     * @param mixed  $value
-     * @return void
+     * @param   string  $path
+     * @param   mixed   $value
+     * @return  void
      */
     private function saveConfig($path, $value)
     {
@@ -134,7 +127,7 @@ class ConfigObserver implements ObserverInterface
     }
 
     /**
-     * @return void
+     * @return  void
      */
     private function updateMiraklAttributes()
     {

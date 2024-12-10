@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Filter;
@@ -27,8 +26,8 @@ class Description implements FilterInterface
     private $attributeRepository;
 
     /**
-     * @param Output                              $output
-     * @param CatalogHelper                       $catalogHelper
+     * @param Output $output
+     * @param CatalogHelper $catalogHelper
      * @param ProductAttributeRepositoryInterface $attributeRepository
      */
     public function __construct(
@@ -50,11 +49,10 @@ class Description implements FilterInterface
 
         if (!empty($description)) {
             $attribute = $this->getAttribute();
-            if (
-                $attribute->getIsHtmlAllowedOnFront()
+            if ($attribute->getIsHtmlAllowedOnFront()
                 && $attribute->getIsWysiwygEnabled()
-                && $this->output->isDirectivesExists($description)
-            ) {
+                && $this->output->isDirectivesExists($description))
+            {
                 $description = $this->catalogHelper->getPageTemplateProcessor()->filter($description);
             }
         }

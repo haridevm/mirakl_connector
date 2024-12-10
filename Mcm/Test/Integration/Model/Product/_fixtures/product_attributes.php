@@ -23,8 +23,7 @@ $entityType = $objectManager->create(\Magento\Eav\Model\Entity\Type::class)->loa
 
 try {
     $attribute = $attributeRepository->get('catalog_product', 'brand');
-    $attributeManagement
-        ->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'brand', 110);
+    $attributeManagement->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'brand', 110);
 } catch (\Exception $e) {
     // Ignore exception and add attribute
     $attributeData = [
@@ -43,14 +42,12 @@ try {
     $attribute->setData($attributeData);
     $attributeRepository->save($attribute);
 
-    $attributeManagement
-        ->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'brand', 110);
+    $attributeManagement->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'brand', 110);
 }
 
 try {
     $attribute = $attributeRepository->get('catalog_product', 'mirakl_image_1');
-    $attributeManagement
-        ->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'mirakl_image_1', 110);
+    $attributeManagement->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'mirakl_image_1', 110);
 } catch (\Exception $e) {
     // Ignore exception and add attribute
     $attributeData = [
@@ -70,6 +67,5 @@ try {
     $attribute->setData($attributeData);
     $attributeRepository->save($attribute);
 
-    $attributeManagement
-        ->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'mirakl_image_1', 120);
+    $attributeManagement->assign(Product::ENTITY, $attributeSet->getId(), $attributeSet->getDefaultGroupId(), 'mirakl_image_1', 120);
 }

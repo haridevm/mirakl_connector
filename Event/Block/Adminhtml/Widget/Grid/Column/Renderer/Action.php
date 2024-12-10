@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Block\Adminhtml\Widget\Grid\Column\Renderer;
 
 use Magento\Framework\DataObject;
@@ -9,8 +6,8 @@ use Magento\Framework\DataObject;
 class Action extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Action
 {
     /**
-     * @param DataObject $row
-     * @return string
+     * @param   DataObject  $row
+     * @return  string
      */
     public function render(DataObject $row)
     {

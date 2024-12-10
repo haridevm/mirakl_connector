@@ -11,11 +11,11 @@ $process = $block->getProcess();
     </div>
     <div class="admin__page-section-content report-output">
         <?php if (!$process->getOutput()): ?>
-            <?= /* @escapeNotVerified */ __('This process has not generated any output.') ?>
+            <?php /* @escapeNotVerified */ echo __('This process has not generated any output.') ?>
         <?php else: ?>
             <p class="report-output-actions">
-                <a href="#" onclick="jQuery('#report-output-block').scrollTop(jQuery('#report-output-block')[0].scrollHeight); return false;"><?= /* @escapeNotVerified */ __('Scroll to Bottom') ?></a>
-                | <a href="#" onclick="jQuery('#report-output-block').scrollTop(0); return false;"><?= /* @escapeNotVerified */ __('Scroll to Top') ?></a>
+                <a href="#" onclick="jQuery('#report-output-block').scrollTop(jQuery('#report-output-block')[0].scrollHeight); return false;"><?php /* @escapeNotVerified */ echo __('Scroll to Bottom') ?></a>
+                | <a href="#" onclick="jQuery('#report-output-block').scrollTop(0); return false;"><?php /* @escapeNotVerified */ echo __('Scroll to Top') ?></a>
             </p>
             <div id="report-output-block" class="report-output-content">
                 <div class="output-cols">
@@ -26,7 +26,7 @@ $process = $block->getProcess();
                     </div>
                     <div class="line">
                         <?php foreach ($block->getOutput() as $line): ?>
-                            <div><?= /* @escapeNotVerified */ $block->format($line) ?></div>
+                            <div><?= $block->format($line) ?></div>
                         <?php endforeach ?>
                     </div>
                 </div>

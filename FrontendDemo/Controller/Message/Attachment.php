@@ -1,19 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Message;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\Result\Raw;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadAttachment;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadMessage;
 
-class Attachment extends AbstractMessage implements HttpGetActionInterface
+class Attachment extends AbstractMessage
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -52,8 +48,8 @@ class Attachment extends AbstractMessage implements HttpGetActionInterface
     }
 
     /**
-     * @param string $attachmentId
-     * @return bool
+     * @param   string  $attachmentId
+     * @return  bool
      */
     protected function validateAttachment($attachmentId)
     {

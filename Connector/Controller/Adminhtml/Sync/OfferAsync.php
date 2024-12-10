@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml\Sync;
 
 use Mirakl\Connector\Controller\Adminhtml\AbstractSync;
@@ -29,6 +26,7 @@ class OfferAsync extends AbstractSync
             $this->processResourceFactory->create()->save($process);
             $this->messageManager->addSuccessMessage(__('Offers will be imported in background.'));
             $this->addRawSuccessMessage(__('Click <a href="%1">here</a> to view process output.', $process->getUrl()));
+
         } catch (\Exception $e) {
             $this->logger->critical($e);
             $this->messageManager->addErrorMessage(

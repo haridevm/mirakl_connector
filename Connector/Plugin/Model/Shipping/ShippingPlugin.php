@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Shipping;
 
 use Magento\Quote\Api\Data\CartInterface;
@@ -26,8 +23,8 @@ class ShippingPlugin
     protected $quoteHelper;
 
     /**
-     * @param CarrierFactory $carrierFactory
-     * @param QuoteHelper    $quoteHelper
+     * @param   CarrierFactory  $carrierFactory
+     * @param   QuoteHelper     $quoteHelper
      */
     public function __construct(CarrierFactory $carrierFactory, QuoteHelper $quoteHelper)
     {
@@ -36,11 +33,11 @@ class ShippingPlugin
     }
 
     /**
-     * @param Shipping    $subject
-     * @param \Closure    $proceed
-     * @param string      $carrierCode
-     * @param RateRequest $request
-     * @return Shipping
+     * @param   Shipping    $subject
+     * @param   \Closure    $proceed
+     * @param   string      $carrierCode
+     * @param   RateRequest $request
+     * @return  Shipping
      */
     public function aroundCollectCarrierRates(Shipping $subject, \Closure $proceed, $carrierCode, $request)
     {
@@ -64,8 +61,8 @@ class ShippingPlugin
     }
 
     /**
-     * @param CartItemInterface[] $items
-     * @return CartInterface|null
+     * @param   CartItemInterface[] $items
+     * @return  CartInterface|null
      */
     private function extractQuoteFromItems(array $items)
     {

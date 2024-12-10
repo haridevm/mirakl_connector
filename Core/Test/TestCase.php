@@ -1,14 +1,11 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Test;
 
 class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @param string $fileName
-     * @return bool|string
+     * @param   string  $fileName
+     * @return  bool|string
      */
     protected function getFileContents($fileName)
     {
@@ -16,7 +13,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return string
+     * @return  string
      */
     protected function getFilesDir()
     {
@@ -24,8 +21,8 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param string $file
-     * @return string
+     * @param   string  $file
+     * @return  string
      */
     protected function getFilePath($file)
     {
@@ -33,11 +30,11 @@ class TestCase extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @param string $fileName
-     * @param bool   $assoc
-     * @return array
+     * @param   string  $fileName
+     * @param   bool    $assoc
+     * @return  array
      */
-    protected function getJsonFileContents($fileName, $assoc = true)
+    protected function _getJsonFileContents($fileName, $assoc = true)
     {
         return json_decode($this->getFileContents($fileName), $assoc);
     }

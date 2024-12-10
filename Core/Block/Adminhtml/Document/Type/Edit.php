@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Document\Type;
 
 use Magento\Backend\Block\Widget\Form\Container;
@@ -14,8 +11,7 @@ class Edit extends Container
      * Add "Save and Apply" button
      * Add "Save and Continue" button
      *
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  void
      */
     protected function _construct()
     {
@@ -35,6 +31,6 @@ class Edit extends Container
                 ]
             ],
             10
-        );
+       );
     }
 }

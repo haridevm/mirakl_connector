@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Cart\Item;
 
 use Magento\Framework\Pricing\PriceCurrencyInterface;
@@ -13,14 +10,9 @@ use Mirakl\Connector\Model\Offer;
 use Mirakl\Connector\Model\OfferFactory;
 use Mirakl\Connector\Model\Quote\Updater as QuoteUpdater;
 use Mirakl\Core\Model\Shop;
-use Mirakl\FrontendDemo\Block\Product\Offer\ShippingDate;
 use Mirakl\MMP\Common\Domain\Shipping\ShippingType;
 use Mirakl\MMP\Front\Domain\Collection\Shipping\ShippingFeeTypeCollection;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Shipping extends Template
 {
     /**
@@ -54,12 +46,12 @@ class Shipping extends Template
     protected $offerFactory;
 
     /**
-     * @param Context                $context
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param OfferHelper            $offerHelper
-     * @param QuoteUpdater           $quoteUpdater
-     * @param OfferFactory           $offerFactory
-     * @param array                  $data
+     * @param   Context                 $context
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   OfferHelper             $offerHelper
+     * @param   QuoteUpdater            $quoteUpdater
+     * @param   OfferFactory            $offerFactory
+     * @param   array                   $data
      */
     public function __construct(
         Context $context,
@@ -77,9 +69,9 @@ class Shipping extends Template
     }
 
     /**
-     * @param float $value
-     * @param bool  $includeContainer
-     * @return string
+     * @param   float   $value
+     * @param   bool    $includeContainer
+     * @return  string
      */
     public function formatPrice($value, $includeContainer = false)
     {
@@ -89,7 +81,7 @@ class Shipping extends Template
     /**
      * Get quote item
      *
-     * @return QuoteItem
+     * @return  QuoteItem
      */
     public function getItem()
     {
@@ -97,7 +89,7 @@ class Shipping extends Template
     }
 
     /**
-     * @return Offer|null
+     * @return  Offer|null
      */
     public function getOffer()
     {
@@ -111,7 +103,7 @@ class Shipping extends Template
     }
 
     /**
-     * @return ShippingType
+     * @return  ShippingType
      */
     public function getSelectedShippingType()
     {
@@ -127,7 +119,7 @@ class Shipping extends Template
     /**
      * Retrieve available shipping methods of given quote item
      *
-     * @return ShippingFeeTypeCollection
+     * @return  ShippingFeeTypeCollection
      */
     public function getShippingTypes()
     {
@@ -145,15 +137,7 @@ class Shipping extends Template
     }
 
     /**
-     * @return ShippingDate
-     */
-    public function getShippingDateBlock()
-    {
-        return $this->_layout->createBlock(ShippingDate::class);
-    }
-
-    /**
-     * @return Shop|null
+     * @return  Shop|null
      */
     public function getShop()
     {
@@ -165,8 +149,8 @@ class Shipping extends Template
     /**
      * Set quote item
      *
-     * @param QuoteItem $item
-     * @return $this
+     * @param   QuoteItem   $item
+     * @return  $this
      */
     public function setItem(QuoteItem $item)
     {
@@ -176,7 +160,7 @@ class Shipping extends Template
     }
 
     /**
-     * @inheritdoc
+     * @return  string
      */
     protected function _toHtml()
     {

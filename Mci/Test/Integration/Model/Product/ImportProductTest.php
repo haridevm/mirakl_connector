@@ -1,23 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Integration\Model\Product;
 
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Mirakl\Mci\Test\Integration\Model\Product\AbstractImportProductTestCase as MiraklBaseTestCase;
 
-/**
- * @group MCI
- * @group import
- *
- * @magentoDbIsolation enabled
- * @magentoAppIsolation enabled
- */
 class ImportProductTest extends MiraklBaseTestCase
 {
     /**
      * @dataProvider importMciDataProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -28,11 +20,11 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $csv
+     * @param   string  $csv
      */
     public function testDataMciImport($csv)
     {
-        $process = $this->runImport('2010', $csv);
+        $this->runImport('2010', $csv);
 
         $values = [
             'category'       => 3,
@@ -48,14 +40,13 @@ class ImportProductTest extends MiraklBaseTestCase
 
         $this->validateAllProductValues('2010', $values);
 
-        $this->assertStringNotContainsString(
-            'Creating process for P43 import report...',
-            $process->getOutput()
-        );
+        $this->assertStringNotContainsString('Creating process for P43 import report...', $this->processModel->getOutput());
     }
 
     /**
      * @dataProvider importMciDataProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -66,7 +57,7 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $csv
+     * @param   string  $csv
      */
     public function testDataMciDisabledProductImport($csv)
     {
@@ -90,6 +81,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -99,11 +92,11 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $csv
+     * @param   string  $csv
      */
     public function testDataMciEnableReportImport($csv)
     {
-        $process = $this->runImport('2010', $csv);
+        $this->runImport('2010', $csv);
 
         $values = [
             'category'       => 3,
@@ -119,14 +112,13 @@ class ImportProductTest extends MiraklBaseTestCase
 
         $this->validateAllProductValues('2010', $values);
 
-        $this->assertStringContainsString(
-            'Creating process for P43 import report...',
-            $process->getOutput()
-        );
+        $this->assertStringContainsString('Creating process for P43 import report...', $this->processModel->getOutput());
     }
 
     /**
      * @dataProvider importMciDataDeduplicationProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -138,8 +130,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataNoUpdateImport($productCreationCsv, $productUpdateCsv)
     {
@@ -167,6 +159,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataDeduplicationProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -178,8 +172,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataDeduplicationImport($productCreationCsv, $productUpdateCsv)
     {
@@ -205,7 +199,7 @@ class ImportProductTest extends MiraklBaseTestCase
         $values = [
             'category'       => 3,
             'brand'          => 'Lacoste UPDATE',
-            'name'           => 'Slim Fit Polo',
+            'name'           => 'Slim Fit Polo UPDATE',
             'description'    => 'This ... UPDATE',
             'color'          => '50',
             'size'           => '91',
@@ -220,6 +214,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataDeduplicationProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -231,8 +227,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataAnotherShopDeduplicationImport($productCreationCsv, $productUpdateCsv)
     {
@@ -257,7 +253,7 @@ class ImportProductTest extends MiraklBaseTestCase
         $values = [
             'category'       => 3,
             'brand'          => 'Lacoste UPDATE',
-            'name'           => 'Slim Fit Polo',
+            'name'           => 'Slim Fit Polo UPDATE',
             'description'    => 'This ... UPDATE',
             'color'          => '50',
             'size'           => '91',
@@ -273,6 +269,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataDeduplicationProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -284,8 +282,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataAnotherShopNoUpdateImport($productCreationCsv, $productUpdateCsv)
     {
@@ -327,6 +325,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataDeduplicationProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -339,8 +339,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataMiraklSync($productCreationCsv, $productUpdateCsv)
     {
@@ -388,6 +388,8 @@ class ImportProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importMciDataProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -401,7 +403,7 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
+     * @param   string  $productCreationCsv
      */
     public function testDataEnableHash($productCreationCsv)
     {
@@ -425,16 +427,15 @@ class ImportProductTest extends MiraklBaseTestCase
 
         $this->validateAllProductValues('2010', $values);
 
-        $process = $this->runImport('2010', $productCreationCsv);
+        $this->runImport('2010', $productCreationCsv);
 
-        $this->assertStringContainsString(
-            'Skipping row 2 because already imported (SHOPSKU)',
-            $process->getOutput()
-        );
+        $this->assertStringContainsString('Skipping row 2 because already imported (SHOPSKU)', $this->processModel->getOutput());
     }
 
     /**
      * @dataProvider importMciDataDeduplicationMultivaluesProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -449,8 +450,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $productCreationCsv
-     * @param string $productUpdateCsv
+     * @param   string  $productCreationCsv
+     * @param   string  $productUpdateCsv
      */
     public function testDataMultiValues($productCreationCsv, $productUpdateCsv)
     {
@@ -476,7 +477,7 @@ class ImportProductTest extends MiraklBaseTestCase
         $values = [
             'category'       => 3,
             'brand'          => 'Lacoste UPDATE',
-            'name'           => 'Slim Fit Polo',
+            'name'           => 'Slim Fit Polo UPDATE',
             'description'    => 'This ... UPDATE',
             'color'          => '50',
             'size'           => '91',
@@ -490,7 +491,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMciDataProvider()
     {
@@ -500,7 +501,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMciDataDeduplicationProvider()
     {
@@ -510,7 +511,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMciDataDeduplicationMultivaluesProvider()
     {

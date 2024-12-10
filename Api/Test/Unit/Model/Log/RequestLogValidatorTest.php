@@ -1,37 +1,25 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Test\Unit\Model\Log;
 
+use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Mirakl\Api\Model\Log\RequestLogValidator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @group api
- * @group model
- * @coversDefaultClass \Mirakl\Api\Model\Log\RequestLogValidator
- */
 class RequestLogValidatorTest extends TestCase
 {
-    /**
-     * @var RequestLogValidator
-     */
+    /** @var RequestLogValidator */
     protected $requestLogValidator;
 
     /**
-     * @var \Mirakl\Api\Helper\Config|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Mirakl\Api\Helper\Config|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $configMock;
 
     /**
-     * @var \Mirakl\Core\Request\RequestInterface|\PHPUnit\Framework\MockObject\MockObject
+     * @var \Mirakl\Core\Request\RequestInterface|\PHPUnit_Framework_MockObject_MockObject
      */
     protected $requestMock;
 
-    /**
-     * @inheritdoc
-     */
     protected function setUp(): void
     {
         $this->configMock = $this->getMockBuilder(\Mirakl\Api\Helper\Config::class)
@@ -42,12 +30,11 @@ class RequestLogValidatorTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->requestLogValidator = new RequestLogValidator($this->configMock);
+        $this->requestLogValidator = (new ObjectManager($this))->getObject(RequestLogValidator::class, [
+            'config' => $this->configMock
+        ]);
     }
 
-    /**
-     * @covers ::validate
-     */
     public function testValidateWithLoggingDisabled()
     {
         $this->configMock->expects($this->once())
@@ -57,9 +44,6 @@ class RequestLogValidatorTest extends TestCase
         $this->assertFalse($this->requestLogValidator->validate($this->requestMock));
     }
 
-    /**
-     * @covers ::validate
-     */
     public function testValidateWithEmptyFilter()
     {
         $this->configMock->expects($this->once())
@@ -74,19 +58,14 @@ class RequestLogValidatorTest extends TestCase
     }
 
     /**
-     * @param string $filter
-     * @param string $requestUri
-     * @param array  $requestQueryParams
-     * @param bool   $expected
+     * @param   string  $filter
+     * @param   string  $requestUri
+     * @param   array   $requestQueryParams
+     * @param   bool    $expected
      * @dataProvider getTestValidateWithFilterDataProvider
-     * @covers ::validate
      */
-    public function testValidateWithFilter(
-        string $filter,
-        string $requestUri,
-        array $requestQueryParams,
-        bool $expected
-    ) {
+    public function testValidateWithFilter($filter, $requestUri, array $requestQueryParams, $expected)
+    {
         $this->configMock->expects($this->once())
             ->method('isApiLogEnabled')
             ->willReturn(true);
@@ -107,20 +86,16 @@ class RequestLogValidatorTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
-    public function getTestValidateWithFilterDataProvider(): array
+    public function getTestValidateWithFilterDataProvider()
     {
         return [
             ['api/orders', 'locales', [], false],
             ['api/shipping/rates|api/locales', 'locales', [], true],
             ['api/shipping/rates|api/locales', 'shipping/rates', [], true],
             ['api/shipping/rates\?shipping_zone_code=INT|api/locales', 'shipping/rates', [], false],
-            [
-                'api/shipping/rates\?shipping_zone_code=INT|api/locales', 'shipping/rates',
-                ['shipping_zone_code' => 'INT'],
-                true,
-            ],
+            ['api/shipping/rates\?shipping_zone_code=INT|api/locales', 'shipping/rates', ['shipping_zone_code' => 'INT'], true],
         ];
     }
 }

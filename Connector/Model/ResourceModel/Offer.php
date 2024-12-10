@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
@@ -67,8 +64,9 @@ class Offer extends AbstractDb
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Initialize main table and table id field
+     *
+     * @return void
      */
     protected function _construct()
     {

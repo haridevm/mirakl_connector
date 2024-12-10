@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\Data\Form\FormKey;
@@ -30,14 +27,14 @@ class Info extends \Magento\Sales\Block\Order\Info
     protected $orderHelper;
 
     /**
-     * @param TemplateContext $context
-     * @param Registry        $registry
-     * @param PaymentHelper   $paymentHelper
-     * @param AddressRenderer $addressRenderer
-     * @param FormKey         $formKey
-     * @param OrderApi        $orderApi
-     * @param OrderHelper     $orderHelper
-     * @param array           $data
+     * @param   TemplateContext $context
+     * @param   Registry        $registry
+     * @param   PaymentHelper   $paymentHelper
+     * @param   AddressRenderer $addressRenderer
+     * @param   FormKey         $formKey
+     * @param   OrderApi        $orderApi
+     * @param   OrderHelper     $orderHelper
+     * @param   array           $data
      */
     public function __construct(
         TemplateContext $context,
@@ -56,7 +53,7 @@ class Info extends \Magento\Sales\Block\Order\Info
     }
 
     /**
-     * @return \Mirakl\MMP\FrontOperator\Domain\Order
+     * @return  \Mirakl\MMP\FrontOperator\Domain\Order
      */
     public function getMiraklOrder()
     {
@@ -64,8 +61,7 @@ class Info extends \Magento\Sales\Block\Order\Info
     }
 
     /**
-     * @return void
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  void
      */
     protected function _prepareLayout()
     {
@@ -75,7 +71,7 @@ class Info extends \Magento\Sales\Block\Order\Info
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function canReceiveOrder()
     {
@@ -83,7 +79,7 @@ class Info extends \Magento\Sales\Block\Order\Info
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getMarkAsReceivedUrl()
     {

@@ -1,14 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\Offer;
 
 class Grid extends \Magento\Backend\Block\Widget\Grid
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _prepareCollection()
     {

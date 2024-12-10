@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Model\ResourceModel\Process;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
@@ -10,13 +7,11 @@ use Mirakl\Process\Model\Process;
 
 /**
  * @method Process getFirstItem()
- *
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
  */
 class Collection extends AbstractCollection
 {
     /**
-     * @inheritdoc
+     * Set resource model
      */
     protected function _construct()
     {
@@ -24,7 +19,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _afterLoad()
     {
@@ -37,17 +32,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param mixed $ids
-     * @return $this
-     */
-    public function addIdFilter($ids)
-    {
-        return $this->addFieldToFilter('id', ['in' => (array) $ids]);
-    }
-
-    /**
-     * @param ActionInterface $action
-     * @return $this
+     * @param   ActionInterface $action
+     * @return  Collection
      */
     public function addActionFilter(ActionInterface $action)
     {
@@ -60,7 +46,7 @@ class Collection extends AbstractCollection
     /**
      * Adds API Type filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addApiTypeFilter()
     {
@@ -70,7 +56,7 @@ class Collection extends AbstractCollection
     /**
      * Adds completed status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addCompletedFilter()
     {
@@ -80,8 +66,8 @@ class Collection extends AbstractCollection
     /**
      * Excludes processes that have the same hash as the given ones
      *
-     * @param string|array $hash
-     * @return $this
+     * @param   string|array    $hash
+     * @return  $this
      */
     public function addExcludeHashFilter($hash)
     {
@@ -99,7 +85,7 @@ class Collection extends AbstractCollection
     /**
      * Adds idle status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addIdleFilter()
     {
@@ -107,8 +93,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param int $parentId
-     * @return $this
+     * @param   int $parentId
+     * @return  $this
      */
     public function addParentFilter($parentId)
     {
@@ -120,7 +106,7 @@ class Collection extends AbstractCollection
     /**
      * Adds pending statuses filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addPendingFilter()
     {
@@ -133,7 +119,7 @@ class Collection extends AbstractCollection
     /**
      * Adds processing status filter to current collection
      *
-     * @return $this
+     * @return  $this
      */
     public function addProcessingFilter()
     {
@@ -143,7 +129,7 @@ class Collection extends AbstractCollection
     /**
      * Adds processing status filter to current collection for mirakl_status field
      *
-     * @return $this
+     * @return  $this
      */
     public function addMiraklProcessingFilter()
     {
@@ -153,7 +139,7 @@ class Collection extends AbstractCollection
     /**
      * Adds pending status filter to current collection for mirakl_status field
      *
-     * @return $this
+     * @return  $this
      */
     public function addMiraklPendingFilter()
     {
@@ -161,8 +147,8 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @param string|array $status
-     * @return $this
+     * @param   string|array    $status
+     * @return  $this
      */
     public function addStatusFilter($status)
     {
@@ -170,7 +156,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function cancel()
     {

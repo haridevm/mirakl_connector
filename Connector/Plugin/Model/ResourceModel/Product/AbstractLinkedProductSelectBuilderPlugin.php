@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\ResourceModel\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\BaseSelectProcessorInterface;
@@ -16,7 +13,7 @@ abstract class AbstractLinkedProductSelectBuilderPlugin
     protected $resource;
 
     /**
-     * @param ResourceConnection $resourceConnection
+     * @param   ResourceConnection  $resourceConnection
      */
     public function __construct(ResourceConnection $resourceConnection)
     {
@@ -24,7 +21,7 @@ abstract class AbstractLinkedProductSelectBuilderPlugin
     }
 
     /**
-     * @return Select
+     * @return  Select
      */
     protected function getOfferSubSelect()
     {
@@ -46,9 +43,9 @@ abstract class AbstractLinkedProductSelectBuilderPlugin
     }
 
     /**
-     * @param Select[] $result
-     * @param string   $defaultPriceField
-     * @return Select[]
+     * @param   Select[]    $result
+     * @param   string      $defaultPriceField
+     * @return  Select[]
      */
     protected function handleOffersMinPrice(&$result, $defaultPriceField)
     {

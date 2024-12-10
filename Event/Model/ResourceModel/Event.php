@@ -1,19 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Magento\Framework\Model\AbstractModel;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Event extends AbstractDb
 {
     /**
-     * @inheritdoc
+     * Initialize model and primary key field
      */
     protected function _construct()
     {
@@ -24,8 +18,8 @@ class Event extends AbstractDb
     /**
      * Perform actions before object save
      *
-     * @param AbstractModel $object
-     * @return $this
+     * @param   AbstractModel   $object
+     * @return  $this
      */
     protected function _beforeSave(AbstractModel $object)
     {
@@ -45,8 +39,8 @@ class Event extends AbstractDb
     /**
      * Deletes specified events from database
      *
-     * @param array $ids
-     * @return bool|int
+     * @param   array   $ids
+     * @return  bool|int
      */
     public function deleteIds(array $ids)
     {

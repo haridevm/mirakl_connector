@@ -12,9 +12,9 @@ require([
         setTimeout(function() {
             (function asyncProcess() {
                 $.ajax({
-                    url: '<?= $block->escapeUrl($block->getUrl('mirakl/process/async')) ?>',
+                    url: '<?php echo $block->getUrl('mirakl/process/async') ?>',
                     data: {
-                        form_key: '<?= /* @escapeNotVerified */ $block->getFormKey() ?>'
+                        form_key: '<?php /* @escapeNotVerified */ echo $block->getFormKey()?>'
                     },
                     showLoader: false,
                     dataType: 'html',

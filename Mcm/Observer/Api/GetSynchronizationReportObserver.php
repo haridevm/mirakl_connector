@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Api;
 
 use Magento\Framework\Event\Observer;
@@ -17,7 +14,7 @@ class GetSynchronizationReportObserver implements ObserverInterface
     protected $reportHelper;
 
     /**
-     * @param ReportHelper $reportHelper
+     * @param   ReportHelper    $reportHelper
      */
     public function __construct(ReportHelper $reportHelper)
     {
@@ -25,7 +22,7 @@ class GetSynchronizationReportObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

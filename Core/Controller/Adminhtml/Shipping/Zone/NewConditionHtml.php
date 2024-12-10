@@ -1,17 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Rule\Model\Condition\AbstractCondition;
 use Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-class NewConditionHtml extends Zone implements HttpPostActionInterface
+class NewConditionHtml extends Zone
 {
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {

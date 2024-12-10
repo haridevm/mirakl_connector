@@ -96,7 +96,7 @@
 "An error occurred while importing MCM products (%1).","Une erreur est survenue lors de l'import des produits MCM (%1)."
 "Last synchronization date of MCM products.","Date de dernière synchronisation des produits MCM."
 "Last MCM products synchronization date has been reset successfully.","La date de dernière synchronisation des produits MCM a été réinitialisée avec succès."
-"No products to import since %1","Aucun produit à importer depuis le %1"
+"No products to import since %1","Aucun produit à importer depuis %1"
 "Importing MCM file...","Import du fichier MCM..."
 "This flag also depends on flag ""Mirakl (Config) > Catalog Management (MCM) > Enable"".","Ce paramètre dépend aussi du champ ""Mirakl (Config) > Gestion catalogue (MCM) > Activer""."
 "MCM Products Export (CM21)","Export des produits MCM (CM21)"

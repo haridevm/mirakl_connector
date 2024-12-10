@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Block\Adminhtml\System\Config\Button\Import;
 
 use Mirakl\Connector\Block\Adminhtml\System\Config\Button\AbstractButtons;
@@ -14,8 +11,7 @@ class ProductsFileAsync extends AbstractButtons
     protected $buttonsConfig = [
         [
             'label' => 'Import in Magento',
-            'onclick' => "var el = jQuery('#mirakl_mcm_import_product_async_file'); "
-                . "el.val() ? configForm.submit() : el.effect('shake', {distance:15}, 500);",
+            'onclick' => "var el = jQuery('#mirakl_mcm_import_product_async_file'); el.val() ? configForm.submit() : el.effect('shake', {distance:15}, 500);",
             'class' => 'scalable primary',
         ]
     ];

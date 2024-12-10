@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model;
 
 use Magento\Catalog\Model\Product\Type as ProductType;
@@ -52,16 +49,12 @@ use Mirakl\MMP\Common\Domain\Discount;
  * @method string   getShopName()
  * @method int      getStateCode()
  * @method float    getTotalPrice()
- *
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
  */
 class Offer extends AbstractModel implements SaleableInterface
 {
-    public const OFFER_ID = 'offer_id'; // We define the id fieldname
+    const OFFER_ID = 'offer_id'; // We define the id fieldname
 
-    public const CHANNELS_SEPARATOR = '|';
+    const CHANNELS_SEPARATOR = '|';
 
     /**
      * Prefix of model events names
@@ -72,6 +65,7 @@ class Offer extends AbstractModel implements SaleableInterface
 
     /**
      * Parameter name in event
+     *
      * In observe method you can use $observer->getEvent()->getOffer() in this case
      *
      * @var string
@@ -89,6 +83,8 @@ class Offer extends AbstractModel implements SaleableInterface
     protected $priceInfoFactory;
 
     /**
+     * Catalog product type
+     *
      * @var ProductType
      */
     protected $catalogProductType;
@@ -124,7 +120,6 @@ class Offer extends AbstractModel implements SaleableInterface
      * @param ShopFactory            $shopFactory
      * @param ShopResourceFactory    $shopResourceFactory
      * @param array                  $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Context $context,
@@ -147,19 +142,19 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @inheritdoc
+     * Init resource model and id field
+     *
+     * @return  void
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->_init(ResourceModel\Offer::class);
         $this->setIdFieldName(self::OFFER_ID);
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getActive()
     {
@@ -167,7 +162,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getActiveChannels()
     {
@@ -177,7 +172,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getAdditionalInfo()
     {
@@ -195,8 +190,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getAllowQuoteRequests()
     {
@@ -206,7 +200,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * For backward compatibility
      *
-     * @return string
+     * @return  string
      * @deprecated Use getCurrencyIsoCode() instead
      */
     public function getCurrencyCode()
@@ -215,8 +209,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getDeleted()
     {
@@ -224,7 +217,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return Discount
+     * @return  Discount
      */
     public function getDiscount()
     {
@@ -252,7 +245,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getId()
     {
@@ -260,7 +253,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return int|null
+     * @return  int|null
      */
     public function getLeadtimeToShip()
     {
@@ -270,8 +263,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getPremium()
     {
@@ -279,8 +271,7 @@ class Offer extends AbstractModel implements SaleableInterface
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getProfessional()
     {
@@ -290,19 +281,19 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns price info container of saleable item
      *
-     * @return PriceInfoInterface
+     * @return  PriceInfoInterface
      */
     public function getPriceInfo()
     {
         if (!$this->priceInfo) {
-            $this->priceInfo = $this->priceInfoFactory->create($this);
+            $this->priceInfo =  $this->priceInfoFactory->create($this);
         }
 
         return $this->priceInfo;
     }
 
     /**
-     * @return DiscountRangeCollection
+     * @return  DiscountRangeCollection
      */
     public function getPriceRanges()
     {
@@ -360,7 +351,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns quantity of saleable item
      *
-     * @return float
+     * @return  float
      */
     public function getQty()
     {
@@ -370,7 +361,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * For backward compatibility
      *
-     * @return int
+     * @return  int
      * @deprecated Use getStateCode() instead
      */
     public function getStateId()
@@ -381,7 +372,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns type identifier of saleable item
      *
-     * @return string
+     * @return  string
      */
     public function getTypeId()
     {
@@ -391,8 +382,8 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns offer state matching specified state id
      *
-     * @param int $stateId
-     * @return string
+     * @param   int $stateId
+     * @return  string
      */
     public function getConditionNameById($stateId)
     {
@@ -405,7 +396,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns offer state collection
      *
-     * @return OfferStateCollection
+     * @return  OfferStateCollection
      */
     public function getAllConditions()
     {
@@ -419,7 +410,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns offer state matching this specific offer state id
      *
-     * @return string
+     * @return  string
      */
     public function getConditionName()
     {
@@ -429,7 +420,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns shop of specified offer if available
      *
-     * @return Shop
+     * @return  Shop
      */
     public function getShop()
     {
@@ -442,7 +433,7 @@ class Offer extends AbstractModel implements SaleableInterface
     /**
      * Returns true if discount price is valid for current date, false otherwise
      *
-     * @return bool
+     * @return  bool
      */
     public function isDiscountPriceValid()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Catalog\Model\ProductRepository;
@@ -19,11 +16,6 @@ use Mirakl\MMP\Common\Domain\Message\Thread\ThreadDetails;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadEntity;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadMessage;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class View extends Template
 {
     /**
@@ -62,14 +54,14 @@ class View extends Template
     protected $_template = 'Mirakl_FrontendDemo::message/view.phtml';
 
     /**
-     * @param Registry          $coreRegistry
-     * @param FormKey           $formKey
-     * @param MessageHelper     $messageHelper
-     * @param OrderFactory      $orderFactory
-     * @param OfferHelper       $offerHelper
-     * @param ProductRepository $productRepository
-     * @param Context           $context
-     * @param array             $data
+     * @param   Registry            $coreRegistry
+     * @param   FormKey             $formKey
+     * @param   MessageHelper       $messageHelper
+     * @param   OrderFactory        $orderFactory
+     * @param   OfferHelper         $offerHelper
+     * @param   ProductRepository   $productRepository
+     * @param   Context             $context
+     * @param   array               $data
      */
     public function __construct(
         Registry $coreRegistry,
@@ -91,17 +83,16 @@ class View extends Template
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->pageConfig->getTitle()->set($this->messageHelper->getTopic($this->getThread()));
     }
 
     /**
-     * @return MessageHelper
+     * @return  MessageHelper
      */
     public function getMessageHelper()
     {
@@ -109,7 +100,7 @@ class View extends Template
     }
 
     /**
-     * @return ThreadDetails
+     * @return  ThreadDetails
      */
     public function getThread()
     {
@@ -117,7 +108,7 @@ class View extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getThreadTitle()
     {
@@ -125,8 +116,7 @@ class View extends Template
         $thread = $this->getThread();
         /** @var ThreadEntity $entity */
         foreach ($thread->getEntities() as $entity) {
-            $titles[] = __(
-                '%1: %2',
+            $titles[] = __('%1: %2',
                 $this->escapeHtmlAttr(__($this->messageHelper->getEntityName($entity))),
                 $this->escapeHtmlAttr($entity->getLabel())
             );
@@ -136,8 +126,8 @@ class View extends Template
     }
 
     /**
-     * @param ThreadMessage $message
-     * @return bool
+     * @param   ThreadMessage   $message
+     * @return  bool
      */
     public function isCustomerMessage(ThreadMessage $message)
     {
@@ -145,8 +135,8 @@ class View extends Template
     }
 
     /**
-     * @param ThreadAttachment $attachment
-     * @return string
+     * @param   ThreadAttachment    $attachment
+     * @return  string
      */
     public function getAttachmentUrl(ThreadAttachment $attachment)
     {
@@ -160,8 +150,8 @@ class View extends Template
     }
 
     /**
-     * @param ThreadEntity $entity
-     * @return string
+     * @param   ThreadEntity    $entity
+     * @return  string
      */
     public function getEntityUrl(ThreadEntity $entity)
     {
@@ -194,7 +184,7 @@ class View extends Template
     }
 
     /**
-     * @return string[]
+     * @return  string[]
      */
     public function getMessageAllowedTags()
     {
@@ -207,8 +197,8 @@ class View extends Template
     }
 
     /**
-     * @param string $remoteId
-     * @return Order
+     * @param   string  $remoteId
+     * @return  Order
      */
     protected function getOrderByMiraklRemoteId($remoteId)
     {
@@ -225,8 +215,8 @@ class View extends Template
     }
 
     /**
-     * @param string $remoteId
-     * @return string
+     * @param   string  $remoteId
+     * @return  string
      */
     protected function getOrderIdByMiraklRemoteId($remoteId)
     {
@@ -236,8 +226,8 @@ class View extends Template
     }
 
     /**
-     * @param string $offerId
-     * @return string
+     * @param   string  $offerId
+     * @return  string
      */
     protected function getProductUrl($offerId)
     {
@@ -257,8 +247,8 @@ class View extends Template
     }
 
     /**
-     * @param ThreadMessage $message
-     * @return string
+     * @param   ThreadMessage   $message
+     * @return  string
      */
     public function getSenderName(ThreadMessage $message)
     {
@@ -272,8 +262,8 @@ class View extends Template
     }
 
     /**
-     * @param ThreadMessage $message
-     * @return array
+     * @param   ThreadMessage   $message
+     * @return  array
      */
     public function getRecipientNames(ThreadMessage $message)
     {
@@ -284,9 +274,7 @@ class View extends Template
         if (!empty($message['to'])) {
             foreach ($message['to'] as $recipient) {
                 if (!empty($recipient['display_name'])) {
-                    $names[] = $recipient['display_name'] === 'Operator'
-                        ? __($recipient['display_name'])
-                        : $recipient['display_name'];
+                    $names[] = $recipient['display_name'] === 'Operator' ? __($recipient['display_name']) : $recipient['display_name'];
                 }
             }
         }

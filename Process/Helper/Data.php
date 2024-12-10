@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Helper;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -19,9 +16,6 @@ use Mirakl\Process\Model\ResourceModel\ProcessFactory as ResourceFactory;
 use Mirakl\Process\Model\ResourceModel\Process\Collection;
 use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Data extends AbstractHelper
 {
     /**
@@ -89,11 +83,11 @@ class Data extends AbstractHelper
 
     /**
      * @param ...$values
-     * @return string
+     * @return  string
      */
     public function generateHash(...$values)
     {
-        return md5(implode(' ', $values)); // phpcs:ignore
+        return md5(implode(' ', $values));
     }
 
     /**
@@ -150,12 +144,14 @@ class Data extends AbstractHelper
             ->addProcessingFilter();
 
         // Retrieve completed processes
-        return $this->collectionFactory->create()
+        $completed = $this->collectionFactory->create()
             ->addCompletedFilter()
             ->addMiraklPendingFilter()
             ->addApiTypeFilter()
             ->addExcludeHashFilter($processing->getColumnValues('hash'))
             ->setOrder('id', 'ASC'); // oldest first
+
+        return $completed;
     }
 
     /**
@@ -178,7 +174,7 @@ class Data extends AbstractHelper
     /**
      * Returns a collection all pending processes, oldest first
      *
-     * @return Collection
+     * @return  ProcessCollection
      */
     public function getPendingProcessCollection()
     {
@@ -189,8 +185,8 @@ class Data extends AbstractHelper
         // Retrieve pending processes
         $pendingCollection = $this->collectionFactory->create();
         $pendingCollection->addPendingFilter()
-            ->addExcludeHashFilter($processingCollection->getColumnValues('hash'))
-            ->setOrder('id', 'ASC'); // oldest first
+                          ->addExcludeHashFilter($processingCollection->getColumnValues('hash'))
+                          ->setOrder('id', 'ASC'); // oldest first
 
         return $pendingCollection;
     }
@@ -244,7 +240,7 @@ class Data extends AbstractHelper
         }
 
         [$micro, $time] = explode(' ', microtime());
-        $filename = sprintf('%s_%s.%s', date('Ymd_His', (int) $time), $micro, $extension);
+        $filename = sprintf('%s_%s.%s', date('Ymd_His', $time), $micro, $extension);
         $filepath = $this->getArchiveDir() . DIRECTORY_SEPARATOR . $filename;
 
         try {
@@ -286,7 +282,7 @@ class Data extends AbstractHelper
             return 0;
         }
 
-        $stat = $directory->stat($path);
+        $stat =  $directory->stat($path);
 
         return $stat['size'];
     }

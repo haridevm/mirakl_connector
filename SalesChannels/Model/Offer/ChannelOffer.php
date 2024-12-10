@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Offer;
@@ -9,7 +8,7 @@ use Mirakl\Connector\Model\Offer;
 class ChannelOffer extends Offer implements ChannelOfferInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getChannel(): ?string
     {
@@ -17,7 +16,7 @@ class ChannelOffer extends Offer implements ChannelOfferInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isAvailable(): bool
     {

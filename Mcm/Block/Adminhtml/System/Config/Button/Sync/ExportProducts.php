@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Block\Adminhtml\System\Config\Button\Sync;
 
 use Magento\Backend\Block\Template\Context;
@@ -42,8 +39,7 @@ class ExportProducts extends AbstractButtons
     ) {
         parent::__construct($context, $data, $secureRenderer);
         $this->mcmConfig = $mcmConfig;
-        $enabled = ($this->mcmConfig->isMcmEnabled() || $this->mcmConfig->isAsyncMcmEnabled())
-            && $this->mcmConfig->isSyncMcmProducts();
+        $enabled = ($this->mcmConfig->isMcmEnabled() || $this->mcmConfig->isAsyncMcmEnabled()) && $this->mcmConfig->isSyncMcmProducts();
         $this->setDisabled(!$enabled);
     }
 }

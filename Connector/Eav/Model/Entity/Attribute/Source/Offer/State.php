@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Eav\Model\Entity\Attribute\Source\Offer;
 
 use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
@@ -22,8 +19,8 @@ class State extends AbstractSource
     private $collectionFactory;
 
     /**
-     * @param AttributeFactory  $eavAttrEntity
-     * @param CollectionFactory $collectionFactory
+     * @param   AttributeFactory    $eavAttrEntity
+     * @param   CollectionFactory   $collectionFactory
      */
     public function __construct(AttributeFactory $eavAttrEntity, CollectionFactory $collectionFactory)
     {
@@ -32,7 +29,10 @@ class State extends AbstractSource
     }
 
     /**
-     * @inheritdoc
+     * Get list of all available offer states
+     *
+     * @param   bool    $withEmpty  Add empty option to array
+     * @return  array
      */
     public function getAllOptions($withEmpty = true)
     {
@@ -53,9 +53,9 @@ class State extends AbstractSource
     /**
      * Retrieve option values array by ids
      *
-     * @param string|array $ids
-     * @param bool         $withEmpty Add empty option to array
-     * @return array
+     * @param   string|array    $ids
+     * @param   bool            $withEmpty  Add empty option to array
+     * @return  array
      */
     public function getSpecificOptions($ids, $withEmpty = true)
     {
@@ -75,7 +75,7 @@ class State extends AbstractSource
     /**
      * Retrieve flat column definition
      *
-     * @return array
+     * @return  array
      */
     public function getFlatColums()
     {
@@ -96,8 +96,8 @@ class State extends AbstractSource
     /**
      * Retrieve Select For Flat Attribute update
      *
-     * @param int $store
-     * @return \Magento\Framework\DB\Select|null
+     * @param   int $store
+     * @return  \Magento\Framework\DB\Select|null
      */
     public function getFlatUpdateSelect($store)
     {

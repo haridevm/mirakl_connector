@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model;
@@ -9,8 +8,8 @@ use Magento\Framework\Serialize\Serializer\Json;
 
 class Config
 {
-    public const XML_PATH_CHANNEL_PRICING_ENABLED = 'mirakl_connector/sales_channels/enable_channel_pricing';
-    public const XML_PATH_STORE_CHANNEL_MAPPING   = 'mirakl_connector/sales_channels/mirakl_channels';
+    const XML_PATH_CHANNEL_PRICING_ENABLED = 'mirakl_connector/sales_channels/enable_channel_pricing';
+    const XML_PATH_STORE_CHANNEL_MAPPING   = 'mirakl_connector/sales_channels/mirakl_channels';
 
     /**
      * @var ScopeConfigInterface
@@ -24,7 +23,7 @@ class Config
 
     /**
      * @param ScopeConfigInterface $scopeConfig
-     * @param Json                 $json
+     * @param Json $json
      */
     public function __construct(ScopeConfigInterface $scopeConfig, Json $json)
     {

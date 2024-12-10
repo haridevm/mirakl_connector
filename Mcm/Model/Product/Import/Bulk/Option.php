@@ -1,13 +1,10 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk;
 
 /**
  * This class will bypass all custom options management during Mirakl MCM bulk import
- *
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
  */
 class Option extends \Magento\CatalogImportExport\Model\Import\Product\Option
 {

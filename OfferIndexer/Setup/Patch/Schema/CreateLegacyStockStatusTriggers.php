@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Setup\Patch\Schema;
@@ -44,7 +43,7 @@ class CreateLegacyStockStatusTriggers implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -91,7 +90,7 @@ class CreateLegacyStockStatusTriggers implements SchemaPatchInterface
         foreach ($stockStatusTables as $key => $tableName) {
             $stockStatusTable = $setup->getTable($tableName);
             if (!$connection->isTableExists($stockStatusTable)) {
-                continue; // @codeCoverageIgnore
+                continue;
             }
 
             // Remove this column that is not used anymore
@@ -116,7 +115,7 @@ class CreateLegacyStockStatusTriggers implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -124,7 +123,7 @@ class CreateLegacyStockStatusTriggers implements SchemaPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

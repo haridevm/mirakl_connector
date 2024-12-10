@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
@@ -16,27 +13,25 @@ class ShippingTypeDescription extends AbstractRenderer
      */
     private $json;
 
-    /**
-     * @param Context $context
-     * @param Json    $json
-     * @param array   $data
-     */
     public function __construct(
         Context $context,
         Json $json,
         array $data = []
     ) {
-        parent::__construct($context, $data);
+        parent::__construct(
+            $context,
+            $data
+        );
         $this->json = $json;
     }
 
     /**
-     * @inheritdoc
+     * @param   DataObject  $row
+     * @return  string
      */
     public function render(DataObject $row)
     {
         $value = $this->_getValue($row);
-
         if (empty($value)) {
             return '';
         }
@@ -44,7 +39,6 @@ class ShippingTypeDescription extends AbstractRenderer
         $labelsByLocale = $this->json->unserialize($value);
 
         $output = '';
-
         foreach ($labelsByLocale as $locale => $label) {
             if (!empty($label)) {
                 $output .= sprintf(
@@ -55,8 +49,6 @@ class ShippingTypeDescription extends AbstractRenderer
             }
         }
 
-        return $output
-            ? '<table class="mirakl-shipping-types-table mirakl-shipping-type-description">' . $output . '</table>'
-            : '';
+        return $output ? '<table class="mirakl-shipping-types-table mirakl-shipping-type-description">' . $output . '</table>' : '';
     }
 }

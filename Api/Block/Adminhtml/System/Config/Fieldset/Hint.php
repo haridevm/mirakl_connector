@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Block\Adminhtml\System\Config\Fieldset;
 
 use Magento\Backend\Block\Template;
@@ -20,7 +17,6 @@ class Hint extends Template implements RendererInterface
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'Mirakl_Api::system/config/fieldset/hint.phtml';
 
@@ -54,7 +50,6 @@ class Hint extends Template implements RendererInterface
         array $data = []
     ) {
         parent::__construct($context, $data);
-
         $this->coreHelper = $coreHelper;
         $this->apiHelper = $apiHelper;
         $this->clientSettings = $clientSettings;
@@ -93,7 +88,10 @@ class Hint extends Template implements RendererInterface
     }
 
     /**
-     * @inheritdoc
+     * Render fieldset html
+     *
+     * @param AbstractElement $element
+     * @return string
      */
     public function render(AbstractElement $element)
     {

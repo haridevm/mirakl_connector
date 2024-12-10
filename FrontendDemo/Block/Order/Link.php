@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\App\DefaultPathInterface;
@@ -23,12 +20,12 @@ class Link extends \Magento\Sales\Block\Order\Link
     protected $connectorConfig;
 
     /**
-     * @param Context              $context
-     * @param DefaultPathInterface $defaultPath
-     * @param Registry             $registry
-     * @param OrderHelper          $orderHelper
-     * @param ConnectorConfig      $connectorConfig
-     * @param array                $data
+     * @param   Context                 $context
+     * @param   DefaultPathInterface    $defaultPath
+     * @param   Registry                $registry
+     * @param   OrderHelper             $orderHelper
+     * @param   ConnectorConfig         $connectorConfig
+     * @param   array                   $data
      */
     public function __construct(
         Context $context,
@@ -46,7 +43,7 @@ class Link extends \Magento\Sales\Block\Order\Link
     /**
      * Retrieve current order model instance
      *
-     * @return \Magento\Sales\Model\Order
+     * @return  \Magento\Sales\Model\Order
      */
     private function getOrder()
     {
@@ -56,7 +53,7 @@ class Link extends \Magento\Sales\Block\Order\Link
     /**
      * Retrieve remote order model instance
      *
-     * @return \Mirakl\MMP\FrontOperator\Domain\Order
+     * @return  \Mirakl\MMP\FrontOperator\Domain\Order
      */
     private function getMiraklOrder()
     {
@@ -64,7 +61,7 @@ class Link extends \Magento\Sales\Block\Order\Link
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getHref()
     {
@@ -75,7 +72,7 @@ class Link extends \Magento\Sales\Block\Order\Link
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function hasEvaluation()
     {
@@ -85,7 +82,7 @@ class Link extends \Magento\Sales\Block\Order\Link
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function hasShipments()
     {
@@ -93,13 +90,11 @@ class Link extends \Magento\Sales\Block\Order\Link
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _toHtml()
     {
-        if (
-            $this->hasKey()
+        if ($this->hasKey()
             && method_exists($this, 'has' . $this->getKey())
             && !$this->{'has' . $this->getKey()}()
         ) {

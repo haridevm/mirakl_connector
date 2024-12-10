@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication\Method;
@@ -24,8 +23,10 @@ class ApiKey implements MethodInterface
      * @param Config              $config
      * @param TestApiKeyInterface $testApiKey
      */
-    public function __construct(Config $config, TestApiKeyInterface $testApiKey)
-    {
+    public function __construct(
+        Config $config,
+        TestApiKeyInterface $testApiKey
+    ) {
         $this->config = $config;
         $this->testApiKey = $testApiKey;
     }

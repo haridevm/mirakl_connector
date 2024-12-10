@@ -1,23 +1,20 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Attribute;
 
 use Magento\Framework\DataObject;
 
 /**
- * @method string getCode()
- * @method $this  setCode(string $code)
- * @method string getLocale()
- * @method $this  setLocale(string $locale)
+ * @method  string  getCode()
+ * @method  $this   setCode(string $code)
+ * @method  string  getLocale()
+ * @method  $this   setLocale(string $locale)
  */
 class AttributeInfo extends DataObject
 {
     /**
-     * @param string      $code
-     * @param string|null $locale
-     * @return $this
+     * @param   string      $code
+     * @param   string|null $locale
+     * @return  $this
      */
     public static function create($code, $locale = null)
     {
@@ -25,7 +22,7 @@ class AttributeInfo extends DataObject
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isLocalized()
     {

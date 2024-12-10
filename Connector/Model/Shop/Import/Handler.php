@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Shop\Import;
@@ -55,7 +54,7 @@ class Handler extends AbstractAction
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Process $process, ...$params): array
     {

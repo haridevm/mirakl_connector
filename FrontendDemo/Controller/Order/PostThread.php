@@ -1,21 +1,18 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
 use GuzzleHttp\Exception\BadResponseException;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
+use Mirakl\Core\Domain\FileWrapper;
 use Mirakl\MMP\Common\Domain\Order\Message\CreateOrderThread;
 
-class PostThread extends AbstractOrder implements HttpPostActionInterface
+class PostThread extends AbstractOrder
 {
     /**
      * Submit new thread action
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {
@@ -89,8 +86,8 @@ class PostThread extends AbstractOrder implements HttpPostActionInterface
     }
 
     /**
-     * @param string $recipients
-     * @return array
+     * @param   string  $recipients
+     * @return  array
      */
     protected function getTo($recipients)
     {

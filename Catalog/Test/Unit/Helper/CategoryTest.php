@@ -1,66 +1,57 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Unit\Helper;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
 use Mirakl\Catalog\Helper\Category as CategoryHelper;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class CategoryTest extends TestCase
 {
     /** @var CategoryHelper */
     protected $categoryHelper;
 
-    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $connection;
 
-    /** @var \Magento\Store\Model\StoreManagerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Store\Model\StoreManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $storeManager;
 
-    /** @var \Magento\Store\Model\Store|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Store\Model\Store|\PHPUnit_Framework_MockObject_MockObject */
     protected $storeMock;
 
-    /** @var \Mirakl\Api\Helper\Category|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Mirakl\Api\Helper\Category|\PHPUnit_Framework_MockObject_MockObject */
     protected $api;
 
-    /** @var \Mirakl\Connector\Helper\Config|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Mirakl\Connector\Helper\Config|\PHPUnit_Framework_MockObject_MockObject */
     protected $config;
 
-    /** @var \Magento\Catalog\Model\ResourceModel\Category\TreeFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Catalog\Model\ResourceModel\Category\TreeFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryTreeFactory;
 
-    /** @var  \Magento\Catalog\Model\Category|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\Category|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryMock;
 
-    /** @var  \Magento\Catalog\Model\CategoryFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\CategoryFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryFactory;
 
-    /** @var  \Magento\Catalog\Model\ResourceModel\Category|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\ResourceModel\Category|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryResourceMock;
 
-    /** @var  \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryResourceFactory;
 
-    /** @var  \Magento\Catalog\Model\ResourceModel\Category\Collection|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\ResourceModel\Category\Collection|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryCollectionMock;
 
-    /** @var  \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var  \Magento\Catalog\Model\ResourceModel\Category\CollectionFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $categoryCollectionFactory;
 
-    /** @var \Magento\Framework\EntityManager\EntityManager|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\EntityManager\EntityManager|\PHPUnit_Framework_MockObject_MockObject */
     protected $entityManager;
 
-    /** @var \Magento\Framework\Data\Tree\Node\Collection|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\Data\Tree\Node\Collection|\PHPUnit_Framework_MockObject_MockObject */
     protected $nodeCollection;
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     protected function setUp(): void
     {
         $this->storeMock = $this->getMockBuilder('Magento\Store\Model\Store')
@@ -134,8 +125,7 @@ class CategoryTest extends TestCase
             ->method('create')
             ->will($this->returnValue($this->categoryResourceMock));
 
-        $this->categoryCollectionFactory = $this
-            ->getMockBuilder('Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')
+        $this->categoryCollectionFactory = $this->getMockBuilder('Magento\Catalog\Model\ResourceModel\Category\CollectionFactory')
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
@@ -170,7 +160,7 @@ class CategoryTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function initCategoryCollectionMock()
     {
@@ -187,11 +177,11 @@ class CategoryTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit\Framework\MockObject\MockObject
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function initCategoryTreeMock()
     {
-        /** @var \Magento\Framework\Data\Tree\Node|\PHPUnit\Framework\MockObject\MockObject $node */
+        /** @var \Magento\Framework\Data\Tree\Node|\PHPUnit_Framework_MockObject_MockObject $node */
         $node = $this->getMockBuilder('Magento\Framework\Data\Tree\Node')
             ->setMethods(['getIdField', 'loadChildren'])
             ->disableOriginalConstructor()
@@ -293,7 +283,7 @@ class CategoryTest extends TestCase
 
     public function testExportCollection()
     {
-        /** @var \Magento\Catalog\Model\ResourceModel\Category\Collection|\PHPUnit\Framework\MockObject\MockObject $collection */
+        /** @var \Magento\Catalog\Model\ResourceModel\Category\Collection|\PHPUnit_Framework_MockObject_MockObject $collection */
         $collection = $this->categoryCollectionFactory->create();
         $collection->expects($this->exactly(3))
             ->method('count')

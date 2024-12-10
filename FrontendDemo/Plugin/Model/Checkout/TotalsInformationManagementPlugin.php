@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Model\Checkout;
 
 use Magento\Checkout\Api\Data\TotalsInformationInterface;
@@ -22,8 +19,8 @@ class TotalsInformationManagementPlugin
     private $quoteHelper;
 
     /**
-     * @param CartRepositoryInterface $quoteRepository
-     * @param QuoteHelper             $quoteHelper
+     * @param   CartRepositoryInterface $quoteRepository
+     * @param   QuoteHelper             $quoteHelper
      */
     public function __construct(
         CartRepositoryInterface $quoteRepository,
@@ -34,9 +31,9 @@ class TotalsInformationManagementPlugin
     }
 
     /**
-     * @param TotalsInformationManagement $subject
-     * @param int                         $cartId
-     * @param TotalsInformationInterface  $addressInformation
+     * @param   TotalsInformationManagement $subject
+     * @param   int                         $cartId
+     * @param   TotalsInformationInterface  $addressInformation
      */
     public function beforeCalculate(
         TotalsInformationManagement $subject,
@@ -50,10 +47,7 @@ class TotalsInformationManagementPlugin
             list (, $offerId) = explode('_', $addressInformation->getShippingCarrierCode());
             if ($offerId) {
                 $this->quoteHelper->updateOffersShippingTypes(
-                    [$offerId => $addressInformation->getShippingMethodCode()],
-                    $quote,
-                    false,
-                    true
+                    [$offerId => $addressInformation->getShippingMethodCode()], $quote, false, true
                 );
             }
         }

@@ -1,21 +1,18 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Helper;
 
 class Config extends \Mirakl\Core\Helper\Config
 {
-    public const XML_PATH_AUTO_ASYNC_EXECUTION        = 'mirakl_process/general/auto_async_execution';
-    public const XML_PATH_SHOW_FILE_MAX_SIZE          = 'mirakl_process/general/show_file_max_size';
-    public const XML_PATH_PROCESS_LONG_TIMEOUT_DELAY  = 'mirakl_process/general/timeout_delay';
-    public const XML_PATH_PROCESS_SHORT_TIMEOUT_DELAY = 'mirakl_process/general/short_timeout_delay';
-    public const XML_PATH_PROCESS_HISTORY_KEEP_DAYS   = 'mirakl_process/history/clear_keep_days';
+    const XML_PATH_AUTO_ASYNC_EXECUTION        = 'mirakl_process/general/auto_async_execution';
+    const XML_PATH_SHOW_FILE_MAX_SIZE          = 'mirakl_process/general/show_file_max_size';
+    const XML_PATH_PROCESS_LONG_TIMEOUT_DELAY  = 'mirakl_process/general/timeout_delay';
+    const XML_PATH_PROCESS_SHORT_TIMEOUT_DELAY = 'mirakl_process/general/short_timeout_delay';
+    const XML_PATH_PROCESS_HISTORY_KEEP_DAYS   = 'mirakl_process/history/clear_keep_days';
 
     /**
      * Returns allowed max file size (in MB) for process files that can be viewed directly in browser
      *
-     * @return int
+     * @return  int
      */
     public function getShowFileMaxSize()
     {
@@ -29,7 +26,7 @@ class Config extends \Mirakl\Core\Helper\Config
      *
      * @see /Mirakl/Process/etc/di.xml
      *
-     * @return int
+     * @return  int
      */
     public function getLongTimeoutDelay()
     {
@@ -41,7 +38,7 @@ class Config extends \Mirakl\Core\Helper\Config
      *
      * Concerns short processes (H01, VL01,...) and used by default for processes with undefined code
      *
-     * @return int
+     * @return  int
      */
     public function getShortTimeoutDelay()
     {
@@ -52,7 +49,7 @@ class Config extends \Mirakl\Core\Helper\Config
      * Returns true if processes can be executed automatically
      * through an AJAX request in Magento admin, false otherwise.
      *
-     * @return bool
+     * @return  bool
      */
     public function isAutoAsyncExecution()
     {

@@ -1,17 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Customer;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Refund extends \Magento\Framework\App\Action\Action implements HttpGetActionInterface
+class Refund extends \Magento\Framework\App\Action\Action
 {
     /**
      * Refund a Mirakl order
      *
-     * @return void
+     * @return  void
      */
     public function execute()
     {

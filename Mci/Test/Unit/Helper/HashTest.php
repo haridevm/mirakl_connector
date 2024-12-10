@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Unit\Helper;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
@@ -13,10 +10,10 @@ class HashTest extends TestCase
     /** @var HashHelper */
     protected $hashHelper;
 
-    /** @var \Mirakl\Mci\Helper\Config|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Mirakl\Mci\Helper\Config|\PHPUnit_Framework_MockObject_MockObject */
     protected $mciConfig;
 
-    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $connection;
 
     protected function setUp(): void

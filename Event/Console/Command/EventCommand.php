@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Console\Command;
 
 use Magento\Framework\Console\Cli;
@@ -18,7 +15,7 @@ class EventCommand extends Command
     /**
      * Event type to execute
      */
-    public const EVENT_TYPE = 'type';
+    const EVENT_TYPE = 'type';
 
     /**
      * @var EventHelper
@@ -26,8 +23,8 @@ class EventCommand extends Command
     private $eventHelper;
 
     /**
-     * @param EventHelper $eventHelper
-     * @param string|null $name
+     * @param   EventHelper $eventHelper
+     * @param   string|null $name
      */
     public function __construct(
         EventHelper $eventHelper,
@@ -38,7 +35,7 @@ class EventCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -47,42 +44,31 @@ class EventCommand extends Command
                 self::EVENT_TYPE,
                 null,
                 InputOption::VALUE_OPTIONAL,
-                sprintf(
-                    'Execute connector events for a specific synchronization type. One of: %s',
-                    implode(', ', Event::getShortTypes())
-                )
+                sprintf('Execute Mirakl events for a specific synchronization type. One of: %s', implode(', ', Event::getShortTypes()))
             )
         ];
-
         $this->setName('mirakl:event')
-            ->setDescription('Handles execution of connector events synchronization')
+            ->setDescription('Handles execution of Mirakl events asynchronous synchronization')
             ->setDefinition($options);
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         try {
             $eventType = $input->getOption(self::EVENT_TYPE);
-
             if ($eventType && !in_array($eventType, Event::getShortTypes())) {
-                $output->writeln(sprintf(
-                    '<error>Invalid event type "%s". Valid types: %s</error>',
-                    $eventType,
-                    implode(', ', Event::getShortTypes())
-                ));
+                $output->writeln(sprintf('<error>Invalid event type "%s". Valid types: %s</error>', $eventType, implode(', ', Event::getShortTypes())));
 
                 return Cli::RETURN_FAILURE;
             }
-
             if ($eventType) {
                 $output->writeln(sprintf('<info>Executing asynchronous %s events...</info>', $eventType));
             } else {
                 $output->writeln('<info>Executing asynchronous events...</info>');
             }
-
             $process = $this->eventHelper->getOrCreateEventProcess(Process::TYPE_CLI, $eventType);
 
             $process->execute();

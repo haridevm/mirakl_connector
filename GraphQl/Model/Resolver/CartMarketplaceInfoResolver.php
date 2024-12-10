@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver;
@@ -46,41 +45,17 @@ class CartMarketplaceInfoResolver implements ResolverInterface
 
         return [
             'model'                           => $quote,
-            'shipping_zone'                   => (string)$quote->getMiraklShippingZone(),
-            'is_offer_incl_tax'               => (bool)$quote->getMiraklIsOfferInclTax(),
-            'is_shipping_incl_tax'            => (bool)$quote->getMiraklIsShippingInclTax(),
-            'base_shipping_excl_tax'          => [
-                'value'    => $quote->getMiraklBaseShippingExclTax(),
-                'currency' => $baseCurrency,
-            ],
-            'shipping_excl_tax'               => [
-                'value'    => $quote->getMiraklShippingExclTax(),
-                'currency' => $currency,
-            ],
-            'base_shipping_incl_tax'          => [
-                'value'    => $quote->getMiraklBaseShippingInclTax(),
-                'currency' => $baseCurrency,
-            ],
-            'shipping_incl_tax'               => [
-                'value'    => $quote->getMiraklShippingInclTax(),
-                'currency' => $currency,
-            ],
-            'base_shipping_tax_amount'        => [
-                'value'    => $quote->getMiraklBaseShippingTaxAmount(),
-                'currency' => $baseCurrency,
-            ],
-            'shipping_tax_amount'             => [
-                'value'    => $quote->getMiraklShippingTaxAmount(),
-                'currency' => $currency,
-            ],
-            'base_custom_shipping_tax_amount' => [
-                'value'    => $quote->getMiraklBaseCustomShippingTaxAmount(),
-                'currency' => $baseCurrency,
-            ],
-            'custom_shipping_tax_amount'      => [
-                'value'    => $quote->getMiraklCustomShippingTaxAmount(),
-                'currency' => $currency,
-            ],
+            'shipping_zone'                   => (string) $quote->getMiraklShippingZone(),
+            'base_shipping_excl_tax'          => ['value' => $quote->getMiraklBaseShippingExclTax(), 'currency' => $baseCurrency],
+            'shipping_excl_tax'               => ['value' => $quote->getMiraklShippingExclTax(), 'currency' => $currency],
+            'base_shipping_incl_tax'          => ['value' => $quote->getMiraklBaseShippingInclTax(), 'currency' => $baseCurrency],
+            'shipping_incl_tax'               => ['value' => $quote->getMiraklShippingInclTax(), 'currency' => $currency],
+            'is_offer_incl_tax'               => (bool) $quote->getMiraklIsOfferInclTax(),
+            'base_shipping_tax_amount'        => ['value' => $quote->getMiraklBaseShippingTaxAmount(), 'currency' => $baseCurrency],
+            'shipping_tax_amount'             => ['value' => $quote->getMiraklShippingTaxAmount(), 'currency' => $currency],
+            'base_custom_shipping_tax_amount' => ['value' => $quote->getMiraklBaseCustomShippingTaxAmount(), 'currency' => $baseCurrency],
+            'custom_shipping_tax_amount'      => ['value' => $quote->getMiraklCustomShippingTaxAmount(), 'currency' => $currency],
+            'is_shipping_incl_tax'            => (bool) $quote->getMiraklIsShippingInclTax(),
         ];
     }
 }

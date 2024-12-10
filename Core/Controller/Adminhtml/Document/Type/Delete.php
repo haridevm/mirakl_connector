@@ -1,18 +1,14 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-class Delete extends Type implements HttpPostActionInterface
+class Delete extends Type
 {
     /**
      * Delete document type action
      *
-     * @return void
+     * @return  void
      */
     public function execute()
     {

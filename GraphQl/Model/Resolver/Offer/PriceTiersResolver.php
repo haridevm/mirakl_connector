@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\GraphQl\Model\Resolver\Offer;
 
 use Magento\CatalogGraphQl\Model\Resolver\Product\Price\Discount;
@@ -28,8 +25,8 @@ class PriceTiersResolver extends AbstractResolver implements ResolverInterface
     private $discount;
 
     /**
-     * @param PriceCurrencyInterface $priceCurrency
-     * @param Discount               $discount
+     * @param   PriceCurrencyInterface  $priceCurrency
+     * @param   Discount                $discount
      */
     public function __construct(PriceCurrencyInterface $priceCurrency, Discount $discount)
     {
@@ -38,8 +35,7 @@ class PriceTiersResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
@@ -61,7 +57,7 @@ class PriceTiersResolver extends AbstractResolver implements ResolverInterface
         if ($offer->isDiscountPriceValid()) {
             foreach ($offer->getDiscount()->getRanges() as $discountRange) {
                 $qty = $discountRange->getQuantityThreshold();
-                if (!isset($priceRanges[$qty]) || $priceRanges[$qty]  > $discountRange->getPrice()) {
+                if (!isset($priceRanges[$qty]) || $priceRanges[$qty]  >$discountRange->getPrice()) {
                     $priceRanges[$qty] = $discountRange->getPrice();
                 }
             }
@@ -87,11 +83,11 @@ class PriceTiersResolver extends AbstractResolver implements ResolverInterface
     }
 
     /**
-     * @param float          $offerPrice
-     * @param float          $tierPrice
-     * @param int            $qty
-     * @param StoreInterface $store
-     * @return array
+     * @param   float           $offerPrice
+     * @param   float           $tierPrice
+     * @param   int             $qty
+     * @param   StoreInterface  $store
+     * @return  array
      */
     private function formatOfferTierPrice(float $offerPrice, float $tierPrice, int $qty, StoreInterface $store)
     {

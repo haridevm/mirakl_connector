@@ -1,14 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Controller\Adminhtml\Event;
 
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Registry;
 
-class View extends AbstractEventAction implements HttpGetActionInterface
+class View extends AbstractEventAction
 {
     /**
      * @var Registry
@@ -16,8 +12,8 @@ class View extends AbstractEventAction implements HttpGetActionInterface
     protected $coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $coreRegistry
+     * @param   Context     $context
+     * @param   Registry    $coreRegistry
      */
     public function __construct(
         Context $context,
@@ -28,7 +24,7 @@ class View extends AbstractEventAction implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -44,7 +40,5 @@ class View extends AbstractEventAction implements HttpGetActionInterface
         $this->_setActiveMenu('Mirakl_Event::event');
         $this->_view->getPage()->getConfig()->getTitle()->prepend(__('Event #%1', $event->getId()));
         $this->_view->renderLayout();
-
-        return $this->_response;
     }
 }

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Offer;
 
 use Magento\Catalog\Model\Product\Attribute\Repository as AttributeRepository;
@@ -28,11 +25,11 @@ class State extends AbstractDb
     protected $logger;
 
     /**
-     * @param State\CollectionFactory $collectionFactory
-     * @param AttributeRepository     $attributeRepository
-     * @param Context                 $context
-     * @param LoggerInterface         $logger
-     * @param string                  $connectionName
+     * @param   State\CollectionFactory $collectionFactory
+     * @param   AttributeRepository     $attributeRepository
+     * @param   Context                 $context
+     * @param   LoggerInterface         $logger
+     * @param   string                  $connectionName
      */
     public function __construct(
         State\CollectionFactory $collectionFactory,
@@ -48,8 +45,9 @@ class State extends AbstractDb
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Initialize main table and table id field
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -59,7 +57,7 @@ class State extends AbstractDb
     /**
      * Returns EAV option ids of offer states
      *
-     * @return array
+     * @return  array
      */
     public function getEavOptionIds()
     {
@@ -70,24 +68,20 @@ class State extends AbstractDb
     }
 
     /**
-     * @param OfferStateCollection $states
-     * @return int
-     * @throws \Exception
+     * @param   OfferStateCollection    $states
+     * @return  int
+     * @throws  \Exception
      */
     public function synchronize(OfferStateCollection $states)
     {
         if (!$states->count()) {
-            throw new \Exception(
-                __('States to synchronize cannot be empty.')->render()
-            );
+            throw new \Exception(__('States to synchronize cannot be empty.'));
         }
 
         // Load existing offer state EAV attribute
         $attribute = $this->attributeRepository->get('mirakl_offer_state_ids');
         if (!$attribute) {
-            throw new \Exception(
-                __('mirakl_offer_state_ids attribute is not created.')->render()
-            );
+            throw new \Exception(__('mirakl_offer_state_ids attribute is not created.'));
         }
 
         $adapter = $this->getConnection();
@@ -109,10 +103,9 @@ class State extends AbstractDb
         /** @var \Mirakl\MMP\Common\Domain\Offer\State\OfferState $state */
         foreach ($states as $sortOrder => $state) {
             // Check if EAV option exists
-            if (
-                isset($customOfferStates[$state->getCode()]) &&
-                isset($eavOfferStateOptions[$customOfferStates[$state->getCode()]])
-            ) {
+            if (isset($customOfferStates[$state->getCode()]) &&
+                isset($eavOfferStateOptions[$customOfferStates[$state->getCode()]]))
+            {
                 $optionId = $customOfferStates[$state->getCode()];
                 // Update EAV option if label has changed
                 if ($eavOfferStateOptions[$optionId]->getLabel() != $state->getLabel()) {

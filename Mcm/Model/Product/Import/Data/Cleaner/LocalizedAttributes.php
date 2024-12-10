@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data\Cleaner;
@@ -10,7 +9,7 @@ use Mirakl\Mcm\Helper\Config;
 class LocalizedAttributes implements CleanerInterface
 {
     // This field will register all localized data
-    public const I18N_FIELD = 'mirakl_localized_attributes';
+    const I18N_FIELD = 'mirakl_localized_attributes';
 
     /**
      * @var Config

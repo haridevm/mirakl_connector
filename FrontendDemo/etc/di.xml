@@ -15,6 +15,9 @@
     <type name="Magento\Catalog\Helper\Product\Configuration">
         <plugin name="mirakl_frontend" type="Mirakl\FrontendDemo\Plugin\Helper\Catalog\Product\ConfigurationPlugin" sortOrder="60" />
     </type>
+    <type name="Magento\Checkout\Block\Cart">
+        <plugin name="mirakl_frontend" type="Mirakl\FrontendDemo\Plugin\Block\CartPlugin" sortOrder="10" />
+    </type>
     <type name="Magento\Checkout\Model\ShippingInformationManagement">
         <plugin name="mirakl_frontend" type="Mirakl\FrontendDemo\Plugin\Model\Checkout\ShippingInformationManagementPlugin" sortOrder="10" />
     </type>
@@ -55,5 +58,4 @@
         <plugin name="mirakl_frontend_collect_carrier_rates" type="Mirakl\FrontendDemo\Plugin\Model\Shipping\ShippingPlugin" sortOrder="1" />
     </type>
     <preference for="Mirakl\FrontendDemo\Model\Offer\RenderProduct\CreatorInterface" type="Mirakl\FrontendDemo\Model\Offer\RenderProduct\Creator"/>
-    <preference for="Magento\Checkout\Block\Cart\Grid" type="Mirakl\FrontendDemo\Block\Cart\Grid"/>
 </config>

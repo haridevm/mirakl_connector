@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Plugin\Helper;
 
 use Magento\Framework\DataObject;
@@ -29,9 +26,9 @@ abstract class AbstractHelperPlugin
     protected $eventManager;
 
     /**
-     * @param EventConfig           $eventConfig
-     * @param EventHelper           $eventHelper
-     * @param EventManagerInterface $eventManager
+     * @param   EventConfig             $eventConfig
+     * @param   EventHelper             $eventHelper
+     * @param   EventManagerInterface   $eventManager
      */
     public function __construct(
         EventConfig $eventConfig,
@@ -46,22 +43,22 @@ abstract class AbstractHelperPlugin
     /**
      * Creates an event for each data to export
      *
-     * @param array $eventData
-     * @return void
+     * @param   array   $eventData
+     * @return  void
      */
     abstract protected function addToEventQueue(array $eventData);
 
     /**
      * Returns the event type constant
      *
-     * @return int
+     * @return  int
      */
     abstract protected function getEventType();
 
     /**
-     * @param string $code
-     * @param array  $data
-     * @return Event
+     * @param   string  $code
+     * @param   array   $data
+     * @return  Event
      */
     protected function addEvent($code, array $data)
     {
@@ -77,10 +74,10 @@ abstract class AbstractHelperPlugin
     }
 
     /**
-     * @param ExportInterface $subject
-     * @param \Closure        $proceed
-     * @param DataObject      $object
-     * @return int|null
+     * @param   ExportInterface $subject
+     * @param   \Closure        $proceed
+     * @param   DataObject      $object
+     * @return  int|null
      */
     public function aroundDelete(ExportInterface $subject, \Closure $proceed, DataObject $object)
     {
@@ -94,10 +91,10 @@ abstract class AbstractHelperPlugin
     }
 
     /**
-     * @param ExportInterface $subject
-     * @param \Closure        $proceed
-     * @param DataObject      $object
-     * @return int|null
+     * @param   ExportInterface $subject
+     * @param   \Closure        $proceed
+     * @param   DataObject      $object
+     * @return  int|null
      */
     public function aroundUpdate(ExportInterface $subject, \Closure $proceed, DataObject $object)
     {
@@ -113,7 +110,7 @@ abstract class AbstractHelperPlugin
     /**
      * Checks if this export must be done in asynchronous or synchronous mode according to config
      *
-     * @return bool
+     * @return  bool
      */
     protected function isAsynchronousEnabled()
     {

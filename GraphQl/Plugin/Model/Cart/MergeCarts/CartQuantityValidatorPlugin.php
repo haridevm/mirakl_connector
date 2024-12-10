@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\GraphQl\Plugin\Model\Cart\MergeCarts;
 
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -71,7 +68,6 @@ class CartQuantityValidatorPlugin
      * @param CartInterface         $customerCart
      * @param CartInterface         $guestCart
      * @return bool
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function aroundValidateFinalCartQuantities(
         CartQuantityValidator $subject,
@@ -94,8 +90,7 @@ class CartQuantityValidatorPlugin
                 }
                 if ($customerCartItem->getMiraklOfferId()) { // Handle Mirakl items
                     $offer = $this->offerHelper->getOfferById($customerCartItem->getMiraklOfferId());
-                    $deleteItem = !$offer->getId()
-                        || ($offer->getQty() < $guestCartItem->getQty() + $customerCartItem->getQty());
+                    $deleteItem = !$offer->getId() || ($offer->getQty() < $guestCartItem->getQty() + $customerCartItem->getQty());
                 } else {
                     $product = $customerCartItem->getProduct();
                     $productSalableQty = $this->getProductSalableQty->execute($product->getSku(), $stockId);

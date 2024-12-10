@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Block\Adminhtml\Process\View;
@@ -7,8 +6,7 @@ namespace Mirakl\Process\Block\Adminhtml\Process\View;
 class ProcessInfo extends AbstractView
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct(): void
     {
@@ -32,8 +30,8 @@ class ProcessInfo extends AbstractView
                 'label' => __('Delete'),
                 'class' => 'primary',
                 'onclick' => 'deleteConfirm(\'' . __(
-                    'Are you sure you want to do this?'
-                ) . '\', \'' . $this->getDeleteUrl() . '\', {data: {}})'
+                        'Are you sure you want to do this?'
+                    ) . '\', \'' . $this->getDeleteUrl() . '\', {data: {}})'
             ]
         );
 
@@ -42,14 +40,14 @@ class ProcessInfo extends AbstractView
                 'label'   => __('Run'),
                 'onclick' => 'confirmSetLocation(\'' . __(
                     'Are you sure?'
-                ) . '\', \'' . $this->getRunUrl() . '\')',
+                    ) . '\', \'' . $this->getRunUrl() . '\')',
             ]);
         } elseif ($process->canStop()) {
             $this->addButton('stop', [
                 'label'   => __('Stop'),
                 'onclick' => 'confirmSetLocation(\'' . __(
                     'Are you sure?'
-                ) . '\', \'' . $this->getStopUrl() . '\')',
+                    ) . '\', \'' . $this->getStopUrl() . '\')',
             ]);
         }
     }

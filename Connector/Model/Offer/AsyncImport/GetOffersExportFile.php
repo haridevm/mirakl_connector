@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Offer\AsyncImport;
@@ -136,7 +135,7 @@ class GetOffersExportFile extends AbstractAction implements RetryableInterface
             'skus'    => array_column($data, 'product_sku'),
         ]);
 
-        $process->output(__('Removing deleted offers ...'));
+        $process->output(__('Removing deleted offers...'));
         $this->offerResource->clearDeletedOffers();
         $process->output(__('Done!'));
 
@@ -166,10 +165,7 @@ class GetOffersExportFile extends AbstractAction implements RetryableInterface
             $file = $this->processHelper->saveFile($offersFile, 'json');
             $process->setFile($file);
         } catch (\Exception $e) {
-            throw new RetryLaterException(
-                $process,
-                __('An error occurred while downloading offers: %1', $e->getMessage())
-            );
+            throw new RetryLaterException($process, __('An error occurred while downloading offers: %1', $e->getMessage()));
         }
     }
 }

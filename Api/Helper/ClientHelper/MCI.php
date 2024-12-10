@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper\ClientHelper;
 
 /**
@@ -9,10 +6,10 @@ namespace Mirakl\Api\Helper\ClientHelper;
  */
 class MCI extends AbstractClientHelper
 {
-    public const AREA_NAME = 'MCI';
+    const AREA_NAME = 'MCI';
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getArea()
     {

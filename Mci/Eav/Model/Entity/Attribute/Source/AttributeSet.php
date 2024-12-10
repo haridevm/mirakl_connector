@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Eav\Model\Entity\Attribute\Source;
 
 use Magento\Catalog\Model\Product;
@@ -29,9 +26,9 @@ class AttributeSet extends AbstractSource implements \Magento\Framework\Data\Opt
     private $eavConfig;
 
     /**
-     * @param AttributeFactory  $eavAttrEntity
-     * @param CollectionFactory $collectionFactory
-     * @param EavConfig         $eavConfig
+     * @param   AttributeFactory    $eavAttrEntity
+     * @param   CollectionFactory   $collectionFactory
+     * @param   EavConfig           $eavConfig
      */
     public function __construct(
         AttributeFactory $eavAttrEntity,
@@ -44,7 +41,9 @@ class AttributeSet extends AbstractSource implements \Magento\Framework\Data\Opt
     }
 
     /**
-     * @inheritdoc
+     * Get list of all available attribute sets
+     *
+     * @return  array
      */
     public function getAllOptions()
     {
@@ -63,7 +62,7 @@ class AttributeSet extends AbstractSource implements \Magento\Framework\Data\Opt
     /**
      * Retrieve flat column definition
      *
-     * @return array
+     * @return  array
      */
     public function getFlatColums()
     {
@@ -84,8 +83,8 @@ class AttributeSet extends AbstractSource implements \Magento\Framework\Data\Opt
     /**
      * Retrieve Select For Flat Attribute update
      *
-     * @param int $store
-     * @return \Magento\Framework\DB\Select|null
+     * @param   int $store
+     * @return  \Magento\Framework\DB\Select|null
      */
     public function getFlatUpdateSelect($store)
     {

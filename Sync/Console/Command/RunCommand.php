@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Sync\Console\Command;
 
 use Magento\Framework\App\Area;
@@ -24,17 +21,14 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class RunCommand extends Command
 {
     use CommandTrait;
 
-    public const LIST_SCRIPTS_OPTION   = 'list';
-    public const RUN_SCRIPT_OPTION     = 'run';
-    public const FULL_OPTION           = 'full';
-    public const DELETED_SINCE_OPTION  = 'deleted-since';
+    const LIST_SCRIPTS_OPTION   = 'list';
+    const RUN_SCRIPT_OPTION     = 'run';
+    const FULL_OPTION           = 'full';
+    const DELETED_SINCE_OPTION  = 'deleted-since';
 
     /**
      * @var ScriptFactory
@@ -191,7 +185,7 @@ class RunCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -228,7 +222,7 @@ class RunCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -296,9 +290,9 @@ class RunCommand extends Command
                 $deletedFrom = $input->getOption(self::DELETED_SINCE_OPTION);
                 if ($deletedFrom && preg_match('(^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$)', $deletedFrom)) {
                     $datetime = new \DateTime();
-                    $params[] = $datetime::createFromFormat('Y-m-d H:i:s', $deletedFrom . ' 00:00:00');
+                    $params[] = $datetime::createFromFormat('Y-m-d H:i:s', $deletedFrom.' 00:00:00');
                 } else {
-                    $params[] = $this->connectorConfig->getSyncDate('mcm_products_delete');
+                    $params[] = $this->connectorConfig->getSyncDate('mcm_products_delete');;
                 }
                 $this->connectorConfig->setSyncDate('mcm_products_delete');
 

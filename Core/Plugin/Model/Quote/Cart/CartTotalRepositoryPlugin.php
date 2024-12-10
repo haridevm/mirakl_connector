@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Plugin\Model\Quote\Cart;
 
 use Magento\Quote\Api\CartRepositoryInterface;
@@ -34,9 +31,9 @@ class CartTotalRepositoryPlugin
     }
 
     /**
-     * @param CartTotalRepository $subject
-     * @param TotalsInterface     $result
-     * @return TotalsInterface
+     * @param   CartTotalRepository $subject
+     * @param   TotalsInterface     $result
+     * @return  TotalsInterface
      */
     public function afterGet(
         CartTotalRepository $subject,

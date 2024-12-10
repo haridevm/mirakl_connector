@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Block\Adminhtml\System\Config\Form\Field;
@@ -14,7 +13,7 @@ class OAuth2 extends Field
      */
     public function render(AbstractElement $element)
     {
-        $message = __('Make sure the refresh token <strong>cron job</strong> is properly configured.');
+        $message = __('Make sure the refresh token <b>cron job</b> is properly configured.');
 
         $html = <<<HTML
 <tr>

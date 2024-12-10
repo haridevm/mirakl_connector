@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\FrontOperator\Request\Catalog\Category\CategorySynchroRequest;
@@ -13,8 +10,8 @@ class Category extends ClientHelper\MMP implements SynchroResultInterface, Expor
     /**
      * (CA01) Builds and sends category synchro request to Mirakl platform
      *
-     * @param array $data
-     * @return int|false
+     * @param   array   $data
+     * @return  int|false
      */
     public function export(array $data)
     {
@@ -40,8 +37,8 @@ class Category extends ClientHelper\MMP implements SynchroResultInterface, Expor
     /**
      * (CA03) Send category synchronization report request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \SplFileObject
+     * @param   int $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {
@@ -55,8 +52,8 @@ class Category extends ClientHelper\MMP implements SynchroResultInterface, Expor
     /**
      * (CA02) Send category synchronization status request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \Mirakl\MMP\FrontOperator\Domain\Synchro\AbstractSynchroResult
+     * @param   int $synchroId
+     * @return  \Mirakl\MMP\FrontOperator\Domain\Synchro\AbstractSynchroResult
      */
     public function getSynchroResult($synchroId)
     {

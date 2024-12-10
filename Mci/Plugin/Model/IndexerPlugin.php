@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Plugin\Model;
 
 use Magento\Framework\Registry;
@@ -15,7 +12,7 @@ class IndexerPlugin
     protected $registry;
 
     /**
-     * @param Registry $registry
+     * @param   Registry        $registry
      */
     public function __construct(Registry $registry)
     {
@@ -25,9 +22,9 @@ class IndexerPlugin
     /**
      * Callback for entity reindex
      *
-     * @param Indexer  $subject
-     * @param \Closure $proceed
-     * @return bool
+     * @param   Indexer     $subject
+     * @param   \Closure    $proceed
+     * @return  bool
      */
     public function aroundIsScheduled(Indexer $subject, \Closure $proceed)
     {

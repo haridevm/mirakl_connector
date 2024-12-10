@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\Order;
 
 use Magento\Sales\Api\Data\OrderInterface;
@@ -24,8 +21,8 @@ class OrderSavePlugin
     protected $logger;
 
     /**
-     * @param OrderHelper     $orderHelper
-     * @param LoggerInterface $logger
+     * @param   OrderHelper     $orderHelper
+     * @param   LoggerInterface $logger
      */
     public function __construct(
         OrderHelper $orderHelper,
@@ -39,9 +36,9 @@ class OrderSavePlugin
      * Mirakl Order is created in this plugin because order item id used for setOrderLineId may not be set in
      * sales_order_save_after event and we also need taxes to be registered in @see \Magento\Tax\Model\Plugin\OrderSave
      *
-     * @param OrderRepositoryInterface $subject
-     * @param OrderInterface           $order
-     * @return OrderInterface
+     * @param   OrderRepositoryInterface    $subject
+     * @param   OrderInterface              $order
+     * @return  OrderInterface
      */
     public function afterSave(
         OrderRepositoryInterface $subject,

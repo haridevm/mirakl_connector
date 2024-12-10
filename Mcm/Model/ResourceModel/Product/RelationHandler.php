@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\ResourceModel\Product;
@@ -21,7 +20,7 @@ class RelationHandler
 
     /**
      * @param Configurable $configurableResource
-     * @param Relation     $productRelation
+     * @param Relation $productRelation
      */
     public function __construct(
         Configurable $configurableResource,

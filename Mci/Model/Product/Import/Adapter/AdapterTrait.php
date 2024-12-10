@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Adapter;
 
 use Magento\Catalog\Model\Product;
@@ -22,9 +19,9 @@ trait AdapterTrait
     /**
      * Returns true if specified products are different
      *
-     * @param Product|null $product1
-     * @param Product|null $product2
-     * @return bool
+     * @param   Product|null    $product1
+     * @param   Product|null    $product2
+     * @return  bool
      */
     protected function areProductsDifferent($product1, $product2)
     {
@@ -34,16 +31,14 @@ trait AdapterTrait
     /**
      * Copy all images from $productSrc to $productDest
      *
-     * @param Product $productSrc
-     * @param Product $productDest
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   Product $productSrc
+     * @param   Product $productDest
      */
     public function copyProductImages(Product $productSrc, Product $productDest)
     {
         $images = [];
         $fileSystem = $this->objectManager->get(\Magento\Framework\Filesystem::class);
-        $mediaPath = $fileSystem
-            ->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
+        $mediaPath = $fileSystem->getDirectoryRead(\Magento\Framework\App\Filesystem\DirectoryList::MEDIA)->getAbsolutePath();
         foreach ($productDest->getMediaAttributes() as $imageAttribute) {
             /** @var \Magento\Catalog\Model\ResourceModel\Eav\Attribute $imageAttribute */
             $imageAttributeCode = $imageAttribute->getAttributeCode();
@@ -99,16 +94,13 @@ trait AdapterTrait
      * not have exactly the same variants than provided data.
      * If such a variant product already exists, throw an error and refuse product.
      *
-     * @param Product $parentProduct
-     * @param array   $data
-     * @param array   $excludedProductIds
-     * @throws ImportException
+     * @param   Product $parentProduct
+     * @param   array   $data
+     * @param   array   $excludedProductIds
+     * @throws  ImportException
      */
-    protected function validateParentProductVariants(
-        Product $parentProduct,
-        array $data,
-        array $excludedProductIds = []
-    ) {
+    protected function validateParentProductVariants(Product $parentProduct, array $data, array $excludedProductIds = [])
+    {
         $variants = $this->dataHelper->getDataVariants($data);
 
         if (empty($variants) || $parentProduct->getTypeId() != Configurable::TYPE_CODE) {
@@ -146,7 +138,7 @@ trait AdapterTrait
     /**
      * Saves specified product with duplicate URL key error handling
      *
-     * @param Product $product
+     * @param   Product $product
      */
     protected function saveProduct(Product $product)
     {

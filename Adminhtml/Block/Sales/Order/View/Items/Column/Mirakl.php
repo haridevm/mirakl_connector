@@ -1,13 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\Order\View\Items\Column;
 
 class Mirakl extends \Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn
 {
     /**
-     * @return float
+     * @return  float
      */
     public function getItemBaseShippingPriceExclTax()
     {
@@ -15,7 +12,7 @@ class Mirakl extends \Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getItemBaseShippingPriceInclTax()
     {
@@ -23,7 +20,7 @@ class Mirakl extends \Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getItemShippingPriceExclTax()
     {
@@ -31,7 +28,7 @@ class Mirakl extends \Magento\Sales\Block\Adminhtml\Items\Column\DefaultColumn
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getItemShippingPriceInclTax()
     {

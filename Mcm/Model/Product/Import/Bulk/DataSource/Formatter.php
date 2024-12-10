@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource;
@@ -23,7 +22,7 @@ class Formatter
     }
 
     /**
-     * @param array               $data
+     * @param array $data
      * @param StoreInterface|null $store
      * @return array
      */

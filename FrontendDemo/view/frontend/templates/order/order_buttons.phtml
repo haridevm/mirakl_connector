@@ -9,10 +9,10 @@
         <?php endif; ?>
         <?php if ($this->canReceiveOrder()): ?>
             <a class="action mark-as-received"
-               href="<?= $block->escapeHtml($this->getMarkAsReceivedUrl()) ?>"
-               onclick="return confirm('<?= $this->escapeJsQuote(__('Are you sure?')) ?>')">
-                <span><?= $this->escapeHtml(__('Mark Order As Received')) ?></span>
+               href="<?php echo $this->getMarkAsReceivedUrl() ?>"
+               onclick="return confirm('<?php echo $this->escapeJsQuote(__('Are you sure?')) ?>')">
+                <span><?php echo $this->escapeHtml(__('Mark Order As Received')) ?></span>
             </a>
-        <?php endif; ?>
+        <?php endif;?>
     </div>
 </div>

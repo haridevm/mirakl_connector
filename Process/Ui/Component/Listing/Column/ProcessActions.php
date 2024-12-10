@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Ui\Component\Listing\Column;
@@ -12,8 +11,8 @@ use Magento\Ui\Component\Listing\Columns\Column;
 
 class ProcessActions extends Column
 {
-    public const PROCESS_URL_PATH_VIEW   = 'mirakl/process/view';
-    public const PROCESS_URL_PATH_DELETE = 'mirakl/process/delete';
+    const PROCESS_URL_PATH_VIEW   = 'mirakl/process/view';
+    const PROCESS_URL_PATH_DELETE = 'mirakl/process/delete';
 
     /**
      * @var UrlInterface

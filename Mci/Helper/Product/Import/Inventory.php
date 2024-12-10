@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Product;
@@ -24,8 +21,8 @@ class Inventory
     protected $stockHelper;
 
     /**
-     * @param ObjectManagerInterface $objectManager
-     * @param Stock                  $stockHelper
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   Stock                   $stockHelper
      */
     public function __construct(
         ObjectManagerInterface $objectManager,

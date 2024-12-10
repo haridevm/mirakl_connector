@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Catalog\Model\ResourceModel\Product as ProductResource;
@@ -54,7 +51,7 @@ class OfferImportAfterRefreshIndexObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -9,7 +6,7 @@ use Magento\Framework\Event\Observer;
 class GroupCartItemsObserver extends AbstractObserver
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

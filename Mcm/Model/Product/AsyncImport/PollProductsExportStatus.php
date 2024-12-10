@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\AsyncImport;
@@ -27,10 +26,12 @@ class PollProductsExportStatus extends AbstractAction implements DelayableInterf
 
     /**
      * @param ProductAsyncApi $api
-     * @param array           $data
+     * @param array         $data
      */
-    public function __construct(ProductAsyncApi $api, array $data = [])
-    {
+    public function __construct(
+        ProductAsyncApi $api,
+        array $data = []
+    ) {
         parent::__construct($data);
         $this->api = $api;
     }
@@ -50,13 +51,16 @@ class PollProductsExportStatus extends AbstractAction implements DelayableInterf
     {
         $trackingId = $params['tracking_id'] ?? null;
         $retryCount = $params['retry_count'] ?? 0;
+
         if (!$trackingId) {
             throw new ChildProcessException($process, __('Could not find "tracking_id" in process params'));
         }
 
         $process->output(__('Using tracking ID: %1', $trackingId));
+
         $attempt = 1;
         $delay = $this->getDefaultDelay();
+
         while (true) {
             $process->output(__('Calling API CM53 with a delay of %1 seconds ...', $delay));
             $result = $this->api->pollProductsExportAsyncStatus($trackingId, $delay);
@@ -70,13 +74,11 @@ class PollProductsExportStatus extends AbstractAction implements DelayableInterf
 
         if ($result->getStatus() === 'PENDING') {
             // We reached max number of attempts, quit and delegate the next call to the cron or manual execution
-            throw new RetryLaterException(
-                $process,
-                __('Products export is still pending in Mirakl. Waiting for next execution.')
-            );
+            throw new RetryLaterException($process, __('Products export is still pending in Mirakl. Waiting for next execution.'));
         }
 
         $urls = $result->getUrls() ?? [];
+
         if (!count($urls)) {
             throw new StopExecutionException($process, __('No URLs to process'), Process::STATUS_COMPLETED);
         }

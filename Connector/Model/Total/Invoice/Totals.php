@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Total\Invoice;
 
 use Magento\Sales\Model\Order\Invoice;
@@ -17,8 +14,8 @@ class Totals extends AbstractTotal
     protected $invoiceManagement;
 
     /**
-     * @param InvoiceManagement $invoiceManagement
-     * @param array             $data
+     * @param   InvoiceManagement   $invoiceManagement
+     * @param   array               $data
      */
     public function __construct(InvoiceManagement $invoiceManagement, array $data = [])
     {
@@ -27,8 +24,8 @@ class Totals extends AbstractTotal
     }
 
     /**
-     * @param Invoice $invoice
-     * @return $this
+     * @param   Invoice $invoice
+     * @return  $this
      */
     public function collect(Invoice $invoice)
     {
@@ -64,9 +61,7 @@ class Totals extends AbstractTotal
 
         // We do not have operator items in invoice, so we have to reset the operator shipping amounts + taxes
         $invoice->setGrandTotal($invoice->getGrandTotal() - $invoice->getShippingAmount() - $orderShippingTaxAmount);
-        $invoice->setBaseGrandTotal(
-            $invoice->getBaseGrandTotal() - $invoice->getBaseShippingAmount() - $orderBaseShippingTaxAmount
-        );
+        $invoice->setBaseGrandTotal($invoice->getBaseGrandTotal() - $invoice->getBaseShippingAmount() - $orderBaseShippingTaxAmount);
         $invoice->setTaxAmount($invoice->getTaxAmount() - $orderShippingTaxAmount);
         $invoice->setBaseTaxAmount($invoice->getBaseTaxAmount() - $orderBaseShippingTaxAmount);
         $invoice->setShippingTaxAmount(null);
@@ -94,17 +89,12 @@ class Totals extends AbstractTotal
             /** @var OrderItem $orderItem */
             $orderItem = $invoiceItem->getOrderItem();
 
-            if (
-                $invoiceItem->getQty() <= 0
-                || !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId())
-            ) {
+            if ($invoiceItem->getQty() <= 0 || !$this->invoiceManagement->canIncludeMiraklOfferShipping($invoice, $orderItem->getMiraklOfferId())) {
                 continue;
             }
 
-            $miraklShippingTaxAmount     += $orderItem->getMiraklShippingTaxAmount()
-                + $orderItem->getMiraklCustomShippingTaxAmount();
-            $miraklBaseShippingTaxAmount += $orderItem->getMiraklBaseShippingTaxAmount()
-                + $orderItem->getMiraklBaseCustomShippingTaxAmount();
+            $miraklShippingTaxAmount     += $orderItem->getMiraklShippingTaxAmount() + $orderItem->getMiraklCustomShippingTaxAmount();
+            $miraklBaseShippingTaxAmount += $orderItem->getMiraklBaseShippingTaxAmount() + $orderItem->getMiraklBaseCustomShippingTaxAmount();
         }
 
         if ($miraklShippingTaxAmount > 0) {

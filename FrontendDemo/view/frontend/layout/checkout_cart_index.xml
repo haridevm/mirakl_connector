@@ -4,11 +4,6 @@
         <css src="Mirakl_FrontendDemo::css/marketplace.css"/>
     </head>
     <body>
-        <referenceBlock name="checkout.cart.form">
-            <action method="setTemplate">
-                <argument name="template" xsi:type="string">Mirakl_FrontendDemo::checkout/cart/form.phtml</argument>
-            </action>
-        </referenceBlock>
         <referenceBlock name="checkout.cart.totals">
             <arguments>
                 <argument name="jsLayout" xsi:type="array">

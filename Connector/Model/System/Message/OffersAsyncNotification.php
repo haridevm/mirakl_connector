@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\System\Message;
@@ -33,7 +32,7 @@ class OffersAsyncNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getIdentity()
     {
@@ -41,7 +40,7 @@ class OffersAsyncNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function isDisplayed()
     {
@@ -49,7 +48,7 @@ class OffersAsyncNotification implements MessageInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getText()
     {
@@ -57,17 +56,15 @@ class OffersAsyncNotification implements MessageInterface
         $ignoreUrl = $this->urlBuilder->getUrl('mirakl/offer/ignoreNotification');
 
         return __(
-            '<strong>Mirakl offers import has changed. Synchronization now uses Mirakl asynchronous '
-            . 'API OF52/OF53/OF54.</strong><br>It is still possible (but not recommended) to switch back to '
-            . 'the legacy offers import with API OF51.<br>Please go to '
-            . '<a href="%1">Mirakl > Configuration > Synchronization</a> for more information. <a href="%2">Ignore</a>',
-            $configUrl,
-            $ignoreUrl
+            '<strong>Mirakl offers import has changed. Synchronization now uses Mirakl asynchronous API OF52/OF53/OF54.</strong><br>'.
+            'It is still possible (but not recommended) to switch back to the legacy offers import with API OF51.<br>' .
+            'Please go to <a href="%1">Mirakl > Configuration > Synchronization</a> for more information. <a href="%2">Ignore</a>',
+            $configUrl, $ignoreUrl
         );
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getSeverity()
     {

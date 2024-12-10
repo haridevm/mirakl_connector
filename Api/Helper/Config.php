@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\Api\Model\Client\ClientManager;
@@ -9,23 +6,24 @@ use Mirakl\Api\Model\Log\LogOptions;
 
 class Config extends \Mirakl\Core\Helper\Config
 {
-    public const XML_PATH_ENABLE          = 'mirakl_api/general/enable';
-    public const XML_PATH_API_URL         = 'mirakl_api/general/api_url';
-    public const XML_PATH_CONNECT_TIMEOUT = 'mirakl_api/general/connect_timeout';
-    public const XML_PATH_AUTH_METHOD     = 'mirakl_api/general/auth_method';
+    const XML_PATH_ENABLE          = 'mirakl_api/general/enable';
+    const XML_PATH_API_URL         = 'mirakl_api/general/api_url';
+    const XML_PATH_CONNECT_TIMEOUT = 'mirakl_api/general/connect_timeout';
+    const XML_PATH_AUTH_METHOD     = 'mirakl_api/general/auth_method';
 
     // Legacy front API key
-    public const XML_PATH_API_KEY = 'mirakl_api/general/api_key';
+    const XML_PATH_API_KEY = 'mirakl_api/general/api_key';
 
     // Access token authentication
-    public const XML_PATH_ACCESS_TOKEN = 'mirakl_api/general/access_token';
+    const XML_PATH_ACCESS_TOKEN = 'mirakl_api/general/access_token';
 
     // OAuth2 authentication
-    public const XML_PATH_OAUTH2_CLIENT_ID     = 'mirakl_api/oauth2/client_id';
-    public const XML_PATH_OAUTH2_CLIENT_SECRET = 'mirakl_api/oauth2/client_secret';
-    public const XML_PATH_OAUTH2_AUTH_URL      = 'mirakl_api/oauth2/auth_url';
-    public const XML_PATH_API_DEVELOPER_LOG_OPTION = 'mirakl_api_developer/log/log_option';
-    public const XML_PATH_API_DEVELOPER_LOG_FILTER = 'mirakl_api_developer/log/log_filter';
+    const XML_PATH_OAUTH2_CLIENT_ID     = 'mirakl_api/oauth2/client_id';
+    const XML_PATH_OAUTH2_CLIENT_SECRET = 'mirakl_api/oauth2/client_secret';
+    const XML_PATH_OAUTH2_AUTH_URL      = 'mirakl_api/oauth2/auth_url';
+
+    const XML_PATH_API_DEVELOPER_LOG_OPTION = 'mirakl_api_developer/log/log_option';
+    const XML_PATH_API_DEVELOPER_LOG_FILTER = 'mirakl_api_developer/log/log_filter';
 
     /**
      * @var bool
@@ -33,7 +31,7 @@ class Config extends \Mirakl\Core\Helper\Config
     protected $apiEnabled = true;
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function disable()
     {
@@ -43,7 +41,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function enable()
     {
@@ -53,8 +51,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isApiLogEnabled($store = null)
     {
@@ -62,7 +60,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabled()
     {
@@ -72,7 +70,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getAuthMethod()
     {
@@ -80,7 +78,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getApiKey()
     {
@@ -88,8 +86,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return int
+     * @param   mixed   $store
+     * @return  int
      */
     public function getApiLogOption($store = null)
     {
@@ -97,8 +95,8 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getApiLogFilter($store = null)
     {
@@ -106,7 +104,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getApiUrl()
     {
@@ -114,7 +112,7 @@ class Config extends \Mirakl\Core\Helper\Config
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getConnectTimeout()
     {
@@ -156,8 +154,8 @@ class Config extends \Mirakl\Core\Helper\Config
     /**
      * Enable or disable API
      *
-     * @param bool $flag
-     * @return $this
+     * @param   bool    $flag
+     * @return  $this
      */
     protected function setApiEnabled($flag)
     {

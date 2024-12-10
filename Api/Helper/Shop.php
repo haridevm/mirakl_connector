@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MMP\Common\Domain\Collection\Evaluation\EvaluationCollection;
@@ -14,21 +11,20 @@ class Shop extends ClientHelper\MMP
     /**
      * (S20) Fetches Mirakl shop list
      *
-     * @param \DateTime $since
-     * @param bool      $paginate
-     * @param int       $offset
-     * @param int       $max
-     * @return ShopCollection
+     * @param   \DateTime   $since
+     * @param   bool        $paginate
+     * @param   int         $offset
+     * @param   int         $max
+     * @return  ShopCollection
      */
     public function getShops(\DateTime $since = null, $paginate = false, $offset = 0, $max = 10)
     {
         $request = new GetShopsRequest();
-        $request->setPaginate($paginate);
-
         if ($since) {
             $request->setUpdatedSince($since);
         }
 
+        $request->setPaginate($paginate);
         if (true === $paginate) {
             $request->setOffset($offset);
             $request->setMax($max);
@@ -48,8 +44,8 @@ class Shop extends ClientHelper\MMP
     /**
      * (S20) Fetches all Mirakl shop list with pagination
      *
-     * @param \DateTime $since
-     * @return ShopCollection
+     * @param   \DateTime   $since
+     * @return  ShopCollection
      */
     public function getAllShops(\DateTime $since = null)
     {
@@ -71,13 +67,13 @@ class Shop extends ClientHelper\MMP
     /**
      * (S03) Fetches specified shop evaluations
      *
-     * @param string $shopId
-     * @param int    $limit
-     * @param int    $offset
-     * @param string $locale
-     * @param string $sortBy
-     * @param string $dir
-     * @return EvaluationCollection
+     * @param   string  $shopId
+     * @param   int     $limit
+     * @param   int     $offset
+     * @param   string  $locale
+     * @param   string  $sortBy
+     * @param   string  $dir
+     * @return  EvaluationCollection
      */
     public function getShopEvaluations(
         $shopId,

@@ -1,43 +1,38 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Store\Api\Data\StoreInterface;
 
 class Config extends \Mirakl\Connector\Helper\Config
 {
-    // phpcs:disable
-    public const XML_PATH_MCI_ROOT_CATEGORY                      = 'mirakl_mci/hierarchy/root_category';
-    public const XML_PATH_MCI_IMPORT_PATH                        = 'mirakl_mci/import_shop_product/import_path';
-    public const XML_PATH_MCI_ENABLE_PRODUCT_IMPORT              = 'mirakl_mci/import_shop_product/enable_product_import';
-    public const XML_PATH_MCI_DEDUPLICATION_ATTRIBUTES           = 'mirakl_mci/import_shop_product/deduplication_attributes';
-    public const XML_PATH_MCI_ENABLE_DEDUPLICATION_MULTIVALUES   = 'mirakl_mci/import_shop_product/enable_deduplication_multivalues';
-    public const XML_PATH_MCI_DEDUPLICATION_DELIMITER            = 'mirakl_mci/import_shop_product/deduplication_delimiter';
-    public const XML_PATH_MCI_UPDATE_EXISTING_PRODUCTS           = 'mirakl_mci/import_shop_product/update_existing_products';
-    public const XML_PATH_MCI_AUTO_CREATE_CONFIGURABLE_PRODUCTS  = 'mirakl_mci/import_shop_product/auto_create_configurable_products';
-    public const XML_PATH_MCI_AUTO_ENABLE_PRODUCT                = 'mirakl_mci/import_shop_product/auto_enable_product';
-    public const XML_PATH_MCI_AUTO_SYNC_PRODUCT                  = 'mirakl_mci/import_shop_product/auto_flag_product_sync';
-    public const XML_PATH_MCI_AUTO_ASSIGN_CATEGORY               = 'mirakl_mci/import_shop_product/auto_assign_category';
-    public const XML_PATH_MCI_DEFAULT_VISIBILITY                 = 'mirakl_mci/import_shop_product/default_visibility';
-    public const XML_PATH_MCI_DEFAULT_TAX_CLASS                  = 'mirakl_mci/import_shop_product/default_tax_class';
-    public const XML_PATH_MCI_CHECK_DATA_HASH                    = 'mirakl_mci/import_shop_product/check_data_hash';
-    public const XML_PATH_MCI_SEND_IMPORT_REPORT                 = 'mirakl_mci/import_shop_product/send_import_report';
-    public const XML_PATH_MCI_ENABLE_INDEXING_IMPORT             = 'mirakl_mci/product_import_indexing/enable_indexing_import';
-    public const XML_PATH_MCI_ENABLE_INDEXING_IMPORT_AFTER       = 'mirakl_mci/product_import_indexing/enable_indexing_import_after';
-    public const XML_PATH_MCI_IMAGE_MAX_SIZE                     = 'mirakl_images_import/general/image_max_size';
-    public const XML_PATH_MCI_IMAGES_IMPORT_LIMIT                = 'mirakl_images_import/general/limit';
-    public const XML_PATH_MCI_IMAGES_IMPORT_HEADERS              = 'mirakl_images_import/general/headers';
-    public const XML_PATH_MCI_IMAGES_IMPORT_PROTOCOL_VERSION     = 'mirakl_images_import/general/protocol_version';
-    public const XML_PATH_MCI_IMAGES_IMPORT_TIMEOUT              = 'mirakl_images_import/general/timeout';
-    public const XML_PATH_ENABLE_SYNC_ATTRIBUTES                 = 'mirakl_sync/attributes/enable_attributes';
-    public const XML_PATH_ENABLE_INCREMENTAL_ATTRIBUTES_SYNC     = 'mirakl_sync/attributes/incremental_sync';
-    public const XML_PATH_EXPORT_ATTRIBUTES_REQUIREMENT_LEVEL    = 'mirakl_sync/attributes/export_requirement_level';
-    public const XML_PATH_ENABLE_SYNC_HIERARCHIES                = 'mirakl_sync/hierarchies/enable_hierarchies';
-    public const XML_PATH_ENABLE_SYNC_VALUES_LISTS               = 'mirakl_sync/values_lists/enable_values_lists';
-    public const XML_PATH_DEFAULT_DECIMAL_ATTRIBUTES_PRECISION   = 'mirakl_sync/attributes/decimal_precision';
-    // phpcs:enable
+    const XML_PATH_MCI_ROOT_CATEGORY                      = 'mirakl_mci/hierarchy/root_category';
+    const XML_PATH_MCI_IMPORT_PATH                        = 'mirakl_mci/import_shop_product/import_path';
+    const XML_PATH_MCI_ENABLE_PRODUCT_IMPORT              = 'mirakl_mci/import_shop_product/enable_product_import';
+    const XML_PATH_MCI_DEDUPLICATION_ATTRIBUTES           = 'mirakl_mci/import_shop_product/deduplication_attributes';
+    const XML_PATH_MCI_ENABLE_DEDUPLICATION_MULTIVALUES   = 'mirakl_mci/import_shop_product/enable_deduplication_multivalues';
+    const XML_PATH_MCI_DEDUPLICATION_DELIMITER            = 'mirakl_mci/import_shop_product/deduplication_delimiter';
+    const XML_PATH_MCI_UPDATE_EXISTING_PRODUCTS           = 'mirakl_mci/import_shop_product/update_existing_products';
+    const XML_PATH_MCI_AUTO_CREATE_CONFIGURABLE_PRODUCTS  = 'mirakl_mci/import_shop_product/auto_create_configurable_products';
+    const XML_PATH_MCI_AUTO_ENABLE_PRODUCT                = 'mirakl_mci/import_shop_product/auto_enable_product';
+    const XML_PATH_MCI_AUTO_SYNC_PRODUCT                  = 'mirakl_mci/import_shop_product/auto_flag_product_sync';
+    const XML_PATH_MCI_AUTO_ASSIGN_CATEGORY               = 'mirakl_mci/import_shop_product/auto_assign_category';
+    const XML_PATH_MCI_DEFAULT_VISIBILITY                 = 'mirakl_mci/import_shop_product/default_visibility';
+    const XML_PATH_MCI_DEFAULT_TAX_CLASS                  = 'mirakl_mci/import_shop_product/default_tax_class';
+    const XML_PATH_MCI_CHECK_DATA_HASH                    = 'mirakl_mci/import_shop_product/check_data_hash';
+    const XML_PATH_MCI_SEND_IMPORT_REPORT                 = 'mirakl_mci/import_shop_product/send_import_report';
+    const XML_PATH_MCI_ENABLE_INDEXING_IMPORT             = 'mirakl_mci/product_import_indexing/enable_indexing_import';
+    const XML_PATH_MCI_ENABLE_INDEXING_IMPORT_AFTER       = 'mirakl_mci/product_import_indexing/enable_indexing_import_after';
+    const XML_PATH_MCI_IMAGE_MAX_SIZE                     = 'mirakl_images_import/general/image_max_size';
+    const XML_PATH_MCI_IMAGES_IMPORT_LIMIT                = 'mirakl_images_import/general/limit';
+    const XML_PATH_MCI_IMAGES_IMPORT_HEADERS              = 'mirakl_images_import/general/headers';
+    const XML_PATH_MCI_IMAGES_IMPORT_PROTOCOL_VERSION     = 'mirakl_images_import/general/protocol_version';
+    const XML_PATH_MCI_IMAGES_IMPORT_TIMEOUT              = 'mirakl_images_import/general/timeout';
+    const XML_PATH_ENABLE_SYNC_ATTRIBUTES                 = 'mirakl_sync/attributes/enable_attributes';
+    const XML_PATH_ENABLE_INCREMENTAL_ATTRIBUTES_SYNC     = 'mirakl_sync/attributes/incremental_sync';
+    const XML_PATH_EXPORT_ATTRIBUTES_REQUIREMENT_LEVEL    = 'mirakl_sync/attributes/export_requirement_level';
+    const XML_PATH_ENABLE_SYNC_HIERARCHIES                = 'mirakl_sync/hierarchies/enable_hierarchies';
+    const XML_PATH_ENABLE_SYNC_VALUES_LISTS               = 'mirakl_sync/values_lists/enable_values_lists';
+    const XML_PATH_DEFAULT_DECIMAL_ATTRIBUTES_PRECISION   = 'mirakl_sync/attributes/decimal_precision';
 
     /**
      * @var string[]
@@ -47,8 +42,8 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns locales that will be used for Mirakl product import data
      *
-     * @param array $default
-     * @return array
+     * @param   array   $default
+     * @return  array
      */
     public function getAllowedLocales($default = ['en_US'])
     {
@@ -71,7 +66,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns attribute codes used for deduplication
      *
-     * @return string[]
+     * @return  string[]
      */
     public function getDeduplicationAttributes()
     {
@@ -86,7 +81,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns MCI products deduplication delimiter
      *
-     * @return string
+     * @return  string
      */
     public function getDeduplicationDelimiter()
     {
@@ -96,7 +91,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns default tax class for product import
      *
-     * @return int
+     * @return  int
      */
     public function getDefaultTaxClass()
     {
@@ -106,7 +101,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns default visibility for product import
      *
-     * @return int
+     * @return  int
      */
     public function getDefaultVisibility()
     {
@@ -116,7 +111,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns root category id to use for hierarchy export
      *
-     * @return int
+     * @return  int
      */
     public function getHierarchyRootCategoryId()
     {
@@ -132,7 +127,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns the maximum number of images to import on each process
      *
-     * @return int
+     * @return  int
      */
     public function getImagesImportLimit()
     {
@@ -142,7 +137,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns image maximum size in kilobytes
      *
-     * @return int
+     * @return  int
      */
     public function getImageMaxSize()
     {
@@ -152,7 +147,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns images import custom headers
      *
-     * @return array
+     * @return  array
      */
     public function getImagesImportHeaders()
     {
@@ -164,7 +159,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns HTTP protocol version to use when downloading images
      *
-     * @return string
+     * @return  string
      */
     public function getImagesImportProtocolVersion()
     {
@@ -174,7 +169,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns maximum time for an image to be downloaded
      *
-     * @return int
+     * @return  int
      */
     public function getImagesImportTimeout()
     {
@@ -184,7 +179,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns MCI products import path
      *
-     * @return string
+     * @return  string
      */
     public function getImportPath()
     {
@@ -194,7 +189,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Returns stores that allow product import
      *
-     * @return StoreInterface[]
+     * @return  StoreInterface[]
      */
     public function getStoresUsedForProductImport()
     {
@@ -217,7 +212,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAutoAssignCategory()
     {
@@ -225,7 +220,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAutoCreateConfigurableProducts()
     {
@@ -233,7 +228,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAutoEnableProduct()
     {
@@ -241,7 +236,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAutoSyncProduct()
     {
@@ -249,7 +244,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isCheckDataHash()
     {
@@ -257,7 +252,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isDeduplicationMultiValues()
     {
@@ -265,7 +260,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabledIndexingImport()
     {
@@ -273,7 +268,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabledIndexingImportAfter()
     {
@@ -281,7 +276,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAttributeRequirementLevelExported()
     {
@@ -289,8 +284,8 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isProductImportEnabled($store = null)
     {
@@ -298,7 +293,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSendImportReport()
     {
@@ -306,7 +301,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncAttributes()
     {
@@ -314,7 +309,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isIncrementalAttributesSyncEnabled()
     {
@@ -322,7 +317,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncHierarchies()
     {
@@ -330,7 +325,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncValuesLists()
     {
@@ -338,7 +333,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isUpdateExistingProducts()
     {

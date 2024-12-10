@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Shipment;
@@ -16,7 +15,7 @@ abstract class AbstractShipmentResolver extends AbstractResolver implements Reso
     protected $shipmentHelper;
 
     /**
-     * @param ShipmentHelper $shipmentHelper
+     * @param  ShipmentHelper   $shipmentHelper
      */
     public function __construct(ShipmentHelper $shipmentHelper)
     {

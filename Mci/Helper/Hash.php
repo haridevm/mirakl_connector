@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -11,7 +8,7 @@ use Magento\Framework\DB\Adapter\AdapterInterface;
 
 class Hash extends AbstractHelper
 {
-    public const TABLE_NAME = 'mirakl_product_import';
+    const TABLE_NAME = 'mirakl_product_import';
 
     /**
      * @var ResourceConnection
@@ -29,9 +26,9 @@ class Hash extends AbstractHelper
     protected $mciConfig;
 
     /**
-     * @param Context            $context
-     * @param ResourceConnection $resource
-     * @param Config             $mciConfig
+     * @param   Context             $context
+     * @param   ResourceConnection  $resource
+     * @param   Config              $mciConfig
      */
     public function __construct(
         Context $context,
@@ -56,9 +53,9 @@ class Hash extends AbstractHelper
     /**
      * Delete hash for specified shop and sku
      *
-     * @param int    $shopId
-     * @param string $sku
-     * @return int
+     * @param   int     $shopId
+     * @param   string  $sku
+     * @return  int
      */
     public function deleteShopHash($shopId, $sku)
     {
@@ -71,10 +68,10 @@ class Hash extends AbstractHelper
     /**
      * Returns true if we have to check data hash for specified shop before import
      *
-     * @param int    $shopId
-     * @param string $sku
-     * @param string $hash
-     * @return bool
+     * @param   int     $shopId
+     * @param   string  $sku
+     * @param   string  $hash
+     * @return  bool
      */
     public function isShopHashExists($shopId, $sku, $hash)
     {
@@ -95,10 +92,10 @@ class Hash extends AbstractHelper
     /**
      * Saves given hash for specified shop id
      *
-     * @param int    $shopId
-     * @param string $sku
-     * @param string $hash
-     * @return int
+     * @param   int     $shopId
+     * @param   string  $sku
+     * @param   string  $hash
+     * @return  int
      */
     public function saveShopHash($shopId, $sku, $hash)
     {

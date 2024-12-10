@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\System\Config\Source\Attribute;
 
 use Magento\Catalog\Model\Category as CategoryModel;
@@ -43,10 +40,10 @@ class Category
     private $options;
 
     /**
-     * @param CategoryFactory           $categoryFactory
-     * @param CategoryCollectionFactory $categoryCollectionFactory
-     * @param EntityManager             $entityManager
-     * @param array                     $requiredFields
+     * @param   CategoryFactory             $categoryFactory
+     * @param   CategoryCollectionFactory   $categoryCollectionFactory
+     * @param   EntityManager               $entityManager
+     * @param   array                       $requiredFields
      */
     public function __construct(
         CategoryFactory $categoryFactory,
@@ -61,7 +58,9 @@ class Category
     }
 
     /**
-     * @inheritdoc
+     * Get list of all available shops
+     *
+     * @return  array
      */
     public function getAllOptions()
     {
@@ -86,8 +85,8 @@ class Category
     }
 
     /**
-     * @param int $parentId
-     * @return array
+     * @param   int $parentId
+     * @return  array
      */
     protected function getCategoriesByParentId($parentId)
     {
@@ -97,10 +96,10 @@ class Category
     /**
      * Builds category options
      *
-     * @param array $category
-     * @param bool  $addEmpty
-     * @return array
-     * @throws \Exception
+     * @param   array $category
+     * @param   bool  $addEmpty
+     * @return  array
+     * @throws  \Exception
      */
     protected function getCategoryOptions($category = null, $addEmpty = true)
     {

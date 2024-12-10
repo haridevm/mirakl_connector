@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Order;
 
 use Magento\Sales\Model\Order;
@@ -9,7 +6,7 @@ use Magento\Sales\Model\Order;
 class CreditMemoFactory extends Order\CreditmemoFactory
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function initData($creditMemo, $data)
     {

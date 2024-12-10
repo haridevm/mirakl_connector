@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Export\Formatter;
@@ -29,6 +28,7 @@ class IdentifierAttributes implements FormatterInterface
         // Format identifier attributes with multivalues if used
         $identifierAttributes = $this->config->getMcmIdentifiersAttributes();
         $separator = $this->config->getMultivalueAttributesSeparator();
+
         foreach ($identifierAttributes as $key) {
             if (isset($data[$key]) && is_string($data[$key])) {
                 $data[$key] = explode($separator, $data[$key]);

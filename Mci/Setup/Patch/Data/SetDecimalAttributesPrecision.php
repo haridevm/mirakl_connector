@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Setup\Patch\Data;
@@ -43,7 +42,7 @@ class SetDecimalAttributesPrecision implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -51,8 +50,7 @@ class SetDecimalAttributesPrecision implements DataPatchInterface
         $setup->startSetup();
 
         if (version_compare($this->magentoMetadata->getVersion(), '2.3.3', '>=')) {
-            // Default decimal precision for Magento 2.3.3+
-            $this->configWriter->save(MciConfig::XML_PATH_DEFAULT_DECIMAL_ATTRIBUTES_PRECISION, 6);
+            $this->configWriter->save(MciConfig::XML_PATH_DEFAULT_DECIMAL_ATTRIBUTES_PRECISION, 6); // default decimal precision for Magento 2.3.3+
         } else {
             $this->configWriter->save(MciConfig::XML_PATH_DEFAULT_DECIMAL_ATTRIBUTES_PRECISION, 4);
         }
@@ -61,7 +59,7 @@ class SetDecimalAttributesPrecision implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -69,7 +67,7 @@ class SetDecimalAttributesPrecision implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

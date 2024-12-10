@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -17,7 +14,7 @@ class FillAttributesObserver implements ObserverInterface
     private $helper;
 
     /**
-     * @param OfferCatalogHelper $offerCatalogHelper
+     * @param   OfferCatalogHelper  $offerCatalogHelper
      */
     public function __construct(OfferCatalogHelper $offerCatalogHelper)
     {
@@ -25,7 +22,7 @@ class FillAttributesObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

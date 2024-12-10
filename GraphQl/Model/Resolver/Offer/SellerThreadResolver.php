@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Offer;
@@ -40,14 +39,15 @@ class SellerThreadResolver extends AbstractResolver implements ResolverInterface
         OfferHelper $offerHelper,
         CustomerRepositoryInterface $customerRepository,
         CustomerMetadataInterface $customerMetadata
-    ) {
+    )
+    {
         $this->offerHelper = $offerHelper;
         $this->customerRepository = $customerRepository;
         $this->customerMetadata = $customerMetadata;
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {
@@ -70,7 +70,7 @@ class SellerThreadResolver extends AbstractResolver implements ResolverInterface
         $messageCustomer->setEmail($customer->getEmail());
         $messageCustomer->setFirstname($customer->getFirstname());
         $messageCustomer->setLastname($customer->getLastname());
-        if ($locale = $this->getInput($args, 'input.locale')) {
+        if ($locale =  $this->getInput($args, 'input.locale')) {
             $messageCustomer->setLocale($locale);
         }
 

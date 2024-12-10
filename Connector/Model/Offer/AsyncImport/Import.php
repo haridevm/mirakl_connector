@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Offer\AsyncImport;
@@ -8,7 +7,7 @@ use Mirakl\Process\Model\Action\AbstractParentAction;
 
 class Import extends AbstractParentAction
 {
-    public const CODE = 'OF52';
+    const CODE = 'OF52';
 
     /**
      * @inheritdoc

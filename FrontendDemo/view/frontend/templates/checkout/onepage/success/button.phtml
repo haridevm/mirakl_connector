@@ -4,11 +4,11 @@
  * See COPYING.txt for license details.
  */
 
-// phpcs:ignoreFile
+// @codingStandardsIgnoreFile
 
 ?>
-<?php /** @var \Magento\Checkout\Block\Onepage\Success $block */ ?>
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
 
-<?php if ($block->getCanViewOrder() && $block->getCanPrintOrder()): ?>
+<?php if ($block->getCanViewOrder() && $block->getCanPrintOrder()) :?>
     <?= $block->getChildHtml() ?>
-<?php endif; ?>
+<?php endif;?>

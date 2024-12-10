@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Unit\Model\Product\Attribute;
 
 use Mirakl\Mci\Model\Product\Attribute\AttributeUtil;
@@ -10,10 +7,10 @@ use PHPUnit\Framework\TestCase;
 class AttributeUtilTest extends TestCase
 {
     /**
-     * @param string      $attrCode
-     * @param bool        $isLocalized
+     * @param string $attrCode
+     * @param bool $isLocalized
      * @param string|null $locale
-     * @param string      $code
+     * @param string $code
      *
      * @dataProvider getTestParseDataProvider
      */
@@ -27,7 +24,7 @@ class AttributeUtilTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTestParseDataProvider()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
 
 use Magento\Catalog\Model\Product;
@@ -33,8 +30,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $csv
-     * @param array  $miraklProductIds
+     * @param   string  $csv
+     * @param   array   $miraklProductIds
      */
     public function testDataMcmImport($csv, $miraklProductIds)
     {
@@ -47,7 +44,6 @@ class ImportProductTest extends MiraklBaseTestCase
             'description'        => 'This ...',
             'color'              => '50',
             'size'               => '91',
-            'material'           => '33,146',
             'mirakl_image_1'     => 'https://magento.mirakl.net/public/ms02-gray_main_1.jpg',
             'status'             => Status::STATUS_DISABLED,
         ];
@@ -68,8 +64,8 @@ class ImportProductTest extends MiraklBaseTestCase
      *
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      *
-     * @param string $csv
-     * @param array  $miraklProductIds
+     * @param   string  $csv
+     * @param   array   $miraklProductIds
      */
     public function testEnableProductMcmImport($csv, $miraklProductIds)
     {
@@ -98,9 +94,9 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      *
-     * @param string $insertCsv
-     * @param string $updateCsv
-     * @param string $miraklProductId
+     * @param   string  $insertCsv
+     * @param   string  $updateCsv
+     * @param   string  $miraklProductId
      */
     public function testUpdateProductMcmImport($insertCsv, $updateCsv, $miraklProductId)
     {
@@ -114,7 +110,6 @@ class ImportProductTest extends MiraklBaseTestCase
             'description'        => 'This ...UPDATE',
             'color'              => '54',
             'size'               => '167',
-            'material'           => '33,146',
             'mirakl_image_1'     => 'https://magento.mirakl.net/public/ms02-gray_main_1.jpg',
             'status'             => Status::STATUS_DISABLED,
         ];
@@ -137,8 +132,8 @@ class ImportProductTest extends MiraklBaseTestCase
      * @magentoConfigFixture current_store mirakl_mcm/import_product/default_tax_class 2
      * @magentoConfigFixture current_store mirakl_mcm/import_product/default_visibility 4
      *
-     * @param string $updateCsv
-     * @param string $miraklProductId
+     * @param   string  $updateCsv
+     * @param   string  $miraklProductId
      */
     public function testDeduplicationProductMcmImport($updateCsv, $miraklProductId)
     {
@@ -156,7 +151,6 @@ class ImportProductTest extends MiraklBaseTestCase
             'description'        => 'This ...UPDATE',
             'color'              => '54',
             'size'               => '167',
-            'material'           => '33,146',
             'mirakl_image_1'     => 'https://magento.mirakl.net/public/ms02-gray_main_1.jpg',
             'status'             => Status::STATUS_ENABLED,
         ];
@@ -169,7 +163,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importDeduplicationMcmDataProvider()
     {
@@ -179,7 +173,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importUpdateMcmDataProvider()
     {
@@ -189,7 +183,7 @@ class ImportProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMcmDataProvider()
     {

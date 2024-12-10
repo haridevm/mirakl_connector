@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\System\Config\Button;
 
 use Magento\Backend\Block\Template\Context;
@@ -10,12 +7,9 @@ use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 use Magento\Framework\DB\Adapter\AdapterInterface;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 abstract class AbstractClearButton extends Field
 {
-    public const BUTTON_TEMPLATE = 'Mirakl_Connector::system/config/button.phtml';
+    const BUTTON_TEMPLATE = 'Mirakl_Connector::system/config/button.phtml';
 
     /**
      * @var string
@@ -33,9 +27,9 @@ abstract class AbstractClearButton extends Field
     private $connection;
 
     /**
-     * @param Context            $context
-     * @param ResourceConnection $resource
-     * @param array              $data
+     * @param   Context             $context
+     * @param   ResourceConnection  $resource
+     * @param   array               $data
      */
     public function __construct(
         Context $context,
@@ -48,12 +42,15 @@ abstract class AbstractClearButton extends Field
     }
 
     /**
-     * @return string
+     * @return  string
      */
     abstract protected function getTableName();
 
     /**
-     * @inheritdoc
+     * Get the button and scripts contents
+     *
+     * @param   AbstractElement $element
+     * @return  string
      */
     protected function _getElementHtml(AbstractElement $element)
     {
@@ -72,20 +69,22 @@ abstract class AbstractClearButton extends Field
     }
 
     /**
-     * @inheritdoc
+     * Set template to itself
+     *
+     * @return  $this
      */
     protected function _prepareLayout()
     {
         parent::_prepareLayout();
         if (!$this->getTemplate()) {
-            $this->setTemplate(static::BUTTON_TEMPLATE); // @phpstan-ignore-line
+            $this->setTemplate(static::BUTTON_TEMPLATE);
         }
 
         return $this;
     }
 
     /**
-     * @return int
+     * @return  int
      */
     private function getRowsCount()
     {
@@ -102,7 +101,10 @@ abstract class AbstractClearButton extends Field
     }
 
     /**
-     * @inheritdoc
+     * Render button
+     *
+     * @param   AbstractElement $element
+     * @return  string
      */
     public function render(AbstractElement $element)
     {

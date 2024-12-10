@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Shipping\Zone\Edit;
 
 use Magento\Backend\Block\Template\Context;
@@ -12,10 +9,6 @@ use Magento\Framework\Registry;
 use Magento\Rule\Block\Conditions;
 use Magento\Store\Model\System\Store as StoreSystem;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Form extends Generic
 {
     /**
@@ -34,13 +27,13 @@ class Form extends Generic
     protected $_systemStore;
 
     /**
-     * @param Context     $context
-     * @param Registry    $registry
-     * @param FormFactory $formFactory
-     * @param Conditions  $conditions
-     * @param Fieldset    $rendererFieldset
-     * @param StoreSystem $systemStore
-     * @param array       $data
+     * @param   Context     $context
+     * @param   Registry    $registry
+     * @param   FormFactory $formFactory
+     * @param   Conditions  $conditions
+     * @param   Fieldset    $rendererFieldset
+     * @param   StoreSystem $systemStore
+     * @param   array       $data
      */
     public function __construct(
         Context $context,
@@ -54,23 +47,23 @@ class Form extends Generic
         $this->_conditions = $conditions;
         $this->_rendererFieldset = $rendererFieldset;
         $this->_systemStore = $systemStore;
-
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
     /**
-     * @inheritdoc
+     * Init class
+     *
+     * @return  void
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->setId('shipping_zone_form');
         $this->setTitle(__('Shipping Zone Information'));
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     protected function _prepareForm()
     {
@@ -125,7 +118,6 @@ class Form extends Generic
         ]);
 
         // Address Conditions
-        // @phpstan-ignore-next-line
         $renderer = $this->_rendererFieldset
             ->setNameInLayout('mirakl_fieldset_renderer')
             ->setTemplate('Mirakl_Core::shipping/zone/fieldset.phtml')

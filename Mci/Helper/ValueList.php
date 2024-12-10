@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -21,8 +18,9 @@ class ValueList extends AbstractHelper implements ExportInterface
 {
     use ExportTrait;
 
-    public const CODE = 'VL01';
-    public const EXPORT_SOURCE = 'VL01';
+    const CODE  = 'VL01';
+
+    const EXPORT_SOURCE = 'VL01';
 
     /**
      * @var ProductResource
@@ -50,12 +48,12 @@ class ValueList extends AbstractHelper implements ExportInterface
     protected $attributeHelper;
 
     /**
-     * @param Context              $context
-     * @param ProductResource      $productResource
-     * @param LocaleListsInterface $localeLists
-     * @param Api                  $api
-     * @param MciConfig            $mciConfig
-     * @param AttributeHelper      $attributeHelper
+     * @param   Context                 $context
+     * @param   ProductResource         $productResource
+     * @param   LocaleListsInterface    $localeLists
+     * @param   Api                     $api
+     * @param   MciConfig               $mciConfig
+     * @param   AttributeHelper         $attributeHelper
      */
     public function __construct(
         Context $context,
@@ -76,7 +74,7 @@ class ValueList extends AbstractHelper implements ExportInterface
     /**
      * Delete all values of all attributes
      *
-     * @return int|false
+     * @return  int|false
      */
     public function deleteAttributes()
     {
@@ -94,7 +92,7 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function export(array $data)
     {
@@ -108,8 +106,8 @@ class ValueList extends AbstractHelper implements ExportInterface
     /**
      * Exports value lists of all attributes using options
      *
-     * @param Process $process
-     * @return int|false
+     * @param   Process $process
+     * @return  int|false
      */
     public function exportAttributes(Process $process = null)
     {
@@ -160,7 +158,7 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getAvailableAttributes()
     {
@@ -170,8 +168,8 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @param EavAttribute $attribute
-     * @return bool
+     * @param   EavAttribute    $attribute
+     * @return  bool
      */
     public function isAttributeExportable(EavAttribute $attribute)
     {
@@ -181,9 +179,7 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * {@inheritdoc}
      */
     public function prepare(DataObject $attribute, $action = null)
     {
@@ -263,22 +259,16 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @param EavAttribute $attribute
-     * @param string       $attributeLabel
-     * @param string       $optionValue
-     * @param string       $optionLabel
-     * @param string|null  $action
-     * @param array|null   $stores
-     * @return array
+     * @param   EavAttribute    $attribute
+     * @param   string          $attributeLabel
+     * @param   string          $optionValue
+     * @param   string          $optionLabel
+     * @param   null|string     $action
+     * @param   null|array      $stores
+     * @return  array
      */
-    public function prepareOption(
-        EavAttribute $attribute,
-        $attributeLabel,
-        $optionValue,
-        $optionLabel,
-        $action = null,
-        $stores = null
-    ) {
+    public function prepareOption(EavAttribute $attribute, $attributeLabel, $optionValue, $optionLabel, $action = null, $stores = null)
+    {
         $optionData = [
             'list-code'     => $attribute->getAttributeCode(),
             'list-label'    => $action !== 'delete' ? $attributeLabel : '',
@@ -293,9 +283,7 @@ class ValueList extends AbstractHelper implements ExportInterface
             /** @var \Magento\Store\Model\Store $store */
             foreach ($stores as $store) {
                 $storeLocale = $this->mciConfig->getLocale($store->getId());
-                $optionData["list-label[$storeLocale]"] = isset($labels[$store->getId()])
-                    ? $labels[$store->getId()]
-                    : '';
+                $optionData["list-label[$storeLocale]"] = isset($labels[$store->getId()]) ? $labels[$store->getId()] : '';
                 $attribute->setStoreId($store->getId());
 
                 $options = $attribute->getSource()->getAllOptions(false);
@@ -311,7 +299,7 @@ class ValueList extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function wrap(DataObject $object, $action = null)
     {

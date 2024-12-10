@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\CreditMemo;
 
 use Magento\Framework\DataObject;
@@ -17,9 +14,9 @@ class Totals extends Template
     protected $taxConfig;
 
     /**
-     * @param Template\Context $context
-     * @param TaxConfig        $taxConfig
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   TaxConfig           $taxConfig
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -31,7 +28,7 @@ class Totals extends Template
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function initTotals()
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Offer;
@@ -11,7 +10,7 @@ use Mirakl\OfferIndexer\Model\Offer\AvailabilityInterface;
 class Availability implements AvailabilityInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validate(Offer $offer, StoreInterface $store): bool
     {

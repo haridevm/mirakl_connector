@@ -1,15 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Controller\Adminhtml\Process;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
-
-class Delete extends AbstractProcessAction implements HttpPostActionInterface
+class Delete extends AbstractProcessAction
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -28,6 +23,6 @@ class Delete extends AbstractProcessAction implements HttpPostActionInterface
             );
         }
 
-        return $this->_redirect('*/*/');
+        $this->_redirect('*/*/');
     }
 }

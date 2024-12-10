@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote;
 
 use Magento\Quote\Api\Data\CartInterface;
@@ -30,9 +27,9 @@ class OfferCollector
     protected $cache;
 
     /**
-     * @param QuoteItemResourceFactory $quoteItemResourceFactory
-     * @param OfferFactory             $offerFactory
-     * @param Cache                    $cache
+     * @param   QuoteItemResourceFactory    $quoteItemResourceFactory
+     * @param   OfferFactory                $offerFactory
+     * @param   Cache                       $cache
      */
     public function __construct(
         QuoteItemResourceFactory $quoteItemResourceFactory,
@@ -47,8 +44,8 @@ class OfferCollector
     /**
      * Returns current offers in specified quote
      *
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getItemsWithOffer(CartInterface $quote)
     {
@@ -92,8 +89,8 @@ class OfferCollector
     /**
      * Returns operator quote items
      *
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getItemsWithoutOffer(CartInterface $quote = null)
     {
@@ -105,10 +102,9 @@ class OfferCollector
         $quoteItemsWithoutOffer = [];
         /** @var QuoteItem $quoteItem */
         foreach ($this->getQuoteItems($quote) as $quoteItem) {
-            if (
-                !$quoteItem->isDeleted() && !$quoteItem->getParentItemId()
-                && !$quoteItem->getProduct()->getCustomOption('mirakl_offer')
-            ) {
+            if (!$quoteItem->isDeleted() && !$quoteItem->getParentItemId()
+                && !$quoteItem->getProduct()->getCustomOption('mirakl_offer'))
+            {
                 $quoteItemsWithoutOffer[] = $quoteItem;
             }
         }
@@ -121,8 +117,8 @@ class OfferCollector
     /**
      * Returns offers in cart with quantity
      *
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getOffersWithQty(CartInterface $quote)
     {
@@ -143,8 +139,8 @@ class OfferCollector
     }
 
     /**
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getQuoteItems(CartInterface $quote)
     {

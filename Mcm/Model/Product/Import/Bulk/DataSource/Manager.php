@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource;
@@ -27,8 +26,8 @@ class Manager implements ManagerInterface
 
     /**
      * @param DataSourceInterface $dataSource
-     * @param Formatter           $dataFormatter
-     * @param Config              $config
+     * @param Formatter $dataFormatter
+     * @param Config $config
      */
     public function __construct(
         DataSourceInterface $dataSource,
@@ -68,7 +67,7 @@ class Manager implements ManagerInterface
     }
 
     /**
-     * @param array               $data
+     * @param array $data
      * @param StoreInterface|null $store
      */
     private function push(array $data, ?StoreInterface $store = null): void

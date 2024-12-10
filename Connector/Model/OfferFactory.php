@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model;
 
 use Magento\Framework\ObjectManagerInterface;
@@ -10,19 +7,17 @@ class OfferFactory
 {
     /**
      * @var ObjectManagerInterface
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_objectManager;
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_instanceName;
 
     /**
-     * @param ObjectManagerInterface $objectManager
-     * @param string                 $instanceName
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   string                  $instanceName
      */
     public function __construct(ObjectManagerInterface $objectManager, $instanceName = Offer::class)
     {
@@ -33,8 +28,8 @@ class OfferFactory
     /**
      * Creates an offer
      *
-     * @param array $data
-     * @return Offer
+     * @param   array   $data
+     * @return  Offer
      */
     public function create(array $data = [])
     {
@@ -44,9 +39,9 @@ class OfferFactory
     /**
      * Creates an offer and sets data according to specified JSON
      *
-     * @param string $json
-     * @param array  $data
-     * @return Offer
+     * @param   string  $json
+     * @param   array   $data
+     * @return  Offer
      */
     public function fromJson($json, $data = [])
     {

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Order;
@@ -28,43 +27,19 @@ class OrderMarketplaceInfoResolver implements ResolverInterface
         $currency = $order->getOrderCurrencyCode();
 
         return [
-            'model'                           => $order,
             'sent'                            => $order->getMiraklSent(),
             'shipping_zone'                   => $order->getMiraklShippingZone(),
+            'base_shipping_excl_tax'          => ['value' => $order->getMiraklBaseShippingExclTax(), 'currency' => $baseCurrency],
+            'base_shipping_incl_tax'          => ['value' => $order->getMiraklBaseShippingInclTax(), 'currency' => $baseCurrency],
+            'shipping_excl_tax'               => ['value' => $order->getMiraklShippingExclTax(), 'currency' => $currency],
+            'shipping_incl_tax'               => ['value' => $order->getMiraklShippingInclTax(), 'currency' => $currency],
+            'base_shipping_tax_amount'        => ['value' => $order->getMiraklBaseShippingTaxAmount(), 'currency' => $baseCurrency],
+            'shipping_tax_amount'             => ['value' => $order->getMiraklShippingTaxAmount(), 'currency' => $currency],
+            'base_custom_shipping_tax_amount' => ['value' => $order->getMiraklBaseCustomShippingTaxAmount(), 'currency' => $baseCurrency],
+            'custom_shipping_tax_amount'      => ['value' => $order->getMiraklCustomShippingTaxAmount(), 'currency' => $currency],
             'is_offer_incl_tax'               => $order->getMiraklIsOfferInclTax(),
             'is_shipping_incl_tax'            => $order->getMiraklIsShippingInclTax(),
-            'base_shipping_excl_tax'          => [
-                'value'    => $order->getMiraklBaseShippingExclTax(),
-                'currency' => $baseCurrency,
-            ],
-            'base_shipping_incl_tax'          => [
-                'value'    => $order->getMiraklBaseShippingInclTax(),
-                'currency' => $baseCurrency,
-            ],
-            'shipping_excl_tax'               => [
-                'value'    => $order->getMiraklShippingExclTax(),
-                'currency' => $currency,
-            ],
-            'shipping_incl_tax'               => [
-                'value'    => $order->getMiraklShippingInclTax(),
-                'currency' => $currency,
-            ],
-            'base_shipping_tax_amount'        => [
-                'value'    => $order->getMiraklBaseShippingTaxAmount(),
-                'currency' => $baseCurrency,
-            ],
-            'shipping_tax_amount'             => [
-                'value'    => $order->getMiraklShippingTaxAmount(),
-                'currency' => $currency,
-            ],
-            'base_custom_shipping_tax_amount' => [
-                'value'    => $order->getMiraklBaseCustomShippingTaxAmount(),
-                'currency' => $baseCurrency,
-            ],
-            'custom_shipping_tax_amount'      => [
-                'value'    => $order->getMiraklCustomShippingTaxAmount(),
-                'currency' => $currency,
-            ],
+            'model'                           => $order,
         ];
     }
 }

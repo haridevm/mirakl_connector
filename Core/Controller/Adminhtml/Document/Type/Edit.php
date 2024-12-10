@@ -1,16 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-class Edit extends Type implements HttpGetActionInterface
+class Edit extends Type
 {
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {

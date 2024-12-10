@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Model\Client;
 
 use Mirakl\Core\Client\AbstractApiClient;
@@ -19,7 +16,7 @@ class ClientManager
     private static $clients = [];
 
     /**
-     * @param ClientFactory $clientFactory
+     * @param   ClientFactory   $clientFactory
      */
     public function __construct(ClientFactory $clientFactory)
     {
@@ -47,8 +44,8 @@ class ClientManager
     }
 
     /**
-     * @param string $area
-     * @return AbstractApiClient
+     * @param   string  $area
+     * @return  AbstractApiClient
      */
     public function get($area)
     {

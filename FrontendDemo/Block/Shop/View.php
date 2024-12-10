@@ -1,17 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Shop;
 
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class View extends Template
 {
     /**
@@ -25,9 +18,9 @@ class View extends Template
     protected $_template = 'shop/view.phtml';
 
     /**
-     * @param Context  $context
-     * @param Registry $registry
-     * @param array    $data
+     * @param   Context     $context
+     * @param   Registry    $registry
+     * @param   array       $data
      */
     public function __construct(Context $context, Registry $registry, array $data = [])
     {
@@ -36,7 +29,7 @@ class View extends Template
     }
 
     /**
-     * @inheritdoc
+     * @return  $this
      */
     protected function _prepareLayout()
     {
@@ -68,7 +61,7 @@ class View extends Template
     }
 
     /**
-     * @return \Mirakl\Core\Model\Shop
+     * @return  \Mirakl\Core\Model\Shop
      */
     public function getShop()
     {
@@ -76,7 +69,7 @@ class View extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getShopDescription()
     {
@@ -91,8 +84,8 @@ class View extends Template
     /**
      * Calculate and format the duration for the human interface
      *
-     * @param int $duration
-     * @return string
+     * @param   int $duration
+     * @return  string
      */
     public function formatDuration($duration)
     {
@@ -111,7 +104,7 @@ class View extends Template
     }
 
     /**
-     * @return void
+     * {@inheritdoc}
      */
     protected function _setTabTitle()
     {

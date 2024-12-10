@@ -1,25 +1,18 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Integration\Model\Product;
 
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product;
 use Mirakl\Mci\Helper\Data as MciDataHelper;
+use Mirakl\Mci\Helper\Product\Image as ImageHelper;
 use Mirakl\Mci\Test\Integration\Model\Product\AbstractImportProductTestCase as MiraklBaseTestCase;
 
-/**
- * @group MCI
- * @group import
- *
- * @magentoDbIsolation enabled
- * @magentoAppIsolation enabled
- */
 class ImportVariantProductTest extends MiraklBaseTestCase
 {
     /**
      * @dataProvider importVariantMciDataProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -34,8 +27,8 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
 
-     * @param string $productVariant
-     * @param array  $eans
+     * @param   string  $productVariant
+     * @param   array   $eans
      */
     public function testVariantProductMciImport($productVariant, $eans)
     {
@@ -77,6 +70,8 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importCreateParentVariantMciDataProvider
      *
+     * @magentoDbIsolation disabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -92,7 +87,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/single_product.php
      *
-     * @param string $variantProductFile
+     * @param   string  $variantProductFile
      */
     public function testCreateParentVariantProductMciImport($variantProductFile)
     {
@@ -102,7 +97,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
         $values = [
             'category'       => 3,
             'brand'          => 'Lacoste',
-            'name'           => 'Slim Fit Polo',
+            'name'           => 'Slim Fit Polo UPDATE',
             'description'    => 'This ... UPDATE',
             'color'          => '50',
             'size'           => '91',
@@ -115,8 +110,30 @@ class ImportVariantProductTest extends MiraklBaseTestCase
 
         $newProduct = $this->validateAllProductValues('2010', $values);
         $this->validateVariantParentProduct($newProduct);
+    }
 
-        $imageProcess = $this->createImageCommandProcess([$newProduct->getId()]);
+    /**
+     * @magentoDbIsolation enabled
+     */
+    public function testImageCommandMci()
+    {
+        $values = [
+            'category'       => 3,
+            'brand'          => 'Lacoste',
+            'name'           => 'Slim Fit Polo UPDATE',
+            'description'    => 'This ... UPDATE',
+            'color'          => '50',
+            'size'           => '91',
+            'ean'            => 'EAN1234',
+            'mirakl_image_1' => 'https://magento.mirakl.net/public/ms02-gray_main_1.jpg',
+            'status'         => Status::STATUS_ENABLED,
+            'mirakl_sync'    => '1',
+            'shop_skus'      => '2010|SHOPSKU',
+        ];
+
+        $product = $this->finder->findProductByDeduplication($values, Product\Type::TYPE_SIMPLE);
+
+        $imageProcess = $this->createImageCommandProcess([$product->getId()]);
         $imageProcess->setQuiet(true);
         $imageProcess->run();
 
@@ -126,6 +143,8 @@ class ImportVariantProductTest extends MiraklBaseTestCase
 
     /**
      * @dataProvider importUpdateVariantMciDataProvider
+     *
+     * @magentoDbIsolation enabled
      *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
@@ -140,8 +159,8 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $updateVariantProductFile
-     * @param array  $eans
+     * @param   string  $updateVariantProductFile
+     * @param   array   $eans
      */
     public function testUpdateVariantProductMciImport($updateVariantProductFile, $eans)
     {
@@ -196,6 +215,8 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     /**
      * @dataProvider importUpdateVariantAlreadyPresentMciDataProvider
      *
+     * @magentoDbIsolation enabled
+     *
      * @magentoConfigFixture current_store mirakl_api/general/enable 1
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/send_import_report 0
      * @magentoConfigFixture current_store mirakl_mci/import_shop_product/auto_enable_product 1
@@ -209,20 +230,16 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mci::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $updateVariantProductFile
+     * @param   string  $updateVariantProductFile
      */
     public function testUpdateAlreadyVariantProductMciImport($updateVariantProductFile)
     {
-        $process = $this->runImport('2010', $updateVariantProductFile);
-
-        $this->assertStringContainsString(
-            'A variant product already exists with the same variants as provided data',
-            $process->getOutput()
-        );
+        $this->runImport('2010', $updateVariantProductFile);
+        $this->assertStringContainsString('A variant product already exists with the same variants as provided data', $this->processModel->getOutput());
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importVariantMciDataProvider()
     {
@@ -232,7 +249,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importCreateParentVariantMciDataProvider()
     {
@@ -242,7 +259,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importUpdateVariantMciDataProvider()
     {
@@ -252,7 +269,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importUpdateVariantAlreadyPresentMciDataProvider()
     {
@@ -262,15 +279,14 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @param Product $newProduct
+     * @param   Product $newProduct
      */
     protected function validateVariantParentProduct($newProduct)
     {
         // Test parent creation
         $parentProduct = $this->coreHelper->getParentProduct($newProduct);
         $this->assertNotNull($parentProduct);
-
         $this->productResourceFactory->create()->load($parentProduct, $parentProduct->getId());
-        $this->assertEquals('2010|VARIANT', $parentProduct->getData(MciDataHelper::ATTRIBUTE_VARIANT_GROUP_CODES));
+        $this->assertEquals($parentProduct->getData(MciDataHelper::ATTRIBUTE_VARIANT_GROUP_CODES), '2010|VARIANT');
     }
 }

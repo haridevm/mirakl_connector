@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Console\Command\Product\Import;
 
 use Magento\Framework\App\Area;
@@ -21,8 +18,9 @@ class PathCommand extends Command
 {
     use CommandTrait;
 
-    public const PROCESS_TYPE = 'CLI';
-    public const MAX_FILES_OPTION = 'max-files';
+    const PROCESS_TYPE = 'CLI';
+
+    const MAX_FILES_OPTION = 'max-files';
 
     /**
      * @var ObjectManagerInterface
@@ -50,12 +48,12 @@ class PathCommand extends Command
     private $handler;
 
     /**
-     * @param ObjectManagerInterface $objectManager
-     * @param ConfigInterface        $configManager
-     * @param State                  $state
-     * @param Config                 $config
-     * @param Handler                $handler
-     * @param string|null            $name
+     * @param   ObjectManagerInterface  $objectManager
+     * @param   ConfigInterface         $configManager
+     * @param   State                   $state
+     * @param   Config                  $config
+     * @param   Handler                 $handler
+     * @param   string|null             $name
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -74,7 +72,7 @@ class PathCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -94,7 +92,7 @@ class PathCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

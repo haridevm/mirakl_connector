@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Test\Integration\Model\Offer\Import;
 
 use Mirakl\Connector\Model\Offer\AsyncImport\GetOffersExportFile as OffersImport;
@@ -25,7 +22,7 @@ class ImportOffersAsyncTest extends TestCase
      *
      * @param string $miraklFile
      * @param string $expectedRowsFile
-     * @param array  $expectedAdditionalInfo
+     * @param array $expectedAdditionalInfo
      */
     public function testImportOffers($miraklFile, $expectedRowsFile, array $expectedAdditionalInfo = [])
     {
@@ -59,7 +56,7 @@ class ImportOffersAsyncTest extends TestCase
             }
             unset($offer['additional_info']);
         });
-        $expectedRows = $this->getJsonFileContents($expectedRowsFile);
+        $expectedRows = $this->_getJsonFileContents($expectedRowsFile);
         $this->assertEquals($expectedRows, $offers);
     }
 

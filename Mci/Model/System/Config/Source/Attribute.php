@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\System\Config\Source;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as AttributeModel;
@@ -61,8 +58,8 @@ class Attribute
     protected $excludedTypes = ['price', 'gallery', 'hidden', 'multiline', 'media_image'];
 
     /**
-     * @param AttributeCollection   $collection
-     * @param EventManagerInterface $eventManager
+     * @param   AttributeCollection     $collection
+     * @param   EventManagerInterface   $eventManager
      */
     public function __construct(AttributeCollection $collection, EventManagerInterface $eventManager)
     {
@@ -71,8 +68,8 @@ class Attribute
     }
 
     /**
-     * @param AttributeModel $attribute
-     * @return bool
+     * @param   AttributeModel  $attribute
+     * @return  bool
      */
     private function isAttributeExportable(AttributeModel $attribute)
     {
@@ -88,7 +85,7 @@ class Attribute
     /**
      * Retrieves exportable product attributes
      *
-     * @return AttributeCollection
+     * @return  AttributeCollection
      */
     public function getExportableAttributes()
     {
@@ -115,7 +112,7 @@ class Attribute
     /**
      * Builds exportable attributes options
      *
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Plugin\View\Page;
 
 use Magento\Framework\View\Page\Config as PageConfig;
@@ -20,8 +17,8 @@ class ConfigPlugin
     protected $addBodyClassTriggers = [];
 
     /**
-     * @param Config $config
-     * @param array  $addBodyClassTriggers
+     * @param   Config  $config
+     * @param   array   $addBodyClassTriggers
      */
     public function __construct(Config $config, $addBodyClassTriggers = [])
     {
@@ -30,20 +27,17 @@ class ConfigPlugin
     }
 
     /**
-     * @param PageConfig $pageConfig
-     * @param \Closure   $proceed
-     * @param string     $className
-     * @return PageConfig
+     * @param   PageConfig  $pageConfig
+     * @param   \Closure    $proceed
+     * @param   string      $className
+     * @return  PageConfig
      */
     public function aroundAddBodyClass(PageConfig $pageConfig, \Closure $proceed, $className)
     {
         $proceed($className);
 
         if (in_array($className, $this->addBodyClassTriggers)) {
-            $proceed(sprintf(
-                'mirakl-mcm-%s',
-                $this->config->isMcmEnabled() || $this->config->isAsyncMcmEnabled() ? 'on' : 'off'
-            ));
+            $proceed(sprintf('mirakl-mcm-%s', $this->config->isMcmEnabled() || $this->config->isAsyncMcmEnabled() ? 'on' : 'off'));
         }
 
         return $pageConfig;

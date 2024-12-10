@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml;
 
 use Magento\Backend\Block\Widget\Grid\Container;
@@ -9,17 +6,14 @@ use Magento\Backend\Block\Widget\Grid\Container;
 class Shop extends Container
 {
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * @return  void
      */
     protected function _construct()
     {
         $this->_blockGroup = 'Mirakl_Core';
         $this->_controller = 'adminhtml_shop';
         $this->_headerText = __('Shop List');
-
         parent::_construct();
-
         $this->removeButton('add');
         $this->addButton(
             'synchronize',
@@ -28,7 +22,7 @@ class Shop extends Container
                 'class' => 'save primary',
                 'onclick' => 'confirmSetLocation(\'' . __(
                     'Are you sure? This will update all modified shops since the last synchronization.'
-                ) . '\', \'' . $this->getUrl('*/sync/shop') . '\')'
+                    ) . '\', \'' . $this->getUrl('*/sync/shop') . '\')'
             ]
         );
     }

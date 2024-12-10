@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Product as ProductModel;
@@ -29,9 +26,9 @@ class Data
     protected $mciHelper;
 
     /**
-     * @param Config     $config
-     * @param CoreHelper $coreHelper
-     * @param MciHelper  $mciHelper
+     * @param   Config      $config
+     * @param   CoreHelper  $coreHelper
+     * @param   MciHelper   $mciHelper
      */
     public function __construct(
         Config $config,
@@ -46,10 +43,10 @@ class Data
     /**
      * Adds specified data to product excepting multi values
      *
-     * @param ProductModel $product
-     * @param array        $data
-     * @param bool         $skipDedupAttrs
-     * @return ProductModel
+     * @param   ProductModel    $product
+     * @param   array           $data
+     * @param   bool            $skipDedupAttrs
+     * @return  ProductModel
      */
     public function addDataToProduct(ProductModel $product, array $data, $skipDedupAttrs = true)
     {
@@ -73,8 +70,8 @@ class Data
     /**
      * Returns values of $data array that are flagged as variant attributes
      *
-     * @param array $data
-     * @return array
+     * @param   array   $data
+     * @return  array
      */
     public function getDataVariants(array $data)
     {
@@ -84,8 +81,8 @@ class Data
     /**
      * Returns true if given data have at least one variant (configurable attribute)
      *
-     * @param array $data
-     * @return bool
+     * @param   array   $data
+     * @return  bool
      */
     public function isDataHaveVariants(array $data)
     {
@@ -97,8 +94,8 @@ class Data
     /**
      * Mark images as not processed if new
      *
-     * @param array             $data
-     * @param ProductModel|null $product
+     * @param   array               $data
+     * @param   ProductModel|null   $product
      */
     public function updateProductImagesProcessingFlag(&$data, ProductModel $product = null)
     {
@@ -123,9 +120,9 @@ class Data
     /**
      * Updates product data containing multi values
      *
-     * @param ProductModel $product
-     * @param array        $data
-     * @return ProductModel
+     * @param   ProductModel    $product
+     * @param   array           $data
+     * @return  ProductModel
      */
     public function updateProductDataMultiValues(ProductModel $product, array $data)
     {

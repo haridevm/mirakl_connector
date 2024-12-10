@@ -1,17 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-class Save extends Zone implements HttpPostActionInterface
+class Save extends Zone
 {
     /**
-     * @return void
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @return  void
      */
     public function execute()
     {
@@ -31,9 +26,7 @@ class Save extends Zone implements HttpPostActionInterface
                 if ($id) {
                     $resource->load($model, $id);
                     if ($id != $model->getId()) {
-                        throw new \Magento\Framework\Exception\LocalizedException(
-                            __('The wrong shipping zone is specified.')
-                        );
+                        throw new \Magento\Framework\Exception\LocalizedException(__('The wrong shipping zone is specified.'));
                     }
                 }
 
@@ -58,7 +51,7 @@ class Save extends Zone implements HttpPostActionInterface
                 unset($data['rule']);
 
                 $model->addData($data);
-                $model->setConditionsSerialized(serialize($data['conditions'])); // phpcs:ignore
+                $model->setConditionsSerialized(serialize($data['conditions']));
 
                 $session->setPageData($model->getData());
 

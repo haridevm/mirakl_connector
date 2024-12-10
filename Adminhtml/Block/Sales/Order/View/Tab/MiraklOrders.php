@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\Order\View\Tab;
 
 use Magento\Backend\Block\Template\Context;
@@ -16,11 +13,6 @@ use Mirakl\MMP\Common\Domain\Order\Tax\OrderTaxAmount;
 use Mirakl\MMP\FrontOperator\Domain\Order as MiraklOrder;
 use Mirakl\MMP\FrontOperator\Domain\Order\OrderLine as MiraklOrderLine;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
@@ -39,12 +31,12 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $api;
 
     /**
-     * @param Context                          $context
-     * @param BackendHelper                    $backendHelper
-     * @param Registry                         $coreRegistry
-     * @param CollectionEntityFactoryInterface $collectionEntityFactory
-     * @param Api                              $api
-     * @param array                            $data
+     * @param   Context                             $context
+     * @param   BackendHelper                       $backendHelper
+     * @param   Registry                            $coreRegistry
+     * @param   CollectionEntityFactoryInterface    $collectionEntityFactory
+     * @param   Api                                 $api
+     * @param   array                               $data
      */
     public function __construct(
         Context $context,
@@ -61,12 +53,11 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _construct()
     {
         parent::_construct();
-
         $this->setId('mirakl_orders_grid');
         $this->setDefaultSort('created_at');
         $this->setDefaultDir('DESC');
@@ -76,7 +67,8 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
+     * @param   string  $html
+     * @return  string
      */
     protected function _afterToHtml($html)
     {
@@ -92,15 +84,13 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
             return $messages->toHtml();
         }
 
-        $messages->addNotice(
-            __('Mirakl orders are retrieved <strong>dynamically</strong>. Nothing is stored in Magento.')
-        );
+        $messages->addNotice(__('Mirakl orders are retrieved <strong>dynamically</strong>. Nothing is stored in Magento.'));
 
         return $messages->toHtml() . $html;
     }
 
     /**
-     * @return \Magento\Sales\Model\Order
+     * @return  \Magento\Sales\Model\Order
      */
     public function getOrder()
     {
@@ -108,8 +98,8 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param MiraklOrderLine $miraklOrderLine
-     * @return float
+     * @param   MiraklOrderLine $miraklOrderLine
+     * @return  float
      */
     public function getMiraklOrderLineShippingTaxAmount($miraklOrderLine)
     {
@@ -126,8 +116,8 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param MiraklOrder $miraklOrder
-     * @return float
+     * @param   MiraklOrder $miraklOrder
+     * @return  float
      */
     public function getMiraklOrderShippingTaxAmount($miraklOrder)
     {
@@ -141,9 +131,9 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param MiraklOrderLine $miraklOrderLine
-     * @param bool            $withShipping
-     * @return float
+     * @param   MiraklOrderLine $miraklOrderLine
+     * @param   bool            $withShipping
+     * @return  float
      */
     public function getMiraklOrderLineTaxAmount($miraklOrderLine, $withShipping = false)
     {
@@ -160,9 +150,9 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param MiraklOrder $miraklOrder
-     * @param bool        $withShipping
-     * @return float
+     * @param   MiraklOrder $miraklOrder
+     * @param   bool        $withShipping
+     * @return  float
      */
     public function getMiraklOrderTaxAmount($miraklOrder, $withShipping = false)
     {
@@ -176,7 +166,7 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _prepareCollection()
     {
@@ -184,7 +174,8 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
         if ($this->getRequest()->isAjax()) {
             try {
                 $commercialId = $this->getOrder()->getIncrementId();
-                if ($orders = $this->api->getOrdersByCommercialId($commercialId)) {
+                $orders = $this->api->getOrdersByCommercialId($commercialId);
+                if (!empty($orders)) {
                     foreach ($orders as $order) {
                         /** @var MiraklOrder $order */
                         $data = $order->getData();
@@ -206,8 +197,7 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * {@inheritdoc}
      */
     protected function _prepareColumns()
     {
@@ -292,7 +282,9 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
             'sortable'          => false,
             'getter'            => function ($row) {
                 /** @var MiraklOrder $row */
-                return $this->formatDate($row->getLastUpdatedDate(), \IntlDateFormatter::MEDIUM, true);
+                return $row->getLastUpdatedDate()
+                    ->setTimezone(new \DateTimeZone('GMT'))
+                    ->format('d/m/Y H:i:s');
             },
         ]);
 
@@ -314,61 +306,60 @@ class MiraklOrders extends \Magento\Backend\Block\Widget\Grid\Extended
             'sortable'          => false,
         ]);
 
-        $this->addColumn(
-            'action',
+        $this->addColumn('action',
             [
-                'header'   => __('Action'),
-                'align'    => 'center',
-                'type'     => 'action',
-                'getter'   => 'getId',
-                'filter'   => false,
-                'sortable' => false,
-                'renderer' => Renderer\MiraklOrder\Action::class,
-                'actions'  => [
+                'header'     => __('Action'),
+                'align'      => 'center',
+                'type'       => 'action',
+                'getter'     => 'getId',
+                'actions'    => [
                     [
-                        'caption'  => __('Validate Order'),
-                        'url'      => [
+                        'caption'   => __('Validate Order'),
+                        'url'       => [
                             'base'   => 'mirakl/order/validate',
-                            'params' => ['order_id' => $this->getOrder()->getId()],
+                            'params' => ['order_id' => $this->getOrder()->getId()]
                         ],
-                        'field'    => 'remote_id',
-                        'confirm'  => __('Are you sure? This will impact all Mirakl orders of this list.'),
-                        'statuses' => [OrderState::STAGING],
-                        'type'     => 'order',
+                        'field'     => 'remote_id',
+                        'confirm'   => __('Are you sure? This will impact all Mirakl orders of this list.'),
+                        'statuses'  => [OrderState::STAGING],
+                        'type'      => 'order',
                     ],
                     [
-                        'caption'  => __('Invalidate Order'),
-                        'url'      => [
+                        'caption'   => __('Invalidate Order'),
+                        'url'       => [
                             'base'   => 'mirakl/order/invalidate',
-                            'params' => ['order_id' => $this->getOrder()->getId()],
+                            'params' => ['order_id' => $this->getOrder()->getId()]
                         ],
-                        'field'    => 'remote_id',
-                        'confirm'  => __('Are you sure? This will impact all Mirakl orders of this list.'),
-                        'statuses' => [OrderState::STAGING],
-                        'type'     => 'order',
+                        'field'     => 'remote_id',
+                        'confirm'   => __('Are you sure? This will impact all Mirakl orders of this list.'),
+                        'statuses'  => [OrderState::STAGING],
+                        'type'      => 'order',
                     ],
                     [
-                        'caption' => __('Validate Payment'),
-                        'url'     => [
+                        'caption'   => __('Validate Payment'),
+                        'url'       => [
                             'base'   => 'mirakl/payment/validate',
-                            'params' => ['order_id' => $this->getOrder()->getId()],
+                            'params' => ['order_id' => $this->getOrder()->getId()]
                         ],
-                        'field'   => 'remote_id',
-                        'confirm' => __('Are you sure?'),
-                        'type'    => 'payment',
+                        'field'     => 'remote_id',
+                        'confirm'   => __('Are you sure?'),
+                        'type'      => 'payment',
                     ],
                     [
-                        'caption' => __('Refuse Payment'),
-                        'url'     => [
+                        'caption'   => __('Refuse Payment'),
+                        'url'       => [
                             'base'   => 'mirakl/payment/refuse',
-                            'params' => ['order_id' => $this->getOrder()->getId()],
+                            'params' => ['order_id' => $this->getOrder()->getId()]
                         ],
-                        'field'   => 'remote_id',
-                        'confirm' => __('Are you sure?'),
-                        'type'    => 'payment',
+                        'field'     => 'remote_id',
+                        'confirm'   => __('Are you sure?'),
+                        'type'      => 'payment',
                     ],
                 ],
-            ],
+                'filter'     => false,
+                'sortable'   => false,
+                'renderer'   => Renderer\MiraklOrder\Action::class,
+            ]
         );
 
         return parent::_prepareColumns();

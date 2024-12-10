@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Unit\Model\Product\Import\Handler;
 
 use Mirakl\Mci\Model\Product\Import\Handler\CsvTrait;
@@ -18,10 +15,10 @@ class CsvTraitTest extends TestCase
     }
 
     /**
-     * @param array        $data
-     * @param string       $fileDelimiter
-     * @param string       $testedDelimiter
-     * @param string|false $expectedDelimiter
+     * @param   array           $data
+     * @param   string          $fileDelimiter
+     * @param   string          $testedDelimiter
+     * @param   string|false    $expectedDelimiter
      *
      * @dataProvider getTestValidDelimiterDataProvider
      */
@@ -39,7 +36,7 @@ class CsvTraitTest extends TestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTestValidDelimiterDataProvider()
     {

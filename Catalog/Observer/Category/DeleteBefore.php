@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Observer\Category;
 
 use Magento\Framework\Event\Observer;
@@ -10,7 +7,7 @@ use Magento\Framework\Event\ObserverInterface;
 class DeleteBefore extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

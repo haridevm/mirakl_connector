@@ -1,17 +1,13 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Mirakl\Core\Controller\Adminhtml\Document\Type;
 
-class Save extends Type implements HttpPostActionInterface
+class Save extends Type
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -37,11 +33,11 @@ class Save extends Type implements HttpPostActionInterface
             );
 
             $model->setData($data);
-
+        
             try {
                 $this->_documentTypeResourceFactory->create()->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the document type.'));
-
+        
                 if ($this->getRequest()->getParam('back')) {
                     return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
                 }
@@ -53,7 +49,7 @@ class Save extends Type implements HttpPostActionInterface
                 $this->messageManager
                     ->addExceptionMessage($e, __('Something went wrong while saving the document type.'));
             }
-
+        
             return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
         }
 

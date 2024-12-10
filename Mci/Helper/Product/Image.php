@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product;
 
 use GuzzleHttp\Exception\RequestException;
@@ -28,16 +25,13 @@ use Mirakl\Mci\Model\Image\Downloader as ImageDownloader;
 use Mirakl\Process\Model\Process;
 use Psr\Http\Message\ResponseInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Image extends AbstractHelper
 {
-    public const IMAGES_IMPORT_STATUS_PENDING    = 1;
-    public const IMAGES_IMPORT_STATUS_PROCESSING = 2;
-    public const IMAGES_IMPORT_STATUS_PROCESSED  = 3;
+    const IMAGES_IMPORT_STATUS_PENDING    = 1;
+    const IMAGES_IMPORT_STATUS_PROCESSING = 2;
+    const IMAGES_IMPORT_STATUS_PROCESSED  = 3;
 
-    public const DELETED_IMAGE_URL = 'http://delete.image?processed=false';
+    const DELETED_IMAGE_URL = 'http://delete.image?processed=false';
 
     /**
      * @var ApiConfigHelper
@@ -110,19 +104,18 @@ class Image extends AbstractHelper
     protected $productAction;
 
     /**
-     * @param Context                  $context
-     * @param ApiConfigHelper          $apiConfigHelper
-     * @param CoreHelper               $coreHelper
-     * @param MciHelper                $mciHelper
-     * @param ImageDownloader          $imageDownloader
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param Filesystem               $filesystem
-     * @param MediaGalleryProcessor    $mediaGalleryProcessor
-     * @param ReadHandler              $configurableReadHandler
-     * @param ProductResourceFactory   $productResourceFactory
-     * @param ImageConverter           $imageConverter
-     * @param ProductAction            $productAction
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                     $context
+     * @param   ApiConfigHelper             $apiConfigHelper
+     * @param   CoreHelper                  $coreHelper
+     * @param   MciHelper                   $mciHelper
+     * @param   ImageDownloader             $imageDownloader
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   Filesystem                  $filesystem
+     * @param   MediaGalleryProcessor       $mediaGalleryProcessor
+     * @param   ReadHandler                 $configurableReadHandler
+     * @param   ProductResourceFactory      $productResourceFactory
+     * @param   ImageConverter              $imageConverter
+     * @param   ProductAction               $productAction
      */
     public function __construct(
         Context $context,
@@ -158,7 +151,7 @@ class Image extends AbstractHelper
     /**
      * Returns dir where images will be downloaded temporarily
      *
-     * @return string
+     * @return  string
      */
     public function getDownloadDir()
     {
@@ -170,7 +163,7 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function generateImageFileName()
     {
@@ -178,8 +171,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param string $file
-     * @return string
+     * @param   string  $file
+     * @return  string
      */
     public function getFilePath($file)
     {
@@ -187,7 +180,7 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @return EavAttribute[]
+     * @return  EavAttribute[]
      */
     public function getImagesAttributes()
     {
@@ -195,8 +188,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return array
+     * @param   Product $product
+     * @return  array
      */
     public function getProductImageAttributeList($product)
     {
@@ -211,7 +204,7 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @return ProductCollection
+     * @return  ProductCollection
      */
     public function getProductsToProcess()
     {
@@ -219,8 +212,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param string $status
-     * @return ProductCollection
+     * @param   string $status
+     * @return  ProductCollection
      */
     public function getProductsByImagesStatus($status)
     {
@@ -231,7 +224,7 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @return ProductCollection
+     * @return  ProductCollection
      * @deprecated Use getProductsToProcess() instead
      */
     public function getProductsToProcessByQueryParam()
@@ -259,8 +252,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param ProductCollection $collection
-     * @return int
+     * @param   ProductCollection   $collection
+     * @return  int
      */
     public function markProductsImagesAsPending(ProductCollection $collection)
     {
@@ -268,8 +261,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param ProductCollection $collection
-     * @return int
+     * @param   ProductCollection   $collection
+     * @return  int
      */
     public function markProductsImagesAsProcessing(ProductCollection $collection)
     {
@@ -277,8 +270,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param ProductCollection $collection
-     * @return int
+     * @param   ProductCollection   $collection
+     * @return  int
      */
     public function markProductsImagesAsProcessed(ProductCollection $collection)
     {
@@ -286,9 +279,9 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param ProductCollection $collection
-     * @param int               $status
-     * @return int
+     * @param   ProductCollection   $collection
+     * @param   int                 $status
+     * @return  int
      */
     public function updateProductsImagesStatus(ProductCollection $collection, $status)
     {
@@ -312,10 +305,9 @@ class Image extends AbstractHelper
      * 2. Add images to product
      * 3. Define images as default if no image where present
      *
-     * @param Process           $process
-     * @param ProductCollection $collection
-     * @return $this
-     * @SuppressWarnings(PHPMD)
+     * @param   Process             $process
+     * @param   ProductCollection   $collection
+     * @return  $this
      */
     public function importProductsImages(Process $process, ProductCollection $collection)
     {
@@ -397,9 +389,7 @@ class Image extends AbstractHelper
                     $start = microtime(true);
 
                     try {
-                        $this->imageDownloader->downloadMultiple(
-                            $client,
-                            $urls,
+                        $this->imageDownloader->downloadMultiple($client, $urls,
                             function (ResponseInterface $response, $attrCode) use ($process, &$images) {
                                 $file = $this->onImageFulfilled($response, $process);
                                 $images[$attrCode] = $file;
@@ -478,10 +468,9 @@ class Image extends AbstractHelper
      * Method called when an image is downloaded successfully.
      * Must return the image file path.
      *
-     * @param ResponseInterface $response
-     * @param Process           $process
-     * @return string
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   ResponseInterface   $response
+     * @param   Process             $process
+     * @return  string
      */
     public function onImageFulfilled(ResponseInterface $response, Process $process)
     {
@@ -551,10 +540,10 @@ class Image extends AbstractHelper
     /**
      * Method called when an error is encountered during an image download.
      *
-     * @param \Exception $reason
-     * @param Process    $process
-     * @param Product    $product
-     * @param string     $attrCode
+     * @param   \Exception  $reason
+     * @param   Process     $process
+     * @param   Product     $product
+     * @param   string      $attrCode
      */
     public function onImageRejected(\Exception $reason, Process $process, Product $product, $attrCode)
     {
@@ -572,8 +561,8 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param Product $product
-     * @return bool
+     * @param   Product $product
+     * @return  bool
      */
     public function areProductImagesProcessed(Product $product)
     {
@@ -587,9 +576,9 @@ class Image extends AbstractHelper
      * 2. Add images to product
      * 3. Define images as default if no image where present
      *
-     * @param Process $process
-     * @param int     $limit
-     * @return $this
+     * @param   Process $process
+     * @param   int     $limit
+     * @return  $this
      * @deprecated Use importProductsImages() instead
      */
     public function run(Process $process, $limit = 100)
@@ -604,9 +593,9 @@ class Image extends AbstractHelper
     }
 
     /**
-     * @param Process $process
-     * @param array   $productIds
-     * @return $this
+     * @param   Process $process
+     * @param   array   $productIds
+     * @return  $this
      */
     public function runByProductIds(Process $process, array $productIds)
     {
@@ -620,8 +609,8 @@ class Image extends AbstractHelper
      * Prepares URL before being downloaded
      * (remove some query parameters that have been added by the connector).
      *
-     * @param string $url
-     * @return string
+     * @param   string  $url
+     * @return  string
      */
     protected function prepareUrl($url)
     {

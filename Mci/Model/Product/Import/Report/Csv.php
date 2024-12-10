@@ -1,15 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Report;
 
 class Csv extends \SplTempFileObject implements ReportInterface
 {
     /**
-     * @param int|null $maxMemory
-     * @param string   $delimiter
-     * @param string   $enclosure
+     * @param   int|null    $maxMemory
+     * @param   string      $delimiter
+     * @param   string      $enclosure
      */
     public function __construct($maxMemory = null, $delimiter = ';', $enclosure = '"')
     {
@@ -18,7 +15,7 @@ class Csv extends \SplTempFileObject implements ReportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getContents()
     {
@@ -28,7 +25,7 @@ class Csv extends \SplTempFileObject implements ReportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function write(array $data)
     {
@@ -36,7 +33,7 @@ class Csv extends \SplTempFileObject implements ReportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clear()
     {

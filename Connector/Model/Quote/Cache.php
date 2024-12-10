@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote;
 
 use Magento\Framework\App\CacheInterface;
@@ -35,10 +32,10 @@ class Cache
     /**
      * Returns result calculated by a previous call on a quote
      *
-     * @param string $methodName
-     * @param int    $quoteId
-     * @param string $hash
-     * @return mixed|null
+     * @param   string  $methodName
+     * @param   int     $quoteId
+     * @param   string  $hash
+     * @return  mixed|null
      */
     public function getCachedMethodResult($methodName, $quoteId, $hash)
     {
@@ -54,7 +51,7 @@ class Cache
     }
 
     /**
-     * @return CacheInterface
+     * @return  CacheInterface
      */
     public function getCache()
     {
@@ -62,8 +59,8 @@ class Cache
     }
 
     /**
-     * @param string $key
-     * @return mixed|null
+     * @param   string  $key
+     * @return  mixed|null
      */
     public function registry($key)
     {
@@ -71,23 +68,19 @@ class Cache
     }
 
     /**
-     * @param CartInterface $quote
-     * @param string        $shippingZone
-     * @return string
+     * @param   CartInterface   $quote
+     * @param   string          $shippingZone
+     * @return  string
      */
     public function getQuoteFeesCacheKey(CartInterface $quote, $shippingZone)
     {
-        return sprintf(
-            'mirakl_shipping_fees_%s_%s_%s',
-            $quote->getId(),
-            $shippingZone,
-            $this->getQuoteControlHash($quote)
-        );
+        return sprintf('mirakl_shipping_fees_%s_%s_%s',
+            $quote->getId(), $shippingZone, $this->getQuoteControlHash($quote));
     }
 
     /**
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getQuoteCacheTags(CartInterface $quote)
     {
@@ -97,8 +90,8 @@ class Cache
     /**
      * Retrieve quote control hash
      *
-     * @param CartInterface $quote
-     * @return string
+     * @param   CartInterface   $quote
+     * @return  string
      */
     public function getQuoteControlHash(CartInterface $quote)
     {
@@ -116,10 +109,10 @@ class Cache
     /**
      * Store cache result calculated
      *
-     * @param string $methodName
-     * @param int    $quoteId
-     * @param mixed  $result
-     * @param string $hash
+     * @param   string  $methodName
+     * @param   int     $quoteId
+     * @param   mixed   $result
+     * @param   string  $hash
      */
     public function setCachedMethodResult($methodName, $quoteId, $result, $hash)
     {
@@ -131,8 +124,8 @@ class Cache
     }
 
     /**
-     * @param string $key
-     * @param mixed  $data
+     * @param   string  $key
+     * @param   mixed   $data
      */
     public function register($key, $data)
     {

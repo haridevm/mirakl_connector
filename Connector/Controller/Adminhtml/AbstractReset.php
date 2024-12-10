@@ -1,23 +1,19 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Controller\Adminhtml;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Connector\Helper\Config as ConnectorConfig;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 
-abstract class AbstractReset extends Action implements HttpGetActionInterface
+abstract class AbstractReset extends Action
 {
     use RedirectRefererTrait;
 
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Config::sync';
+    const ADMIN_RESOURCE = 'Mirakl_Config::sync';
 
     /**
      * @var ConnectorConfig
@@ -25,8 +21,8 @@ abstract class AbstractReset extends Action implements HttpGetActionInterface
     protected $connectorConfig;
 
     /**
-     * @param Context         $context
-     * @param ConnectorConfig $connectorConfig
+     * @param   Context         $context
+     * @param   ConnectorConfig $connectorConfig
      */
     public function __construct(
         Context $context,

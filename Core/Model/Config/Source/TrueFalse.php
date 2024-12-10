@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Config\Source;
 
 class TrueFalse implements \Magento\Framework\Option\ArrayInterface
@@ -9,7 +6,7 @@ class TrueFalse implements \Magento\Framework\Option\ArrayInterface
     /**
      * Options getter
      *
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

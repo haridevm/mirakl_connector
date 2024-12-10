@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Model;
 
 use Mirakl\Event\Model\ResourceModel\Event as EventResource;
@@ -15,10 +12,11 @@ class HistoryClearer
     private $eventResource;
 
     /**
-     * @param EventResource $eventResource
+     * @param EventResource  $eventResource
      */
-    public function __construct(EventResource $eventResource)
-    {
+    public function __construct(
+        EventResource $eventResource
+    ) {
         $this->eventResource = $eventResource;
     }
 
@@ -26,12 +24,11 @@ class HistoryClearer
      * Deletes events created before $beforeDate
      *
      * @param Process $process
-     * @param string  $beforeDate
+     * @param  string $beforeDate
      */
     public function execute(Process $process, string $beforeDate)
     {
-        $process->output(__('Deleting all connector events created before %1 ...', $beforeDate), true);
-
+        $process->output(__('Deleting all Mirakl events created before %1 ...', $beforeDate), true);
         try {
             $this->deleteEvents($beforeDate);
             $process->output(__('Done!'), true);
@@ -51,7 +48,7 @@ class HistoryClearer
         $connection = $this->eventResource->getConnection();
         $connection->delete(
             $this->eventResource->getMainTable(),
-            ['created_at < ?' => $beforeDate]
+            ['created_at < ?'=> $beforeDate]
         );
     }
 }

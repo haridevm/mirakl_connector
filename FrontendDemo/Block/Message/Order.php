@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Message;
 
 use Magento\Customer\Model\Customer;
@@ -18,9 +15,6 @@ use Mirakl\MMP\Common\Domain\Message\Thread\Thread;
 use Mirakl\MMP\Common\Domain\Message\Thread\ThreadDetails;
 use Mirakl\MMP\FrontOperator\Domain\Order as MiraklOrder;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Order extends Template
 {
     /**
@@ -77,8 +71,7 @@ class Order extends Template
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     public function _construct()
     {
@@ -87,7 +80,7 @@ class Order extends Template
 
         if ($nbThreads == 0) {
             $this->tabChildren[] = $this->addBlock('marketplace.message.form.order', FormOrder::class);
-        } elseif ($nbThreads == 1) {
+        } else if ($nbThreads == 1) {
             $thread = $this->getThread($threads->getCollection()->first())->toArray();
             $this->tabTitle = $thread['topic']['value'] ?? '';
             $this->tabChildren[] = $this->addBlock('marketplace.message.form.new', FormNew::class)->setAsModal(true);
@@ -100,7 +93,7 @@ class Order extends Template
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getTabChildren()
     {
@@ -108,7 +101,7 @@ class Order extends Template
     }
 
     /**
-     * @return SeekableCollection
+     * @return  SeekableCollection
      */
     public function getThreads()
     {
@@ -132,12 +125,13 @@ class Order extends Template
     }
 
     /**
-     * @param Thread $thread
-     * @return ThreadDetails
+     * @param   Thread  $thread
+     * @return  ThreadDetails
      */
     public function getThread(Thread $thread)
     {
         if (!$this->coreRegistry->registry('mirakl_thread')) {
+
             $order = $this->getOrder();
             $customer = $this->customerSession->getCustomer();
             $customerIdForThread = $this->getCustomerIdForThread($order, $customer);
@@ -164,7 +158,7 @@ class Order extends Template
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getTabTitle()
     {
@@ -172,7 +166,7 @@ class Order extends Template
     }
 
     /**
-     * @return MiraklOrder
+     * @return  MiraklOrder
      */
     public function getMiraklOrder()
     {
@@ -188,9 +182,9 @@ class Order extends Template
     }
 
     /**
-     * @param string $blockName
-     * @param string $blockClass
-     * @return BlockInterface
+     * @param   string  $blockName
+     * @param   string  $blockClass
+     * @return  BlockInterface
      */
     public function addBlock($blockName, $blockClass)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Console\Command;
 
 use Magento\Framework\Console\Cli;
@@ -17,9 +14,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ApiReturnProcessCommand extends Command
 {
     /**
-     * Run specific process id
+     * Run specific id key
      */
-    public const RUN_PROCESS_OPTION = 'run';
+    const RUN_PROCESS_OPTION = 'run';
 
     /**
      * @var ProcessFactory
@@ -37,10 +34,10 @@ class ApiReturnProcessCommand extends Command
     private $helper;
 
     /**
-     * @param ProcessFactory         $processFactory
-     * @param ProcessResourceFactory $processResourceFactory
-     * @param Helper                 $helper
-     * @param string|null            $name
+     * @param   ProcessFactory          $processFactory
+     * @param   ProcessResourceFactory  $processResourceFactory
+     * @param   Helper                  $helper
+     * @param   string|null             $name
      */
     public function __construct(
         ProcessFactory $processFactory,
@@ -55,7 +52,7 @@ class ApiReturnProcessCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -74,7 +71,7 @@ class ApiReturnProcessCommand extends Command
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -94,11 +91,7 @@ class ApiReturnProcessCommand extends Command
             if ($processes->count() > 0) {
                 foreach ($processes as $process) {
                     /** @var Process $process */
-                    $output->writeln(sprintf(
-                        '<info>Processing API Status #%s %s</info>',
-                        $process->getId(),
-                        $process->getName()
-                    ));
+                    $output->writeln(sprintf('<info>Processing API Status #%s %s</info>', $process->getId(), $process->getName()));
                     $process->addOutput('cli');
                     $process->checkMiraklStatus();
                 }

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Product\Offer;
 
 use Magento\Catalog\Model\Product;
@@ -9,14 +6,13 @@ use Magento\Framework\View\Element\Template;
 use Mirakl\FrontendDemo\Helper\Offer as OfferHelper;
 
 /**
- * @method Product getProduct
- * @method $this   setProduct(Product $product)
+ * @method  Product getProduct
+ * @method  $this   setProduct(Product $product)
  */
 class Summary extends Template
 {
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'product/offer/summary.phtml';
 
@@ -26,9 +22,9 @@ class Summary extends Template
     protected $offerHelper;
 
     /**
-     * @param Template\Context $context
-     * @param OfferHelper      $offerHelper
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   OfferHelper         $offerHelper
+     * @param   array               $data
      */
     public function __construct(Template\Context $context, OfferHelper $offerHelper, array $data = [])
     {
@@ -39,7 +35,7 @@ class Summary extends Template
     /**
      * Returns offers summary for current product
      *
-     * @return array
+     * @return  array
      */
     public function getSummary()
     {

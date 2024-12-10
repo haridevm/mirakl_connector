@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper\Quote;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -19,8 +16,8 @@ class Item extends AbstractHelper
     protected $quoteUpdater;
 
     /**
-     * @param Context      $context
-     * @param QuoteUpdater $quoteUpdater
+     * @param   Context                 $context
+     * @param   QuoteUpdater            $quoteUpdater
      */
     public function __construct(
         Context $context,
@@ -31,9 +28,9 @@ class Item extends AbstractHelper
     }
 
     /**
-     * @param QuoteItem          $item
-     * @param Quote\Address|null $shippingAddress
-     * @return ShippingFeeTypeCollection
+     * @param   QuoteItem           $item
+     * @param   Quote\Address|null  $shippingAddress
+     * @return  ShippingFeeTypeCollection
      */
     public function getItemShippingTypes(QuoteItem $item, $shippingAddress = null)
     {

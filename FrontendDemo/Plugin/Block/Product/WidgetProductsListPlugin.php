@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Plugin\Block\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\Collection;
@@ -24,8 +21,8 @@ class WidgetProductsListPlugin
     }
 
     /**
-     * @param ProductsList $subject
-     * @param Collection   $result
+     * @param  ProductsList $subject
+     * @param  Collection   $result
      * @return Collection
      */
     public function afterCreateCollection(ProductsList $subject, Collection $result)

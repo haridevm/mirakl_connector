@@ -1,17 +1,10 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\System\Config\Button;
 
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Backend\Block\Widget\Button;
 use Magento\Framework\Data\Form\Element\AbstractElement;
 
-/**
- * @SuppressWarnings(PHPMD.NumberOfChildren)
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 abstract class AbstractButtons extends Field implements ButtonsRendererInterface
 {
     /**
@@ -25,7 +18,7 @@ abstract class AbstractButtons extends Field implements ButtonsRendererInterface
     protected $disabled = false;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _getElementHtml(AbstractElement $element)
     {
@@ -33,7 +26,7 @@ abstract class AbstractButtons extends Field implements ButtonsRendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getButtonsHtml()
     {
@@ -78,8 +71,7 @@ abstract class AbstractButtons extends Field implements ButtonsRendererInterface
     }
 
     /**
-     * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
+     * @return  bool
      */
     public function getDisabled()
     {
@@ -87,7 +79,7 @@ abstract class AbstractButtons extends Field implements ButtonsRendererInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function render(AbstractElement $element)
     {
@@ -98,8 +90,8 @@ abstract class AbstractButtons extends Field implements ButtonsRendererInterface
     }
 
     /**
-     * @param bool $flag
-     * @return $this
+     * @param   bool    $flag
+     * @return  $this
      */
     public function setDisabled($flag)
     {

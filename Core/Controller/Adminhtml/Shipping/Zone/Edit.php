@@ -1,16 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Shipping\Zone;
 
-class Edit extends Zone implements HttpGetActionInterface
+class Edit extends Zone
 {
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {

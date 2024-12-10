@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Source;
@@ -10,7 +9,7 @@ use Mirakl\Process\Model\Process;
 class StatusLayout implements OptionSourceInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function toOptionArray(): array
     {

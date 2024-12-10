@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mirakl\Core\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
@@ -25,9 +23,9 @@ class Csv extends AbstractHelper
     protected $shopResourceFactory;
 
     /**
-     * @param Context             $context
-     * @param ShopFactory         $shopFactory
-     * @param ShopResourceFactory $shopResourceFactory
+     * @param   Context             $context
+     * @param   ShopFactory         $shopFactory
+     * @param   ShopResourceFactory $shopResourceFactory
      */
     public function __construct(
         Context $context,
@@ -42,9 +40,9 @@ class Csv extends AbstractHelper
     /**
      * Retrieve import id from CSV file name
      *
-     * @param string $fileName
-     * @return int
-     * @throws LocalizedException
+     * @param   string  $fileName
+     * @return  int
+     * @throws  LocalizedException
      */
     public function getImportIdFromFileName($fileName)
     {
@@ -59,9 +57,9 @@ class Csv extends AbstractHelper
     /**
      * Retrieve shop from CSV file name
      *
-     * @param string $fileName
-     * @return Shop
-     * @throws LocalizedException
+     * @param   string  $fileName
+     * @return  Shop
+     * @throws  LocalizedException
      */
     public function getShopFromFileName($fileName)
     {
@@ -87,10 +85,10 @@ class Csv extends AbstractHelper
     /**
      * Splits specified CSV file into N files and returns the number of created files
      *
-     * @param \SplFileObject $file
-     * @param int            $size
-     * @param \Closure|null  $callback
-     * @return int
+     * @param   \SplFileObject  $file
+     * @param   int             $size
+     * @param   \Closure|null   $callback
+     * @return  int
      */
     public function split(\SplFileObject $file, $size, \Closure $callback = null)
     {
@@ -123,8 +121,8 @@ class Csv extends AbstractHelper
     /**
      * Validates that given file exists and is a valid CSV file
      *
-     * @param string $file
-     * @throws LocalizedException
+     * @param   string  $file
+     * @throws  LocalizedException
      */
     public function validateFile($file)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Block\Adminhtml\System\Config\Button\Sync;
 
 use Magento\Backend\Block\Template\Context;
@@ -46,18 +43,20 @@ class DeleteProducts extends AbstractButtons
         array $data = [],
         ?SecureHtmlRenderer $secureRenderer = null
     ) {
-        parent::__construct($context, $data, $secureRenderer);
+        parent::__construct(
+            $context,
+            $data,
+            $secureRenderer
+        );
         $this->mcmConfig = $mcmConfig;
     }
 
     /**
      * @return bool
-     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getDisabled()
     {
-        $enabled = $this->mcmConfig->isMcmProductsDeleteEnabled()
-            && ($this->mcmConfig->isMcmEnabled() || $this->mcmConfig->isAsyncMcmEnabled());
+        $enabled = $this->mcmConfig->isMcmProductsDeleteEnabled() && ($this->mcmConfig->isMcmEnabled() || $this->mcmConfig->isAsyncMcmEnabled());
 
         return !$enabled;
     }

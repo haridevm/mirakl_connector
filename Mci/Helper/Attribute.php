@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Catalog\Model\ResourceModel\Eav\Attribute as EavAttribute;
@@ -25,15 +22,13 @@ use Mirakl\Process\Model\ProcessFactory;
 use Mirakl\Process\Model\ResourceModel\Process as ProcessResource;
 use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Attribute extends AbstractHelper implements ExportInterface
 {
     use ExportTrait;
 
-    public const CODE = 'PM01';
-    public const EXPORT_SOURCE = 'PM01';
+    const CODE = 'PM01';
+
+    const EXPORT_SOURCE = 'PM01';
 
     /**
      * @var Api
@@ -81,17 +76,16 @@ class Attribute extends AbstractHelper implements ExportInterface
     protected $processResource;
 
     /**
-     * @param Context                     $context
-     * @param MciConfig                   $mciConfig
-     * @param Api                         $api
-     * @param CategoryAttributesBuilder   $categoryAttributesBuilder
-     * @param ProductAttributesFinder     $productAttributesFinder
-     * @param AttributeFormatter          $attributeFormatter
-     * @param CategoryRepositoryInterface $categoryRepository
-     * @param ProcessFactory              $processFactory
-     * @param CollectionFactory           $processCollectionFactory
-     * @param ProcessResource             $processResource
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                     $context
+     * @param   Api                         $api
+     * @param   MciConfig                   $mciConfig
+     * @param   CategoryAttributesBuilder   $categoryAttributesBuilder
+     * @param   ProductAttributesFinder     $productAttributesFinder
+     * @param   AttributeFormatter          $attributeFormatter
+     * @param   CategoryRepositoryInterface $categoryRepository
+     * @param   ProcessFactory              $processFactory
+     * @param   CollectionFactory           $processCollectionFactory
+     * @param   ProcessResource             $processResource
      */
     public function __construct(
         Context $context,
@@ -120,7 +114,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Deletes all operator attributes on Mirakl platform
      *
-     * @return int|false
+     * @return  int|false
      */
     public function deleteAll()
     {
@@ -130,7 +124,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Deletes de-synchroniezd attribute on Mirakl platform
      *
-     * @return int|false
+     * @return  int|false
      */
     public function deleteAttribute()
     {
@@ -138,7 +132,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function export(array $data)
     {
@@ -152,8 +146,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Exports all operator attributes to Mirakl platform
      *
-     * @param Process|null $process
-     * @return int|false
+     * @param   Process $process
+     * @return  int|false
      */
     public function exportAll(Process $process = null)
     {
@@ -182,8 +176,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Export an attribute to Mirakl platform
      *
-     * @param EavAttribute $attribute
-     * @return int|false
+     * @param   EavAttribute    $attribute
+     * @return  int|false
      */
     public function exportAttribute(EavAttribute $attribute)
     {
@@ -193,10 +187,10 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Exports operator attributes to Mirakl platform
      *
-     * @param string|null $action
-     * @param bool        $full
-     * @param array       $attributeIds
-     * @return int|false
+     * @param   null|string $action
+     * @param   bool        $full
+     * @param   array       $attributeIds
+     * @return  int|false
      */
     public function exportTree($action = 'update', $full = true, array $attributeIds = [])
     {
@@ -206,8 +200,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Returns attribute label
      *
-     * @param DataObject|EavAttribute $attribute
-     * @return string
+     * @param   DataObject|EavAttribute $attribute
+     * @return  string
      */
     protected function getAttributeLabel(DataObject $attribute)
     {
@@ -221,8 +215,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Returns exportable attribute codes according to current included attributes property
      *
-     * @param array $attributeIds
-     * @return EavAttribute[]
+     * @param   array   $attributeIds
+     * @return  EavAttribute[]
      */
     public function getExportableAttributeCodes(array $attributeIds = [])
     {
@@ -243,8 +237,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @param EavAttribute $attribute
-     * @return bool
+     * @param   EavAttribute    $attribute
+     * @return  bool
      */
     public function isAttributeExportable(EavAttribute $attribute)
     {
@@ -256,12 +250,10 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Prepare CSV for export
      *
-     * @param string|null $action
-     * @param bool        $full
-     * @param array       $attributeIds
-     * @return array
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   null|string $action
+     * @param   bool        $full
+     * @param   array       $attributeIds
+     * @return  array
      */
     public function prepareCsvData($action = 'update', $full = true, array $attributeIds = [])
     {
@@ -314,10 +306,8 @@ class Attribute extends AbstractHelper implements ExportInterface
                 if (count($currentAttributes)) {
                     if (!isset($attributesToUpdate[$hCode])) {
                         $attributesToUpdate[$hCode] = array_unique($currentAttributes);
-                    } else {
-                        $attributesToUpdate[$hCode] = array_unique(
-                            array_merge($attributesToUpdate[$hCode], $currentAttributes)
-                        );
+                    } else  {
+                        $attributesToUpdate[$hCode] = array_unique(array_merge($attributesToUpdate[$hCode], $currentAttributes));
                     }
                 }
             }
@@ -345,12 +335,8 @@ class Attribute extends AbstractHelper implements ExportInterface
                 $attributeCode = $attributeData['code'];
 
                 $parentIds = array_merge([''], $category->getParentIds());
-
                 foreach ($parentIds as $parentId) {
-                    if (
-                        isset($categoryAttributes[$parentId])
-                        && in_array($attributeCode, $categoryAttributes[$parentId])
-                    ) {
+                    if (isset($categoryAttributes[$parentId]) && in_array($attributeCode, $categoryAttributes[$parentId])) {
                         // we do not delete attribute if its associated with a parent category
                         $attributeData['update-delete'] = 'update';
                         break;
@@ -365,7 +351,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Call PM11 to retrieve Mirakl attributes
      *
-     * @return array
+     * @return  array
      */
     protected function getMiraklAttributes()
     {
@@ -382,8 +368,8 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Remove extra locale code from attribute code
      *
-     * @param string $attrCode
-     * @return string
+     * @param   string  $attrCode
+     * @return  string  Attribute codes
      */
     public function getOriginalAttributeCode($attrCode)
     {
@@ -402,7 +388,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return StoreInterface
+     * @return  StoreInterface
      */
     protected function getStore()
     {
@@ -410,7 +396,7 @@ class Attribute extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function prepare(DataObject $attribute, $action = null)
     {
@@ -423,7 +409,7 @@ class Attribute extends AbstractHelper implements ExportInterface
         $data = [
             'code'           => $attribute->getAttributeCode(),
             'label'          => $this->getAttributeLabel($attribute),
-            'hierarchy-code' => (string) $attribute->getData('hierarchy_code'),
+            'hierarchy-code' => strval($attribute->getData('hierarchy_code')),
             'type'           => $this->attributeFormatter->getAttributeType($attribute),
             'type-parameter' => $this->attributeFormatter->getAttributeTypeParameter($attribute),
             'variant'        => $attribute->getData('mirakl_is_variant') ? 'true' : 'false',
@@ -457,11 +443,10 @@ class Attribute extends AbstractHelper implements ExportInterface
     /**
      * Prepare attributes to export
      *
-     * @param string      $attrCode
-     * @param string      $hierarchyCode
-     * @param string|null $action
-     * @return array
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     *  @param   string      $attrCode
+     *  @param   string      $hierarchyCode
+     *  @param   null|string $action
+     *  @return  array
      */
     public function prepareAttribute($attrCode, $hierarchyCode, $action = null)
     {
@@ -515,10 +500,7 @@ class Attribute extends AbstractHelper implements ExportInterface
                 if ($data['label']) {
                     $localeData['label'] = sprintf('%s (%s)', $data['label'], $locale);
                 }
-                if (
-                    $isAttributeRequirementLevelExported
-                    && $locale != $this->mciConfig->getLocale(\Magento\Store\Model\Store::DEFAULT_STORE_ID)
-                ) {
+                if ($isAttributeRequirementLevelExported && $locale != $this->mciConfig->getLocale(\Magento\Store\Model\Store::DEFAULT_STORE_ID)) {
                     $localeData['required'] = 'false';
                 }
                 foreach ($localeData as $key => $value) {

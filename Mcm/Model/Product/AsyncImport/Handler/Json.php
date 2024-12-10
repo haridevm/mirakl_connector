@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\AsyncImport\Handler;
 
 use Magento\Framework\App\Filesystem\DirectoryList;
@@ -85,7 +82,6 @@ class Json
      * @param bool    $sendReport
      * @return $this
      * @throws \Exception
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      */
     public function run(Process $process, $sendReport = true)
     {
@@ -93,7 +89,7 @@ class Json
 
         try {
             $file = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)
-                ->openFile($fileName);
+                                     ->openFile($fileName);
 
             $process->output(__('Importing MCM file...'));
 
@@ -125,6 +121,7 @@ class Json
 
                     // Register report not only on product creation
                     $this->writeSuccessReport($miraklProductId, $sku);
+
                 } catch (SkipException $e) {
                     $process->output(__($e->getMessage()));
                 } catch (ImportException $e) {
@@ -164,8 +161,8 @@ class Json
     /**
      * Sends integration report to Mirakl (CM21)
      *
-     * @param Process $process
-     * @return void
+     * @param   Process $process
+     * @return  void
      */
     private function sendIntegrationReport(Process $process)
     {
@@ -180,7 +177,7 @@ class Json
     /**
      * Validate presence and value of the identifier
      *
-     * @param array $data
+     * @param  array $data
      * @return string
      * @throws \Exception
      */
@@ -188,7 +185,7 @@ class Json
     {
         if (empty($data[McmHelper::JSON_MIRAKL_PRODUCT_ID])) {
             throw new \Exception(
-                __('"%1" cannot be empty', McmHelper::JSON_MIRAKL_PRODUCT_ID)->render()
+                __('"%1" cannot be empty', McmHelper::JSON_MIRAKL_PRODUCT_ID)
             );
         }
 

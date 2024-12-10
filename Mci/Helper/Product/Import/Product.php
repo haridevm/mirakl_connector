@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Product as ProductModel;
@@ -53,13 +50,13 @@ class Product
     protected $inventoryHelper;
 
     /**
-     * @param Config                $config
-     * @param StoreManagerInterface $storeManager
-     * @param ProductFactory        $productFactory
-     * @param OptionsFactory        $optionsFactory
-     * @param MciHelper             $mciHelper
-     * @param CategoryHelper        $categoryHelper
-     * @param InventoryHelper       $inventoryHelper
+     * @param   Config                  $config
+     * @param   StoreManagerInterface   $storeManager
+     * @param   ProductFactory          $productFactory
+     * @param   OptionsFactory          $optionsFactory
+     * @param   MciHelper               $mciHelper
+     * @param   CategoryHelper          $categoryHelper
+     * @param   InventoryHelper         $inventoryHelper
      */
     public function __construct(
         Config $config,
@@ -80,10 +77,10 @@ class Product
     }
 
     /**
-     * @param ProductModel $product
-     * @param string       $shopId
-     * @param array        $data
-     * @return ProductModel
+     * @param   ProductModel    $product
+     * @param   string          $shopId
+     * @param   array           $data
+     * @return  ProductModel
      */
     public function addProductShopVariantId(ProductModel $product, $shopId, array $data)
     {
@@ -97,7 +94,7 @@ class Product
     }
 
     /**
-     * @param ProductModel $product
+     * @param   ProductModel    $product
      */
     protected function flagProduct(ProductModel $product)
     {
@@ -110,7 +107,7 @@ class Product
     /**
      * Removes potential unique deduplication attributes from parent
      *
-     * @param array $data
+     * @param   array   $data
      */
     public function removeDeduplicationAttributesFromParent(&$data)
     {

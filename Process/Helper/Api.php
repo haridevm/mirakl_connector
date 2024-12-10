@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;

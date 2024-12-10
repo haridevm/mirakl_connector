@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\CustomOption;
@@ -22,7 +21,7 @@ class Creator implements CreatorInterface
     private $offerResourceFactory;
 
     /**
-     * @param OfferFactory         $offerFactory
+     * @param OfferFactory $offerFactory
      * @param OfferResourceFactory $offerResourceFactory
      */
     public function __construct(
@@ -34,7 +33,7 @@ class Creator implements CreatorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function create(Product $product, int $offerId): Offer
     {

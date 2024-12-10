@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml;
 
 /**
@@ -10,8 +7,8 @@ namespace Mirakl\Core\Controller\Adminhtml;
 trait RawMessagesTrait
 {
     /**
-     * @param string      $message
-     * @param string|null $group
+     * @param   string      $message
+     * @param   string|null $group
      */
     protected function addRawErrorMessage($message, $group = null)
     {
@@ -20,8 +17,8 @@ trait RawMessagesTrait
     }
 
     /**
-     * @param string      $message
-     * @param string|null $group
+     * @param   string      $message
+     * @param   string|null $group
      */
     protected function addRawSuccessMessage($message, $group = null)
     {

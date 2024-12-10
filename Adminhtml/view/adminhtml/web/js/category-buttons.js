@@ -1,5 +1,5 @@
-define(['uiComponent', 'mage/translate'], function (Component, $t) {
-
+define(['uiComponent', 'mage/translate'], function(Component, $t) {
+ 
     return Component.extend({
         initialize: function () {
             this._super();
@@ -30,7 +30,7 @@ define(['uiComponent', 'mage/translate'], function (Component, $t) {
 
             confirmSetLocation(
                 alertMsg,
-                this.actionUrl + 'action/' + action + '/category/' + categoryId + '/'
+                this.actionUrl+'action/'+action+'/category/'+categoryId+'/'
             );
         }
     });

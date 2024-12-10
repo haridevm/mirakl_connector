@@ -1,25 +1,22 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Helper;
 
 class Config extends \Mirakl\Connector\Helper\Config
 {
-    public const XML_PATH_SHIPPING_FEES_CACHE_LIFETIME = 'mirakl_frontend/general/shipping_fees_cache_lifetime';
+    const XML_PATH_SHIPPING_FEES_CACHE_LIFETIME = 'mirakl_frontend/general/shipping_fees_cache_lifetime';
 
     /** @deprecated */
-    public const XML_PATH_AUTO_REMOVE_OFFERS           = 'mirakl_frontend/shopping_cart/auto_remove_offers';
+    const XML_PATH_AUTO_REMOVE_OFFERS           = 'mirakl_frontend/shopping_cart/auto_remove_offers';
     /** @deprecated */
-    public const XML_PATH_AUTO_UPDATE_OFFERS           = 'mirakl_frontend/shopping_cart/auto_update_offers';
+    const XML_PATH_AUTO_UPDATE_OFFERS           = 'mirakl_frontend/shopping_cart/auto_update_offers';
 
-    public const XML_PATH_OFFER_NEW_STATE              = 'mirakl_frontend/offer/new_state';
+    const XML_PATH_OFFER_NEW_STATE              = 'mirakl_frontend/offer/new_state';
 
-    public const XML_PATH_CHOICEBOX_ENABLE             = 'mirakl_frontend/choicebox/enable';
-    public const XML_PATH_CHOICEBOX_ELEMENTS           = 'mirakl_frontend/choicebox/elements';
+    const XML_PATH_CHOICEBOX_ENABLE             = 'mirakl_frontend/choicebox/enable';
+    const XML_PATH_CHOICEBOX_ELEMENTS           = 'mirakl_frontend/choicebox/elements';
 
     /**
-     * @return int
+     * @return  int
      */
     public function getNewOfferStateId()
     {
@@ -29,8 +26,8 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Should we update Mirakl offers automatically when processing shopping cart?
      *
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      * @deprecated
      * @see \Mirakl\Connector\Helper\Config::isAutoUpdateOffers()
      */
@@ -42,7 +39,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isChoiceBoxEnabled()
     {
@@ -50,7 +47,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getNbChoiceBoxElements()
     {
@@ -58,7 +55,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getShippingFeesCacheLifetime()
     {
@@ -68,7 +65,7 @@ class Config extends \Mirakl\Connector\Helper\Config
     /**
      * Indicates if SH02 API calls should be cached or not (only for AJAX requests)
      *
-     * @return bool
+     * @return  bool
      */
     public function isShippingFeesCacheEnabled()
     {

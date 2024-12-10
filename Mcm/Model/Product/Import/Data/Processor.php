@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Data;
@@ -22,7 +21,7 @@ class Processor
     }
 
     /**
-     * @param array      $data
+     * @param array $data
      * @param array|null $product
      */
     public function process(array &$data, array $product = null): void

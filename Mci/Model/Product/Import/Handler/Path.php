@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Handler;
 
 use Mirakl\Core\Helper\Csv as CsvHelper;
@@ -11,8 +8,8 @@ use Mirakl\Process\Model\ProcessFactory;
 
 class Path
 {
-    public const IMPORT_PROCESSING_DIR = 'processing';
-    public const IMPORT_ARCHIVE_DIR    = 'archive';
+    const IMPORT_PROCESSING_DIR = 'processing';
+    const IMPORT_ARCHIVE_DIR    = 'archive';
 
     /**
      * @var CsvHelper
@@ -30,9 +27,9 @@ class Path
     private $processHelper;
 
     /**
-     * @param CsvHelper      $csvHelper
-     * @param ProcessFactory $processFactory
-     * @param ProcessHelper  $processHelper
+     * @param   CsvHelper       $csvHelper
+     * @param   ProcessFactory  $processFactory
+     * @param   ProcessHelper   $processHelper
      */
     public function __construct(
         CsvHelper $csvHelper,
@@ -47,18 +44,17 @@ class Path
     /**
      * Imports all CSV files present in the configured path
      *
-     * @param string $path
-     * @param int    $maxFiles
-     * @return $this
-     * @throws \Exception
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   string  $path
+     * @param   int     $maxFiles
+     * @return  $this
+     * @throws  \Exception
      */
     public function run($path, $maxFiles)
     {
         $DS = DIRECTORY_SEPARATOR;
         $createPathIfNotExists = function ($path) use ($DS) {
             if (!is_dir($path)) {
-                @mkdir($path, 0777, true); // phpcs:ignore
+                @mkdir($path, 0777, true);
             }
 
             return rtrim($path, $DS) . $DS;
@@ -70,14 +66,12 @@ class Path
         // Retrieve processing path
         $pathProcessing = $createPathIfNotExists(dirname($pathIncoming) . $DS . self::IMPORT_PROCESSING_DIR);
         if (!empty(glob("$pathProcessing*.csv", GLOB_NOSORT))) {
-            throw new \Exception(
-                __('Another file is processing. Aborted.')->render()
-            );
+            throw new \Exception(__('Another file is processing. Aborted.'));
         }
 
         // Retrieve pending files and sort them by creation date (older first)
         $files = glob("$pathIncoming*.csv", GLOB_NOSORT);
-        usort($files, function ($file1, $file2) {
+        usort($files, function($file1, $file2) {
             return filemtime($file1) - filemtime($file2);
         });
 
@@ -91,7 +85,7 @@ class Path
                 $filename = $pathInfo['filename'] . $suffix . '.' . $pathInfo['extension'];
                 $destFile = $destPath . $filename;
 
-                return @rename($srcFile, $destFile) ? $destFile : false; // phpcs:ignore
+                return @rename($srcFile, $destFile) ? $destFile : false;
             };
 
             foreach ($files as $i => $file) {

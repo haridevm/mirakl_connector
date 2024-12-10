@@ -1,17 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Customer;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
-
-class Debit extends \Magento\Framework\App\Action\Action implements HttpGetActionInterface
+class Debit extends \Magento\Framework\App\Action\Action
 {
     /**
      * Debit a Mirakl order
      *
-     * @return void
+     * @return  void
      */
     public function execute()
     {

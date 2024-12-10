@@ -1,19 +1,17 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Adminhtml\Ui\Component\View\Element\DataProvider;
 
 use Magento\Framework\Api\Filter;
 use Magento\Framework\Data\Collection;
-use Magento\Framework\DB\Select;
 use Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter;
 use Magento\Sales\Model\ResourceModel\Order\Grid\Collection as OrderGridCollection;
 
 class OrderFlagFilter extends RegularFilter
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(Collection $collection, Filter $filter)
     {
@@ -21,8 +19,8 @@ class OrderFlagFilter extends RegularFilter
     }
 
     /**
-     * @param Collection $collection
-     * @param Filter     $filter
+     * @param   Collection  $collection
+     * @param   Filter      $filter
      */
     protected function applyFlagFilter(Collection $collection, Filter $filter): void
     {
@@ -32,7 +30,7 @@ class OrderFlagFilter extends RegularFilter
 
         /** @var OrderGridCollection $collection */
         $select = clone $collection->getSelect();
-        $select->reset(Select::COLUMNS);
+        $select->reset(\Zend_Db_Select::COLUMNS);
         $select->columns('main_table.entity_id');
         $columns = [
             'count_magento' => new \Zend_Db_Expr('SUM(IF(items.mirakl_offer_id IS NULL, 1, 0))'),

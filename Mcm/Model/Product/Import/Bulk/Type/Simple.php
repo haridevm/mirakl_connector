@@ -1,12 +1,8 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\Type;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Simple extends \Magento\CatalogImportExport\Model\Import\Product\Type\Simple
 {
     use TypeTrait;

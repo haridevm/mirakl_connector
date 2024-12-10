@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper\Product\Import;
 
 use Magento\Catalog\Model\Category as CategoryModel;
@@ -32,9 +29,9 @@ trait ProductTrait
     /**
      * Associates a simple child product to a parent configurable product
      *
-     * @param ProductModel $parent
-     * @param ProductModel $child
-     * @param int|null     $unlinkProductId
+     * @param   ProductModel    $parent
+     * @param   ProductModel    $child
+     * @param   int|null        $unlinkProductId
      */
     public function associateProducts(ProductModel $parent, ProductModel $child, $unlinkProductId = null)
     {
@@ -44,9 +41,9 @@ trait ProductTrait
     /**
      * Associates specified simple product ids to a parent configurable product
      *
-     * @param ProductModel $parent
-     * @param array        $childrenIds
-     * @param int|null     $unlinkProductId
+     * @param   ProductModel    $parent
+     * @param   array           $childrenIds
+     * @param   int|null        $unlinkProductId
      */
     public function associateProductIds(ProductModel $parent, array $childrenIds, $unlinkProductId = null)
     {
@@ -68,9 +65,9 @@ trait ProductTrait
     /**
      * Creates and initializes a configurable product
      *
-     * @param CategoryModel $category
-     * @param array         $data
-     * @return ProductModel
+     * @param   CategoryModel   $category
+     * @param   array           $data
+     * @return  ProductModel
      */
     public function createConfigurableProduct(CategoryModel $category, array $data)
     {
@@ -102,11 +99,11 @@ trait ProductTrait
     /**
      * Creates and initializes a product according to arguments
      *
-     * @param string        $type
-     * @param CategoryModel $category
-     * @param array         $data
-     * @param array         $stockData
-     * @return ProductModel
+     * @param   string          $type
+     * @param   CategoryModel   $category
+     * @param   array           $data
+     * @param   array           $stockData
+     * @return  ProductModel
      */
     private function createProduct($type, CategoryModel $category, array $data, array $stockData = [])
     {
@@ -122,9 +119,9 @@ trait ProductTrait
     /**
      * Creates and initializes a simple product
      *
-     * @param CategoryModel $category
-     * @param array         $data
-     * @return ProductModel
+     * @param   CategoryModel   $category
+     * @param   array           $data
+     * @return  ProductModel
      */
     public function createSimpleProduct(CategoryModel $category, array $data)
     {
@@ -143,7 +140,7 @@ trait ProductTrait
     /**
      * Returns stores used for product import
      *
-     * @return StoreInterface[]
+     * @return  StoreInterface[]
      */
     public function getStores()
     {
@@ -157,7 +154,7 @@ trait ProductTrait
     /**
      * Returns website ids to enable for product import
      *
-     * @return array
+     * @return  array
      */
     private function getWebsiteIds()
     {
@@ -178,9 +175,9 @@ trait ProductTrait
     /**
      * Updates product configurable options in extension attributes
      *
-     * @param ProductModel $parentProduct
-     * @param array        $data
-     * @return $this
+     * @param   ProductModel    $parentProduct
+     * @param   array           $data
+     * @return  $this
      */
     private function updateProductConfigurableOptions(ProductModel $parentProduct, $data)
     {
@@ -243,9 +240,9 @@ trait ProductTrait
     /**
      * Initializes product default data
      *
-     * @param ProductModel  $product
-     * @param CategoryModel $category
-     * @param string        $type
+     * @param   ProductModel    $product
+     * @param   CategoryModel   $category
+     * @param   string          $type
      */
     private function initProduct(ProductModel $product, CategoryModel $category, $type = ProductModel\Type::TYPE_SIMPLE)
     {
@@ -274,8 +271,8 @@ trait ProductTrait
     /**
      * Retrieve configurable attributes flagged as 'Is Variant' in Mirakl of specified product's attribute set
      *
-     * @param ProductModel $product
-     * @return \Magento\Catalog\Model\ResourceModel\Eav\Attribute[]
+     * @param   ProductModel    $product
+     * @return  \Magento\Catalog\Model\ResourceModel\Eav\Attribute[]
      */
     private function getVariantAttributes(ProductModel $product)
     {

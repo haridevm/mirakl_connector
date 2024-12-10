@@ -1,21 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Type;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Connector\Helper\Config;
 use Mirakl\Core\Helper\Data as CoreHelper;
 
-class Index extends Action implements HttpGetActionInterface
+class Index extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Core::shipping_type';
+    const ADMIN_RESOURCE = 'Mirakl_Core::shipping_type';
 
     /**
      * @var Config
@@ -28,9 +24,9 @@ class Index extends Action implements HttpGetActionInterface
     private $coreHelper;
 
     /**
-     * @param Context    $context
-     * @param Config     $connectorConfig
-     * @param CoreHelper $coreHelper
+     * @param   Context     $context
+     * @param   Config      $connectorConfig
+     * @param   CoreHelper  $coreHelper
      */
     public function __construct(
         Context $context,
@@ -43,8 +39,9 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return $this
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * Init action
+     *
+     * @return  $this
      */
     protected function _initAction()
     {
@@ -62,7 +59,7 @@ class Index extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {

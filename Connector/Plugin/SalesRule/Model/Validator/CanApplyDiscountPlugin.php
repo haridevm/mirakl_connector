@@ -1,6 +1,5 @@
 <?php
-
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Mirakl\Connector\Plugin\SalesRule\Model\Validator;
 

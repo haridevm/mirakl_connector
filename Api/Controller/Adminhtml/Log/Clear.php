@@ -1,20 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Controller\Adminhtml\Log;
 
 use Magento\Backend\App\Action;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Mirakl\Api\Model\Log\LoggerManager;
 
-class Clear extends Action implements HttpGetActionInterface
+class Clear extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Config::api_developer';
+    const ADMIN_RESOURCE = 'Mirakl_Config::api_developer';
 
     /**
      * @var LoggerManager
@@ -22,8 +18,8 @@ class Clear extends Action implements HttpGetActionInterface
     protected $loggerManager;
 
     /**
-     * @param Action\Context $context
-     * @param LoggerManager  $loggerManager
+     * @param   Action\Context  $context
+     * @param   LoggerManager   $loggerManager
      */
     public function __construct(
         Action\Context $context,
@@ -34,7 +30,7 @@ class Clear extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

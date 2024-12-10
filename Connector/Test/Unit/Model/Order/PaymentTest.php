@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Test\Unit\Model\Order;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
@@ -15,10 +12,10 @@ class PaymentTest extends TestCase
     /** @var PaymentModel */
     protected $paymentModel;
 
-    /** @var \Magento\Framework\Event\ManagerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\Event\ManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $eventManagerMock;
 
-    /** @var \Mirakl\Api\Helper\Payment|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Mirakl\Api\Helper\Payment|\PHPUnit_Framework_MockObject_MockObject */
     protected $paymentApiMock;
 
     protected function setUp(): void

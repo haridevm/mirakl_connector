@@ -1,35 +1,30 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Shipping;
 
 use Magento\Framework\Data\Collection\AbstractDb as AbstractDbCollection;
+use Magento\Framework\Data\FormFactory;
 use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
-use Magento\Framework\Serialize\Serializer\Serialize;
+use Magento\Framework\Stdlib\DateTime\TimezoneInterface;
 use Magento\Store\Model\StoreManagerInterface;
 use Mirakl\Core\Model\ResourceModel\Shipping\ZoneFactory as ZoneResourceFactory;
 use Mirakl\Core\Model\Shipping\Zone\Rule as ZoneRule;
 use Mirakl\Core\Model\Shipping\Zone\RuleFactory as ZoneRuleFactory;
 
 /**
- * @method string getCode()
- * @method $this  setCode(string $value)
- * @method string getEavOptionId()
- * @method $this  setEavOptionId(int $optionId)
- * @method int    getIsActive()
- * @method $this  setIsActive(bool $value)
- * @method string getConditionsSerialized()
- * @method $this  setConditionsSerialized(string $value)
- * @method int    getSortOrder()
- * @method $this  setSortOrder(int $value)
- * @method $this  setStoreIds(array $value)
- *
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+ * @method  string  getCode()
+ * @method  $this   setCode(string $value)
+ * @method  string  getEavOptionId()
+ * @method  $this   setEavOptionId(int $optionId)
+ * @method  int     getIsActive()
+ * @method  $this   setIsActive(bool $value)
+ * @method  string  getConditionsSerialized()
+ * @method  $this   setConditionsSerialized(string $value)
+ * @method  int     getSortOrder()
+ * @method  $this   setSortOrder(int $value)
+ * @method  $this   setStoreIds(array $value)
  */
 class Zone extends AbstractModel
 {
@@ -42,6 +37,7 @@ class Zone extends AbstractModel
 
     /**
      * Parameter name in event
+     *
      * In observe method you can use $observer->getEvent()->getShippingZone() in this case
      *
      * @var string
@@ -69,28 +65,25 @@ class Zone extends AbstractModel
     protected $_zoneResourceFactory;
 
     /**
-     * @var Serialize
-     */
-    protected $serializer;
-
-    /**
-     * @param Context                   $context
-     * @param Registry                  $registry
-     * @param StoreManagerInterface     $storeManager
-     * @param ZoneRuleFactory           $zoneRuleFactory
-     * @param ZoneResourceFactory       $zoneResourceFactory
-     * @param Serialize                 $serializer
-     * @param AbstractResource|null     $resource
-     * @param AbstractDbCollection|null $resourceCollection
-     * @param array                     $data
+     * @param   Context                     $context
+     * @param   Registry                    $registry
+     * @param   FormFactory                 $formFactory
+     * @param   TimezoneInterface           $localeDate
+     * @param   StoreManagerInterface       $storeManager
+     * @param   ZoneRuleFactory             $zoneRuleFactory
+     * @param   ZoneResourceFactory         $zoneResourceFactory
+     * @param   AbstractResource|null       $resource
+     * @param   AbstractDbCollection|null   $resourceCollection
+     * @param   array                       $data
      */
     public function __construct(
         Context $context,
         Registry $registry,
+        FormFactory $formFactory,
+        TimezoneInterface $localeDate,
         StoreManagerInterface $storeManager,
         ZoneRuleFactory $zoneRuleFactory,
         ZoneResourceFactory $zoneResourceFactory,
-        Serialize $serializer,
         AbstractResource $resource = null,
         AbstractDbCollection $resourceCollection = null,
         array $data = []
@@ -99,11 +92,12 @@ class Zone extends AbstractModel
         $this->_storeManager = $storeManager;
         $this->_ruleFactory = $zoneRuleFactory;
         $this->_zoneResourceFactory = $zoneResourceFactory;
-        $this->serializer = $serializer;
     }
 
     /**
-     * @inheritdoc
+     * Init resource model and id field
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -113,20 +107,20 @@ class Zone extends AbstractModel
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getConditions()
     {
         $conds = $this->_getData('conditions_serialized');
         if (is_string($conds)) {
-            $conds = $this->serializer->unserialize($conds);
+            $conds = unserialize($conds);
         }
 
         return $conds;
     }
 
     /**
-     * @return ZoneRule
+     * @return  ZoneRule
      */
     public function getRule()
     {
@@ -144,7 +138,7 @@ class Zone extends AbstractModel
     /**
      * Get associated store ids of current rule
      *
-     * @return array
+     * @return  array
      */
     public function getStoreIds()
     {

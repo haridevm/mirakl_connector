@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper;
 
 use Magento\Store\Api\Data\StoreInterface;
@@ -9,30 +6,28 @@ use Mirakl\Connector\Helper\Config as ConnectorConfig;
 
 class Config extends ConnectorConfig
 {
-    // phpcs:disable
-    public const XML_PATH_ENABLE_MCM                         = 'mirakl_mcm/import_product/enable_mcm';
-    public const XML_PATH_MCM_PRODUCTS_IMPORT_MODE           = 'mirakl_mcm/import_product/mode';
-    public const XML_PATH_MCM_ENABLE_PRODUCT_IMPORT          = 'mirakl_mcm/import_product/enable_product_import';
-    public const XML_PATH_MCM_DEFAULT_VISIBILITY             = 'mirakl_mcm/import_product/default_visibility';
-    public const XML_PATH_MCM_DEFAULT_TAX_CLASS              = 'mirakl_mcm/import_product/default_tax_class';
-    public const XML_PATH_MCM_AUTO_ENABLE_PRODUCT            = 'mirakl_mcm/import_product/auto_enable_product';
-    public const XML_PATH_ENABLE_ASYNC_MCM                   = 'mirakl_mcm/import_product_async/enable_mcm';
-    public const XML_PATH_ASYNC_MCM_ENABLE_PRODUCT_IMPORT    = 'mirakl_mcm/import_product_async/enable_product_import';
-    public const XML_PATH_ASYNC_MCM_DEFAULT_VISIBILITY       = 'mirakl_mcm/import_product_async/default_visibility';
-    public const XML_PATH_ASYNC_MCM_DEFAULT_TAX_CLASS        = 'mirakl_mcm/import_product_async/default_tax_class';
-    public const XML_PATH_ASYNC_MCM_AUTO_ENABLE_PRODUCT      = 'mirakl_mcm/import_product_async/auto_enable_product';
-    public const XML_PATH_ENABLE_SYNC_MCM_PRODUCTS           = 'mirakl_sync/mcm_products/enable_mcm_products';
-    public const XML_PATH_ENABLE_DELETE_MCM_PRODUCTS         = 'mirakl_sync/mcm_products_delete/enable';
-    public const XML_PATH_MCM_ENABLE_INDEXING_IMPORT         = 'mirakl_mcm/product_import_indexing/enable_indexing_import';
-    public const XML_PATH_MCM_ENABLE_INDEXING_IMPORT_AFTER   = 'mirakl_mcm/product_import_indexing/enable_indexing_import_after';
-    public const XML_PATH_MCM_PRODUCT_EXPORT_CHUNK_SIZE      = 'mirakl_mcm/export_product/chunk_size';
-    public const XML_PATH_MCM_IDENTIFIER_ATTRIBUTES          = 'mirakl_connector/product_attributes/mcm_synchronization/identifier_attributes';
-    // phpcs:enable
+    const XML_PATH_ENABLE_MCM                         = 'mirakl_mcm/import_product/enable_mcm';
+    const XML_PATH_MCM_PRODUCTS_IMPORT_MODE           = 'mirakl_mcm/import_product/mode';
+    const XML_PATH_MCM_ENABLE_PRODUCT_IMPORT          = 'mirakl_mcm/import_product/enable_product_import';
+    const XML_PATH_MCM_DEFAULT_VISIBILITY             = 'mirakl_mcm/import_product/default_visibility';
+    const XML_PATH_MCM_DEFAULT_TAX_CLASS              = 'mirakl_mcm/import_product/default_tax_class';
+    const XML_PATH_MCM_AUTO_ENABLE_PRODUCT            = 'mirakl_mcm/import_product/auto_enable_product';
+    const XML_PATH_ENABLE_ASYNC_MCM                   = 'mirakl_mcm/import_product_async/enable_mcm';
+    const XML_PATH_ASYNC_MCM_ENABLE_PRODUCT_IMPORT    = 'mirakl_mcm/import_product_async/enable_product_import';
+    const XML_PATH_ASYNC_MCM_DEFAULT_VISIBILITY       = 'mirakl_mcm/import_product_async/default_visibility';
+    const XML_PATH_ASYNC_MCM_DEFAULT_TAX_CLASS        = 'mirakl_mcm/import_product_async/default_tax_class';
+    const XML_PATH_ASYNC_MCM_AUTO_ENABLE_PRODUCT      = 'mirakl_mcm/import_product_async/auto_enable_product';
+    const XML_PATH_ENABLE_SYNC_MCM_PRODUCTS           = 'mirakl_sync/mcm_products/enable_mcm_products';
+    const XML_PATH_ENABLE_DELETE_MCM_PRODUCTS         = 'mirakl_sync/mcm_products_delete/enable';
+    const XML_PATH_MCM_ENABLE_INDEXING_IMPORT         = 'mirakl_mcm/product_import_indexing/enable_indexing_import';
+    const XML_PATH_MCM_ENABLE_INDEXING_IMPORT_AFTER   = 'mirakl_mcm/product_import_indexing/enable_indexing_import_after';
+    const XML_PATH_MCM_PRODUCT_EXPORT_CHUNK_SIZE      = 'mirakl_mcm/export_product/chunk_size';
+    const XML_PATH_MCM_IDENTIFIER_ATTRIBUTES          = 'mirakl_connector/product_attributes/mcm_synchronization/identifier_attributes';
 
     /**
      * Returns default tax class for product import
      *
-     * @return int
+     * @return  int
      */
     public function getDefaultTaxClass()
     {
@@ -42,7 +37,7 @@ class Config extends ConnectorConfig
     /**
      * Returns default tax class for async product import
      *
-     * @return int
+     * @return  int
      */
     public function getAsyncDefaultTaxClass()
     {
@@ -52,7 +47,7 @@ class Config extends ConnectorConfig
     /**
      * Returns default visibility for product import
      *
-     * @return int
+     * @return  int
      */
     public function getDefaultVisibility()
     {
@@ -62,7 +57,7 @@ class Config extends ConnectorConfig
     /**
      * Returns default visibility for async product import
      *
-     * @return int
+     * @return  int
      */
     public function getAsyncDefaultVisibility()
     {
@@ -70,7 +65,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getProductsImportMode()
     {
@@ -80,8 +75,8 @@ class Config extends ConnectorConfig
     /**
      * Returns stores that allow product import
      *
-     * @param bool $withDefault
-     * @return StoreInterface[]
+     * @param   bool    $withDefault
+     * @return  StoreInterface[]
      */
     public function getStoresUsedForProductImport($withDefault = true)
     {
@@ -90,8 +85,7 @@ class Config extends ConnectorConfig
             if (!$store->getIsActive()) {
                 continue;
             }
-            if (
-                ($this->isMcmEnabled() && $this->isProductImportEnabled($store))
+            if (($this->isMcmEnabled() && $this->isProductImportEnabled($store))
                 || ($this->isAsyncMcmEnabled() && $this->isAsyncProductImportEnabled($store))
             ) {
                 $stores[] = $store;
@@ -106,8 +100,8 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isProductImportEnabled($store = null)
     {
@@ -115,8 +109,8 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @param mixed $store
-     * @return bool
+     * @param   mixed   $store
+     * @return  bool
      */
     public function isAsyncProductImportEnabled($store = null)
     {
@@ -124,7 +118,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getDeduplicationAttributes()
     {
@@ -132,7 +126,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAutoEnableProduct()
     {
@@ -140,7 +134,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isAsyncAutoEnableProduct()
     {
@@ -148,7 +142,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabledIndexingImport()
     {
@@ -156,7 +150,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isEnabledIndexingImportAfter()
     {
@@ -166,7 +160,7 @@ class Config extends ConnectorConfig
     /**
      * Returns true if MCM is enabled, false otherwise
      *
-     * @return bool
+     * @return  bool
      */
     public function isMcmEnabled()
     {
@@ -176,7 +170,7 @@ class Config extends ConnectorConfig
     /**
      * Returns true if MCM is enabled in async mode, false otherwise
      *
-     * @return bool
+     * @return  bool
      */
     public function isAsyncMcmEnabled()
     {
@@ -186,7 +180,7 @@ class Config extends ConnectorConfig
     /**
      * Returns true if MCM products deletion is enabled, false otherwise
      *
-     * @return bool
+     * @return  bool
      */
     public function isMcmProductsDeleteEnabled()
     {
@@ -194,7 +188,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncMcmProducts()
     {
@@ -202,7 +196,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function getMcmIdentifiersAttributes()
     {
@@ -212,7 +206,7 @@ class Config extends ConnectorConfig
     }
 
     /**
-     * @return int
+     * @return  int
      */
     public function getMcmProductExportChunkSize()
     {

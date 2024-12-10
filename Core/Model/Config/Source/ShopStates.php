@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\Config\Source;
 
 use Magento\Framework\Option\ArrayInterface;

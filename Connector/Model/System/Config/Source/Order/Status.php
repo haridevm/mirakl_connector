@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\System\Config\Source\Order;
 
 use Magento\Framework\Option\ArrayInterface;
@@ -15,7 +12,7 @@ class Status implements ArrayInterface
     private $orderStatusCollectionFactory;
 
     /**
-     * @param OrderStatusCollectionFactory $orderStatusCollectionFactory
+     * @param   OrderStatusCollectionFactory    $orderStatusCollectionFactory
      */
     public function __construct(OrderStatusCollectionFactory $orderStatusCollectionFactory)
     {
@@ -23,7 +20,7 @@ class Status implements ArrayInterface
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

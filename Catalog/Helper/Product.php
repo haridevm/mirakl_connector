@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Helper;
 
 use Magento\Catalog\Helper\Product as ProductHelper;
@@ -30,15 +27,13 @@ use Mirakl\Connector\Model\Product\Filter;
 use Mirakl\Core\Helper\Data as CoreHelper;
 use Mirakl\Process\Model\Process;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Product extends AbstractHelper implements ExportInterface
 {
     use ExportTrait;
 
-    public const CODE = 'P21';
-    public const EXPORT_SOURCE = 'P21';
+    const CODE = 'P21';
+
+    const EXPORT_SOURCE = 'P21';
 
     /**
      * @var StoreManagerInterface
@@ -106,21 +101,20 @@ class Product extends AbstractHelper implements ExportInterface
     protected $descriptionFilter;
 
     /**
-     * @param Context                   $context
-     * @param StoreManagerInterface     $storeManager
-     * @param CategoryFactory           $categoryFactory
-     * @param CategoryResourceFactory   $categoryResourceFactory
-     * @param CategoryCollectionFactory $categoryCollectionFactory
-     * @param ProductResourceFactory    $productResourceFactory
-     * @param ProductCollectionFactory  $productCollectionFactory
-     * @param ProductHelper             $productHelper
-     * @param Api                       $api
-     * @param CatalogConfig             $catalogConfig
-     * @param MediaConfig               $productMediaConfig
-     * @param CoreHelper                $coreHelper
-     * @param IndexScopeResolver        $tableResolver
-     * @param Filter\Description        $descriptionFilter
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @param   Context                     $context
+     * @param   StoreManagerInterface       $storeManager
+     * @param   CategoryFactory             $categoryFactory
+     * @param   CategoryResourceFactory     $categoryResourceFactory
+     * @param   CategoryCollectionFactory   $categoryCollectionFactory
+     * @param   ProductResourceFactory      $productResourceFactory
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ProductHelper               $productHelper
+     * @param   Api                         $api
+     * @param   CatalogConfig               $catalogConfig
+     * @param   MediaConfig                 $productMediaConfig
+     * @param   CoreHelper                  $coreHelper
+     * @param   IndexScopeResolver          $tableResolver
+     * @param   Filter\Description          $descriptionFilter
      */
     public function __construct(
         Context $context,
@@ -155,7 +149,7 @@ class Product extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function export(array $data)
     {
@@ -169,8 +163,8 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Export Magento products to Mirakl platform
      *
-     * @param Process|null $process
-     * @return int
+     * @param   Process $process
+     * @return  int
      */
     public function exportAll(Process $process = null)
     {
@@ -206,10 +200,10 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Exports custom product collection to Mirakl platform
      *
-     * @param ProductCollection $collection
-     * @param string|null       $action
-     * @param int               $chunkSize
-     * @return int
+     * @param   ProductCollection   $collection
+     * @param   null|string         $action
+     * @param   int                 $chunkSize
+     * @return  int
      */
     public function exportCollection(ProductCollection $collection, $action = null, $chunkSize = 10000)
     {
@@ -234,7 +228,7 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Retrieves Magento products available for being exported to Mirakl platform
      *
-     * @return ProductCollection
+     * @return  ProductCollection
      */
     public function getProductsToExport()
     {
@@ -260,8 +254,7 @@ class Product extends AbstractHelper implements ExportInterface
             $dimension = new Dimension(Store::ENTITY, $store->getId());
 
             $categoryIndex = $this->tableResolver->resolve(
-                'catalog_category_product_index',
-                [$dimension]
+                'catalog_category_product_index', [$dimension]
             );
 
             if (!$connection->isTableExists($categoryIndex)) {
@@ -303,9 +296,9 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Prepares product data for export
      *
-     * @param DataObject  $product
-     * @param string|null $action
-     * @return array
+     * @param   DataObject  $product
+     * @param   null|string $action
+     * @return  array
      */
     public function prepare(DataObject $product, $action = null)
     {
@@ -353,9 +346,9 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Returns category id associated with specified Mirakl product
      *
-     * @param ProductObject $product
-     * @return string
-     * @throws \Exception
+     * @param   ProductObject   $product
+     * @return  string
+     * @throws  \Exception
      */
     public function getAssociatedCategoryId(ProductObject $product)
     {
@@ -369,7 +362,8 @@ class Product extends AbstractHelper implements ExportInterface
             /** @var CategoryCollection $collection */
             $collection = $this->categoryCollectionFactory->create();
 
-            $collection->addIdFilter($categoryIds)
+            $collection
+                ->addIdFilter($categoryIds)
                 ->addIsActiveFilter()
                 ->addAttributeToFilter('mirakl_sync', 1);
 
@@ -383,8 +377,8 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Returns authorized shop ids of specified product as string
      *
-     * @param ProductObject $product
-     * @return string
+     * @param   ProductObject   $product
+     * @return  string
      */
     public function getProductAuthorizedShopIds(ProductObject $product)
     {
@@ -401,8 +395,8 @@ class Product extends AbstractHelper implements ExportInterface
      * Brand attribute is configured in Mirakl configuration section:
      * "System > Configuration > Mirakl Connector > Product Attributes > Brand Attribute"
      *
-     * @param ProductObject $product
-     * @return string|null
+     * @param   ProductObject  $product
+     * @return  string|null
      */
     public function getProductBrand(ProductObject $product)
     {
@@ -427,8 +421,8 @@ class Product extends AbstractHelper implements ExportInterface
      * Attribute identifiers used for references are configured in Mirakl configuration section:
      * "System > Configuration > Mirakl Connector > Product Attributes > Identifier Attributes"
      *
-     * @param ProductObject $product
-     * @return array
+     * @param   ProductObject  $product
+     * @return  array
      */
     public function getProductReferences(ProductObject $product)
     {
@@ -445,8 +439,8 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Retrieves product variant code if possible
      *
-     * @param ProductObject $product
-     * @return string
+     * @param   ProductObject  $product
+     * @return  string
      */
     public function getProductVariantCode(ProductObject $product)
     {
@@ -463,10 +457,10 @@ class Product extends AbstractHelper implements ExportInterface
     /**
      * Returns product URL for specified store
      *
-     * @param ProductObject $product
-     * @param mixed         $store
-     * @return string
-     * @throws \Exception
+     * @param   ProductObject   $product
+     * @param   mixed           $store
+     * @return  string
+     * @throws  \Exception
      */
     protected function getProductUrl(ProductObject $product, $store = null)
     {

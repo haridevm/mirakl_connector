@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Sync\Block\Adminhtml\Sync;
 
 use Magento\Backend\Block\Template\Context;
@@ -13,10 +10,6 @@ use Mirakl\Core\Helper\Config;
 use Mirakl\Sync\Model\Sync\Entry;
 use Mirakl\Sync\Model\Sync\EntryFactory;
 
-/**
- * @SuppressWarnings(PHPMD.UnusedFormalParameter)
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
 {
     /**
@@ -35,12 +28,12 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     protected $config;
 
     /**
-     * @param Context         $context
-     * @param BackendHelper   $backendHelper
-     * @param ConfigStructure $configStructure
-     * @param EntryFactory    $entryFactory
-     * @param Config          $config
-     * @param array           $data
+     * @param   Context         $context
+     * @param   BackendHelper   $backendHelper
+     * @param   ConfigStructure $configStructure
+     * @param   EntryFactory    $entryFactory
+     * @param   Config          $config
+     * @param   array           $data
      */
     public function __construct(
         Context $context,
@@ -57,8 +50,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * {@inheritdoc}
      */
     protected function _prepareCollection()
     {
@@ -100,12 +92,11 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _prepareColumns()
     {
-        $this->addColumn(
-            'name',
+        $this->addColumn('name',
             [
                 'header'   => __('Name'),
                 'index'    => 'name',
@@ -113,8 +104,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'sortable' => false,
             ]
         );
-        $this->addColumn(
-            'description',
+        $this->addColumn('description',
             [
                 'header'         => __('Description'),
                 'index'          => 'description',
@@ -123,8 +113,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'sortable'       => false,
             ]
         );
-        $this->addColumn(
-            'last_sync_date',
+        $this->addColumn('last_sync_date',
             [
                 'type'     => 'datetime',
                 'header'   => __('Last Sync Date'),
@@ -133,8 +122,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'sortable' => false,
             ]
         );
-        $this->addColumn(
-            'status',
+        $this->addColumn('status',
             [
                 'header'         => __('Status'),
                 'index'          => 'status',
@@ -143,8 +131,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'sortable'       => false,
             ]
         );
-        $this->addColumn(
-            'api',
+        $this->addColumn('api',
             [
                 'header'         => __('API'),
                 'index'          => 'status',
@@ -154,8 +141,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
                 'align'          => 'center',
             ]
         );
-        $this->addColumn(
-            'buttons',
+        $this->addColumn('buttons',
             [
                 'header'         => __('Action'),
                 'index'          => 'buttons',
@@ -169,21 +155,21 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param mixed $value
-     * @param Entry $entry
-     * @return string
+     * @param   mixed   $value
+     * @param   Entry   $entry
+     * @return  string
      */
     public function decorateApi($value, Entry $entry)
     {
-        preg_match('/.*\((.+)\)$/i', (string) $entry->getName(), $matches);
+        preg_match('/.*\((.+)\)$/i', $entry->getName(), $matches);
 
         return $matches[1] ?? 'SYSTEM';
     }
 
     /**
-     * @param mixed $value
-     * @param Entry $entry
-     * @return string
+     * @param   mixed   $value
+     * @param   Entry   $entry
+     * @return  string
      */
     public function decorateDescription($value, Entry $entry)
     {
@@ -191,9 +177,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param mixed $value
-     * @param Entry $entry
-     * @return string
+     * @param   mixed   $value
+     * @param   Entry   $entry
+     * @return  string
      */
     public function decorateStatus($value, Entry $entry)
     {
@@ -215,9 +201,9 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @param mixed $value
-     * @param Entry $entry
-     * @return string
+     * @param   mixed   $value
+     * @param   Entry   $entry
+     * @return  string
      */
     public function decorateButtons($value, Entry $entry)
     {
@@ -225,7 +211,7 @@ class Grid extends \Magento\Backend\Block\Widget\Grid\Extended
     }
 
     /**
-     * @return ConfigSection
+     * @return  ConfigSection
      */
     protected function getConfigSection()
     {

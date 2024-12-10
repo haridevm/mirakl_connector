@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Observer\Product;
@@ -22,7 +21,7 @@ class AttributeMassUpdateBeforeObserver implements ObserverInterface
 
     /**
      * @param IndexProcessor $indexProcessor
-     * @param array          $attributesFilter
+     * @param array $attributesFilter
      */
     public function __construct(
         IndexProcessor $indexProcessor,
@@ -33,7 +32,7 @@ class AttributeMassUpdateBeforeObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

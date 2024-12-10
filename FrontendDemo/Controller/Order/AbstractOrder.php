@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
 use Magento\Customer\Model\Session as CustomerSession;
@@ -23,9 +20,6 @@ use Mirakl\Connector\Helper\Order as OrderHelper;
 use Mirakl\Core\Domain\FileWrapper;
 use Psr\Log\LoggerInterface;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractController\View implements OrderInterface
 {
     /**
@@ -89,7 +83,6 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
      * @param OrderHelper          $orderHelper
      * @param ApiFactory           $apiFactory
      * @param LoggerInterface      $logger
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         Action\Context $context,
@@ -119,8 +112,8 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
     /**
      * Try to load remote order by remote_id and register it
      *
-     * @param string|null $remoteId
-     * @return bool|ResultInterface
+     * @param   string|null  $remoteId
+     * @return  bool|ResultInterface
      */
     protected function loadMiraklOrder($remoteId = null)
     {
@@ -156,7 +149,7 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
     /**
      * Initialize order and remote order in session
      *
-     * @return bool|ResultInterface
+     * @return  bool|ResultInterface
      */
     protected function initOrders()
     {
@@ -172,7 +165,7 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
     }
 
     /**
-     * @return array
+     * @return  array
      */
     protected function buildFiles(): array
     {
@@ -192,7 +185,7 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
     /**
      * Order view page
      *
-     * @return ResultInterface
+     * @return  ResultInterface
      */
     public function execute()
     {
@@ -214,9 +207,9 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
     }
 
     /**
-     * @param FileWrapper $file
-     * @param string|null $fileName
-     * @return Raw
+     * @param   FileWrapper $file
+     * @param   string|null $fileName
+     * @return  Raw
      */
     protected function downloadFile(FileWrapper $file, $fileName = null)
     {
@@ -227,7 +220,7 @@ abstract class AbstractOrder extends \Magento\Sales\Controller\AbstractControlle
         $result->setHttpResponseCode(200)
             ->setHeader('Pragma', 'public', true)
             ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
-            ->setHeader('Content-Type', $file->getContentType(), true)
+            ->setHeader('Content-type', $file->getContentType(), true)
             ->setHeader('Content-Length', $contentSize);
 
         if (!$fileName && $file->getFileName()) {

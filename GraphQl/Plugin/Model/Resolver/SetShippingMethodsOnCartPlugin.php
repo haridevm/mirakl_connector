@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\GraphQl\Plugin\Model\Resolver;
 
 use Magento\Framework\GraphQl\Config\Element\Field;
@@ -25,8 +22,8 @@ class SetShippingMethodsOnCartPlugin
     private $quoteUpdater;
 
     /**
-     * @param GetCartForUser $getCartForUser
-     * @param QuoteUpdater   $quoteUpdater
+     * @param  GetCartForUser  $getCartForUser
+     * @param  QuoteUpdater    $quoteUpdater
      */
     public function __construct(
         GetCartForUser $getCartForUser,
@@ -37,17 +34,16 @@ class SetShippingMethodsOnCartPlugin
     }
 
     /**
-     * Apply Mirakl shipping methods to Marketplace items and update Mirakl shipping info
-     * (shipping method codes, shipping fees, ...) before Magento applies shipping methods
-     * to operator items and re-collect quote totals.
+     * Apply Mirakl shipping methods to Marketplace items and update Mirakl shipping info (shipping method codes, shipping fees, ...)
+     * before Magento applies shipping methods to operator items and re-collect quote totals
      *
-     * @param SetShippingMethodsOnCart $subject
-     * @param Field                    $field
-     * @param ContextInterface         $context
-     * @param ResolveInfo              $info
-     * @param array|null               $value
-     * @param array|null               $args
-     * @return array
+     * @param   SetShippingMethodsOnCart    $subject
+     * @param   Field                       $field
+     * @param   ContextInterface            $context
+     * @param   ResolveInfo                 $info
+     * @param   array|null                  $value
+     * @param   array|null                  $args
+     * @return  array
      */
     public function beforeResolve(
         SetShippingMethodsOnCart $subject,

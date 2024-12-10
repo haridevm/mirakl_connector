@@ -1,12 +1,6 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Category;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Tree extends \Magento\Catalog\Block\Adminhtml\Category\Tree
 {
     /**
@@ -15,14 +9,14 @@ class Tree extends \Magento\Catalog\Block\Adminhtml\Category\Tree
     protected $miraklSyncIds = [];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _construct()
     {
         parent::_construct();
 
         /** @var \Magento\Catalog\Model\ResourceModel\Category\Collection $collection */
-        $collection = $this->_categoryFactory->create()->getCollection(); // @phpstan-ignore-line
+        $collection = $this->_categoryFactory->create()->getCollection();
         $collection->addAttributeToFilter('mirakl_sync', 1);
 
         $this->_eventManager->dispatch('mirakl_adminhtml_category_tree', [
@@ -35,7 +29,7 @@ class Tree extends \Magento\Catalog\Block\Adminhtml\Category\Tree
     /**
      * Need to specify Magento_Catalog module because we do not override the template file
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getTemplateFile($template = null)
     {
@@ -48,7 +42,7 @@ class Tree extends \Magento\Catalog\Block\Adminhtml\Category\Tree
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _getNodeJson($node, $level = 0)
     {

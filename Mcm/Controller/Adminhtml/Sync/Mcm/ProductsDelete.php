@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Controller\Adminhtml\Sync\Mcm;
 
 use Mirakl\Connector\Controller\Adminhtml\AbstractSync;
@@ -35,6 +32,7 @@ class ProductsDelete extends AbstractSync
             $this->connectorConfig->setSyncDate('mcm_products_delete');
             $this->messageManager->addSuccessMessage(__('Products will be deleted in background.'));
             $this->addRawSuccessMessage(__('Click <a href="%1">here</a> to view process output.', $process->getUrl()));
+
         } catch (\Exception $e) {
             $this->logger->critical($e);
             $this->messageManager->addErrorMessage(

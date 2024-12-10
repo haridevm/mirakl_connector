@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Mapper;
@@ -9,7 +8,7 @@ use Mirakl\Core\Model\Shop as ShopModel;
 class Shop
 {
     /**
-     * @param ShopModel $shop
+     * @param  ShopModel  $shop
      * @return array
      */
     public function toGraphQlArray(ShopModel $shop)

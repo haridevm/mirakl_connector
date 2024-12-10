@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Quote;
 
 use Magento\Quote\Api\Data\AddressInterface;
@@ -47,12 +44,12 @@ class Synchronizer
     protected $taxCalculation;
 
     /**
-     * @param Api                $api
-     * @param Config             $config
-     * @param ShippingZoneHelper $shippingZoneHelper
-     * @param OfferCollector     $offerCollector
-     * @param Cache              $cache
-     * @param TaxCalculation     $taxCalculation
+     * @param   Api                 $api
+     * @param   Config              $config
+     * @param   ShippingZoneHelper  $shippingZoneHelper
+     * @param   OfferCollector      $offerCollector
+     * @param   Cache               $cache
+     * @param   TaxCalculation      $taxCalculation
      */
     public function __construct(
         Api $api,
@@ -71,8 +68,8 @@ class Synchronizer
     }
 
     /**
-     * @param CartInterface $quote
-     * @return bool
+     * @param   CartInterface   $quote
+     * @return  bool
      */
     public function canComputeTaxes(CartInterface $quote)
     {
@@ -90,9 +87,8 @@ class Synchronizer
      * If address conditions data is empty, we try to retrieve it
      * from the customer attached to the quote object.
      *
-     * @param CartInterface $quote
-     * @return AddressInterface
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @param   CartInterface   $quote
+     * @return  AddressInterface
      */
     public function getQuoteShippingAddress(CartInterface $quote)
     {
@@ -142,8 +138,8 @@ class Synchronizer
     /**
      * Returns current quote items grouped by order (SH02)
      *
-     * @param CartInterface $quote
-     * @return CartItemInterface[]
+     * @param   CartInterface   $quote
+     * @return  CartItemInterface[]
      */
     public function getGroupedItems(CartInterface $quote)
     {
@@ -161,17 +157,9 @@ class Synchronizer
                 foreach ($shippingFees as $orderShippingFee) {
                     /** @var OrderShippingFee $orderShippingFee */
                     if ($offers = $orderShippingFee->getOffers()) {
-                        $orderShippingFeeItems = array_intersect_key(
-                            $itemsWithOffer,
-                            array_flip($offers->walk('getId'))
-                        );
-                        foreach ($orderShippingFeeItems as $orderShippingFeeItem) {
-                            // set some logistic order infos on item (lead_time_to_ship,...)
-                            $orderShippingFeeItem->setMiraklLeadtimeToShip($orderShippingFee->getLeadtimeToShip());
-                        }
                         $groupedItems = array_merge(
                             $groupedItems,
-                            $orderShippingFeeItems
+                            array_intersect_key($itemsWithOffer, array_flip($offers->walk('getId')))
                         );
                     }
                 }
@@ -192,8 +180,8 @@ class Synchronizer
     }
 
     /**
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getGroupedOfferIds(CartInterface $quote)
     {
@@ -212,7 +200,7 @@ class Synchronizer
     /**
      * Returns attributes used for shipping zones address conditions
      *
-     * @return array
+     * @return  array
      */
     public function getQuoteShippingAddressAttributes()
     {
@@ -222,20 +210,19 @@ class Synchronizer
     /**
      * Returns shipping zone code of specified quote object
      *
-     * @param CartInterface $quote
-     * @return string
+     * @param   CartInterface $quote
+     * @return  string
      */
     public function getQuoteShippingZone(CartInterface $quote)
     {
         return $this->shippingZoneHelper->getShippingZoneCode(
-            $this->getQuoteShippingAddress($quote),
-            $quote->getStoreId()
+            $this->getQuoteShippingAddress($quote), $quote->getStoreId()
         );
     }
 
     /**
-     * @param CartInterface $quote
-     * @return array
+     * @param   CartInterface   $quote
+     * @return  array
      */
     public function getShippingAddressData(CartInterface $quote)
     {
@@ -253,10 +240,10 @@ class Synchronizer
     /**
      * Returns specified quote shipping fees
      *
-     * @param CartInterface $quote
-     * @param bool          $useCache
-     * @param int           $cacheLifetime
-     * @return OrderShippingFeeCollection
+     * @param   CartInterface   $quote
+     * @param   bool            $useCache
+     * @param   int             $cacheLifetime
+     * @return  OrderShippingFeeCollection
      */
     public function getShippingFees(CartInterface $quote, $useCache = false, $cacheLifetime = null)
     {
@@ -271,8 +258,8 @@ class Synchronizer
      * Returns true if shipping address data of specified quote is empty
      * (check only attributes used for Mirakl shipping zones conditions)
      *
-     * @param CartInterface $quote
-     * @return bool
+     * @param   CartInterface   $quote
+     * @return  bool
      */
     public function isQuoteShippingAddressDataEmpty(CartInterface $quote)
     {
@@ -284,8 +271,8 @@ class Synchronizer
     }
 
     /**
-     * @param CartInterface $quote
-     * @return bool
+     * @param   CartInterface   $quote
+     * @return  bool
      */
     public function isShippingAddressComplete(CartInterface $quote)
     {
@@ -301,10 +288,10 @@ class Synchronizer
     /**
      * Synchronizes shipping fees with specified quote (calls the Mirakl platform)
      *
-     * @param CartInterface $quote
-     * @param bool          $useCache
-     * @param int           $cacheLifetime
-     * @return CartInterface
+     * @param   CartInterface   $quote
+     * @param   bool            $useCache
+     * @param   int             $cacheLifetime
+     * @return  CartInterface
      */
     public function syncQuoteShippingInfo(CartInterface $quote, $useCache = false, $cacheLifetime = null)
     {
@@ -313,12 +300,12 @@ class Synchronizer
         $cacheKey     = $this->cache->getQuoteFeesCacheKey($quote, $zone);
 
         if ($fees = $this->cache->registry($cacheKey)) {
-            goto UPDATE_QUOTE; // phpcs:ignore
+            goto UPDATE_QUOTE;
         }
 
         if ($useCache && ($fees = $this->cache->getCache()->load($cacheKey))) {
-            $fees = unserialize($fees); // phpcs:ignore
-            goto REGISTER_FEES; // phpcs:ignore
+            $fees = unserialize($fees);
+            goto REGISTER_FEES;
         }
 
         $locale              = $this->config->getLocale($quote->getStore());
@@ -337,12 +324,7 @@ class Synchronizer
         \Magento\Framework\Profiler::stop('MIRAKL: GET SHIPPING FEES');
 
         if ($useCache) {
-            $this->cache->getCache()->save(
-                serialize($fees), // phpcs:ignore
-                $cacheKey,
-                $this->cache->getQuoteCacheTags($quote),
-                $cacheLifetime
-            );
+            $this->cache->getCache()->save(serialize($fees), $cacheKey, $this->cache->getQuoteCacheTags($quote), $cacheLifetime);
         }
 
         REGISTER_FEES:

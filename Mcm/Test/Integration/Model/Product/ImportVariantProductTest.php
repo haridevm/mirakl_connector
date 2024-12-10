@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
 
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
@@ -33,9 +30,9 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
 
-     * @param string $csv
-     * @param array  $miraklProductIds
-     * @param string $variantCode
+     * @param   string  $csv
+     * @param   array   $miraklProductIds
+     * @param   string  $variantCode
      */
     public function testVariantProductMcmImport($csv, $miraklProductIds, $variantCode)
     {
@@ -52,10 +49,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
             $parentProduct = $this->coreHelper->getParentProduct($newProduct);
             $this->assertNotNull($parentProduct);
             $this->productResource->load($parentProduct, $parentProduct->getId());
-            $this->assertEquals(
-                $parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE),
-                $variantCode
-            );
+            $this->assertEquals($parentProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE), $variantCode);
         }
     }
 
@@ -73,18 +67,15 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/attributes_variant.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
+     * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/single_mcm_product.php
      *
-     * @param string $singleProductFile
-     * @param string $variantProductFile
-     * @param string $miraklProductId
-     * @param string $variantCode
+     * @param   string  $singleProductFile
+     * @param   string  $variantProductFile
+     * @param   string  $miraklProductId
+     * @param   string  $variantCode
      */
-    public function testCreateParentVariantProductMcmImport(
-        $singleProductFile,
-        $variantProductFile,
-        $miraklProductId,
-        $variantCode
-    ) {
+    public function testCreateParentVariantProductMcmImport($singleProductFile, $variantProductFile, $miraklProductId, $variantCode)
+    {
         // Import #1
         $this->runImport($singleProductFile);
 
@@ -99,7 +90,7 @@ class ImportVariantProductTest extends MiraklBaseTestCase
         $this->assertNotNull($newProduct);
         $this->assertInstanceOf(\Magento\Catalog\Model\Product::class, $newProduct);
         $this->assertEquals($newProduct->getData(McmDataHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID), $miraklProductId);
-        $this->assertEquals($newProduct->getData('name'), 'Slim Fit Polo');
+        $this->assertEquals($newProduct->getData('name'), 'Slim Fit Polo UPDATE');
 
         // Test parent creation
         $parentProduct = $this->coreHelper->getParentProduct($newProduct);
@@ -123,23 +114,18 @@ class ImportVariantProductTest extends MiraklBaseTestCase
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/categories_attribute_set.php
      * @magentoDataFixture Mirakl_Mcm::Test/Integration/Model/Product/_fixtures/product_attributes.php
      *
-     * @param string $variantProductFile
-     * @param string $updateVariantProductFile
+     * @param   string  $variantProductFile
+     * @param   string  $updateVariantProductFile
      */
     public function testUpdateAlreadyVariantProductMcmImport($variantProductFile, $updateVariantProductFile)
     {
         $this->runImport($variantProductFile);
-
-        $process = $this->runImport($updateVariantProductFile);
-
-        $this->assertStringContainsString(
-            'A variant product already exists with the same variants as provided data',
-            $process->getOutput()
-        );
+        $this->runImport($updateVariantProductFile);
+        $this->assertStringContainsString('A variant product already exists with the same variants as provided data', $this->processModel->getOutput());
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importUpdateVariantAlreadyPresentMcmDataProvider()
     {
@@ -149,31 +135,22 @@ class ImportVariantProductTest extends MiraklBaseTestCase
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importVariantMcmDataProvider()
     {
         return [
-            [
-                'CM51_multi_variant_product.csv',
-                ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'],
-                'variant_code'
-            ],
+            ['CM51_multi_variant_product.csv', ['abc5-4cf1-acdb-56152a77bc56', 'abc4-5cf1-acdb-56152a77bc56'], 'variant_code'],
         ];
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importCreateParentVariantMcmDataProvider()
     {
         return [
-            [
-                'CM51_single_product.csv',
-                'CM51_create_parent_variant_product.csv',
-                'abc5-4cf1-acdb-56152a77bc56',
-                'variant_code'
-            ],
+            ['CM51_single_product.csv', 'CM51_create_parent_variant_product.csv', 'abc5-4cf1-acdb-56152a77bc56', 'variant_code'],
         ];
     }
 }

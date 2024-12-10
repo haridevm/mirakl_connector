@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Model\Product\Import\Report;
 
 use Mirakl\Mci\Model\Product\Import\Report\ReportInterface;
@@ -14,7 +11,7 @@ class Data implements ReportInterface
     protected $data = [];
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getContents()
     {
@@ -22,7 +19,7 @@ class Data implements ReportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function write(array $data)
     {
@@ -30,7 +27,7 @@ class Data implements ReportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function clear()
     {

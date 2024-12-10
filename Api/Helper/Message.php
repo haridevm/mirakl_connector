@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\Core\Domain\Collection\FileCollection;
@@ -20,9 +17,9 @@ class Message extends ClientHelper\MMP
     /**
      * (M10) Retrieve a thread
      *
-     * @param string      $threadId
-     * @param string|null $customerId
-     * @return ThreadDetails
+     * @param   string       $threadId
+     * @param   string|null  $customerId
+     * @return  ThreadDetails
      */
     public function getThreadDetails($threadId, $customerId = null)
     {
@@ -40,12 +37,12 @@ class Message extends ClientHelper\MMP
     /**
      * (M11) List all threads
      *
-     * @param string|null       $customerId
-     * @param string|null       $entityType
-     * @param array|string|null $entityId
-     * @param int|null          $limit
-     * @param string|null       $token
-     * @return SeekableCollection
+     * @param   string|null         $customerId
+     * @param   string|null         $entityType
+     * @param   array|string|null   $entityId
+     * @param   int|null            $limit
+     * @param   string|null         $token
+     * @return  SeekableCollection
      */
     public function getThreads($customerId = null, $entityType = null, $entityId = null, $limit = null, $token = null)
     {
@@ -79,8 +76,8 @@ class Message extends ClientHelper\MMP
     /**
      * (M11) List all threads from page token
      *
-     * @param string $token
-     * @return SeekableCollection
+     * @param   string  $token
+     * @return  SeekableCollection
      */
     public function getThreadsFromPageToken($token)
     {
@@ -90,9 +87,9 @@ class Message extends ClientHelper\MMP
     /**
      * (M12) Reply to a thread
      *
-     * @param string                  $threadId
-     * @param ThreadReplyMessageInput $messageInput
-     * @param FileWrapper[]           $files
+     * @param  string                   $threadId
+     * @param  ThreadReplyMessageInput  $messageInput
+     * @param  FileWrapper[]            $files
      * @return ThreadReplyCreated
      */
     public function replyToThread($threadId, ThreadReplyMessageInput $messageInput, $files = null)
@@ -111,8 +108,8 @@ class Message extends ClientHelper\MMP
     /**
      * (M13) Download an attachment
      *
-     * @param string $attachmentId
-     * @return FileWrapper
+     * @param   string  $attachmentId
+     * @return  FileWrapper
      */
     public function downloadThreadMessageAttachment($attachmentId)
     {
@@ -124,8 +121,8 @@ class Message extends ClientHelper\MMP
     }
 
     /**
-     * @param FileWrapper $fileWrapper
-     * @return array
+     * @param   FileWrapper $fileWrapper
+     * @return  array
      */
     public function transformToAttachment(FileWrapper $fileWrapper)
     {
@@ -136,15 +133,15 @@ class Message extends ClientHelper\MMP
         $file->rewind();
 
         return [
-            'base64_encoded_data' => base64_encode(@$file->fread($file->fstat()['size'])), // phpcs:ignore
+            'base64_encoded_data' => base64_encode(@$file->fread($file->fstat()['size'])),
             'name' => $fileWrapper->getFileName(),
             'type' => $fileWrapper->getContentType(),
         ];
     }
 
     /**
-     * @param array $fileInput
-     * @return FileWrapper
+     * @param   array   $fileInput
+     * @return  FileWrapper
      */
     public function transformToFileWrapper(array $fileInput)
     {

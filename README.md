@@ -9,11 +9,6 @@
 
 This is the official Mirakl extension for Magento 2.
 
-## Coverage reports
-
-[Unit tests report](https://magento.mirakl.net/_coverage/operator/unit/develop/)\
-[Integration tests report](https://magento.mirakl.net/_coverage/operator/integration/develop/)
-
 ## How to use
 
 ### Prerequisites

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mci\Setup\Patch\Data;
@@ -38,8 +37,7 @@ class CreateMiraklMciAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -58,12 +56,11 @@ class CreateMiraklMciAttributes implements DataPatchInterface
                 'backend'          => '',
                 'frontend'         => '',
                 'label'            => 'MCI Attribute Set',
-                'note'             => 'Associate an attribute set to this category. '
-                    . 'It will be used to synchronize Mirakl product attributes with MCI.',
+                'note'             => 'Associate an attribute set to this category. It will be used to synchronize Mirakl product attributes with MCI.',
                 'input'            => 'select',
                 'input_renderer'   => '',
                 'class'            => '',
-                'source'           => \Mirakl\Mci\Eav\Model\Entity\Attribute\Source\AttributeSet::class,
+                'source'           => 'Mirakl\Mci\Eav\Model\Entity\Attribute\Source\AttributeSet',
                 'global'           => ScopedAttributeInterface::SCOPE_GLOBAL,
                 'visible'          => true,
                 'required'         => false,
@@ -83,8 +80,7 @@ class CreateMiraklMciAttributes implements DataPatchInterface
                 'backend'                 => '',
                 'frontend'                => '',
                 'label'                   => 'MCI Shops SKUs',
-                'note'                    => 'Contains all Mirakl shops SKUs as shop_id1|sku1,shop_id2|sku2... '
-                    . 'This field is automatically filled.',
+                'note'                    => 'Contains all Mirakl shops SKUs as shop_id1|sku1,shop_id2|sku2... This field is automatically filled.',
                 'input'                   => 'text',
                 'class'                   => '',
                 'source'                  => '',
@@ -112,8 +108,7 @@ class CreateMiraklMciAttributes implements DataPatchInterface
                 'backend'                 => '',
                 'frontend'                => '',
                 'label'                   => 'MCI Variant Group Codes',
-                'note'                    => 'Contains all Mirakl shops variant group codes as '
-                    . 'shop_id1|variant_id1,shop_id2|variant_id2... This field is automatically filled.',
+                'note'                    => 'Contains all Mirakl shops variant group codes as shop_id1|variant_id1,shop_id2|variant_id2... This field is automatically filled.',
                 'input'                   => 'text',
                 'class'                   => '',
                 'source'                  => '',
@@ -154,7 +149,7 @@ class CreateMiraklMciAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -162,7 +157,7 @@ class CreateMiraklMciAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

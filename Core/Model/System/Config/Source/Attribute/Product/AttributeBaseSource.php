@@ -1,12 +1,9 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\System\Config\Source\Attribute\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\Attribute\CollectionFactory as AttributeCollectionFactory;
 
-class AttributeBaseSource
+class AttributeBaseSource 
 {
     /**
      * @var AttributeCollectionFactory
@@ -14,7 +11,7 @@ class AttributeBaseSource
     protected $attrCollectionFactory;
 
     /**
-     * @param AttributeCollectionFactory $collectionFactory
+     * @param   AttributeCollectionFactory  $collectionFactory
      */
     public function __construct(AttributeCollectionFactory $collectionFactory)
     {
@@ -24,7 +21,7 @@ class AttributeBaseSource
     /**
      * Retrieves all product attributes
      *
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

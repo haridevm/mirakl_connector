@@ -1,19 +1,15 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Controller\Adminhtml\Category;
 
 use Magento\Backend\App\Action;
 use Magento\Catalog\Model\CategoryFactory;
 use Magento\Catalog\Model\ResourceModel\CategoryFactory as CategoryResourceFactory;
 use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory as CategoryCollectionFactory;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Api\Helper\Config as ApiConfig;
 use Mirakl\Core\Controller\Adminhtml\RedirectRefererTrait;
 use Psr\Log\LoggerInterface;
 
-class UpdateTree extends Action implements HttpGetActionInterface
+class UpdateTree extends Action
 {
     use RedirectRefererTrait;
 
@@ -43,12 +39,12 @@ class UpdateTree extends Action implements HttpGetActionInterface
     protected $logger;
 
     /**
-     * @param Action\Context            $context
-     * @param CategoryFactory           $categoryFactory
-     * @param CategoryResourceFactory   $categoryResourceFactory
-     * @param CategoryCollectionFactory $categoryCollectionFactory
-     * @param ApiConfig                 $apiConfigHelper
-     * @param LoggerInterface           $logger
+     * @param   Action\Context              $context
+     * @param   CategoryFactory             $categoryFactory
+     * @param   CategoryResourceFactory     $categoryResourceFactory
+     * @param   CategoryCollectionFactory   $categoryCollectionFactory
+     * @param   ApiConfig                   $apiConfigHelper
+     * @param   LoggerInterface             $logger
      */
     public function __construct(
         Action\Context $context,
@@ -67,7 +63,7 @@ class UpdateTree extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MCI\Front\Request\Attribute\AttributeImportRequest;
@@ -14,8 +11,8 @@ class Attribute extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (PM01) Import operator attributes
      *
-     * @param array $data
-     * @return int|false
+     * @param   array   $data
+     * @return  int|false
      */
     public function export(array $data)
     {
@@ -36,9 +33,9 @@ class Attribute extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (PM11) Retrieves all attributes for parents and children of the requested hierarchy
      *
-     * @param string $hierarchyCode
-     * @param int    $maxLevel
-     * @return \Mirakl\MCI\Common\Domain\Collection\AttributeCollection
+     * @param   string  $hierarchyCode
+     * @param   int     $maxLevel
+     * @return  \Mirakl\MCI\Common\Domain\Collection\AttributeCollection
      */
     public function getAttributesConfiguration($hierarchyCode = null, $maxLevel = null)
     {
@@ -58,8 +55,8 @@ class Attribute extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (PM03) Send attributes import report request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \SplFileObject
+     * @param   int $synchroId
+     * @return  \SplFileObject
      */
     public function getErrorReport($synchroId)
     {
@@ -73,8 +70,8 @@ class Attribute extends ClientHelper\MCI implements SynchroResultInterface, Expo
     /**
      * (PM02) Send attributes import status request to Mirakl platform
      *
-     * @param int $synchroId
-     * @return \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
+     * @param   int $synchroId
+     * @return  \Mirakl\MCI\Common\Domain\AbstractCatalogImportResult
      */
     public function getSynchroResult($synchroId)
     {

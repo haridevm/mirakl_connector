@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\GraphQl\Plugin\Model\Cart;
 
 use Magento\Checkout\Model\Session;
@@ -10,9 +7,6 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Quote\Model\Quote;
 use Magento\QuoteGraphQl\Model\Cart\GetCartForUser;
 
-/**
- * @SuppressWarnings(PHPMD.CookieAndSessionMisuse)
- */
 class GetCartForUserPlugin
 {
     /**
@@ -26,8 +20,8 @@ class GetCartForUserPlugin
     protected $customerRepository;
 
     /**
-     * @param Session                     $checkoutSession
-     * @param CustomerRepositoryInterface $customerRepository
+     * @param   Session                         $checkoutSession
+     * @param   CustomerRepositoryInterface     $customerRepository
      */
     public function __construct(
         Session $checkoutSession,
@@ -38,9 +32,9 @@ class GetCartForUserPlugin
     }
 
     /**
-     * @param GetCartForUser $subject
-     * @param Quote          $result
-     * @return Quote
+     * @param   GetCartForUser  $subject
+     * @param   Quote           $result
+     * @return  Quote
      */
     public function afterExecute(GetCartForUser $subject, Quote $result)
     {

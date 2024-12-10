@@ -1,16 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Offer\State;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Mirakl\Core\Controller\Adminhtml\Offer\State;
 
-class Index extends State implements HttpGetActionInterface
+class Index extends State
 {
     /**
-     * @return void
+     * @return  void
      */
     public function execute()
     {

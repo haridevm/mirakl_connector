@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Test\Integration\Model\Product;
 
 use Mirakl\Mcm\Test\Integration\Model\Product\AbstractImportMcmProductTestCase as MiraklBaseTestCase;
@@ -18,20 +15,20 @@ class BulkFailImportProductTest extends MiraklBaseTestCase
      * @magentoConfigFixture current_store mirakl_mcm/import_product/enable_mcm 1
      * @magentoConfigFixture current_store mirakl_mcm/import_product/mode bulk
      *
-     * @param string $csv
-     * @param array  $errors
+     * @param   string  $csv
+     * @param   array   $errors
      */
     public function testDataErrorMcmImport($csv, $errors)
     {
-        $process = $this->runImport($csv);
+        $this->runImport($csv);
 
         foreach ($errors as $error) {
-            $this->assertStringContainsString($error, $process->getOutput());
+            $this->assertStringContainsString($error, $this->processModel->getOutput());
         }
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function importMcmErrorDataProvider()
     {

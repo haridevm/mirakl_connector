@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Model\Order;
 
 use Magento\Sales\Model\Order\Invoice;
@@ -9,9 +6,9 @@ use Magento\Sales\Model\Order\Invoice;
 class InvoiceManagement
 {
     /**
-     * @param Invoice $invoice
-     * @param int     $miraklOfferId
-     * @return bool
+     * @param   Invoice $invoice
+     * @param   int     $miraklOfferId
+     * @return  bool
      */
     public function canIncludeMiraklOfferShipping(Invoice $invoice, $miraklOfferId)
     {

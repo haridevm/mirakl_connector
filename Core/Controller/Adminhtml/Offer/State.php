@@ -1,23 +1,16 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Offer;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 abstract class State extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Core::offer_states';
+    const ADMIN_RESOURCE = 'Mirakl_Core::offer_states';
 
     /**
      * @var Registry
@@ -25,8 +18,8 @@ abstract class State extends Action
     protected $_coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $coreRegistry
+     * @param   Context     $context
+     * @param   Registry    $coreRegistry
      */
     public function __construct(Context $context, Registry $coreRegistry)
     {
@@ -35,7 +28,9 @@ abstract class State extends Action
     }
 
     /**
-     * @return $this
+     * Init action
+     *
+     * @return  $this
      */
     protected function _initAction()
     {

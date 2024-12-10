@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Document;
 
 use Magento\Backend\App\Action;
@@ -9,16 +6,12 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\Registry;
 use Mirakl\Core\Model\ResourceModel\Document\TypeFactory as DocumentTypeResourceFactory;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 abstract class Type extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Core::document_types';
+    const ADMIN_RESOURCE = 'Mirakl_Core::document_types';
 
     /**
      * @var Registry
@@ -31,9 +24,9 @@ abstract class Type extends Action
     protected $_documentTypeResourceFactory;
 
     /**
-     * @param Context                     $context
-     * @param Registry                    $coreRegistry
-     * @param DocumentTypeResourceFactory $documentTypeResourceFactory
+     * @param   Context                     $context
+     * @param   Registry                    $coreRegistry
+     * @param   DocumentTypeResourceFactory $documentTypeResourceFactory
      */
     public function __construct(
         Context $context,
@@ -46,7 +39,9 @@ abstract class Type extends Action
     }
 
     /**
-     * @return $this
+     * Init action
+     *
+     * @return  $this
      */
     protected function _initAction()
     {

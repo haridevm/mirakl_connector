@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Block\Adminhtml\Offer;
 
 use Magento\Backend\Block\Widget\Context;
@@ -17,8 +14,8 @@ class View extends Container
     protected $coreRegistry;
 
     /**
-     * @param Context  $context
-     * @param Registry $coreRegistry
+     * @param   Context     $context
+     * @param   Registry    $coreRegistry
      */
     public function __construct(
         Context $context,
@@ -29,8 +26,7 @@ class View extends Container
     }
 
     /**
-     * @inheritdoc
-     * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
+     * {@inheritdoc}
      */
     protected function _construct()
     {
@@ -44,7 +40,7 @@ class View extends Container
     }
 
     /**
-     * @return Offer
+     * @return  Offer
      */
     public function getOffer()
     {

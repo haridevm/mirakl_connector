@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Model\System\Config\Source;
 
 use Magento\Store\Model\StoreManagerInterface;
@@ -19,7 +16,7 @@ class Store
     private $storeManager;
 
     /**
-     * @param StoreManagerInterface $storeManager
+     * @param   StoreManagerInterface   $storeManager
      */
     public function __construct(StoreManagerInterface $storeManager)
     {
@@ -27,7 +24,7 @@ class Store
     }
 
     /**
-     * @return array
+     * @return  array
      */
     public function toOptionArray()
     {

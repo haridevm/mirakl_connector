@@ -1,22 +1,17 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
 use GuzzleHttp\Exception\BadResponseException;
-use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Mirakl\MMP\Common\Domain\Order\Message\CreateOrderMessage;
 
-class PostMessage extends AbstractOrder implements HttpPostActionInterface
+class PostMessage extends AbstractOrder
 {
     /**
      * Submit new message action
      *
-     * @return ResultInterface
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @return  ResultInterface
      */
     public function execute()
     {
@@ -50,7 +45,8 @@ class PostMessage extends AbstractOrder implements HttpPostActionInterface
             try {
                 $customer = $this->customerSession->getCustomerDataObject();
                 $message = new CreateOrderMessage();
-                $message->setCustomerId($order->getCustomerId() ?: $customer->getId())
+                $message
+                    ->setCustomerId($order->getCustomerId() ?: $customer->getId())
                     ->setCustomerFirstname($order->getCustomerFirstname() ?: $customer->getFirstname())
                     ->setCustomerLastname($order->getCustomerLastname() ?: $customer->getLastname())
                     ->setCustomerEmail($order->getCustomerEmail() ?: $customer->getEmail())

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Model\Product\Attribute\Backend\Shop;
 
 use Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend;
@@ -9,7 +6,8 @@ use Magento\Eav\Model\Entity\Attribute\Backend\AbstractBackend;
 class Authorized extends AbstractBackend
 {
     /**
-     * @inheritdoc
+     * @param   \Magento\Framework\DataObject   $object
+     * @return  $this
      */
     public function beforeSave($object)
     {
@@ -21,8 +19,7 @@ class Authorized extends AbstractBackend
             }
             $object->setData($attributeCode, implode(',', $data));
         }
-
-        if ($object->getData($attributeCode) === null) {
+        if (is_null($object->getData($attributeCode))) {
             $object->setData($attributeCode, false);
         }
 
@@ -30,7 +27,8 @@ class Authorized extends AbstractBackend
     }
 
     /**
-     * @inheritdoc
+     * @param   \Magento\Framework\DataObject   $object
+     * @return  $this
      */
     public function afterLoad($object)
     {

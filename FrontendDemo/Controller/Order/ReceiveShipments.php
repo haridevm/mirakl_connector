@@ -1,15 +1,11 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Controller\Order;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Mirakl\Api\Helper\Shipment as ShipmentApi;
 use Mirakl\MMP\Common\Domain\Shipment\Shipment;
 
-class ReceiveShipments extends AbstractOrder implements HttpGetActionInterface
+class ReceiveShipments extends AbstractOrder
 {
     /**
      * Verify that given shipment id is part of the Mirakl order (calls API ST11)
@@ -35,7 +31,7 @@ class ReceiveShipments extends AbstractOrder implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -84,7 +80,7 @@ class ReceiveShipments extends AbstractOrder implements HttpGetActionInterface
     }
 
     /**
-     * @return ShipmentApi
+     * @return  ShipmentApi
      */
     protected function getShipmentApi()
     {

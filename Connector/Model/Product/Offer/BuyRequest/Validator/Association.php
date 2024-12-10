@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\BuyRequest\Validator;
@@ -12,7 +11,7 @@ use Mirakl\Connector\Model\Offer;
 class Association implements ValidatorInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function validate(DataObject $buyRequest, Product $product, Offer $offer): bool
     {

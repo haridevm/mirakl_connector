@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\CatalogInventory\Quote\Item;
 
 use Magento\CatalogInventory\Model\Quote\Item\QuantityValidator\QuoteItemQtyList;
@@ -14,18 +11,16 @@ class QuoteItemQtyListPlugin
      * data is valid if you check quote item qty and use singleton instance
      *
      * @var array
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_checkedQuoteItems = [];
 
     /**
      * @var ItemOptionCollectionFactory
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_itemOptionCollectionFactory;
 
     /**
-     * @param ItemOptionCollectionFactory $itemOptionCollectionFactory
+     * @param   ItemOptionCollectionFactory $itemOptionCollectionFactory
      */
     public function __construct(ItemOptionCollectionFactory $itemOptionCollectionFactory)
     {
@@ -41,22 +36,16 @@ class QuoteItemQtyListPlugin
      * - we try to add the same product but the operator offer with qty = 1
      * - Magento checks for qty = 2 before adding the product to the cart when we should exclude the offer qty
      *
-     * @param QuoteItemQtyList $subject
-     * @param \Closure         $proceed
-     * @param int              $productId
-     * @param int              $quoteItemId
-     * @param int              $quoteId
-     * @param int              $itemQty
-     * @return int
+     * @param   QuoteItemQtyList    $subject
+     * @param   \Closure            $proceed
+     * @param   int                 $productId
+     * @param   int                 $quoteItemId
+     * @param   int                 $quoteId
+     * @param   int                 $itemQty
+     * @return  int
      */
-    public function aroundGetQty(
-        QuoteItemQtyList $subject,
-        \Closure $proceed,
-        $productId,
-        $quoteItemId,
-        $quoteId,
-        $itemQty
-    ) {
+    public function aroundGetQty(QuoteItemQtyList $subject, \Closure $proceed, $productId, $quoteItemId, $quoteId, $itemQty)
+    {
         if ($quoteItemId) {
             $collection = $this->_itemOptionCollectionFactory->create();
             $collection->addItemFilter($quoteItemId)
@@ -74,10 +63,8 @@ class QuoteItemQtyListPlugin
         }
 
         $qty = $itemQty;
-        if (
-            isset($this->_checkedQuoteItems[$quoteId][$productId]['qty']) &&
-            !in_array($quoteItemId, $this->_checkedQuoteItems[$quoteId][$productId]['items'])
-        ) {
+        if (isset($this->_checkedQuoteItems[$quoteId][$productId]['qty']) &&
+            !in_array($quoteItemId, $this->_checkedQuoteItems[$quoteId][$productId]['items'])) {
             $qty += $this->_checkedQuoteItems[$quoteId][$productId]['qty'];
         }
 
@@ -88,8 +75,8 @@ class QuoteItemQtyListPlugin
     }
 
     /**
-     * @param string $str
-     * @return array
+     * @param   string  $str
+     * @return  array
      */
     private function decodeOptionValue($str)
     {
@@ -98,6 +85,6 @@ class QuoteItemQtyListPlugin
             return $value;
         }
 
-        return unserialize($str); // phpcs:ignore
+        return unserialize($str);
     }
 }

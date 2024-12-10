@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Block\Sales\CreditMemo\Create;
 
 use Magento\Framework\DataObject;
@@ -13,7 +10,6 @@ class MiraklAdjustments extends Template
 {
     /**
      * @var Creditmemo
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_source;
 
@@ -23,9 +19,9 @@ class MiraklAdjustments extends Template
     protected $taxConfig;
 
     /**
-     * @param Template\Context $context
-     * @param TaxConfig        $taxConfig
-     * @param array            $data
+     * @param   Template\Context    $context
+     * @param   TaxConfig           $taxConfig
+     * @param   array               $data
      */
     public function __construct(
         Template\Context $context,
@@ -37,8 +33,8 @@ class MiraklAdjustments extends Template
     }
 
     /**
-     * @param float $value
-     * @return string
+     * @param   float   $value
+     * @return  string
      */
     public function formatValue($value)
     {
@@ -46,7 +42,7 @@ class MiraklAdjustments extends Template
     }
 
     /**
-     * @return $this
+     * @return  $this
      */
     public function initTotals()
     {
@@ -66,7 +62,7 @@ class MiraklAdjustments extends Template
     }
 
     /**
-     * @return float
+     * @return  float
      */
     public function getShippingAmount()
     {
@@ -101,7 +97,7 @@ class MiraklAdjustments extends Template
     }
 
     /**
-     * @return Creditmemo
+     * @return  Creditmemo
      */
     public function getSource()
     {

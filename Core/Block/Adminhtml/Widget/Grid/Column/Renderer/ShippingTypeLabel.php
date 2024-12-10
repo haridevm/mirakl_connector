@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Block\Adminhtml\Widget\Grid\Column\Renderer;
 
 use Magento\Backend\Block\Context;
@@ -26,12 +23,16 @@ class ShippingTypeLabel extends AbstractRenderer
         Json $json,
         array $data = []
     ) {
-        parent::__construct($context, $data);
+        parent::__construct(
+            $context,
+            $data
+        );
         $this->json = $json;
     }
 
     /**
-     * @inheritdoc
+     * @param   DataObject  $row
+     * @return  string
      */
     public function render(DataObject $row)
     {
@@ -53,8 +54,6 @@ class ShippingTypeLabel extends AbstractRenderer
             }
         }
 
-        return $output
-            ? '<table class="mirakl-shipping-types-table mirakl-shipping-type-label">' . $output . '</table>'
-            : '';
+        return $output ? '<table class="mirakl-shipping-types-table mirakl-shipping-type-label">' . $output. '</table>' : '';
     }
 }

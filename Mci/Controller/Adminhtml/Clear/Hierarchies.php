@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Controller\Adminhtml\Clear;
 
 use Mirakl\Mci\Controller\Adminhtml\Clear;

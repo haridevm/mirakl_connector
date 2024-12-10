@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Test\Unit\Model\Order;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
@@ -13,22 +10,22 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
     /** @var OrderConverter */
     protected $orderConverter;
 
-    /** @var \Mirakl\Connector\Helper\Config|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Mirakl\Connector\Helper\Config|\PHPUnit_Framework_MockObject_MockObject */
     protected $configMock;
 
-    /** @var \Magento\Directory\Model\Country|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Directory\Model\Country|\PHPUnit_Framework_MockObject_MockObject */
     protected $countryMock;
 
-    /** @var \Magento\Directory\Model\CountryFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Directory\Model\CountryFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $countryFactoryMock;
 
-    /** @var \Magento\Sales\Model\ResourceModel\Order\Tax\Item|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Sales\Model\ResourceModel\Order\Tax\Item|\PHPUnit_Framework_MockObject_MockObject */
     protected $orderItemTaxMock;
 
-    /** @var \Magento\Sales\Model\ResourceModel\Order\Tax\ItemFactory|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Sales\Model\ResourceModel\Order\Tax\ItemFactory|\PHPUnit_Framework_MockObject_MockObject */
     protected $orderItemTaxFactoryMock;
 
-    /** @var \Magento\Framework\Event\ManagerInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\Event\ManagerInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $eventManagerMock;
 
     protected function setUp(): void
@@ -62,8 +59,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $this->orderItemTaxFactoryMock = $this
-            ->getMockBuilder(\Magento\Sales\Model\ResourceModel\Order\Tax\ItemFactory::class)
+        $this->orderItemTaxFactoryMock = $this->getMockBuilder(\Magento\Sales\Model\ResourceModel\Order\Tax\ItemFactory::class)
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -83,9 +79,6 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
         ]);
     }
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     public function testConvertOrder()
     {
         $orderMock = $this->getMockBuilder(\Magento\Sales\Model\Order::class)
@@ -93,7 +86,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $orderData = $this->getJsonFileContents('order/000000086/order.json');
+        $orderData = $this->_getJsonFileContents('order/000000086/order.json');
         $orderMock->setData($orderData);
 
         $orderMock->expects($this->any())
@@ -104,7 +97,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             ->method('getId')
             ->willReturn($orderMock->getData('entity_id'));
 
-        $orderItemsData = $this->getJsonFileContents('order/000000086/order_items.json');
+        $orderItemsData = $this->_getJsonFileContents('order/000000086/order_items.json');
         $orderItemsMock = [];
 
         foreach ($orderItemsData as $itemData) {
@@ -131,7 +124,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             ->method('getItems')
             ->willReturn($orderItemsMock);
 
-        $billingAddressData = $this->getJsonFileContents('order/000000086/order_billing_address.json');
+        $billingAddressData = $this->_getJsonFileContents('order/000000086/order_billing_address.json');
         $billingAddressMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Address::class)
             ->setMethods()
             ->disableOriginalConstructor()
@@ -141,7 +134,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             ->method('getBillingAddress')
             ->willReturn($billingAddressMock);
 
-        $shippingAddressData = $this->getJsonFileContents('order/000000086/order_shipping_address.json');
+        $shippingAddressData = $this->_getJsonFileContents('order/000000086/order_shipping_address.json');
         $shippingAddressMock = $this->getMockBuilder(\Magento\Sales\Model\Order\Address::class)
             ->setMethods()
             ->disableOriginalConstructor()
@@ -161,7 +154,7 @@ class ConverterTest extends \Mirakl\Core\Test\TestCase
             'iso3_code'  => 'FRA',
         ]);
 
-        $orderItemsTaxesData = $this->getJsonFileContents('order/000000086/order_items_taxes.json');
+        $orderItemsTaxesData = $this->_getJsonFileContents('order/000000086/order_items_taxes.json');
         $this->orderItemTaxMock->expects($this->any())
             ->method('getTaxItemsByOrderId')
             ->willReturn($orderItemsTaxesData);

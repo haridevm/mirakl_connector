@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Ui\Component\Listing\Column;
@@ -18,8 +17,8 @@ class Status extends Column
             foreach ($dataSource['data']['items'] as &$row) {
                 if ($row[$this->getName()]) {
                     $statusClass = Process::getClassForStatus($row[$this->getName()]);
-                    $row[$this->getName()] = '<span class="' . $statusClass . '">'
-                        . '<span>' . __($row[$this->getName()]) . '</span></span>';
+                    $row[$this->getName()] = '<span class="' . $statusClass . '">' .
+                        '<span>' . __($row[$this->getName()]) . '</span></span>';
                 }
             }
             unset($row);

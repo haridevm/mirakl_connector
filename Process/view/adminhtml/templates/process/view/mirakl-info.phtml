@@ -15,7 +15,7 @@ $process = $block->getProcess();
                 <tbody>
                 <tr>
                     <th><?= $block->escapeHtml(__('Mirakl API Status')) ?></th>
-                    <td><p class="report-status"><span class="<?= $block->escapeHtml($process->getStatusClass(true)) ?>"><span><?= /* @escapeNotVerified */ __($process->getMiraklStatus()) ?></span></span></p></td>
+                    <td><p class="report-status"><span class="<?= $block->escapeHtml($process->getStatusClass(true)) ?>"><span><?php /* @escapeNotVerified */ echo __($process->getMiraklStatus()) ?></span></span></p></td>
                 </tr>
                 <tr>
                     <th><?= $block->escapeHtml(__('Synchro Id')) ?></th>
@@ -23,11 +23,11 @@ $process = $block->getProcess();
                 </tr>
                 <?php if ($url = $process->getDownloadFileUrl(true)): ?>
                     <tr>
-                        <th><?= $block->escapeHtml(__('Report File')) ?></th>
+                        <th><<?= $block->escapeHtml(__('Report File')) ?></th>
                         <td>
-                            <a href="<?= $block->escapeUrl($url) ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;', true)): ?>&nbsp;(<?= /* @escapeNotVerified */ $fileSize ?>)<?php endif ?>
+                            <a href="<?= $url ?>" title="<?= $block->escapeHtml(__('Download')) ?>"><?= $block->escapeHtml(__('Download')) ?></a><?php if ($fileSize = $process->getFileSizeFormatted('&nbsp;', true)): ?>&nbsp;(<?php echo $fileSize ?>)<?php endif ?>
                             <?php if ($process->canShowFile(true)): ?>
-                                <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->escapeUrl($block->getUrl('*/*/showFile', ['id' => $process->getId(), 'mirakl' => true])) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
+                                <?= $block->escapeHtml(__('or')) ?> <a target="_blank" href="<?= $block->getUrl('*/*/showFile', ['id' => $process->getId(), 'mirakl' => true]) ?>" title="<?= $block->escapeHtml(__('Open in Browser')) ?>"><?= $block->escapeHtml(__('open in browser')) ?></a>
                             <?php endif ?>
                         </td>
                     </tr>

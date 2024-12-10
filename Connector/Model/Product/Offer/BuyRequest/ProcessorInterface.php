@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Product\Offer\BuyRequest;
@@ -11,7 +10,7 @@ interface ProcessorInterface
 {
     /**
      * @param DataObject $buyRequest
-     * @param Product    $product
+     * @param Product $product
      * @return void
      */
     public function process(DataObject $buyRequest, Product $product): void;

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\OfferIndexer\Model\Offer;
@@ -10,7 +9,7 @@ use Mirakl\Connector\Model\Offer;
 interface AvailabilityInterface
 {
     /**
-     * @param Offer          $offer
+     * @param Offer $offer
      * @param StoreInterface $store
      * @return bool
      */

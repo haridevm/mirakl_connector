@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Plugin\Model\Order\CreditMemo;
 
 use Magento\Sales\Api\Data\CreditmemoExtension;
@@ -13,10 +10,10 @@ use Magento\Sales\Model\Order\Creditmemo\RefundOperation;
 class RefundOperationPlugin
 {
     /**
-     * @param RefundOperation     $subject
-     * @param OrderInterface      $order
-     * @param CreditmemoInterface $creditMemo
-     * @return OrderInterface
+     * @param   RefundOperation     $subject
+     * @param   OrderInterface      $order
+     * @param   CreditmemoInterface $creditMemo
+     * @return  OrderInterface
      */
     public function afterExecute(RefundOperation $subject, OrderInterface $order, CreditmemoInterface $creditMemo)
     {

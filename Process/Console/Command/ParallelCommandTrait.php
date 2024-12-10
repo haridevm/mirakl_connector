@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Process\Console\Command;
 
 use Mirakl\Process\Model\Process;
@@ -15,8 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 trait ParallelCommandTrait
 {
     /**
-     * @param array $options
-     * @return void
+     * @param   array   $options
+     * @return  void
      */
     public function addParallelCommandOptions(array &$options)
     {
@@ -30,9 +27,9 @@ trait ParallelCommandTrait
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @return int
+     * @param   InputInterface  $input
+     * @param   OutputInterface $output
+     * @return  int
      */
     protected function getMaxRunningProcessesOption(InputInterface $input, OutputInterface $output, $default = 1)
     {
@@ -47,10 +44,10 @@ trait ParallelCommandTrait
     }
 
     /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param string|null     $hash
-     * @return bool
+     * @param   InputInterface  $input
+     * @param   OutputInterface $output
+     * @param   string|null     $hash
+     * @return  bool
      */
     public function canRunCommand(InputInterface $input, OutputInterface $output, $hash = null)
     {

@@ -1,68 +1,69 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mirakl\Process\Model;
 
-use Mirakl\Process\Model\ResourceModel\Process\CollectionFactory as ProcessCollectionFactory;
+use Magento\Framework\App\Filesystem\DirectoryList;
+use Magento\Framework\DB\Select;
+use Magento\Framework\Filesystem;
+use Magento\Framework\Filesystem\Io\File;
+use Mirakl\Process\Model\ResourceModel\Process as ProcessResource;
 
 class HistoryClearer
 {
-    public const FILES_DELETE_STEP = 1000;
+    const FILES_DELETE_STEP              = 10000;
+    const PROCESS_FILES_DIRECTORY_SUFFIX = 'mirakl/process';
 
     /**
-     * @var ProcessCollectionFactory
+     * @var ProcessResource
      */
-    private $processCollectionFactory;
+    private $processResource;
 
     /**
-     * @var DeleteHandler
+     * @var File
      */
-    private $deleteHandler;
+    private $file;
 
     /**
-     * @var int
+     * @var Filesystem
      */
-    private int $deleteStep;
+    private $filesystem;
 
     /**
-     * @param ProcessCollectionFactory $processCollectionFactory
-     * @param DeleteHandler            $deleteHandler
-     * @param int                      $deleteStep
+     * @param ProcessResource  $processResource
+     * @param File             $file
+     * @param Filesystem       $filesystem
      */
     public function __construct(
-        ProcessCollectionFactory $processCollectionFactory,
-        DeleteHandler $deleteHandler,
-        int $deleteStep = self::FILES_DELETE_STEP
+        ProcessResource $processResource,
+        File $file,
+        Filesystem $filesystem
     ) {
-        $this->processCollectionFactory = $processCollectionFactory;
-        $this->deleteHandler = $deleteHandler;
-        $this->deleteStep = $deleteStep;
+        $this->processResource = $processResource;
+        $this->file = $file;
+        $this->filesystem = $filesystem;
     }
 
     /**
      * Deletes processes and associated files created before $beforeDate
      *
-     * @param Process|null $process
-     * @param string|null  $beforeDate
-     * @throws \Exception
+     * @param   Process|null $process
+     * @param   string|null  $beforeDate
+     * @throws  \Exception
      */
     public function execute(?Process $process = null, ?string $beforeDate = null)
     {
         try {
             if ($process && $beforeDate) {
                 $process->output(__('Deleting all Mirakl processes and files created before %1...', $beforeDate), true);
-            } elseif ($process) {
+            } else if ($process){
                 $process->output(__('Deleting all Mirakl processes and files...'), true);
             }
 
-            if ($beforeDate) {
-                $this->deleteBeforeDate($beforeDate);
-            } else {
-                $this->deleteHandler->executeAll();
-            }
+            $this->deleteProcesses($beforeDate);
 
-            $process?->output(__('Done!', true));
+            if ($process) {
+                $process->output(__('Done!'), true);
+            }
         } catch (\Exception $e) {
             if ($process) {
                 $process->output(__('An error occurred: %1', $e->getMessage()), true);
@@ -75,24 +76,90 @@ class HistoryClearer
     /**
      * Deletes all process files/directories created before $beforeDate
      *
-     * @param string $beforeDate
-     * @return void
+     * @param string|null  $beforeDate
+     * @throws \Exception
      */
-    private function deleteBeforeDate(string $beforeDate): void
+    private function deleteProcesses(?string $beforeDate)
     {
-        while (true) {
-            // Fetch processes step by step and delete associated files
-            $collection = $this->processCollectionFactory->create();
-            $collection->addFieldToFilter('created_at', ['lt' => $beforeDate]);
-            $collection->getSelect()
-                ->limit($this->deleteStep)
-                ->order('id ASC');
+        $connection = $this->processResource->getConnection();
 
-            if (!$collection->count()) {
+        if (!$beforeDate) {
+            // Remove all processes files and folders and truncate process table
+            $directory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath() . self::PROCESS_FILES_DIRECTORY_SUFFIX;
+            $this->file->rmdirRecursive($directory);
+            $connection->truncateTable($this->processResource->getMainTable());
+            return;
+        }
+
+        $tableName = $this->processResource->getMainTable();
+
+        // Fetch processes step by step and delete associated files
+        while (true) {
+            $select = $connection->select()
+                ->from(
+                    ['t' => $tableName],
+                    ['id', 'file', 'mirakl_file']
+                )
+                ->where('created_at < ?', $beforeDate)
+                ->order('id ' . Select::SQL_ASC)
+                ->limit(self::FILES_DELETE_STEP);
+
+            $processes = $connection->fetchAll($select);
+            if (!count($processes)) {
                 break;
             }
+            // We delete processes associated files
+            $maxId = 0;
+            foreach ($processes as $process) {
+                $maxId = max($maxId, $process['id']);
+                $file = $process['file'];
+                if ($file && $this->file->fileExists($file)) {
+                    $this->file->rm($file);
+                }
+                $miraklFile = $process['mirakl_file'];
+                if ($miraklFile && $this->file->fileExists($miraklFile)) {
+                    $this->file->rm($miraklFile);
+                }
+            }
 
-            $this->deleteHandler->executeCollection($collection);
+            $select->reset(Select::LIMIT_COUNT);
+            $select->reset(Select::ORDER);
+            $select->where('id <= ?', $maxId);
+
+            // We delete processed rows from database
+            $delete = $connection->deleteFromSelect($select, 't');
+            $connection->query($delete);
         }
+
+        // Remove empty process files directories
+        $directory = $this->filesystem->getDirectoryRead(DirectoryList::MEDIA)->getAbsolutePath() . self::PROCESS_FILES_DIRECTORY_SUFFIX;
+        if (is_dir($directory)) {
+            $this->removeEmptyFoldersRecursive($directory);
+        }
+    }
+
+    /**
+     * Delete empty sub folders recursively
+     *
+     * @param string $directory
+     * @return bool
+     */
+    private function removeEmptyFoldersRecursive(string $directory)
+    {
+        $empty = true;
+        foreach (glob($directory . DIRECTORY_SEPARATOR . "*") as $path) {
+            if (is_dir($path)) {
+                if (!$this->removeEmptyFoldersRecursive($path)) {
+                    $empty = false;
+                }
+            } else {
+                $empty = false;
+            }
+        }
+        if ($empty) {
+            $this->file->rmdir($directory);
+        }
+
+        return $empty;
     }
 }

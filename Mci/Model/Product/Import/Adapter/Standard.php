@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Product\Import\Adapter;
 
 use Magento\Catalog\Model\Product;
@@ -20,9 +17,6 @@ use Mirakl\Mci\Model\Product\Attribute\AttributeUtil;
 use Mirakl\Mci\Model\Product\Import\Exception\WarningException;
 use Mirakl\Mci\Model\Product\Import\Indexer\Indexer;
 
-/**
- * @SuppressWarnings(PHPMD)
- */
 class Standard implements AdapterInterface
 {
     use AdapterTrait;
@@ -88,18 +82,18 @@ class Standard implements AdapterInterface
     protected $objectManager;
 
     /**
-     * @param CoreHelper             $coreHelper
-     * @param MciHelper              $mciHelper
-     * @param Config                 $config
-     * @param CategoryHelper         $categoryHelper
-     * @param ProductHelper          $productHelper
-     * @param DataHelper             $dataHelper
-     * @param UrlHelper              $urlHelper
-     * @param Finder                 $finder
-     * @param ProductAction          $productAction
-     * @param ProductResourceFactory $productResourceFactory
-     * @param Indexer                $indexer
-     * @param ObjectManagerInterface $objectManager
+     * @param   CoreHelper              $coreHelper
+     * @param   MciHelper               $mciHelper
+     * @param   Config                  $config
+     * @param   CategoryHelper          $categoryHelper
+     * @param   ProductHelper           $productHelper
+     * @param   DataHelper              $dataHelper
+     * @param   UrlHelper               $urlHelper
+     * @param   Finder                  $finder
+     * @param   ProductAction           $productAction
+     * @param   ProductResourceFactory  $productResourceFactory
+     * @param   Indexer                 $indexer
+     * @param   ObjectManagerInterface  $objectManager
      */
     public function __construct(
         CoreHelper $coreHelper,
@@ -130,8 +124,8 @@ class Standard implements AdapterInterface
     }
 
     /**
-     * @param Product $product
-     * @return string
+     * @param   Product $product
+     * @return  string
      */
     private function getParentProductHash(Product $product)
     {
@@ -145,7 +139,7 @@ class Standard implements AdapterInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function import($shopId, array $data)
     {
@@ -173,11 +167,7 @@ class Standard implements AdapterInterface
         $defaultLocale = $this->config->getLocale();
         foreach (array_keys($data) as $attrCode) {
             $attrInfo = AttributeUtil::parse($attrCode);
-            if (
-                $attrInfo->isLocalized()
-                && $attrInfo->getLocale() == $defaultLocale
-                && !isset($data[$attrInfo->getCode()])
-            ) {
+            if ($attrInfo->isLocalized() && $attrInfo->getLocale() == $defaultLocale && !isset($data[$attrInfo->getCode()])) {
                 $data[$attrInfo->getCode()] = $data[$attrCode];
                 unset($data[$attrCode]);
             }
@@ -255,9 +245,8 @@ class Standard implements AdapterInterface
             // Create parent product if simple product has variant attributes
             if (!$parentProduct && $this->config->isAutoCreateConfigurableProducts()) {
                 $parentProduct = $this->productHelper->createConfigurableProduct($category, $data);
-                foreach (array_keys($this->dataHelper->getDataVariants($data)) as $code) {
-                    // Variant attributes must not have any values in parent product
-                    $parentProduct->setData($code);
+                foreach ($this->dataHelper->getDataVariants($data) as $code => $value) {
+                    $parentProduct->setData($code, null); // Variant attributes must not have any values in parent product
                 }
                 $this->dataHelper->updateProductImagesProcessingFlag($data, $parentProduct);
                 if ($productExists) {
@@ -315,11 +304,7 @@ class Standard implements AdapterInterface
 
             foreach (array_keys($data) as $attrCode) {
                 $attrInfo = AttributeUtil::parse($attrCode);
-                if (
-                    $attrInfo->isLocalized()
-                    && $data[$attrCode] != $data[$attrInfo->getCode()]
-                    && strlen(trim($data[$attrCode])) > 0
-                ) {
+                if ($attrInfo->isLocalized() && $data[$attrCode] != $data[$attrInfo->getCode()] && strlen(trim($data[$attrCode])) > 0) {
                     // Set localized data in another locale only if values are different
                     $dataLocalized[$attrInfo->getLocale()][$attrInfo->getCode()] = $data[$attrCode];
                 }
@@ -328,10 +313,9 @@ class Standard implements AdapterInterface
             if (!empty($dataLocalized)) {
                 // Initialize products to update
                 $productIds = [$product->getId()];
-                if (
-                    $parentProduct
+                if ($parentProduct
                     && (!$parentProductExists || ($allowUpdate && $product->getId() < $parentProduct->getId()))
-                ) {
+                )  {
                     /**
                      * We update the parent product store view scope in the following cases:
                      *   - parent product did not exist before (has just been created)

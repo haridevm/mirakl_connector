@@ -1,22 +1,18 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Controller\Adminhtml\Shipping\Type;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Registry;
 use Mirakl\Core\Model\Shipping\TypeFactory as ShippingTypeFactory;
 use Mirakl\Core\Model\ResourceModel\Shipping\Type as ShippingTypeResource;
 
-class View extends Action implements HttpGetActionInterface
+class View extends Action
 {
     /**
      * @see _isAllowed()
      */
-    public const ADMIN_RESOURCE = 'Mirakl_Core::shipping_types';
+    const ADMIN_RESOURCE = 'Mirakl_Core::shipping_types';
 
     /**
      * @var Registry
@@ -52,7 +48,7 @@ class View extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -72,7 +68,5 @@ class View extends Action implements HttpGetActionInterface
         $this->_setActiveMenu('Mirakl_Core::shipping_types');
         $this->_view->getPage()->getConfig()->getTitle()->prepend(__('Shipping Method #%1', $model->getId()));
         $this->_view->renderLayout();
-
-        return $this->_response;
     }
 }

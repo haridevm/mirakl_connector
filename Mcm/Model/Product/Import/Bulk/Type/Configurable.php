@@ -1,12 +1,8 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\Type;
 
-/**
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Configurable extends \Magento\ConfigurableImportExport\Model\Import\Product\Type\Configurable
 {
     use TypeTrait;

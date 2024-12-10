@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Helper\Product\Export;
 
 use Magento\Catalog\Model\Product;
@@ -30,9 +27,9 @@ class Report extends AbstractHelper
     protected $productResource;
 
     /**
-     * @param Context                  $context
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param ProductResourceFactory   $productResourceFactory
+     * @param   Context                     $context
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   ProductResourceFactory      $productResourceFactory
      */
     public function __construct(
         Context $context,
@@ -49,8 +46,8 @@ class Report extends AbstractHelper
      * Updates mirakl_mcm_product_id field according to specified report data.
      * Returns the number of updated products.
      *
-     * @param array $report
-     * @return int
+     * @param   array   $report
+     * @return  int
      */
     public function updateMiraklProductIds(array $report)
     {
@@ -85,7 +82,7 @@ class Report extends AbstractHelper
 
     /**
      * @param Product $product
-     * @param string  $miraklProductId
+     * @param string $miraklProductId
      * @return int
      */
     private function saveMiraklProductId(Product $product, string $miraklProductId)

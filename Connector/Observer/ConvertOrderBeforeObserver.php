@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -16,7 +13,7 @@ class ConvertOrderBeforeObserver implements ObserverInterface
     protected $configHelper;
 
     /**
-     * @param ConfigHelper $configHelper
+     * @param   ConfigHelper    $configHelper
      */
     public function __construct(ConfigHelper $configHelper)
     {
@@ -26,7 +23,7 @@ class ConvertOrderBeforeObserver implements ObserverInterface
     /**
      * Creates the Mirakl order when Magento order status is one of those defined in configuration
      *
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

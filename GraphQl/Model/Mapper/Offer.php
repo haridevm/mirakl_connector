@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Mapper;
@@ -10,9 +9,9 @@ use Mirakl\Connector\Model\Offer as OfferModel;
 class Offer
 {
     /**
-     * @param Product    $product
-     * @param OfferModel $offer
-     * @return array
+     * @param   Product     $product
+     * @param   OfferModel  $offer
+     * @return  array
      */
     public function toGraphQlArray(Product $product, OfferModel $offer)
     {

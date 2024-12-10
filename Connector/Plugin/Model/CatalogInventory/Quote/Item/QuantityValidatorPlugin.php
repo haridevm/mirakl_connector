@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Plugin\Model\CatalogInventory\Quote\Item;
 
 use Magento\Catalog\Model\Product;
@@ -25,8 +22,8 @@ class QuantityValidatorPlugin
     protected $mathDivision;
 
     /**
-     * @param OfferFactory $offerFactory
-     * @param MathDivision $mathDivision
+     * @param   OfferFactory    $offerFactory
+     * @param   MathDivision    $mathDivision
      */
     public function __construct(OfferFactory $offerFactory, MathDivision $mathDivision)
     {
@@ -37,12 +34,10 @@ class QuantityValidatorPlugin
     /**
      * Check offer qty if quote item refer to an offer
      *
-     * @param QuantityValidator $subject
-     * @param \Closure          $proceed
-     * @param Observer          $observer
-     * @return void
-     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @SuppressWarnings(PHPMD.NPathComplexity)
+     * @param   QuantityValidator   $subject
+     * @param   \Closure            $proceed
+     * @param   Observer            $observer
+     * @return  void
      */
     public function aroundValidate(QuantityValidator $subject, \Closure $proceed, Observer $observer)
     {
@@ -114,9 +109,9 @@ class QuantityValidatorPlugin
     }
 
     /**
-     * @param QuoteItem $quoteItem
-     * @param int       $code
-     * @param string    $message
+     * @param   QuoteItem   $quoteItem
+     * @param   int         $code
+     * @param   string      $message
      */
     protected function addQuantityError(QuoteItem $quoteItem, $code, $message)
     {

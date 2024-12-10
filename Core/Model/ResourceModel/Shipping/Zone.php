@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Shipping;
 
 use Magento\Eav\Model\Config as EavConfig;
@@ -12,10 +9,6 @@ use Magento\Framework\Model\ResourceModel\Db\Context;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
-/**
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- */
 class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
 {
     /**
@@ -52,12 +45,12 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     protected $_storeManager;
 
     /**
-     * @param Context               $context
-     * @param StoreManagerInterface $storeManager
-     * @param EavConfig             $eavConfig
-     * @param EventManagerInterface $eventManager
-     * @param LoggerInterface       $logger
-     * @param string                $connectionName
+     * @param   Context                 $context
+     * @param   StoreManagerInterface   $storeManager
+     * @param   EavConfig               $eavConfig
+     * @param   EventManagerInterface   $eventManager
+     * @param   LoggerInterface         $logger
+     * @param   string                  $connectionName
      */
     public function __construct(
         Context $context,
@@ -75,7 +68,9 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     }
 
     /**
-     * @inheritdoc
+     * Initialize main table and table id field
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -85,7 +80,8 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     /**
      * Add store ids to shipping zone data after load
      *
-     * @inheritdoc
+     * @param   AbstractModel   $object
+     * @return  AbstractDb
      */
     protected function _afterLoad(AbstractModel $object)
     {
@@ -97,7 +93,8 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     /**
      * Bind shipping zone to store(s)
      *
-     * @inheritdoc
+     * @param   AbstractModel   $object
+     * @return  $this
      */
     protected function _afterSave(AbstractModel $object)
     {
@@ -115,7 +112,8 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     }
 
     /**
-     * @inheritdoc
+     * @param   AbstractModel   $zone
+     * @return  $this
      */
     protected function _afterDelete(AbstractModel $zone)
     {
@@ -133,8 +131,8 @@ class Zone extends \Magento\Rule\Model\ResourceModel\AbstractResource
     /**
      * Retrieve store ids of specified shipping zone
      *
-     * @param int $zoneId
-     * @return array
+     * @param   int $zoneId
+     * @return  array
      */
     public function getStoreIds($zoneId)
     {

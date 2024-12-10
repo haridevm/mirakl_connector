@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\GraphQl\Model\Resolver\Thread;
@@ -12,7 +11,7 @@ use Mirakl\MMP\Common\Domain\Message\Thread\ThreadReplyMessageInput;
 class ThreadReplyResolver extends AbstractThreadResolver implements ResolverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
     {

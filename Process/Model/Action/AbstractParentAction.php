@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Model\Action;
@@ -74,11 +73,7 @@ abstract class AbstractParentAction extends AbstractAction
                 continue; // continue to next child
             }
 
-            $process->output(__(
-                '<info>Executing child process #%1 "%2" ...</info>',
-                $childProcess->getId(),
-                $action->getName()
-            ));
+            $process->output(__('<info>Executing child process #%1 "%2" ...</info>', $childProcess->getId(), $action->getName()));
 
             try {
                 $childProcess->start();
@@ -91,7 +86,7 @@ abstract class AbstractParentAction extends AbstractAction
                 $childProcess->output($e->getMessage());
                 $childProcess->stop($e->getStatus());
                 break; // Stop children execution
-            } catch (ChildProcessException | \Exception $e) {
+            } catch (ChildProcessException|\Exception $e) {
                 $childProcess->fail($e->getMessage());
                 break; // Stop children execution
             }

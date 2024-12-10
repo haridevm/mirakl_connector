@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\SalesChannels\Model\Offer\Channel\FieldCollector;
@@ -26,7 +25,7 @@ class Prices implements FieldCollectorInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function collect(ChannelOfferInterface $offer): array
     {

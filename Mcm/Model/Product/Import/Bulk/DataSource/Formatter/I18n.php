@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\Import\Bulk\DataSource\Formatter;
@@ -28,8 +27,8 @@ class I18n implements FormatterInterface
     private $attributesFinder;
 
     /**
-     * @param Config                  $config
-     * @param GeneratorInterface      $urlGenerator
+     * @param Config $config
+     * @param GeneratorInterface $urlGenerator
      * @param ProductAttributesFinder $attributesFinder
      */
     public function __construct(
@@ -73,18 +72,18 @@ class I18n implements FormatterInterface
 
         // Add Magento required fields
         $data['_store'] = $store->getCode();
+        $data['price'] = 0;
         $data['url_key'] = $this->urlGenerator->generate($data);
     }
 
     /**
-     * @param int    $setId
+     * @param int $setId
      * @param string $typeId
      * @return array
      */
     private function getRequiredAttributes(int $setId, string $typeId): array
     {
-        return array_filter(
-            $this->attributesFinder->findBySetId($setId),
+        return array_filter($this->attributesFinder->findBySetId($setId),
             function ($attr) use ($typeId) {
                 return $attr->getIsRequired()
                     && $attr->getIsVisible()

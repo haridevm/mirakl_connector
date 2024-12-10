@@ -4,49 +4,49 @@
         <?php /** @var \Mirakl\MMP\Common\Domain\Collection\Message\OrderMessageCollection $_messages */ ?>
         <?php if ($_messages = $this->getMessages()): ?>
             <div class="block-title">
-                <strong><?= $block->escapeHtml(__('Order Messages')) ?></strong>
+                <strong><?php echo __('Order Messages') ?></strong>
             </div>
             <ol class="items message-items">
-                <?php foreach ($_messages as $_message): ?>
-                    <li class="item message-item <?= /* @escapeNotVerified */ $block->isCustomerMessage($_message) ? 'message-left' : 'message-right' ?> <?= $block->escapeHtml(strtolower($_message->getUserSender()->getType())) ?>">
+                <?php foreach ($_messages as $_message):?>
+                    <li class="item message-item <?php echo $block->isCustomerMessage($_message) ? 'message-left' : 'message-right' ?> <?php echo strtolower($_message->getUserSender()->getType()) ?>">
                         <p class="meta">
-                            <?= $block->escapeHtml(__('By %1 - %2', $this->getSenderName($_message), $this->helper('Mirakl\Core\Helper\Data')->formatDateTime($_message->getDateCreated()))) ?>
+                            <?php echo __('By %1 - %2', $this->getSenderName($_message), $this->helper('Mirakl\Core\Helper\Data')->formatDateTime($_message->getDateCreated())) ?>
                         </p>
-                        <p class="subject"><?= $block->escapeHtml($_message->getSubject()) ?></p>
-                        <p class="body"><?= /* @noEscape */ nl2br($block->escapeHtml($_message->getBody(), ['br'])) ?></p>
+                        <p class="subject"><?php echo $block->escapeHtml($_message->getSubject()) ?></p>
+                        <p class="body"><?php echo nl2br($block->escapeHtml($_message->getBody(), ['br'])) ?></p>
                     </li>
-                <?php endforeach; ?>
+                <?php endforeach;?>
             </ol>
-        <?php endif; ?>
+        <?php endif;?>
 
-        <form action="<?= /* @escapeNotVerified */ $block->getAction() ?>" class="message-form" method="post" id="message-form" data-role="order-message-form" data-bind="scope: 'messsage-form'">
-            <?= $block->getBlockHtml('formkey'); ?>
-            <?= $block->getChildHtml('form_fields_before') ?>
+        <form action="<?php /* @escapeNotVerified */ echo $block->getAction() ?>" class="message-form" method="post" id="message-form" data-role="order-message-form" data-bind="scope: 'messsage-form'">
+            <?php echo $block->getBlockHtml('formkey'); ?>
+            <?php echo $block->getChildHtml('form_fields_before')?>
             <fieldset class="fieldset message-fieldset" data-hasrequired="<?php __('* Required Fields'); ?>">
-                <legend class="legend message-legend"><span><?= /* @escapeNotVerified */ __('Send a Message'); ?></span></legend><br />
+                <legend class="legend message-legend"><span><?php /* @escapeNotVerified */ echo __('Send a Message'); ?></span></legend><br />
                 <div class="field message-field-summary required">
-                    <label for="summary_field" class="label"><span><?= /* @escapeNotVerified */ __('Topic') ?></span></label>
+                    <label for="summary_field" class="label"><span><?php /* @escapeNotVerified */ echo __('Topic') ?></span></label>
                     <div class="control">
-                        <select name="subject" id="message_subject" class="" title="<?= /* @escapeNotVerified */ __('Topic') ?>" data-validate="{'validate-select':true}">
-                            <option value=""><?= $block->escapeHtml(__('-- Please Select --')) ?></option>
+                        <select name="subject" id="message_subject" class="" title="<?php /* @escapeNotVerified */ echo __('Topic') ?>" data-validate="{'validate-select':true}">
+                            <option value=""><?php echo __('-- Please Select --') ?></option>
                             <?php foreach ($block->getReasons() as $reason): ?>
-                                <?php $_label = $this->escapeHtml(__($reason->getLabel())) ?>
-                                <option <?php if ($block->getPostMessage('subject') == $_label): ?>selected="selected" <?php endif; ?>value="<?= $block->escapeHtml($_label) ?>"><?= $block->escapeHtml($_label) ?></option>
+                                <?php $_label = $this->escapeHtml(__($reason->getLabel()))?>
+                                <option <?php if ($block->getPostMessage('subject') == $_label):?>selected="selected" <?php endif;?>value="<?php echo $_label ?>"><?php echo $_label ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="field message-field-text required">
-                    <label for="message_body" class="label"><span><?= /* @escapeNotVerified */ __('Message') ?></span></label>
+                    <label for="message_body" class="label"><span><?php /* @escapeNotVerified */ echo __('Message') ?></span></label>
                     <div class="control">
-                        <textarea name="body" id="message_body" cols="5" rows="3" data-validate="{required:true}"><?= $block->escapeHtml($block->getPostMessage('body')) ?></textarea>
+                        <textarea name="body" id="message_body" cols="5" rows="3" data-validate="{required:true}"><?php echo $block->getPostMessage('body')?></textarea>
                     </div>
                 </div>
             </fieldset>
             <div class="actions-toolbar message-form-actions">
                 <div class="primary actions-primary">
                     <button type="submit" class="action submit primary">
-                        <span><?= /* @escapeNotVerified */ __('Send Message') ?></span>
+                        <span><?php /* @escapeNotVerified */ echo __('Send Message') ?></span>
                     </button>
                 </div>
             </div>

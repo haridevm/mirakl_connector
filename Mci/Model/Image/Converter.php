@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Model\Image;
 
 use Magento\Framework\Exception\LocalizedException;
@@ -9,8 +6,8 @@ use Magento\Framework\Exception\LocalizedException;
 class Converter
 {
     /**
-     * @param string $file
-     * @throws LocalizedException
+     * @param   string  $file
+     * @throws  LocalizedException
      */
     public function convertWebpToJpeg($file)
     {

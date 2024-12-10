@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Framework\Event\Observer;
@@ -12,7 +9,7 @@ use Mirakl\MMP\Front\Domain\Order\Create\CreateOrder;
 class AddPurchaseOrderNumberObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

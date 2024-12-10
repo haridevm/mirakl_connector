@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client;
@@ -24,8 +23,10 @@ class ClientSettings implements ClientSettingsInterface
      * @param Config              $config
      * @param MethodPoolInterface $methodPool
      */
-    public function __construct(Config $config, MethodPoolInterface $methodPool)
-    {
+    public function __construct(
+        Config $config,
+        MethodPoolInterface $methodPool
+    ) {
         $this->config = $config;
         $this->methodPool = $methodPool;
     }

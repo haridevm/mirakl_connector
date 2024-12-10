@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Event\Plugin\Helper\Mci;
 
 use Mirakl\Mci\Helper\Attribute as MciAttributeHelper;
@@ -11,7 +8,7 @@ use Mirakl\Event\Plugin\Helper\AbstractHelperPlugin;
 class AttributePlugin extends AbstractHelperPlugin
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function addToEventQueue(array $attributeIds)
     {
@@ -25,12 +22,12 @@ class AttributePlugin extends AbstractHelperPlugin
     }
 
     /**
-     * @param MciAttributeHelper $subject
-     * @param \Closure           $proceed
-     * @param string             $action
-     * @param bool               $full
-     * @param array              $attributeIds
-     * @return mixed
+     * @param   MciAttributeHelper  $subject
+     * @param   \Closure            $proceed
+     * @param   string              $action
+     * @param   bool                $full
+     * @param   array               $attributeIds
+     * @return  mixed
      */
     public function aroundExportTree(
         MciAttributeHelper $subject,
@@ -47,7 +44,7 @@ class AttributePlugin extends AbstractHelperPlugin
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getEventType()
     {

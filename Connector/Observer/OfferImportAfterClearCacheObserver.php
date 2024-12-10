@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Observer;
 
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
@@ -20,7 +17,7 @@ class OfferImportAfterClearCacheObserver implements ObserverInterface
     /**
      * @var int
      */
-    public const CLEAN_CACHE_CHUNK_SIZE = 200;
+    const CLEAN_CACHE_CHUNK_SIZE = 200;
 
     /**
      * @var ProductCollectionFactory
@@ -69,7 +66,7 @@ class OfferImportAfterClearCacheObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

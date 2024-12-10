@@ -9,16 +9,16 @@
                 <frontend_model>Mirakl\Api\Block\Adminhtml\System\Config\Fieldset\Hint</frontend_model>
             </group>
             <group id="general" translate="label" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Connector Events Configuration</label>
+                <label>Mirakl Events Configuration</label>
                 <field id="event_async_active" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Active For</label>
+                    <label>Asynchronous Active For</label>
                     <source_model>Mirakl\Event\Model\System\Config\Source\Event\Type</source_model>
                     <comment><![CDATA[Modifications made in selected entities will not be sent immediately to Mirakl but stored in the event queue and sent at regular interval to Mirakl.]]></comment>
                     <can_be_empty>1</can_be_empty>
                 </field>
             </group>
             <group id="history" translate="label" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Connector Events History</label>
+                <label>Mirakl Events History</label>
                 <field id="clear_keep_days" translate="label comment" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label><![CDATA[Clear History of Events Created Before (days)]]></label>
                     <validate>required-entry validate-greater-than-zero validate-number</validate>

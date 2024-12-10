@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\AsyncImport;
@@ -26,8 +25,11 @@ class CreateProductsExport extends AbstractAction
      * @param AsyncProductApi $api
      * @param array           $data
      */
-    public function __construct(Config $config, AsyncProductApi $api, array $data = [])
-    {
+    public function __construct(
+        Config $config,
+        AsyncProductApi $api,
+        array $data = []
+    ) {
         parent::__construct($data);
         $this->config = $config;
         $this->api = $api;
@@ -52,8 +54,9 @@ class CreateProductsExport extends AbstractAction
             $mainProcessParams = $mainProcess->getParams() ?: [];
         }
 
-        $updatedSince = $params['updated_since'] ?? ($mainProcessParams['updated_since'] ?? null);
-        $updatedUntil = $params['updated_until'] ?? ($mainProcessParams['updated_until'] ?? null);
+        $updatedSince = $params['updated_since'] ?? ($mainProcessParams['updated_since']?? null);
+        $updatedUntil = $params['updated_until'] ?? ($mainProcessParams['updated_until']?? null);
+
         if (!$updatedSince) {
             $updatedSince = $this->config->getSyncDate('mcm_products_import_async');
         }
@@ -64,26 +67,17 @@ class CreateProductsExport extends AbstractAction
         }
 
         if ($updatedSince && $updatedUntil) {
-            $process->output(__(
-                'Creating products export from Mirakl between %1 and %2',
-                $updatedSince->format('Y-m-d H:i:s'),
-                $updatedUntil->format('Y-m-d H:i:s')
-            ), true);
+            $process->output(__('Creating products export from Mirakl between %1 and %2', $updatedSince->format('Y-m-d H:i:s'), $updatedUntil->format('Y-m-d H:i:s')), true);
         } elseif ($updatedSince) {
-            $process->output(__(
-                'Creating products export from Mirakl since %1',
-                $updatedSince->format('Y-m-d H:i:s')
-            ), true);
+            $process->output(__('Creating products export from Mirakl since %1', $updatedSince->format('Y-m-d H:i:s')), true);
         } elseif ($updatedUntil) {
-            $process->output(__(
-                'Creating entire products export from Mirakl until %1',
-                $updatedUntil->format('Y-m-d H:i:s')
-            ), true);
+            $process->output(__('Creating entire products export from Mirakl until %1', $updatedUntil->format('Y-m-d H:i:s')), true);
         } else {
             $process->output(__('Creating entire products export from Mirakl'), true);
         }
 
         $result = $this->api->createProductsExportAsync($updatedSince, $updatedUntil);
+
         $process->output(__('Done!'));
         $process->output(__('Tracking ID: %1', $result->getTrackingId()));
 

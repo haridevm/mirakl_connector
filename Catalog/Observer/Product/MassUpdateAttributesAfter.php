@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Observer\Product;
 
 use Magento\Framework\Event\Observer;
@@ -11,19 +9,14 @@ use Mirakl\Catalog\Model\Product\Attribute\MassUpdate;
 class MassUpdateAttributesAfter extends AbstractObserver implements ObserverInterface
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {
         /** @var MassUpdate $massUpdate */
         $massUpdate = $this->registry->registry('mass_update_mirakl_p21_collection');
 
-        if (
-            !$this->isEnabled()
-            || !$massUpdate instanceof MassUpdate
-            || empty($massUpdate->getCollection())
-            || !$massUpdate->getCollection()->count()
-        ) {
+        if (!$this->isEnabled() || empty($massUpdate) || empty($massUpdate->getCollection()) || !$massUpdate->getCollection()->count()) {
             return;
         }
 

@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Ui\Component\Listing;
@@ -11,7 +10,7 @@ use Mirakl\Process\Model\Repository;
 
 class Bookmark extends AbstractComponent
 {
-    public const NAME = 'bookmark';
+    const NAME = 'bookmark';
 
     /**
      * @var BookmarkManagementInterface
@@ -52,7 +51,7 @@ class Bookmark extends AbstractComponent
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function prepare(): void
     {

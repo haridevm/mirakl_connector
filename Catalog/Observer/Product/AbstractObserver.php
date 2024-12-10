@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Catalog\Observer\Product;
 
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory as ProductCollectionFactory;
@@ -43,11 +40,11 @@ abstract class AbstractObserver
     protected $enabled = true;
 
     /**
-     * @param ApiConfig                $apiConfigHelper
-     * @param CatalogConfig            $catalogConfigHelper
-     * @param ProductHelper            $productHelper
-     * @param ProductCollectionFactory $productCollectionFactory
-     * @param Registry                 $registry
+     * @param   ApiConfig                   $apiConfigHelper
+     * @param   CatalogConfig               $catalogConfigHelper
+     * @param   ProductHelper               $productHelper
+     * @param   ProductCollectionFactory    $productCollectionFactory
+     * @param   Registry                    $registry
      */
     public function __construct(
         ApiConfig $apiConfigHelper,
@@ -65,11 +62,10 @@ abstract class AbstractObserver
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     protected function isEnabled()
     {
-        return $this->enabled
-            && ($this->apiConfigHelper->isEnabled() || $this->registry->registry('mirakl_import_working') === true);
+        return ($this->apiConfigHelper->isEnabled() || $this->registry->registry('mirakl_import_working') === true) && $this->enabled;
     }
 }

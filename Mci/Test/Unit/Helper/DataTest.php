@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Test\Unit\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -15,21 +12,18 @@ class DataTest extends TestCase
     /** @var MciHelper */
     protected $helper;
 
-    /** @var Product|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var Product|\PHPUnit_Framework_MockObject_MockObject */
     protected $product;
 
-    /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Catalog\Model\ResourceModel\Product\Collection|\PHPUnit_Framework_MockObject_MockObject */
     protected $productCollection;
 
-    /** @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection|\PHPUnit_Framework_MockObject_MockObject */
     protected $attributeCollection;
 
-    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Magento\Framework\DB\Adapter\AdapterInterface|\PHPUnit_Framework_MockObject_MockObject */
     protected $connection;
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
-     */
     protected function setUp(): void
     {
         $this->product = $this->getMockBuilder('Magento\Catalog\Model\Product')
@@ -111,7 +105,7 @@ class DataTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        /** @var \Magento\Eav\Model\Entity\Type|\PHPUnit\Framework\MockObject\MockObject $entityType */
+        /** @var \Magento\Eav\Model\Entity\Type|\PHPUnit_Framework_MockObject_MockObject $entityType */
         $entityType = $this->getMockBuilder('Magento\Eav\Model\Entity\Type')
             ->disableOriginalConstructor()
             ->getMock();
@@ -135,8 +129,7 @@ class DataTest extends TestCase
             ->method('create')
             ->will($this->returnValue($productResource));
 
-        $productCollectionFactory = $this
-            ->getMockBuilder('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')
+        $productCollectionFactory = $this->getMockBuilder('Magento\Catalog\Model\ResourceModel\Product\CollectionFactory')
             ->disableOriginalConstructor()
             ->setMethods(['create'])
             ->getMock();
@@ -156,8 +149,7 @@ class DataTest extends TestCase
 
     protected function initAttributeCollectionMock()
     {
-        $this->attributeCollection = $this
-            ->getMockBuilder('Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection')
+        $this->attributeCollection = $this->getMockBuilder('Magento\Eav\Model\ResourceModel\Entity\Attribute\Collection')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -174,8 +166,7 @@ class DataTest extends TestCase
 
     protected function initProductCollectionMock()
     {
-        $this->productCollection = $this
-            ->getMockBuilder('Magento\Catalog\Model\ResourceModel\Product\Collection')
+        $this->productCollection = $this->getMockBuilder('Magento\Catalog\Model\ResourceModel\Product\Collection')
             ->setMethods(['addAttributeToFilter', 'addFieldToFilter', 'addAttributeToSelect',
                 'setPage', 'count', 'getFirstItem', 'getSelect'])
             ->disableOriginalConstructor()
@@ -197,7 +188,7 @@ class DataTest extends TestCase
     }
 
     /**
-     * @return string|null
+     * @return  string|null
      */
     private function getProductShopsSkus()
     {
@@ -205,7 +196,7 @@ class DataTest extends TestCase
     }
 
     /**
-     * @return string|null
+     * @return  string|null
      */
     private function getProductShopsVariantIds()
     {
@@ -235,15 +226,7 @@ class DataTest extends TestCase
             ->willReturnOnConsecutiveCalls(0, 1);
 
         $this->assertNull($this->helper->findProductByAttribute('mirakl_shop_id', '2001'));
-
-        $this->assertEquals(
-            $this->product,
-            $this->helper->findProductByAttribute(
-                'mirakl_shop_id',
-                '2002',
-                'simple'
-            )
-        );
+        $this->assertEquals($this->product, $this->helper->findProductByAttribute('mirakl_shop_id', '2002', 'simple'));
     }
 
     public function testFindProductByMultiValues()
@@ -252,23 +235,8 @@ class DataTest extends TestCase
             ->method('count')
             ->willReturnOnConsecutiveCalls(0, 1);
 
-        $this->assertNull(
-            $this->helper->findProductByMultiValues(
-                MciHelper::ATTRIBUTE_SHOPS_SKUS,
-                '2001|MH06-S-Black',
-                ','
-            )
-        );
-
-        $this->assertEquals(
-            $this->product,
-            $this->helper->findProductByMultiValues(
-                MciHelper::ATTRIBUTE_SHOPS_SKUS,
-                '2002|MH06-XL-White',
-                ',',
-                'simple'
-            )
-        );
+        $this->assertNull($this->helper->findProductByMultiValues(MciHelper::ATTRIBUTE_SHOPS_SKUS, '2001|MH06-S-Black', ','));
+        $this->assertEquals($this->product, $this->helper->findProductByMultiValues(MciHelper::ATTRIBUTE_SHOPS_SKUS, '2002|MH06-XL-White', ',', 'simple'));
     }
 
     public function testFindProductByShopSku()

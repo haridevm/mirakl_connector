@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
@@ -37,7 +34,7 @@ class UpdateMiraklMcmAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -46,26 +43,14 @@ class UpdateMiraklMcmAttributes implements DataPatchInterface
 
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
-
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            McmHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID,
-            'backend_type',
-            'varchar'
-        );
-
-        $eavSetup->updateAttribute(
-            Product::ENTITY,
-            McmHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE,
-            'backend_type',
-            'varchar'
-        );
+        $eavSetup->updateAttribute(Product::ENTITY, McmHelper::ATTRIBUTE_MIRAKL_PRODUCT_ID, 'backend_type', 'varchar');
+        $eavSetup->updateAttribute(Product::ENTITY, McmHelper::ATTRIBUTE_MIRAKL_VARIANT_GROUP_CODE, 'backend_type', 'varchar');
 
         $setup->endSetup();
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -75,7 +60,7 @@ class UpdateMiraklMcmAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

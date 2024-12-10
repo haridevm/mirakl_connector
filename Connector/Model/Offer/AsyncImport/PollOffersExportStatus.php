@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Connector\Model\Offer\AsyncImport;
@@ -75,10 +74,7 @@ class PollOffersExportStatus extends AbstractAction implements DelayableInterfac
 
         if ($result->getStatus() === 'PENDING') {
             // We reached max number of attempts, quit and delegate the next call to the cron or manual execution
-            throw new RetryLaterException(
-                $process,
-                __('Offers export is still pending in Mirakl. Waiting for next execution.')
-            );
+            throw new RetryLaterException($process, __('Offers export is still pending in Mirakl. Waiting for next execution.'));
         }
 
         $urls = $result->getUrls() ?? [];

@@ -9,7 +9,6 @@ $product = $productCollection
     ->addFieldToFilter('sku', 'SHOPSKU')
     ->getFirstItem();
 
-// @phpstan-ignore-next-line
 $product->setTypeId(\Magento\Catalog\Model\Product\Type::TYPE_SIMPLE)
     ->setAttributeSetId(11)
     ->setName('Test Product')

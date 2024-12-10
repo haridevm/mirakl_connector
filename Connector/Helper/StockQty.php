@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Helper;
 
 use Magento\Catalog\Model\Product;
@@ -33,10 +30,10 @@ class StockQty extends AbstractHelper
     protected $stockIdResolver;
 
     /**
-     * @param Context                $context
+     * @param Context $context
      * @param ObjectManagerInterface $objectManager
-     * @param Stock                  $stockHelper
-     * @param StockIdResolver        $stockIdResolver
+     * @param Stock $stockHelper
+     * @param StockIdResolver $stockIdResolver
      */
     public function __construct(
         Context $context,
@@ -54,8 +51,8 @@ class StockQty extends AbstractHelper
      * Returns stock quantity of specified product according to
      * current website and potential multi inventory configuration.
      *
-     * @param Product $product
-     * @return float
+     * @param   Product $product
+     * @return  float
      */
     public function getProductStockQty(Product $product)
     {

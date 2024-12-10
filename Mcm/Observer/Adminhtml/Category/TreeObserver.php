@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Observer\Adminhtml\Category;
 
 use Magento\Framework\Event\Observer;
@@ -22,8 +19,8 @@ class TreeObserver implements ObserverInterface
     protected $hierarchyHelper;
 
     /**
-     * @param Config          $config
-     * @param HierarchyHelper $hierarchyHelper
+     * @param   Config          $config
+     * @param   HierarchyHelper $hierarchyHelper
      */
     public function __construct(Config $config, HierarchyHelper $hierarchyHelper)
     {
@@ -32,7 +29,7 @@ class TreeObserver implements ObserverInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute(Observer $observer)
     {

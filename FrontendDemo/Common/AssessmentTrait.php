@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Common;
 
 use Mirakl\FrontendDemo\Model\Evaluation\EvaluationFormatter;
@@ -11,8 +8,8 @@ use Mirakl\MMP\Common\Domain\Evaluation\Assessment;
 trait AssessmentTrait
 {
     /**
-     * @param Assessment $assessment
-     * @return bool
+     * @param   Assessment  $assessment
+     * @return  bool
      */
     public function isBooleanAssessment(Assessment $assessment)
     {
@@ -22,8 +19,8 @@ trait AssessmentTrait
     /**
      * Calculates the percentage of an assessment response
      *
-     * @param Assessment $assessment
-     * @return float
+     * @param   Assessment  $assessment
+     * @return  float
      */
     public function getAssessmentPercent(Assessment $assessment)
     {
@@ -33,8 +30,8 @@ trait AssessmentTrait
     /**
      * Calculates the percentage of an evaluation
      *
-     * @param Evaluation $evaluation
-     * @return float
+     * @param   Evaluation  $evaluation
+     * @return  float
      */
     public function getEvaluationPercent(Evaluation $evaluation)
     {

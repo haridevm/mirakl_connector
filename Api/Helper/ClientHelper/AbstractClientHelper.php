@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper\ClientHelper;
 
 use Magento\Framework\App\CacheInterface;
@@ -40,11 +37,11 @@ abstract class AbstractClientHelper extends AbstractHelper
     protected $requestLogValidator;
 
     /**
-     * @param Context             $context
-     * @param ClientManager       $clientManager
-     * @param CacheInterface      $cache
-     * @param LoggerManager       $loggerManager
-     * @param RequestLogValidator $requestLogValidator
+     * @param   Context                $context
+     * @param   ClientManager          $clientManager
+     * @param   CacheInterface         $cache
+     * @param   LoggerManager          $loggerManager
+     * @param   RequestLogValidator    $requestLogValidator
      */
     public function __construct(
         Context $context,
@@ -64,9 +61,9 @@ abstract class AbstractClientHelper extends AbstractHelper
     /**
      * Proxy to API client methods
      *
-     * @param string $name
-     * @param array  $args
-     * @return mixed
+     * @param   string  $name
+     * @param   array   $args
+     * @return  mixed
      */
     public function __call($name, $args)
     {
@@ -74,14 +71,14 @@ abstract class AbstractClientHelper extends AbstractHelper
     }
 
     /**
-     * @return string
+     * @return  string
      */
     abstract protected function getArea();
 
     /**
-     * Get API Client
+     * Get Api Client
      *
-     * @return AbstractApiClient
+     * @return  AbstractApiClient
      */
     public function getClient()
     {
@@ -91,8 +88,8 @@ abstract class AbstractClientHelper extends AbstractHelper
     /**
      * Sends specified request of type 'file' to Mirakl API
      *
-     * @param AbstractFileRequest $request
-     * @return mixed
+     * @param   AbstractFileRequest $request
+     * @return  mixed
      */
     public function upload(AbstractFileRequest $request)
     {
@@ -103,7 +100,7 @@ abstract class AbstractClientHelper extends AbstractHelper
      * Sends specified request to Mirakl API
      *
      * @param AbstractRequest $request
-     * @return mixed
+     * @return  mixed
      */
     public function post(AbstractRequest $request)
     {
@@ -111,9 +108,9 @@ abstract class AbstractClientHelper extends AbstractHelper
     }
 
     /**
-     * @param AbstractRequest $request
-     * @param bool            $raw
-     * @return mixed
+     * @param   AbstractRequest $request
+     * @param   bool            $raw
+     * @return  mixed
      */
     public function send(AbstractRequest $request, $raw = false)
     {

@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\FrontendDemo\Block\Order;
 
 use Magento\Framework\Data\Form\FormKey;
@@ -19,9 +16,6 @@ use Mirakl\MMP\Common\Domain\Evaluation as MiraklEvaluation;
 use Mirakl\MMP\Common\Domain\Collection\Evaluation\AssessmentCollection;
 use Mirakl\MMP\Common\Domain\Order\Document\OrderDocument;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Evaluation extends Info
 {
     use AssessmentTrait;
@@ -48,13 +42,11 @@ class Evaluation extends Info
 
     /**
      * @var array
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_postEvaluation;
 
     /**
      * @var string
-     * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
      */
     protected $_template = 'order/evaluation.phtml';
 
@@ -70,7 +62,6 @@ class Evaluation extends Info
      * @param OrderHelper          $orderHelper
      * @param OrderConnectorHelper $orderConnectorHelper
      * @param array                $data
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
     public function __construct(
         TemplateContext $context,
@@ -101,8 +92,8 @@ class Evaluation extends Info
     }
 
     /**
-     * @return MiraklEvaluation
-     * @throws \Exception
+     * @return  MiraklEvaluation
+     * @throws  \Exception
      */
     public function getEvaluation()
     {
@@ -110,8 +101,8 @@ class Evaluation extends Info
     }
 
     /**
-     * @param OrderDocument $doc
-     * @return string
+     * @param   OrderDocument   $doc
+     * @return  string
      */
     public function getDownloadUrl(OrderDocument $doc)
     {
@@ -126,8 +117,8 @@ class Evaluation extends Info
     /**
      * Retrieve form data strored in session
      *
-     * @param string $field
-     * @return array|string
+     * @param   string  $field
+     * @return  array|string
      */
     public function getPostEvaluation($field = null)
     {
@@ -143,7 +134,7 @@ class Evaluation extends Info
     }
 
     /**
-     * @return AssessmentCollection
+     * @return  AssessmentCollection
      */
     public function getAssessments()
     {
@@ -151,7 +142,7 @@ class Evaluation extends Info
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getFormAction()
     {

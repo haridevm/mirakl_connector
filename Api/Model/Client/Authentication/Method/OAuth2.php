@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Model\Client\Authentication\Method;
@@ -131,19 +130,20 @@ class OAuth2 implements MethodInterface, ExpirableTokenInterface
         $authUrl = $this->config->getOAuth2AuthUrl();
 
         if (!$clientId || !$clientSecret || !$authUrl) {
-            throw new LocalizedException(__(
-                'Please provide the OAuth 2.0 settings (Client ID, Client Secret, Authentication URL).'
-            ));
+            throw new LocalizedException(
+                __('Please provide the OAuth 2.0 settings (Client ID, Client Secret, Authentication URL).')
+            );
         }
 
         if ($this->isTokenExpired()) {
-            throw new LocalizedException(__('We detected an expired token. '
-                . 'Please check your refresh token cron job configuration or change the API Authentication Method.'));
+            throw new LocalizedException(__('We detected an expired token. ' .
+                'Please check your refresh token cron job configuration or change the API Authentication Method.'));
         }
 
         if (!$this->storagePool->get('access_token')->load()) {
-            throw new LocalizedException(__('Invalid connection. '
-                . 'Please check your OAuth 2.0 configuration (Client ID, Client Secret, Authentication URL).'));
+            throw new LocalizedException(
+                __('Invalid connection. Please check your OAuth 2.0 configuration (Client ID, Client Secret, Authentication URL).')
+            );
         }
     }
 }

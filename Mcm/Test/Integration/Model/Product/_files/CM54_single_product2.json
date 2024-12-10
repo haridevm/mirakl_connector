@@ -10,10 +10,6 @@
             "description": "This ...",
             "color": 50,
             "size": 91,
-            "material": [
-                33,
-                146
-            ],
             "mirakl_image_1": {
                 "source": "https://magento.mirakl.net/public/ms02-gray_main_1.jpg"
             }

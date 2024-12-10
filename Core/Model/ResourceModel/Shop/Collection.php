@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Core\Model\ResourceModel\Shop;
 
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
@@ -9,9 +6,6 @@ use Mirakl\Core\Model\Shop;
 
 /**
  * @method Shop getFirstItem()
- *
- * @phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
- * @phpcs:disable PSR2.Classes.PropertyDeclaration.Underscore
  */
 class Collection extends AbstractCollection
 {
@@ -21,7 +15,9 @@ class Collection extends AbstractCollection
     protected $_idFieldName = Shop::SHOP_ID;
 
     /**
-     * @inheritdoc
+     * Define resource model
+     *
+     * @return  void
      */
     protected function _construct()
     {
@@ -29,7 +25,7 @@ class Collection extends AbstractCollection
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function _afterLoad()
     {

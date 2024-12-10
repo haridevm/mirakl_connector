@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mci\Helper;
 
 use Magento\Catalog\Model\Category;
@@ -21,15 +18,13 @@ use Mirakl\Connector\Common\ExportTrait;
 use Mirakl\Mci\Helper\Config as MciConfig;
 use Mirakl\Process\Model\Process;
 
-/**
- * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
- */
 class Hierarchy extends AbstractHelper implements ExportInterface
 {
     use ExportTrait;
 
-    public const CODE = 'H01';
-    public const EXPORT_SOURCE = 'H01';
+    const CODE = 'H01';
+
+    const EXPORT_SOURCE = 'H01';
 
     /**
      * @var StoreManagerInterface
@@ -77,14 +72,14 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     protected $treeCache = [];
 
     /**
-     * @param Context                   $context
-     * @param StoreManagerInterface     $storeManager
-     * @param Api                       $api
-     * @param MciConfig                 $mciConfig
-     * @param CategoryFactory           $categoryFactory
-     * @param CategoryTreeFactory       $categoryTreeFactory
-     * @param CategoryResourceFactory   $categoryResourceFactory
-     * @param CategoryCollectionFactory $categoryCollectionFactory
+     * @param   Context                     $context
+     * @param   StoreManagerInterface       $storeManager
+     * @param   Api                         $api
+     * @param   MciConfig                   $mciConfig
+     * @param   CategoryFactory             $categoryFactory
+     * @param   CategoryTreeFactory         $categoryTreeFactory
+     * @param   CategoryResourceFactory     $categoryResourceFactory
+     * @param   CategoryCollectionFactory   $categoryCollectionFactory
      */
     public function __construct(
         Context $context,
@@ -109,7 +104,7 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Deletes all MCI hierarchy in Mirakl platform
      *
-     * @return $this
+     * @return  $this
      */
     public function deleteAll()
     {
@@ -124,7 +119,7 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function export(array $data)
     {
@@ -138,8 +133,8 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Exports all MCI hierarchy to Mirakl platform
      *
-     * @param Process $process
-     * @return int|false
+     * @param   Process $process
+     * @return  int|false
      */
     public function exportAll(Process $process = null)
     {
@@ -168,9 +163,9 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Exports Magento hierarchies to Mirakl platform
      *
-     * @param CategoryTree $tree
-     * @param string|null  $action
-     * @return int|false
+     * @param   CategoryTree    $tree
+     * @param   string|null     $action
+     * @return  int|false
      */
     public function exportTree(CategoryTree $tree, $action = null)
     {
@@ -188,8 +183,8 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return CategoryCollection
-     * @throws \Exception
+     * @return  CategoryCollection
+     * @throws  \Exception
      */
     protected function getDefaultCollection()
     {
@@ -201,8 +196,8 @@ class Hierarchy extends AbstractHelper implements ExportInterface
             ->addFieldToFilter('level', ['gt' => 1]);
 
         $this->_eventManager->dispatch('mirakl_mci_hierarchy_default_collection', [
-            'collection' => $collection
-        ]);
+            'collection' => $collection]
+        );
 
         return $collection;
     }
@@ -210,8 +205,8 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Returns store locale
      *
-     * @param mixed $store
-     * @return string
+     * @param   mixed   $store
+     * @return  string
      */
     public function getLocale($store = null)
     {
@@ -223,7 +218,7 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @return Category
+     * @return  Category
      */
     protected function getRootCategory()
     {
@@ -237,9 +232,9 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     }
 
     /**
-     * @param Category|null $category
-     * @param mixed         $store
-     * @return CategoryTree
+     * @param   Category    $category
+     * @param   mixed       $store
+     * @return  CategoryTree
      */
     public function getTree(Category $category = null, $store = null)
     {
@@ -250,7 +245,7 @@ class Hierarchy extends AbstractHelper implements ExportInterface
         }
 
         if (!isset($this->treeCache[$storeId])) {
-            /** @var CategoryTree $tree */
+            /** @var $tree CategoryTree */
             $tree = $this->categoryTreeFactory->create();
 
             if (null === $category) {
@@ -273,10 +268,10 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Prepares category data for export
      *
-     * @param DataObject  $category
-     * @param string|null $action
-     * @return array
-     * @throws \Exception
+     * @param   DataObject  $category
+     * @param   null|string $action
+     * @return  array
+     * @throws  \Exception
      */
     public function prepare(DataObject $category, $action = null)
     {
@@ -286,13 +281,10 @@ class Hierarchy extends AbstractHelper implements ExportInterface
 
         /** @var Category $category */
         if ($category->getStoreId() != $this->mciConfig->getCatalogIntegrationStore()->getId()) {
-            // If category store is not the one defined in config "Translation Store",
-            // reload category with configured store
+            // If category store is not the one defined in config "Translation Store", reload category with configured store
             $category = $this->getTree()->getNodeById($category->getId());
             if (!$category) {
-                throw new \Exception(
-                    __('Could not find category on configured store')->render()
-                );
+                throw new \Exception(__('Could not find category on configured store'));
             }
         }
 
@@ -317,8 +309,8 @@ class Hierarchy extends AbstractHelper implements ExportInterface
     /**
      * Prepares translated data for specified category
      *
-     * @param DataObject $category
-     * @return array
+     * @param   DataObject  $category
+     * @return  array
      */
     protected function translateHierarchy($category)
     {

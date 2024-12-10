@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Process\Block\Adminhtml\Process\View;
@@ -21,6 +20,7 @@ class Title extends Html\Title
      * @param Context              $context
      * @param ScopeConfigInterface $scopeConfig
      * @param ProcessRepository    $processRepository
+     * @param ProcessContext       $processContext
      * @param array                $data
      */
     public function __construct(
@@ -58,7 +58,7 @@ class Title extends Html\Title
     }
 
     /**
-     * @param int $id
+     * @param  int $id
      * @return string
      */
     public function getProcessLabel(int $id): string

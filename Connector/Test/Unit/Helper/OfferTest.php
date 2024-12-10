@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Connector\Test\Unit\Helper;
 
 use Magento\Framework\TestFramework\Unit\Helper\ObjectManager;
@@ -19,9 +16,9 @@ class OfferTest extends TestCase
     }
 
     /**
-     * @param float    $expected
-     * @param array    $offerData
-     * @param int|null $qty
+     * @param   float       $expected
+     * @param   array       $offerData
+     * @param   int|null    $qty
      * @dataProvider getTestGetOfferFinalPriceDataProvider
      */
     public function testGetOfferFinalPrice($expected, array $offerData, $qty = null)
@@ -34,8 +31,7 @@ class OfferTest extends TestCase
     }
 
     /**
-     * @return array
-     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     * @return  array
      */
     public function getTestGetOfferFinalPriceDataProvider()
     {

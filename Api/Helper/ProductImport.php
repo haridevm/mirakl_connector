@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Api\Helper;
 
 use Mirakl\MCI\Common\Domain\Product\ProductImportStatus;
@@ -10,13 +7,14 @@ use Mirakl\MCI\Front\Request\Product\UpdateProductImportStatusRequest;
 class ProductImport extends ClientHelper\MCI
 {
     /**
-     * (P43) Upload integration and error reports from the operator information system using multipart/form-data
+     * (P43) Upload integration and error reports from the
+     * operator information system using multipart/form-data
      *
-     * @param int    $importId
-     * @param mixed  $productsFile
-     * @param mixed  $errorsFile
-     * @param string $status
-     * @return void
+     * @param   int     $importId
+     * @param   mixed   $productsFile
+     * @param   mixed   $errorsFile
+     * @param   string  $status
+     * @return  void
      */
     public function sendProductsImportReport(
         $importId,

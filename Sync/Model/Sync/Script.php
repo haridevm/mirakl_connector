@@ -1,23 +1,20 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Sync\Model\Sync;
 
 use Magento\Framework\DataObject;
 use Mirakl\Core\Helper\Config as MiraklConfig;
 
 /**
- * @method string getCode()
- * @method $this  setCode(string $code)
- * @method array  getConfig()
- * @method $this  setConfig(array $config)
- * @method string getHelper()
- * @method $this  setHelper(string $helper)
- * @method bool   getMethod()
- * @method $this  setMethod(string $method)
- * @method string getTitle()
- * @method $this  setTitle(string $title)
+ * @method  string  getCode()
+ * @method  $this   setCode(string $code)
+ * @method  array   getConfig()
+ * @method  $this   setConfig(array $config)
+ * @method  string  getHelper()
+ * @method  $this   setHelper(string $helper)
+ * @method  bool    getMethod()
+ * @method  $this   setMethod(string $method)
+ * @method  string  getTitle()
+ * @method  $this   setTitle(string $title)
  */
 class Script extends DataObject
 {
@@ -32,9 +29,9 @@ class Script extends DataObject
     protected $collectionFactory;
 
     /**
-     * @param Script\CollectionFactory $collectionFactory
-     * @param MiraklConfig             $miraklConfig
-     * @param array                    $data
+     * @param   Script\CollectionFactory $collectionFactory
+     * @param   MiraklConfig             $miraklConfig
+     * @param   array                    $data
      */
     public function __construct(
         Script\CollectionFactory $collectionFactory,
@@ -47,7 +44,7 @@ class Script extends DataObject
     }
 
     /**
-     * @return Script\Collection
+     * @return  Script\Collection
      */
     public function getCollection()
     {
@@ -55,7 +52,7 @@ class Script extends DataObject
     }
 
     /**
-     * @return string
+     * @return  string
      */
     public function getId()
     {
@@ -63,7 +60,7 @@ class Script extends DataObject
     }
 
     /**
-     * @return bool
+     * @return  bool
      */
     public function isSyncDisable()
     {

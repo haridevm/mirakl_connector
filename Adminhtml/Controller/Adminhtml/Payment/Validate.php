@@ -1,18 +1,14 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Adminhtml\Controller\Adminhtml\Payment;
 
-use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Sales\Api\Data\OrderInterface;
 use Mirakl\MMP\FrontOperator\Domain\Order as MiraklOrder;
 
-class Validate extends \Magento\Sales\Controller\Adminhtml\Order implements HttpGetActionInterface
+class Validate extends \Magento\Sales\Controller\Adminhtml\Order
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function execute()
     {
@@ -54,8 +50,8 @@ class Validate extends \Magento\Sales\Controller\Adminhtml\Order implements Http
     }
 
     /**
-     * @param OrderInterface $order
-     * @return MiraklOrder|null
+     * @param   OrderInterface   $order
+     * @return  MiraklOrder|null
      */
     private function getMiraklOrder(OrderInterface $order)
     {

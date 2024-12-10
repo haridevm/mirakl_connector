@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Api\Observer\Client;
@@ -26,8 +25,10 @@ class SendRequestBeforeObserver implements ObserverInterface
      * @param ClientSettingsInterface $clientSettings
      * @param LoggerInterface         $logger
      */
-    public function __construct(ClientSettingsInterface $clientSettings, LoggerInterface $logger)
-    {
+    public function __construct(
+        ClientSettingsInterface $clientSettings,
+        LoggerInterface $logger
+    ) {
         $this->clientSettings = $clientSettings;
         $this->logger = $logger;
     }

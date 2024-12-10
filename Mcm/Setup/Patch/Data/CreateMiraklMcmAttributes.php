@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace Mirakl\Mcm\Setup\Patch\Data;
 
 use Magento\Catalog\Model\Product;
@@ -37,8 +34,7 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
-     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * {@inheritdoc}
      */
     public function apply(): void
     {
@@ -56,7 +52,6 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
                 'backend'                 => '',
                 'frontend'                => '',
                 'label'                   => 'MCM Product Id',
-                // phpcs:ignore
                 'note'                    => 'Contains Mirakl product id created by MCM. This field is automatically filled.',
                 'input'                   => 'text',
                 'class'                   => '',
@@ -86,11 +81,10 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
                 'backend'                 => '',
                 'frontend'                => '',
                 'label'                   => 'MCM Is Operator Master',
-                // phpcs:ignore
                 'note'                    => 'Is the operator master of this product? This field is automatically filled.',
                 'input'                   => 'select',
                 'class'                   => '',
-                'source'                  => \Magento\Eav\Model\Entity\Attribute\Source\Boolean::class,
+                'source'                  => 'Magento\Eav\Model\Entity\Attribute\Source\Boolean',
                 'global'                  => ScopedAttributeInterface::SCOPE_GLOBAL,
                 'visible'                 => true,
                 'required'                => false,
@@ -117,7 +111,6 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
                 'backend'                 => '',
                 'frontend'                => '',
                 'label'                   => 'MCM Variant Group Code',
-                // phpcs:ignore
                 'note'                    => 'Contains variant group code from MCM import. This field is automatically filled.',
                 'input'                   => 'text',
                 'class'                   => '',
@@ -142,7 +135,7 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function getDependencies(): array
     {
@@ -150,7 +143,7 @@ class CreateMiraklMcmAttributes implements DataPatchInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function getAliases(): array
     {

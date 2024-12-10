@@ -16,14 +16,14 @@ define([
         /**
          * @override
          */
-        getShippingMethodTitle: function () {
+        getShippingMethodTitle: function() {
             return '';
         },
 
         /**
          * @override
          */
-        isCalculated: function () {
+        isCalculated: function() {
             return this._super() || this.totals()['mirakl_shipping_excl_tax'] > 0;
         },
 

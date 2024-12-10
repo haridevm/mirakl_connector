@@ -1,5 +1,4 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Mirakl\Mcm\Model\Product\AsyncImport;
@@ -110,21 +109,20 @@ class GetProductsExportFile extends AbstractAction implements RetryableInterface
     private function download(Process $process, array $params = []): void
     {
         $url = $params['url'] ?? null;
+
         if (!$url) {
             throw new ChildProcessException($process, __('Could not find "url" in process params'));
         }
 
         $process->output(__('Downloading products file through API CM54 ...'));
         $process->output($url);
+
         try {
             $productsFile = $this->api->getProductsExportAsyncFile($url)->getFile();
             $file = $this->processHelper->saveFile($productsFile, 'json');
             $process->setFile($file);
         } catch (\Exception $e) {
-            throw new RetryLaterException(
-                $process,
-                __('An error occurred while downloading products file: %1', $e->getMessage())
-            );
+            throw new RetryLaterException($process, __('An error occurred while downloading products file: %1', $e->getMessage()));
         }
     }
 }
